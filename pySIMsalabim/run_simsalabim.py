@@ -9,10 +9,68 @@
 ######### Package Imports ###################################################################
 
 import subprocess,shutil,os,parmap,sys,platform,itertools,uuid,multiprocessing,warnings
+import pandas as pd
 # Import pySIMsalabim functions
 from compile_simsalabim import fpc_prog
 
 ######### Function Definitions ##############################################################
+
+def SIMsalabim_error_message(errorcode):
+    """When a 'standard Pascal' fatal error occurs, add the standard error message
+
+    Parameters
+    ----------
+    errorcode : int
+        the error code
+
+    Returns
+    -------
+    str
+        the error message
+
+    """
+    message = ''
+    if errorcode >= 90 and errorcode < 100:
+        message = 'Error '+str(errorcode) +': '
+        if errorcode == 90:
+            message += 'Device parameter file corrupted.'
+        elif errorcode == 91:
+            message += 'Invalid input (physics, or voltage in tVG_file too large).'
+        elif errorcode == 92:
+            message += 'Invalid input from command line.'
+        elif errorcode == 93:
+            message += 'Numerical failure.'
+        elif errorcode == 94:
+            message += 'Failed to converge, halt (FailureMode = 0).'
+        elif errorcode == 95:
+            message += ' Failed to converge at least 1 point, not halt (FailureMode != 0).'
+        elif errorcode == 96:
+            message += 'Missing input file.'
+        elif errorcode == 97:
+            message += 'Runtime exceeds limit set by timeout.'
+        elif errorcode == 99:
+            message += 'Programming error (i.e. not due to the user!).'
+    elif errorcode > 100:
+        message = 'Fatal error '+str(errorcode) +': '
+        if errorcode == 106:
+            message += 'Invalid numeric format: Reported when a non-numeric value is read from a text file.'
+        elif errorcode == 200:
+            message += 'Division by zero: The application attempted to divide a number by zero.'
+        elif errorcode == 201:
+            message += 'Range check error.'
+        elif errorcode == 202:
+            message += 'Stack overflow error: This error is only reported when stack checking is enabled.'
+        elif errorcode == 205:
+            message += 'Floating point overflow.'
+        elif errorcode == 206:
+            message = 'Floating point underflow.'
+        else:
+            message += 'Unknown error'
+
+    else:
+        message = 'Unknown error code '+str(errorcode)
+
+    return message
 
 def run_code(name_prog,path2prog,str2run='',show_term_output=False,verbose=False,ignore_error_code=False):
     """Run program 'name_prog' in the folder specified by 'path2prog'.
@@ -84,10 +142,10 @@ def run_code(name_prog,path2prog,str2run='',show_term_output=False,verbose=False
         else:
             if ignore_error_code:
                 warnings.warn('Error code '+str(e.returncode)+' found in log file, ignoring error code')
+                warnings.warn(SIMsalabim_error_message(e.returncode)+ 'but it is ignored and the simulation continues')
                 pass
             else:
-                print('Error code '+str(e.returncode)+' found in log file, stopping simulation')
-                print(e)
+                print(SIMsalabim_error_message(e.returncode))
                 raise e
         # print(path2prog)
         # raise ChildProcessError
@@ -159,18 +217,14 @@ def run_parallel_simu(code_name_lst,path_lst,str_lst,max_jobs=max(1,os.cpu_count
         Ignore all error codes from SIMsalabim, this can lead to imcomplete or wrong data, by default False
     """
     
-    # str_lst,JV_files,Var_files,scPars_files,code_name_lst,path_lst,labels = Simulation_Inputs
+
     path2prog = path_lst[0]
-    
     filename = 'Str4Parallel_'+str(uuid.uuid4())+'.txt'
-    # tempfilepar = open(os.path.join(path2prog,filename),'w')
+    
     with open(os.path.join(path2prog,filename),'w') as tempfilepar:
         for idx,val in enumerate(str_lst):
-
             str_lst[idx] = './'+code_name_lst[idx].lower() + ' ' + str_lst[idx]
             tempfilepar.write(str_lst[idx] + "\n")
-    # print(str_lst)
-    # tempfilepar.close()
     
     curr_dir = os.getcwd()                      # Get current directory
     os.chdir(path2prog)                         # Change directory to working directory
@@ -190,30 +244,32 @@ def run_parallel_simu(code_name_lst,path_lst,str_lst,max_jobs=max(1,os.cpu_count
         else:
             # Output will be redirected to DEVNULL
             subprocess.check_call(cmd_str.split(), encoding='utf8', cwd=path2prog, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
+        os.chdir(curr_dir)                          # Change directory back to original directory
     except subprocess.CalledProcessError as e:
+        os.chdir(curr_dir)                          # Change directory back to original directory
         #don't stop if error code is 95
         if e.returncode != 0:
             # log = pd.read_csv(log_file,sep='\t',usecols=['Exitval'],error_bad_lines=False)
-            # repalce error bad line with skip
+            # replace error bad line with skip
             log = pd.read_csv(log_file,sep='\t',usecols=['Exitval'],on_bad_lines='skip')
+            os.remove(log_file)
+            unique_exitval = log['Exitval'].unique()
             if log['Exitval'].isin([0, 95]).all():
-                os.remove(log_file)
                 if verbose:
-                    print("Error code 95")
+                    for exitval in unique_exitval:
+                        print(SIMsalabim_error_message(exitval) + ' found in log file, when running \n'+ str(cmd_str))
+                
             else:
                 if ignore_error_code:
-                    print(str(cmd_str))
-                    warnings.warn('Error code '+str(log['Exitval'].unique())+' found in log file, ignoring error code.'+ str(filename))
+                    warnings.warn('The following errors were caught but are ignored and the simulation continues: '+str(unique_exitval))
+                    if verbose:
+                        for exitval in unique_exitval: 
+                            warnings.warn(SIMsalabim_error_message(e.returncode) + ' found in log file, when running \n'+ str(cmd_str))
                     pass
                 else:
-                    print('Error code '+str(log['Exitval'].unique())+' found in log file, stopping simulation')
-                    print(log['Exitval'])
+                    print(SIMsalabim_error_message(e.returncode) + ' found in log file, when running \n'+ str(cmd_str))
+                    print('Stopping simulation...')
                     raise e
-
-    os.chdir(curr_dir)                          # Change directory back to original directory
-
-
 
 
 def RunSimulation(Simulation_Inputs,max_jobs=os.cpu_count()-2 ,do_multiprocessing=True,verbose=False,ignore_error_code=False):
