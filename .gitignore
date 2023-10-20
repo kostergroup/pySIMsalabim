@@ -1,0 +1,20 @@
+# text files
+*.dat
+*.txt
+*.jpg
+*.png
+*.pdf
+*.o
+*.exe
+*__pycache__
+*.h5
+*.gif
+*.py
+*.pyc
+*.ipynb
+*.py
+*SIMsalabim
+
+# Exceptions
+!requirements.txt
+!pySIMsalabim/*.py
