@@ -14,7 +14,7 @@ import os, random, shutil, sys, re
 
 def ReadParameterFile(path2file):
     """Get all the parameters from the 'device_parameters.txt' file
-    for SIMsalabim and ZimT
+    for SIMsalabim
 
     Parameters
     ----------
@@ -47,6 +47,92 @@ def ReadParameterFile(path2file):
             count += 1
    
     return ParFileDic
+
+
+def ReadParameterFile_full(path2file):
+    """Get all the parameters from the 'device_parameters.txt' file
+    for SIMsalabim
+
+    Parameters
+    ----------
+    path2file : str
+        Path to the 'device_parameters.txt'
+
+    Returns
+    -------
+    List
+        List with nested lists for all parameters in all sections.
+    """    
+
+    # Note:List object format (basic layout) Identical structure for all sections
+    #
+    # [
+    #     [
+    #         'Description',
+    #         ['comm', {comment1}],
+    #         ['comm', {comment2}],
+    #             ...
+    #     ],
+    #     [   'General',
+    #         ['par', {parameter_general_name1}, {parameter_general_value1}, {parameter_general_description1}],
+    #         ['par', {parameter_general_name2}, {parameter_general_value2}, {parameter_general_description2}],
+    #         ['comm', {comment_general_1}],
+    #         ...
+    #     ],
+    #     [   'Mobilities',
+    #         ...
+    #     ],
+    #     ...
+    # ]
+
+    # check if the file exists
+    if not os.path.isfile(path2file):
+        raise FileNotFoundError('The file '+path2file+' does not exist')
+
+    # read the file
+    with open(path2file) as f:
+        fp = f.readlines()
+
+    index = 0
+
+    # Reserve the first element of the list for the top/header description
+    dev_par_object = [['Description']]
+
+    # All possible section headers
+    section_list = ['General', 'Mobilities', 'Optics', 'Contacts', 'Transport layers', 'Ions', 'Generation and recombination',
+                    'Trapping', 'Numerical Parameters', 'Voltage range of simulation', 'User interface']
+
+    for line in fp:
+        # Read all lines from the file
+        if line.startswith('**'):
+        # Left adjusted comment
+            comm_line = line.replace('*', '').strip()
+            if (comm_line in section_list):  # Does the line match a section name
+                # New section, add element to the main list
+                dev_par_object.append([comm_line])
+                index += 1
+            else:
+                # A left-adjusted comment, add with 'comm' flag to current element
+                dev_par_object[index].append(['comm', comm_line])
+        elif line.strip() == '':
+        # Empty line, ignore and do not add to dev_par_object
+            continue
+        else:
+        # Line is either a parameter or leftover comment.
+            par_line = line.split('*')
+            if '=' in par_line[0]:  # Line contains a parameter
+                par_split = par_line[0].split('=')
+                par = ['par', par_split[0].strip(), par_split[1].strip(),par_line[1].strip()]
+                dev_par_object[index].append(par)
+            else:
+                # leftover (*) comment. Add to the description of the last added parameter
+                dev_par_object[index][-1][3] = dev_par_object[index][-1][3] + \
+                    "*" + par_line[1].strip()
+
+    # close the file
+    f.close()
+
+    return dev_par_object
 
 
 def GetParFromStr(str2run):
@@ -185,19 +271,36 @@ def UpdateDevParFile(ParFileDic,path2file,fullpath=True,MakeCopy=True):
         absolute path to the simulation folder that contains the device_parameters.txt file. 
     MakeCopy : bool, optional
         Make a copy of the previous device_parameters.txt file in device_parameters_old.txt, by default True
+
+    Raises
+    ------
+    FileNotFoundError
+        If the file device_parameters.txt does not exist
+
     """    
 
     # Saves a copy of the original device_parameters.txt file
-    
-
     if MakeCopy:
         path2file_old = os.path.join(path2file,'device_parameters_old.txt')
         if not fullpath:
             path2file = os.path.join(path2file,'device_parameters.txt')
+        
+        if os.path.isdir(path2file): # check that it is a file and not a folder
+            raise FileNotFoundError('The path '+path2file+' is a folder, not a file, try using fullpath=False.')
+
+        if not os.path.isfile(path2file): # check if the file exists
+            raise FileNotFoundError('The file '+path2file+' does not exist')
+
         MakeDevParFileCopy(path2file,path2file_old)
     else:
         if not fullpath:
             path2file = os.path.join(path2file,'device_parameters.txt')
+        
+        if os.path.isdir(path2file): # check that it is a file and not a folder
+            raise FileNotFoundError('The path '+path2file+' is a folder, not a file, try using fullpath=False.')
+
+        if not os.path.isfile(path2file): # check if the file exists
+            raise FileNotFoundError('The file '+path2file+' does not exist')
     
     # Check for version number
     CheckProgVersion(path2file)
