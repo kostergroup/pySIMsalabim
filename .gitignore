@@ -14,11 +14,12 @@
 # *.ipynb
 *.json
 
-# Don't push SIMsalabim folder
-/SIMsalabim/
 
 # Exceptions
 !requirements.txt
 !pySIMsalabim/**.py
+# !SIMsalabim/Data/**.txt
+# !SIMsalabim/Docs/**.txt
+# !SIMsalabim/Docs/**.pdf
 
 

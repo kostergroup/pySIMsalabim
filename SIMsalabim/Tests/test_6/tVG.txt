@@ -1,0 +1,15 @@
+t 	Vext 	G_frac 	comments
+0   oc      0.0001
+0   oc      0.0003
+0   oc      0.001
+0   oc      0.003
+0   oc      0.01
+0   oc      0.03
+0   oc      0.1
+0   oc      0.3
+0   oc      1
+
+
+
+      
+
