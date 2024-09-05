@@ -9,10 +9,9 @@
 *__pycache__
 *.h5
 *.gif
-*.csv\
-*.py
+*.csv
 *.pyc
-*.ipynb
+# *.ipynb
 *.json
 
 # Don't push SIMsalabim folder
@@ -21,3 +20,5 @@
 # Exceptions
 !requirements.txt
 !pySIMsalabim/**.py
+
+
