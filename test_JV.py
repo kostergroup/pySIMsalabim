@@ -3,7 +3,7 @@ import os, uuid
 from pySIMsalabim.experiments.JV_steady_state import *
 import matplotlib.pyplot as plt
 from joblib import Parallel, delayed
-from pySIMsalabim.utils.clean_up import clean_all_output
+from pySIMsalabim.utils.clean_up import clean_all_output,clean_up_output,delete_folders
 
 cwd = os.getcwd()
 simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup.txt')
@@ -14,12 +14,16 @@ UUID = str(uuid.uuid4())
 clean_all_output(session_path)
 res = run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', G_fracs = Gfracs, parallel = False, max_jobs = 3, run_mode = False, UUID=UUID, cmd_pars=[{'par': 'l2.L', 'val': '500e-9'}])
 
-# plt.figure()
-# for Gfrac in Gfracs:
-#     data = pd.read_csv(os.path.join(session_path,f'JV_Gfrac_{Gfrac}_{UUID}.dat'), sep=r'\s+')
-#     plt.plot(data['Vext'],data['Jext'],label=f'Gfrac = {Gfrac}')
+plt.figure()
+for Gfrac in Gfracs:
+    data = pd.read_csv(os.path.join(session_path,f'JV_Gfrac_{Gfrac}_{UUID}.dat'), sep=r'\s+')
+    plt.plot(data['Vext'],data['Jext'],label=f'Gfrac = {Gfrac}')
 
-# plt.xlabel('Vext [V]')
-# plt.ylabel('Current density [A/m^2]')
-# plt.legend()
+plt.xlabel('Vext [V]')
+plt.ylabel('Current density [A/m^2]')
+plt.legend()
 plt.show()
+
+clean_all_output(session_path)
+clean_up_output('Gfracs',session_path)
+delete_folders('tmp',session_path)
