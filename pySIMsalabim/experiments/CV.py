@@ -14,7 +14,7 @@ from pySIMsalabim.utils import general as utils_gen
 from pySIMsalabim.plots import plot_functions_gen as utils_plot_gen
 from pySIMsalabim.utils.utils import *
 from pySIMsalabim.utils.device_parameters import *
-
+from pySIMsalabim.utils.clean_up import clean_all_output,clean_up_output,delete_folders
 ######### Function Definitions ####################################################################
 
 def create_tVG_CV(V_0, V_max, del_V, V_step, G_frac, tVG_name, session_path, freq, ini_timeFactor, timeFactor):
@@ -815,3 +815,4 @@ if __name__ == "__main__":
     else:
         print(message)
 
+    

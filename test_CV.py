@@ -4,7 +4,7 @@ import pandas as pd
 from pySIMsalabim.experiments.CV import *
 import matplotlib.pyplot as plt
 from joblib import Parallel, delayed
-from pySIMsalabim.utils.clean_up import clean_all_output,clean_up_output
+from pySIMsalabim.utils.clean_up import clean_all_output,clean_up_output,delete_folders
 
 cwd = os.getcwd()
 zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
@@ -71,3 +71,4 @@ plt.show()
 clean_all_output(session_path)
 clean_up_output('CapVol',session_path)
 clean_up_output('Gfracs',session_path)
+delete_folders('tmp',session_path)

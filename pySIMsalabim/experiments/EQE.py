@@ -110,7 +110,7 @@ def calc_EQE(Jext,Jext_err,J0_single, J0_err_single, lambda_array,p):
 
     return deltaJ, deltaJerr, I_diff, EQE_val, EQE_err
 
-def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_max, lambda_step, Vext, outfile_name, JV_file_name = 'JV.dat', remove_dirs = True, parallel = False, max_jobs = max(1,os.cpu_count()-1), run_mode = True, **kwargs):
+def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_max, lambda_step, Vext, output_file = 'EQE.dat', JV_file_name = 'JV.dat', remove_dirs = True, parallel = False, max_jobs = max(1,os.cpu_count()-1), run_mode = True, **kwargs):
     """Run the EQE calculation for a given spectrum and external voltage, and save the results in a file.
 
     Parameters
@@ -129,10 +129,10 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
         Step size for the wavelength.
     Vext : float
         External voltage at which the simulation will run and the EQE must be calculated.
-    outfile_name : string
-        Name of the file where the results will be stored.
+    output_file : string
+        Name of the file where the results will be stored. The file will be stored in the session folder, by default 'EQE.dat'
     JV_file_name : string
-        Name of the JV file.
+        Name of the JV file. Must be unique for each simulation, by default 'JV.dat'
     remove_dirs : bool, optional
         Remove the temporary directories, by default True
     parallel : bool, optional
@@ -164,8 +164,15 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
     else:
         dum_str = ''
 
-    JV_file_name_base, JV_file_name_ext = os.path.splitext(JV_file_name)
-    JV_file_name = JV_file_name_base + dum_str + JV_file_name_ext
+    
+    JV_file_name = os.path.join(session_path, JV_file_name)
+    output_file = os.path.join(session_path, output_file)
+    if UUID != '':
+        JV_file_name_base, JV_file_name_ext = os.path.splitext(JV_file_name)
+        JV_file_name = JV_file_name_base + dum_str + JV_file_name_ext
+        output_file_base, output_file_ext = os.path.splitext(output_file)
+        output_file = output_file_base + dum_str + output_file_ext
+    varFile = 'none' # we don't use a var file for this simulation
     
     msg_list = [] # Init the returnmessage list
     p=0.03*1e21 #number of photons that are added to the irradiance. in this example it is 3% of the number of photons absorbed by a Silicon solar cell in m-2
@@ -312,7 +319,7 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
     deltaJ, deltaJerr, I_diff, EQE_val, EQE_err = calc_EQE(Jext,Jext_err,J0_single, J0_err_single, lambda_array,p)
 
     # Save the results in a file
-    fp = open(os.path.join(session_path,outfile_name), 'w')
+    fp = open(os.path.join(session_path,output_file), 'w')
     fp.write('lambda Jext Jerr deltaJ deltaJerr Imonopeak EQE EQEerr\n')
     for i in range(len(lambda_array)):
         fp.write(f'{lambda_array[i]:.3e} {Jext[i]:.3e} {Jext_err[i]:.3e} {deltaJ[i]:.3e} {deltaJerr[i]:.3e} {I_diff[i]:.3e} {EQE_val[i]:.3e} {EQE_err[i]:.3e}\n')
@@ -334,8 +341,8 @@ if __name__ == '__main__':
     Vext = [0]
 
     for i in range(len(Vext)):
-        outfile_name = f'output_{Vext[i]}V.dat'
-        retval = run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_max, lambda_step, Vext[i], outfile_name, remove_dirs=True, run_mode=False)
+        output_file = f'output_{Vext[i]}V.dat'
+        retval = run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_max, lambda_step, Vext[i], output_file, remove_dirs=True, run_mode=False)
     
     #TMP
     plt.figure()
