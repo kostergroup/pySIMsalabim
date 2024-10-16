@@ -1,6 +1,7 @@
 numpy
 pandas
 matplotlib
+plotly
 scipy
 joblib
 lmfit
