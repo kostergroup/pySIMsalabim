@@ -7,11 +7,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 import scipy.integrate
-
-# from utils import general as utils_gen
-# from utils import plot_functions_gen as utils_plot_gen
+import pySIMsalabim
 from pySIMsalabim.utils import general as utils_gen
-from pySIMsalabim.plots import plot_functions_gen as utils_plot_gen
+from pySIMsalabim.plots import plot_functions as utils_plot
 from pySIMsalabim.utils.utils import *
 from pySIMsalabim.utils.device_parameters import *
 
@@ -341,9 +339,49 @@ def IMPS_plot(session_path, output_file, xscale='log', yscale='log', plot_type =
     ylabel = 'Im Y'
     title = 'Computed IMPS'
     fig, ax = plt.subplots()
-    utils_plot_gen.plot_result(data_freqY, pars_imps, selected, par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type)
+    utils_plot.plot_result(data_freqY, pars_imps, selected, par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type)
 
     plt.show()
+
+def ColeCole_plot(session_path, output_file, xscale='linear', yscale='linear', plot_type = plt.errorbar):
+    """ Plot the Cole-Cole plot with the real and imaginary part of the admittance against frequency
+
+    Parameters
+    ----------
+    session_path : string
+        working directory for zimt
+    output_file : string
+        Filename where the admittance data is stored
+    xscale : string
+        Scale of the x-axis. E.g linear or log
+    yscale : string
+        Scale of the y-axis. E.g linear or log
+    plot_type : matplotlib.pyplot
+        Type of plot to display
+    """
+    # Read the data from freqY-file
+    data = pd.read_csv(os.path.join(session_path,output_file), sep=r'\s+')
+    
+    fig, ax = plt.subplots()
+    pars_nyq = {'ImY' : '-Im Y [A/m$^2$]'}
+    par_x_nyq = 'ReY'
+    par_weight_nyq = 'freq'
+    xlabel_nyq = 'Re Y [A/m$^2$]'
+    ylabel_nyq = '-Im Y [A/m$^2$]'
+    weightlabel_nyq = 'frequency [Hz]'
+    weight_norm_nyq = 'log'
+    title_nyq = 'Cole-Cole plot'
+
+    # Plot the Cole-Cole plot with or without errorbars
+    if plot_type == plt.errorbar:
+        ax = utils_plot.plot_result(data, pars_nyq, list(pars_nyq.keys()), par_x_nyq, xlabel_nyq, ylabel_nyq, xscale, yscale, title_nyq, ax, plot_type, 
+                                            [], data['ImErrY'], legend=False)
+    else:
+        ax = utils_plot.plot_result(data, pars_nyq, list(pars_nyq.keys()), par_x_nyq, xlabel_nyq, ylabel_nyq, xscale, yscale, title_nyq, ax, plot_type, legend=False)
+
+    plt.show()
+
+
 
 def plot_IMPS(session_path, output_file='freqY.dat'):
     """Plot admittance of IMPS
@@ -356,8 +394,10 @@ def plot_IMPS(session_path, output_file='freqY.dat'):
     # IMPS plot
     IMPS_plot(session_path,output_file)
 
-def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V, G_frac, GStep, run_mode=False, output_file = 'freqY.dat', ini_timeFactor=1e-3, timeFactor=1.02, 
-                  tj_name = 'tj.dat',**kwargs):
+    # Cole-Cole plot
+    ColeCole_plot(session_path,output_file)
+
+def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V, G_frac, GStep, run_mode=False, output_file = 'freqY.dat', tj_name = 'tj.dat',varFile ='none', ini_timeFactor=1e-3, timeFactor=1.02, **kwargs):
     """Create a tVG file and run ZimT with admittance device parameters
 
     Parameters
@@ -365,7 +405,7 @@ def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, 
     zimt_device_parameters : string
         Name of the zimt device parameters file
     session_path : string
-        Working directory for zimt
+        Path of the simulation folder for this session
     tVG_name : string
         Name of the tVG file
     f_min : float
@@ -386,6 +426,8 @@ def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, 
         Name of the file where the admittance data is stored, by default freqY.dat
     tj_name : string, optional
         Name of the tj file where the admittance data is stored, by default tj.dat
+    varFile : string, optional
+        Name of the var file, by default 'none'
     ini_timeFactor : float, optional
         Constant defining the size of the initial timestep, by default 1e-3
     timeFactor : float, optional
@@ -406,6 +448,13 @@ def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, 
     else:
         threadsafe = kwargs.get('threadsafe', False) # Check if the user wants to force the use of threads instead of processes
     
+    turnoff_autoTidy = kwargs.get('turnoff_autoTidy', None) # Check if the user wants to turn off the autoTidy function in SIMsalabim
+    if turnoff_autoTidy is None: 
+        if not threadsafe:
+            turnoff_autoTidy = True
+        else:
+            turnoff_autoTidy = False
+
     # Update the file names with the UUID
     if UUID != '':
         dum_str = f'_{UUID}'
@@ -422,7 +471,11 @@ def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, 
         tVG_name = tVG_name_base + dum_str + tVG_name_ext
         output_file_base, output_file_ext = os.path.splitext(output_file)
         output_file = output_file_base + dum_str + output_file_ext
-    varFile = 'none' # we don't use a var file for this simulation
+        if varFile != 'none':
+            var_file_base, var_file_ext = os.path.splitext(varFile)
+            varFile = var_file_base + dum_str + var_file_ext
+            varFile = os.path.join(session_path,varFile)
+    # varFile = 'none' # we don't use a var file for this simulation
 
     # Create tVG
     result, message = create_tVG_IMPS(V, G_frac, GStep, tVG_name, session_path, f_min, f_max, ini_timeFactor, timeFactor)
@@ -438,6 +491,12 @@ def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, 
                         {'par':'varFile','val':varFile},
                         {'par':'logFile','val':'log'+dum_str+'.txt'}]
         
+        if turnoff_autoTidy:
+            IMPS_args.append({'par':'autoTidy','val':'0'})
+        
+        if cmd_pars is not None:
+            IMPS_args = update_cmd_pars(IMPS_args, cmd_pars)
+
         if threadsafe:
             result, message = utils_gen.run_simulation_filesafe('zimt', IMPS_args, session_path, run_mode)
         else:
@@ -477,7 +536,7 @@ if __name__ == "__main__":
 
     # Run IMPS spectroscopy
     GStep = G_frac*fac_G
-    result, message = run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V, G_frac, GStep, run_mode=False, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
+    result, message = run_IMPS_simu(zimt_device_parameters, tVG_name, f_min, f_max, f_steps, V, G_frac, GStep, session_path= session_path, run_mode=False, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
 
     # Make the IMPS plots
     plot_IMPS(session_path)

@@ -1,10 +1,9 @@
 """Functions for general use"""
 ######### Package Imports #########################################################################
 
-import os, zipfile, subprocess, uuid, shutil, time
+import os, subprocess, uuid, shutil, time
 import pandas as pd
 from subprocess import run, PIPE
-from datetime import datetime
 from pySIMsalabim.utils.device_parameters import *
 
 ######### Function Definitions ####################################################################
@@ -223,11 +222,9 @@ def run_simulation(sim_type, cmd_pars, session_path, run_mode = False, verbose =
             result = run(cmd_line, cwd=session_path,stdout=PIPE, check=False, shell=True)
         else:
             result = run([cmd_line], cwd=session_path, stdout=PIPE, check=False, shell=True)
-            # result = run([cmd_line], cwd=session_path, check=False, shell=True)
-        # else:
-        #     result = run([cmd_line], cwd=session_path, check=False, shell=True, stdout=PIPE)
+
         message = ''
-        
+ 
     return result, message
 
 

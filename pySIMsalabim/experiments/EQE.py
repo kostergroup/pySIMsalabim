@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import constants
+import pySIMsalabim
 from pySIMsalabim.utils import general as utils_gen
 from pySIMsalabim.utils.parallel_sim import *
 from pySIMsalabim.utils.utils import update_cmd_pars
@@ -110,7 +111,7 @@ def calc_EQE(Jext,Jext_err,J0_single, J0_err_single, lambda_array,p):
 
     return deltaJ, deltaJerr, I_diff, EQE_val, EQE_err
 
-def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_max, lambda_step, Vext, output_file = 'EQE.dat', JV_file_name = 'JV.dat', remove_dirs = True, parallel = False, max_jobs = max(1,os.cpu_count()-1), run_mode = True, **kwargs):
+def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_max, lambda_step, Vext, output_file = 'EQE.dat', JV_file_name = 'JV.dat', varFile = 'none',remove_dirs = True, parallel = False, max_jobs = max(1,os.cpu_count()-1), run_mode = True, **kwargs):
     """Run the EQE calculation for a given spectrum and external voltage, and save the results in a file.
 
     Parameters
@@ -129,10 +130,12 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
         Step size for the wavelength.
     Vext : float
         External voltage at which the simulation will run and the EQE must be calculated.
-    output_file : string
+    output_file : string, optional
         Name of the file where the results will be stored. The file will be stored in the session folder, by default 'EQE.dat'
-    JV_file_name : string
+    JV_file_name : string, optional
         Name of the JV file. Must be unique for each simulation, by default 'JV.dat'
+    varFile : string, optional
+        Name of the var file, by default 'none'
     remove_dirs : bool, optional
         Remove the temporary directories, by default True
     parallel : bool, optional
@@ -157,7 +160,14 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
         threadsafe = kwargs.get('threadsafe', True) # Check if the user wants to force the use of threads instead of processes
     else:
         threadsafe = kwargs.get('threadsafe', False) # Check if the user wants to force the use of threads instead of processes
-        
+
+    turnoff_autoTidy = kwargs.get('turnoff_autoTidy', None) # Check if the user wants to turn off the autoTidy function in SIMsalabim
+    if turnoff_autoTidy is None: 
+        if not threadsafe:
+            turnoff_autoTidy = True
+        else:
+            turnoff_autoTidy = False
+
     # Update the JV file name with the UUID
     if UUID != '':
         dum_str = f'_{UUID}'
@@ -172,7 +182,11 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
         JV_file_name = JV_file_name_base + dum_str + JV_file_name_ext
         output_file_base, output_file_ext = os.path.splitext(output_file)
         output_file = output_file_base + dum_str + output_file_ext
-    varFile = 'none' # we don't use a var file for this simulation
+        if varFile != 'none':
+            varFile = os.path.join(session_path,varFile)
+            var_file_base, var_file_ext = os.path.splitext(varFile)
+            varFile = var_file_base + dum_str + var_file_ext
+    # varFile = 'none' # we don't use a var file for this simulation
     
     msg_list = [] # Init the returnmessage list
     p=0.03*1e21 #number of photons that are added to the irradiance. in this example it is 3% of the number of photons absorbed by a Silicon solar cell in m-2
@@ -198,7 +212,6 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
     #runs for no monochromatic peak (normal spectrum) and obtains J0 and its err
     # Prepare the arguments for the simulation
     EQE_args = [{'par':'dev_par_file','val':simss_device_parameters},
-                    {'par':'autoTidy','val':str(0)}, # unnecessary to tidy up the files all the time
                     {'par':'outputRatio','val':str(0)}, # we don't care about the var file here
                     {'par':'Vmin','val':str(Vext)},
                     {'par':'Vmax','val':str(Vext)},
@@ -206,10 +219,12 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
                     {'par':'JVFile','val':os.path.join(session_path,JV_file_name)}, # need to add the session path to the JV file name to make sure it is stored in the session folder
                     # below are unecessary output files but we asign them to avoid errors
                     {'par':'logFile','val':'log'+dum_str+'.txt'},
-                    {'par':'varFile','val':'none'},
+                    {'par':'varFile','val':varFile},
                     {'par':'scParsFile','val':'scPars'+dum_str+'.txt'}
                     ]
-    
+    if turnoff_autoTidy:
+        EQE_args.append({'par':'autoTidy','val':'0'})
+
     if cmd_pars is not None:
         EQE_args = update_cmd_pars(EQE_args, cmd_pars)
     
@@ -233,15 +248,19 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
 
     #obtains Jext and Jext error for a monochromatic peak at each wavelength        
     if parallel and len(lambda_array) > 1 : # Run the simulations in parallel
-        # JV_file_name_base, JV_file_name_ext = os.path.splitext(JV_file_name)
+        JV_file_name_base, JV_file_name_ext = os.path.splitext(JV_file_name)
         log_file_name_base, log_file_name_ext = os.path.splitext('log'+dum_str+'.txt')
         scParsFile_name_base, scParsFile_name_ext = os.path.splitext('scPars'+dum_str+'.txt')
-
+        
         EQE_args_list = []
         for i in lambda_array:
-            JV_file_name_single = f'{JV_file_name}_{int(i*1e9)}nm{JV_file_name_ext}'
+            JV_file_name_single = f'{JV_file_name_base}{dum_str}_{int(i*1e9)}nm{JV_file_name_ext}'
+            if varFile != 'none':
+                varFile_single = f'{var_file_base}+{dum_str}_{int(i*1e9)}nm{var_file_ext}'
+                varFile_single = os.path.join(session_path,varFile_single)
+            else:
+                varFile_single = 'none'
             dum_args = [{'par':'dev_par_file','val':simss_device_parameters},
-                        {'par':'autoTidy','val':str(0)}, # unnecessary to tidy up the files all the time
                         {'par':'outputRatio','val':str(0)}, # we don't care about the var file here
                         {'par':'Vmin','val':str(Vext)},
                         {'par':'Vmax','val':str(Vext)},
@@ -249,9 +268,12 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
                         {'par':'JVFile','val':os.path.join(session_path,JV_file_name_single)}, # makes sure that the JV file is unique for each simulation and is stored in the session folder
                         # below are unecessary output files but we asign them to avoid errors
                         {'par':'logFile','val':f'{log_file_name_base}_{int(i*1e9)}nm{log_file_name_ext}'},
-                        {'par':'varFile','val':'none'},
+                        {'par':'varFile','val':varFile_single},
                         {'par':'scParsFile','val':f'{scParsFile_name_base}_{int(i*1e9)}nm{scParsFile_name_ext}'}
                         ]
+            if turnoff_autoTidy:
+                dum_args.append({'par':'autoTidy','val':'0'}) # necessary to avoid autoTidy messing up the files in parallel mode
+
             if cmd_pars is not None:
                 dum_args = update_cmd_pars(dum_args, cmd_pars)
             EQE_args_list.append(dum_args)
@@ -259,8 +281,8 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
         results = run_simulation_parallel('simss', EQE_args_list, session_path, max_jobs, force_multithreading=force_multithreading)
         
         for i in lambda_array:
-            JV_file_name_single = f'{JV_file_name}_{int(i*1e9)}nm{JV_file_name_ext}'
-            J_single, Jerr_single = get_CurrDens(JV_file_name_single,session_path)
+            JV_file_name_single = f'{JV_file_name_base}{dum_str}_{int(i*1e9)}nm{JV_file_name_ext}'
+            J_single, Jerr_single = get_CurrDens(os.path.join(session_path,JV_file_name_single),session_path)
             Jext.append(J_single)
             Jext_err.append(Jerr_single)
             
@@ -272,9 +294,13 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
             JV_file_name_single = f'{JV_file_name_base}_{int(i*1e9)}nm{JV_file_name_ext}'
             log_file_name_base, log_file_name_ext = os.path.splitext('log'+dum_str+'.txt')
             scParsFile_name_base, scParsFile_name_ext = os.path.splitext('scPars'+dum_str+'.txt')
+            if varFile != 'none':
+                varFile_single = f'{var_file_base}_{int(i*1e9)}nm{var_file_ext}'
+                varFile_single = os.path.join(session_path,varFile_single)
+            else:
+                varFile_single = 'none'
             
             EQE_args = [{'par':'dev_par_file','val':simss_device_parameters},
-                        {'par':'autoTidy','val':str(0)}, # unnecessary to tidy up the files all the time
                         {'par':'outputRatio','val':str(0)}, # we don't care about the var file here
                         {'par':'Vmin','val':str(Vext)},
                         {'par':'Vmax','val':str(Vext)},
@@ -282,9 +308,11 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
                         {'par':'JVFile','val':os.path.join(session_path,JV_file_name_single)},#JV_file_name_single}, # makes sure that the JV file is unique for each simulation and is stored in the session folder
                         # below are unecessary output files but we asign them to avoid errors
                         {'par':'logFile','val':f'{log_file_name_base}_{int(i*1e9)}nm{log_file_name_ext}'},
-                        {'par':'varFile','val':'none'},
+                        {'par':'varFile','val':varFile_single},
                         {'par':'scParsFile','val':f'{scParsFile_name_base}_{int(i*1e9)}nm{scParsFile_name_ext}'}
                         ]  
+            if turnoff_autoTidy:
+                EQE_args.append({'par':'autoTidy','val':'0'})
 
             if cmd_pars is not None:
                 EQE_args = update_cmd_pars(EQE_args, cmd_pars)

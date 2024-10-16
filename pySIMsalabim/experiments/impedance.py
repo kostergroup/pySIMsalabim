@@ -8,12 +8,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 import scipy.integrate
-
-# from utils import general as utils_gen
-# from utils import plot_functions_gen as utils_plot_gen
-# from utils.device_parameters_gen import *
+import pySIMsalabim
 from pySIMsalabim.utils import general as utils_gen
-from pySIMsalabim.plots import plot_functions_gen as utils_plot_gen
+from pySIMsalabim.plots import plot_functions as utils_plot
 from pySIMsalabim.utils.utils import *
 from pySIMsalabim.utils.device_parameters import *
 
@@ -445,7 +442,7 @@ def Bode_plot(session_path, output_file, xscale='log', yscale_1='linear', yscale
 
     fig, ax1 = plt.subplots()
     ax2 = ax1.twinx()
-    utils_plot_gen.plot_result_twinx(data, pars, selected_1, selected_2, par_x, xlabel, ylabel_1, ylabel_2, xscale, yscale_1, yscale_2, title,ax1,ax2, 
+    utils_plot.plot_result_twinx(data, pars, selected_1, selected_2, par_x, xlabel, ylabel_1, ylabel_2, xscale, yscale_1, yscale_2, title,ax1,ax2, 
                                         plot_type, y_error_1 = data['ReErrZ'], y_error_2 = data['ImErrZ'])
     plt.show()
 
@@ -476,10 +473,10 @@ def Nyquist_plot(session_path, output_file, xscale='linear', yscale='linear', pl
 
     # Plot the nyquist plot with or without errorbars
     if plot_type == plt.errorbar:
-        ax = utils_plot_gen.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, 
+        ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, 
                                             data['ReErrZ'], data['ImErrZ'], legend=False)
     else:
-        ax = utils_plot_gen.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
+        ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
 
     plt.show()
 
@@ -509,7 +506,7 @@ def Capacitance_plot(session_path, output_file, xscale='log', yscale='linear'):
     ylabel = 'C [F m$^{-2}$]'
     title = 'Capacitance plot'
 
-    ax = utils_plot_gen.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plt.errorbar, y_error=data['errC'], legend=False)
+    ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plt.errorbar, y_error=data['errC'], legend=False)
 
     plt.show()
 
@@ -530,7 +527,7 @@ def plot_impedance(session_path, output_file='freqZ.dat'):
     # Capacitance plot
     Capacitance_plot(session_path,output_file)
 
-def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V_0, del_V, G_frac, run_mode=False, output_file = 'freqZ.dat', tj_name = 'tj.dat', ini_timeFactor=1e-3, timeFactor=1.02, **kwargs):
+def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V_0, del_V, G_frac, run_mode=False, output_file = 'freqZ.dat', tj_name = 'tj.dat', varFile ='none', ini_timeFactor=1e-3, timeFactor=1.02, **kwargs):
     """Create a tVG file and run ZimT with impedance device parameters
 
     Parameters
@@ -559,6 +556,8 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
         Name of the file where the impedance data is stored, by default freqZ.dat
     tj_name : string, optional
         Name of the tj file where the impedance data is stored, by default tj.dat
+    varFile : string, optional
+        Name of the var file, by default 'none'
     ini_timeFactor : float, optional
         Constant defining the size of the initial timestep, by default 1e-3
     timeFactor : float, optional
@@ -579,6 +578,13 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
     else:
         threadsafe = kwargs.get('threadsafe', False) # Check if the user wants to force the use of threads instead of processes
     
+    turnoff_autoTidy = kwargs.get('turnoff_autoTidy', None) # Check if the user wants to turn off the autoTidy function in SIMsalabim
+    if turnoff_autoTidy is None: 
+        if not threadsafe:
+            turnoff_autoTidy = True
+        else:
+            turnoff_autoTidy = False
+
     # Update the file names with the UUID
     if UUID != '':
         dum_str = f'_{UUID}'
@@ -595,7 +601,11 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
         tVG_name = tVG_name_base + dum_str + tVG_name_ext
         output_file_base, output_file_ext = os.path.splitext(output_file)
         output_file = output_file_base + dum_str + output_file_ext
-    varFile = 'none' # we don't use a var file for the hysteresis JV simulation
+        if varFile != 'none':
+            var_file_base, var_file_ext = os.path.splitext(varFile)
+            varFile = var_file_base + dum_str + var_file_ext
+            varFile = os.path.join(session_path,varFile)
+    # varFile = 'none' # we don't use a var file for the hysteresis JV simulation
 
     # The simulations with Rseries and Rshunt often do not converge, so we first run a steady state simulation to get the internal voltage and then run the impedance simulation with Rseries = 0 and Rshunt = -Rshunt. We will correct the impedance afterwards. This is a workaround to improve the convergence of the impedance simulation that should remain accurate to estimate the impedance.
     #default values for Rseries and Rshunt
@@ -647,6 +657,9 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
                                 {'par':'logFile','val':'log'+dum_str+'.txt'}
                                 ]
             
+            if turnoff_autoTidy:
+                Impedance_SS_args.append({'par':'autoTidy','val':'0'})
+
             if cmd_pars is not None:
                 Impedance_SS_args = update_cmd_pars(Impedance_SS_args, cmd_pars)
             
@@ -696,6 +709,10 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
                              # We remove Rseries and Rshunt as the simulation is either to converge that way, we will correct the impedance afterwards
                              {'par':'R_series','val':str(0)},
                              {'par':'R_shunt','val':str(-abs(Rshunt))}]
+        
+        if turnoff_autoTidy:
+            Impedance_args.append({'par':'autoTidy','val':'0'})
+            
         if cmd_pars is not None:
             Impedance_args = update_cmd_pars(Impedance_args, cmd_pars)
 
@@ -705,8 +722,7 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
             result, message = utils_gen.run_simulation('zimt', Impedance_args, session_path, run_mode)
 
         if result.returncode == 0 or result.returncode == 95:
-            data = read_tj_file(session_path, tj_file_name=tj_name)
-            print('Rseries:', Rseries)    
+            data = read_tj_file(session_path, tj_file_name=tj_name) 
             result, message = get_impedance(data, f_min, f_max, f_steps, del_V, session_path, output_file, zimt_device_parameters, Rseries, Rshunt)
             return result, message
 
@@ -737,7 +753,7 @@ if __name__ == "__main__":
     session_path = 'Zimt'
 
     # Run impedance spectroscopy
-    result, message = run_impedance_simu(zimt_device_parameters, session_path, tVG_name,f_min, f_max, f_steps, V_0, del_V, G_frac, run_mode=True, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
+    result, message = run_impedance_simu(zimt_device_parameters, tVG_name,f_min, f_max, f_steps, V_0, del_V, G_frac, session_path = session_path, run_mode=True, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
 
     # Make the impedance plots
     plot_impedance(session_path)

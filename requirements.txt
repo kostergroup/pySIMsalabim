@@ -1,0 +1,11 @@
+numpy
+pandas
+matplotlib
+scipy
+joblib
+lmfit
+jupyterlab
+ipympl
+seaborn
+gitpython
+openpyxl

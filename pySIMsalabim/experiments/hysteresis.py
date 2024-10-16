@@ -5,8 +5,9 @@ import os,sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import pySIMsalabim
 from pySIMsalabim.utils import general as utils_gen
-from pySIMsalabim.plots import plot_functions_gen as utils_plot_gen
+from pySIMsalabim.plots import plot_functions as utils_plot
 from pySIMsalabim.utils.utils import update_cmd_pars
 
 ######### Function Definitions ####################################################################
@@ -258,7 +259,7 @@ def plot_hysteresis_JV(path2file = 'tj.dat'):
     title = 'JV curve'
     plot_type = plt.plot
 
-    ax = utils_plot_gen.plot_result(data_tj, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type)
+    ax = utils_plot.plot_result(data_tj, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type)
     
     return ax
 
@@ -368,6 +369,9 @@ def read_Exp_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin):
 
 def concatJVs(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, direction):
     """Put the experimental forward and backward JV arrays together
+
+    Parameters
+    ----------
     session_path : string
         working directory for zimt
     expJV_Vmin_Vmax : string
@@ -498,17 +502,17 @@ def Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode,
     
     return rms
 
-def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name, tj_name = 'tj.dat',
+def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name, tj_name = 'tj.dat',varFile='none',
                   run_mode=False, Vmin=0.0, Vmax=0.0, steps =0, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin', **kwargs ):
     """Create a tVG file and perform a JV hysteresis experiment.
 
     Parameters
     ----------
     zimt_device_parameters : string
-        name of the zimt device parmaeters file
+        name of the zimt device parameters file
     session_path : string
         working directory for zimt
-    UseExpData : intger
+    UseExpData : integer
         If 1, use experimental JV curves. If 0, Use Vmin, Vmax as boundaries
     scan_speed : float
         Voltage scan speed [V/s]
@@ -518,6 +522,10 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
         Device Parameter | Fractional generation rate
     tVG_name : string
         Device Parameter | Name of the tVG file
+    tj_name : string, optional
+        Name of the tj file, by default 'tj.dat'
+    varFile : string, optional
+        Name of the var file, by default 'none'
     run_mode : bool, optional
         indicate whether the script is in 'web' mode (True) or standalone mode (False). Used to control the console output, by default False
     Vmin : float, optional
@@ -551,6 +559,13 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
     else:
         threadsafe = kwargs.get('threadsafe', False) # Check if the user wants to force the use of threads instead of processes
 
+    turnoff_autoTidy = kwargs.get('turnoff_autoTidy', None) # Check if the user wants to turn off the autoTidy function in SIMsalabim
+    if turnoff_autoTidy is None: 
+        if not threadsafe:
+            turnoff_autoTidy = True
+        else:
+            turnoff_autoTidy = False
+
     # tVG file generation additional parameters
     expo_mode = kwargs.get('expo_mode', False) # whether to use exponential time steps
     Vminexpo = kwargs.get('Vminexpo', 1e-2) # minimum voltage after 0 to start the log steps
@@ -568,7 +583,11 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
         tj_name = tj_file_name_base + dum_str + tj_file_name_ext 
         tVG_name_base, tVG_name_ext = os.path.splitext(tVG_name)
         tVG_name = tVG_name_base + dum_str + tVG_name_ext
-    varFile = 'none' # we don't use a var file for the hysteresis JV simulation
+        if varFile != 'none':
+            var_file_base, var_file_ext = os.path.splitext(varFile)
+            varFile = var_file_base + dum_str + var_file_ext
+            varFile = os.path.join(session_path, varFile)
+    # varFile = 'none' # we don't use a var file for the hysteresis JV simulation
 
     rms = 0.0
     if UseExpData == 1:
@@ -590,6 +609,9 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
                               {'par':'logFile','val':'log'+dum_str+'.txt'}
                               ]
         
+        if turnoff_autoTidy:
+            Hysteresis_JV_args.append({'par':'autoTidy','val':'0'})
+
         if cmd_pars is not None:
             Hysteresis_JV_args = update_cmd_pars(Hysteresis_JV_args, cmd_pars)
 
@@ -601,7 +623,8 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
         if result.returncode == 0 or result.returncode == 95:
             if UseExpData == 1:
                 rms = Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode, direction, tj_name)
-
+        result = result.returncode
+    
     return result, message, rms
 
 ## Running the function as a standalone script
@@ -623,7 +646,7 @@ if __name__ == "__main__":
     steps = 1000
     
     # Required input for fitting
-    UseExpData = 1 # integer, if 1 read experimental data
+    UseExpData = 0 # integer, if 1 read experimental data
     rms_mode = 'log' # lin or log
     expJV_Vmin_Vmax = 'od05_f.txt' # Forward (direction=1)/Backward (direction=-1) JV scan file
     expJV_Vmax_Vmin = 'od05_b.txt' # Backward (direction=1)/Forward (direction=-1) JV scan file
@@ -635,7 +658,7 @@ if __name__ == "__main__":
         result, message, rms = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name, 
                                              Vmin=Vmin, Vmax=Vmax, steps =steps, rms_mode = rms_mode)
         
-    if result.returncode == 0 or result.returncode == 95:
+    if result == 0 or result == 95:
         if UseExpData == 1:
             print('Rms-value: ', "{:.5f}".format(round(rms, 5)))
     

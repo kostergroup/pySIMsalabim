@@ -13,13 +13,34 @@
 *.pyc
 # *.ipynb
 *.json
-
-
+*.html
+*.css
+*.js
+*.egg-info
+/docs/build
+/docs/source/_static
+/docs/source/_templates
+/docs/source/auto_examples
+/SIMsalabim/SimSS/log*.txt
+/SIMsalabim/SimSS/JV*.dat
+/SIMsalabim/SimSS/scPars*.txt
+/SIMsalabim/SimSS/Var*.txt
 # Exceptions
 !requirements.txt
 !pySIMsalabim/**.py
 # !SIMsalabim/Data/**.txt
 # !SIMsalabim/Docs/**.txt
 # !SIMsalabim/Docs/**.pdf
+
+
+# ignore folders
+__pycache__/
+.vscode/
+.ipynb_checkpoints/
+dist/
+# build/
+.eggs/
+.pypirc
+.pytest_cache/
 
 

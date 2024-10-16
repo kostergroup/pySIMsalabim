@@ -44,7 +44,7 @@ def cmd_yes_no_question(question, default = "yes"):
     while True:
         # Capture user input
         sys.stdout.write(question + prompt)
-        choice = input(question + prompt)
+        choice = input()
         # convert the input to lowercase
         choice = choice.lower()
         if default is not None and choice == "":

@@ -7,14 +7,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 import scipy.integrate
-
-# from utils import general as utils_gen
-# from utils import plot_functions_gen as utils_plot_gen
+import pySIMsalabim
 from pySIMsalabim.utils import general as utils_gen
-from pySIMsalabim.plots import plot_functions_gen as utils_plot_gen
+from pySIMsalabim.plots import plot_functions as utils_plot
 from pySIMsalabim.utils.utils import *
 from pySIMsalabim.utils.device_parameters import *
-from pySIMsalabim.utils.clean_up import clean_all_output,clean_up_output,delete_folders
+
 ######### Function Definitions ####################################################################
 
 def create_tVG_CV(V_0, V_max, del_V, V_step, G_frac, tVG_name, session_path, freq, ini_timeFactor, timeFactor):
@@ -536,10 +534,10 @@ def cap_plot(session_path, output_file, xscale='linear', yscale='linear', plot_t
     
     # Plot with or without errorbars
     if plot_type == plt.errorbar:
-        ax = utils_plot_gen.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, 
+        ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, 
                                             [], data['errC'], legend=False)
     else:
-        ax = utils_plot_gen.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
+        ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
 
     plt.show()
 
@@ -574,10 +572,10 @@ def MottSchottky_plot(session_path, output_file, xscale='linear', yscale='linear
 
     # Plot with or without errorbars
     if plot_type == plt.errorbar:
-        ax = utils_plot_gen.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, 
+        ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, 
                                             [], data['errC'], legend=False)
     else:
-        ax = utils_plot_gen.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
+        ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
 
     plt.show()
 
@@ -594,15 +592,15 @@ def plot_capacitance(session_path, output_file='CapVol.dat'):
 
     MottSchottky_plot(session_path, output_file)
 
-def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_max, del_V, V_step, G_frac, run_mode=False, output_file = 'CapVol.dat', tj_name = 'tj.dat', ini_timeFactor=1e-3, timeFactor=1.02,**kwargs):
+def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_max, del_V, V_step, G_frac, run_mode=False, output_file = 'CapVol.dat', tj_name = 'tj.dat', varFile = 'none', ini_timeFactor=1e-3, timeFactor=1.02,**kwargs):
     """Create a tVG file and run ZimT with capacitance device parameters
 
     Parameters
     ----------
     zimt_device_parameters : string
         Name of the zimt device parameters file
-    session_path : string
-        Working directory for zimt
+    session_path : string, optional
+        working directory for zimt
     tVG_name : string
         Name of the tVG file
     freq : float
@@ -623,6 +621,8 @@ def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_m
         Name of the file where the capacitance data is stored, by default CapVol.dat
     tj_name : string, optional
         Name of the tj file where the capacitance data is stored, by default tj.dat
+    varFile : string, optional
+        Name of the var file, by default 'none'
     ini_timeFactor : float, optional
         Constant defining the size of the initial timestep, by default 1e-3
     timeFactor : float, optional
@@ -649,6 +649,13 @@ def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_m
     else:
         dum_str = ''
 
+    turnoff_autoTidy = kwargs.get('turnoff_autoTidy', None) # Check if the user wants to turn off the autoTidy function in SIMsalabim
+    if turnoff_autoTidy is None: 
+        if not threadsafe:
+            turnoff_autoTidy = True
+        else:
+            turnoff_autoTidy = False
+
     # Update the filenames with the UUID
     tj_name = os.path.join(session_path, tj_name)
     output_file = os.path.join(session_path, output_file)
@@ -659,7 +666,11 @@ def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_m
         tVG_name = tVG_name_base + dum_str + tVG_name_ext
         output_file_base, output_file_ext = os.path.splitext(output_file)
         output_file = output_file_base + dum_str + output_file_ext
-    varFile = 'none' # we don't use a var file for this simulation
+        if varFile != 'none':
+            var_file_base, var_file_ext = os.path.splitext(varFile)
+            varFile = var_file_base + dum_str + var_file_ext
+            varFile = os.path.join(session_path,varFile)
+    # varFile = 'none' # we don't use a var file for this simulation
 
     # The simulations with Rseries and Rshunt often do not converge, so we first run a steady state simulation to get the internal voltage and then run the impedance simulation with Rseries = 0 and Rshunt = -Rshunt. We will correct the impedance afterwards. This is a workaround to improve the convergence of the impedance simulation that should remain accurate to estimate the impedance.
     #default values for Rseries and Rshunt
@@ -710,6 +721,8 @@ def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_m
                                 {'par':'varFile','val':varFile},
                                 {'par':'logFile','val':'log'+dum_str+'.txt'}
                                 ]
+            if turnoff_autoTidy:
+                CV_SS_args.append({'par':'autoTidy','val':'0'})
 
             if cmd_pars is not None:
                 CV_SS_args = update_cmd_pars(CV_SS_args, cmd_pars)
@@ -768,6 +781,9 @@ def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_m
                         {'par':'R_series','val':str(0)},
                         {'par':'R_shunt','val':str(-abs(Rshunt))}]
         
+        if turnoff_autoTidy:
+            CV_args.append({'par':'autoTidy','val':'0'})
+            
         if cmd_pars is not None:
                 CV_args = update_cmd_pars(CV_args, cmd_pars)
 

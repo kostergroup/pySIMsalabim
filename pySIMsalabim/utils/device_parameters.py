@@ -298,18 +298,7 @@ def store_file_names(dev_par, sim_type, dev_par_name, layers, run_mode = False):
         # st.session_state['opticsFiles'].append(specfile)
 
     if run_mode == True:
-        st.session_state['LayersFiles'] = LayersFiles
-        st.session_state['genProfile'] = genProfile
-        st.session_state['opticsFiles'] = opticsFiles
-        st.session_state['varFile'] = varFile
-        st.session_state['logFile'] = logFile
-        st.session_state['expJV'] = expJV
-        st.session_state['JVFile'] = JVFile
-        st.session_state['scParsFile'] = scParsFile
-        st.session_state['tVGFile'] = tVGFile
-        st.session_state['tJFile'] = tJFile
-        st.session_state['traps_int'] = traps_int
-        st.session_state['traps_bulk'] = traps_bulk
+        return LayersFiles, opticsFiles, genProfile, traps_int, traps_bulk, expJV, varFile, logFile, JVFile, scParsFile, tVGFile, tJFile      
     else:
         if sim == 'simss':
             return LayersFiles, opticsFiles, traps_int, traps_bulk, expJV, varFile, logFile, JVFile, scParsFile
