@@ -16,7 +16,7 @@ jobs:
           pandoc --version
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_theme sphinx-gallery nbsphinx sphinx_copybutton sphinx-notfound-page docutils readthedocs-sphinx-search pandoc pytest plotly
+          pip install sphinx sphinx_rtd_theme sphinx-gallery nbsphinx sphinx_copybutton sphinx-notfound-page docutils readthedocs-sphinx-search pandoc pytest plotly myst-parser
           pip install -r requirements.txt
       - name: Build
         run: |
