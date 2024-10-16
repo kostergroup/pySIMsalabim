@@ -43,4 +43,12 @@ dist/
 .pypirc
 .pytest_cache/
 
+# ignore files
+!docs/logo/**
+!docs/index.html
+!docs/source/*.rst
+!docs/source/*.py
+!docs/source/examples/*.ipynb
+
+
 
