@@ -100,7 +100,8 @@ def run_simulation_parallel(sim_type, cmd_pars_list, session_path, max_jobs = ma
     else:
         # Linux
         if shutil.which('parallel') is not None and not force_multithreading:
-            result_list = run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
+            result, msg_list, return_code_list  = run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
+            result_list = return_code_list
         else:
             result_list = run_simulation_multithreaded_linux(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
 
@@ -165,32 +166,32 @@ def run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs 
     result = run([cmd_parallel], cwd=session_path,stdout=PIPE, check=False, shell=True)
     msg_list,return_code_list = [],[]
 
-    if result.returncode != 0:
-        log = pd.read_csv(log_file, sep='\t',usecols=['Exitval'],on_bad_lines='skip')
+    # if result.returncode != 0:
+    log = pd.read_csv(log_file, sep='\t',usecols=['Exitval'],on_bad_lines='skip')
 
-        # check if all jobs have been completed successfully, i.e. all exitvals are 0, 95 or 3
-        if not all(val in [0, 95, 3] for val in log['Exitval']):
-            for idx, val in enumerate(log['Exitval']):
-                message = ''
-                if val != 0 and val != 95 and val != 3:
-                    if val >= 90 :
-                        # Show the message as an error on the screen. Do not continue to the simulation results page.
-                        msg_list.append('Simulation raised an error with Errorcode: ' + str(val) + '\n\n' + parallel_error_message(val))
-                    else:
-                        msg_list.append(parallel_error_message(val))
+    # check if all jobs have been completed successfully, i.e. all exitvals are 0, 95 or 3
+    if not all(val in [0, 95, 3] for val in log['Exitval']):
+        for idx, val in enumerate(log['Exitval']):
+            message = ''
+            if val != 0 and val != 95 and val != 3:
+                if val >= 90 :
+                    # Show the message as an error on the screen. Do not continue to the simulation results page.
+                    msg_list.append('Simulation raised an error with Errorcode: ' + str(val) + '\n\n' + parallel_error_message(val))
                 else:
-                    if val == 95:
-                        # In case of errorcode 95, failures during the simulations were encountered but the simulation did not halt. Show 'error' messages on the UI.
-                        msg_list.append('Simulation completed but raised errorcode: ' + str(val) + '\n\n' + 'The simulation finished but at least 1 point did not converge.')
-                    elif val == 3:
-                        # Special case, should not occur in the web version.
-                        # When the program exits as a success but no simulation has been run, e.g. in the case of the autotidy functionality. 
-                        msg_list.append('Action completed')
-                    else:
-                        # Simulation completed as expected.
-                        msg_list.append('Simulation completed.')
+                    msg_list.append(parallel_error_message(val))
+            else:
+                if val == 95:
+                    # In case of errorcode 95, failures during the simulations were encountered but the simulation did not halt. Show 'error' messages on the UI.
+                    msg_list.append('Simulation completed but raised errorcode: ' + str(val) + '\n\n' + 'The simulation finished but at least 1 point did not converge.')
+                elif val == 3:
+                    # Special case, should not occur in the web version.
+                    # When the program exits as a success but no simulation has been run, e.g. in the case of the autotidy functionality. 
+                    msg_list.append('Action completed')
+                else:
+                    # Simulation completed as expected.
+                    msg_list.append('Simulation completed.')
 
-        return_code_list = log['Exitval'].tolist()  
+    return_code_list = log['Exitval'].tolist()  
 
     # remove the temporary files
     os.remove(os.path.join(session_path,filename))
