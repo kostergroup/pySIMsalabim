@@ -33,7 +33,7 @@ def test_run_CV_simu():
     del_V = 0.01
     G_frac = 0
     # Run the CV simulation
-    ret, mess = run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_max, del_V, V_step ,G_frac, run_mode=False, output_file = 'CapVol.dat', tj_name = 'tj.dat')
+    ret, mess = run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step ,G_frac, del_V,run_mode=False, tVG_name=tVG_name, output_file = 'CapVol.dat', tj_name = 'tj.dat')
     print(ret,mess)
     # Clean up the output
     sim.clean_all_output(session_path)
@@ -61,7 +61,7 @@ def test_CV_parallel():
             V_step = 0.1
             del_V = 0.01
             print('Running')
-            ret, mess = run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_max, del_V, V_step ,G_frac, run_mode=False, output_file = 'CapVol.dat', tj_name = 'tj.dat', UUID = ID,cmd_pars=cmd_pars,threadsafe=True)
+            ret, mess = run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step ,G_frac, del_V,run_mode=False, tVG_name=tVG_name, output_file = 'CapVol.dat', tj_name = 'tj.dat', UUID = ID,cmd_pars=cmd_pars,threadsafe=True)
 
         Gfracs = [ 0.1,0.5,1]
         ID_list = [str(uuid.uuid4()) for i in range(len(Gfracs))]

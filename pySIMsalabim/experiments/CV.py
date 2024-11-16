@@ -592,7 +592,7 @@ def plot_capacitance(session_path, output_file='CapVol.dat'):
 
     MottSchottky_plot(session_path, output_file)
 
-def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_max, del_V, V_step, G_frac, run_mode=False, output_file = 'CapVol.dat', tj_name = 'tj.dat', varFile = 'none', ini_timeFactor=1e-3, timeFactor=1.02,**kwargs):
+def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step, G_frac=1, del_V=0.01,  run_mode=False,tVG_name='tVG.txt',  output_file = 'CapVol.dat', tj_name = 'tj.dat', varFile = 'none', ini_timeFactor=1e-3, timeFactor=1.02,**kwargs):
     """Create a tVG file and run ZimT with capacitance device parameters
 
     Parameters
@@ -601,22 +601,22 @@ def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_m
         Name of the zimt device parameters file
     session_path : string, optional
         working directory for zimt
-    tVG_name : string
-        Name of the tVG file
     freq : float
         Frequency at which the capacitance-voltage measurement is performed
     V_min : float
         Initial voltage
     V_max : float
         Maximum voltage
-    del_V : float
-        Voltage step that is applied directly after t=0
     V_step : float
         Voltage difference, determines at which voltages the capacitance is determined
-    G_frac : float
-        Fractional light intensity
+    G_frac : float, optional
+        Fractional light intensity, by default 1
+    del_V : float, optional
+        Voltage step that is applied directly after t=0, by default 0.01
     run_mode : bool, optional
         Indicate whether the script is in 'web' mode (True) or standalone mode (False). Used to control the console output, by default False  
+    tVG_name : string, optional
+        Name of the tVG file, by default tVG.txt
     output_file : string, optional
         Name of the file where the capacitance data is stored, by default CapVol.dat
     tj_name : string, optional
@@ -659,6 +659,7 @@ def run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_m
     # Update the filenames with the UUID
     tj_name = os.path.join(session_path, tj_name)
     output_file = os.path.join(session_path, output_file)
+    tVG_name = os.path.join(session_path, tVG_name)
     if UUID != '':
         tj_file_name_base, tj_file_name_ext = os.path.splitext(tj_name)
         tj_name = tj_file_name_base + dum_str + tj_file_name_ext 
@@ -823,7 +824,7 @@ if __name__ == "__main__":
     tj_name = 'tj.dat'
 
     # Run Capacitance-Voltage   
-    result, message = run_CV_simu(zimt_device_parameters, session_path, tVG_name, freq, V_min, V_max, del_V, V_step, G_frac, run_mode=True, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
+    result, message = run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step, G_frac, del_V,run_mode=True, tVG_name=tVG_name, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
 
     # Make the capacitance-voltage plot
     if result == 0 or result == 95:

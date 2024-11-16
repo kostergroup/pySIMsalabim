@@ -640,8 +640,56 @@ def make_basename_input_files(filename, updateFile = True):
         return layer_par
 
 
-    
+def get_par_from_dev_par(dev_par, par_name):
+    """Get the parameter from the device parameters
 
+    Parameters
+    ----------
+    dev_par : List
+        List with the device parameters
+    par_name : string
+        Name of the parameter
+
+    Returns
+    -------
+    List
+        List with the parameter
+    """
+    for section in dev_par:
+        for param in section[1:]:
+            if param[1] == par_name:
+                return param 
+
+def ReadParameterFile(path2file):
+    """Get all the parameters from the 'Device_parameters.txt' file
+    for SIMsalabim and ZimT
+    Parameters
+    ----------
+    path2file : str
+        Path to the 'Device_parameters.txt'
+
+    Returns
+    -------
+    dict
+        Contains the parameters and values from the 'Device_parameters.txt'
+    """    
+    
+    lines = []
+    ParFileDic = {}
+    with open(path2file) as f:
+        lines = f.readlines()
+
+    count = 0
+    for line in lines:
+        line = line.replace(' ', '')
+        if line[0] != '*' and (not line.isspace()):
+            equal_idx = line.find('=')
+            star_idx = line.find('*')
+            # print(line[0:equal_idx] , line[equal_idx+1:star_idx])
+            ParFileDic[line[0:equal_idx] ] = line[equal_idx+1:star_idx]
+            count += 1
+            # print(f'line {count}: {line}')   
+    return ParFileDic
 
 # def update_dev_par(sim_type, cmd_pars, dev_par, layers):
 #     """Update the device parameters with the command line parameters

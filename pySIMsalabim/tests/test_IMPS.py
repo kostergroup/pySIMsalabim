@@ -33,7 +33,7 @@ def test_run_IMPS_simu():
     G_frac = 1
     GStep = 0.05
     # Run the IMPS simulation
-    ret, mess = run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V, G_frac, GStep, run_mode=False, output_file = 'freqY.dat', tj_name = 'tj.dat')
+    ret, mess = run_IMPS_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V, G_frac, GStep, run_mode=False, tVG_name =tVG_name, output_file = 'freqY.dat', tj_name = 'tj.dat')
     # Clean up the output
     sim.clean_all_output(session_path)
     sim.clean_up_output('freqY',session_path)
@@ -60,7 +60,7 @@ def test_IMPS_parallel():
             V = 0
             GStep = 0.05
             print('Running')
-            ret, mess = run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V, G_frac, GStep, run_mode=False, output_file = 'freqY.dat', tj_name = 'tj.dat', UUID = ID,cmd_pars=cmd_pars,threadsafe=True)
+            ret, mess = run_IMPS_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V, G_frac, GStep, run_mode=False, tVG_name =tVG_name, output_file = 'freqY.dat', tj_name = 'tj.dat', UUID = ID,cmd_pars=cmd_pars,threadsafe=True)
 
         Gfracs = [ 0.1,0.5,1]
         ID_list = [str(uuid.uuid4()) for i in range(len(Gfracs))]

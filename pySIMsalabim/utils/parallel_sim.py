@@ -161,7 +161,7 @@ def run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs 
         for cmd_line in cmd_line_list:
             tempfilepar.write(cmd_line+'\n')
 
-    cmd_parallel = 'parallel --joblog '+ log_file +' --jobs '+str(int(max_jobs))+' --bar -a '+os.path.join(session_path,filename)
+    cmd_parallel = 'parallel --joblog '+ log_file +' --jobs '+str(int(max_jobs))+' -a '+os.path.join(session_path,filename)
     
     result = run([cmd_parallel], cwd=session_path,stdout=PIPE, check=False, shell=True)
     msg_list,return_code_list = [],[]

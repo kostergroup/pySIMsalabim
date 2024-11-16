@@ -397,7 +397,7 @@ def plot_IMPS(session_path, output_file='freqY.dat'):
     # Cole-Cole plot
     ColeCole_plot(session_path,output_file)
 
-def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V, G_frac, GStep, run_mode=False, output_file = 'freqY.dat', tj_name = 'tj.dat',varFile ='none', ini_timeFactor=1e-3, timeFactor=1.02, **kwargs):
+def run_IMPS_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V, G_frac, GStep = 0.05, run_mode=False, tVG_name = 'tVG.txt', output_file = 'freqY.dat', tj_name = 'tj.dat',varFile ='none', ini_timeFactor=1e-3, timeFactor=1.02, **kwargs):
     """Create a tVG file and run ZimT with admittance device parameters
 
     Parameters
@@ -406,8 +406,6 @@ def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, 
         Name of the zimt device parameters file
     session_path : string
         Path of the simulation folder for this session
-    tVG_name : string
-        Name of the tVG file
     f_min : float
         Minimum frequency
     f_max : float
@@ -418,10 +416,12 @@ def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, 
         Voltage, the voltage is constant over the whole time range
     G_frac : float
         Fractional light intensity
-    GStep : float
-        Applied generation rate increase at t=0
+    GStep : float, optional
+        Applied generation rate increase at t=0, by default 0.05
     run_mode : bool, optional
         Indicate whether the script is in 'web' mode (True) or standalone mode (False). Used to control the console output, by default False
+    tVG_name : string, optional
+        Name of the tVG file, by default tVG.txt
     output_file : string, optional
         Name of the file where the admittance data is stored, by default freqY.dat
     tj_name : string, optional
@@ -464,6 +464,7 @@ def run_IMPS_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, 
     # Update the filenames with the UUID
     tj_name = os.path.join(session_path, tj_name)
     output_file = os.path.join(session_path, output_file)
+    tVG_name = os.path.join(session_path, tVG_name)
     if UUID != '':
         tj_file_name_base, tj_file_name_ext = os.path.splitext(tj_name)
         tj_name = tj_file_name_base + dum_str + tj_file_name_ext 
@@ -536,7 +537,7 @@ if __name__ == "__main__":
 
     # Run IMPS spectroscopy
     GStep = G_frac*fac_G
-    result, message = run_IMPS_simu(zimt_device_parameters, tVG_name, f_min, f_max, f_steps, V, G_frac, GStep, session_path= session_path, run_mode=False, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
+    result, message = run_IMPS_simu(zimt_device_parameters, f_min, f_max, f_steps, V, G_frac, GStep, tVG_name=tVG_name,  session_path= session_path, run_mode=False, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
 
     # Make the IMPS plots
     plot_IMPS(session_path)

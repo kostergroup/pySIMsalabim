@@ -136,7 +136,7 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
                 dum_args = update_cmd_pars(dum_args, cmd_pars)
 
             SS_JV_args_list.append(dum_args)                             
-                                            
+                                       
         if parallel and len(G_fracs) > 1:
             results = run_simulation_parallel('simss', SS_JV_args_list, session_path, max_jobs, force_multithreading=force_multithreading)
             msg_list = ['' for i in range(len(results))]

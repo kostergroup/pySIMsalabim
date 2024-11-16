@@ -527,7 +527,7 @@ def plot_impedance(session_path, output_file='freqZ.dat'):
     # Capacitance plot
     Capacitance_plot(session_path,output_file)
 
-def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_max, f_steps, V_0, del_V, G_frac, run_mode=False, output_file = 'freqZ.dat', tj_name = 'tj.dat', varFile ='none', ini_timeFactor=1e-3, timeFactor=1.02, **kwargs):
+def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V_0, G_frac = 1, del_V = 0.01, run_mode = False, tVG_name='tVG.txt', output_file = 'freqZ.dat', tj_name = 'tj.dat', varFile ='none', ini_timeFactor=1e-3, timeFactor=1.02, **kwargs):
     """Create a tVG file and run ZimT with impedance device parameters
 
     Parameters
@@ -536,8 +536,6 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
         Name of the zimt device parameters file
     session_path : string
         Working directory for zimt
-    tVG_name : string
-        Name of the tVG file
     f_min : float
         Minimum frequency
     f_max : float
@@ -546,12 +544,14 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
         Frequency step
     V_0 : float 
         Voltage at t=0
-    del_V : float
-        Voltage step
-    G_frac : float
-        Fractional light intensity
+    G_frac : float, optional
+        Fractional light intensity, by default 1
+    del_V : float, optional
+        Voltage step, by default 0.01
     run_mode : bool, optional
         Indicate whether the script is in 'web' mode (True) or standalone mode (False). Used to control the console output, by default False  
+    tVG_name : string, optional
+        Name of the tVG file, by default tVG.txt
     output_file : string, optional
         Name of the file where the impedance data is stored, by default freqZ.dat
     tj_name : string, optional
@@ -594,6 +594,7 @@ def run_impedance_simu(zimt_device_parameters, session_path, tVG_name, f_min, f_
     # Update the filenames with the UUID
     tj_name = os.path.join(session_path, tj_name)
     output_file = os.path.join(session_path, output_file)
+    tVG_name = os.path.join(session_path, tVG_name)
     if UUID != '':
         tj_file_name_base, tj_file_name_ext = os.path.splitext(tj_name)
         tj_name = tj_file_name_base + dum_str + tj_file_name_ext 
@@ -753,7 +754,7 @@ if __name__ == "__main__":
     session_path = 'Zimt'
 
     # Run impedance spectroscopy
-    result, message = run_impedance_simu(zimt_device_parameters, tVG_name,f_min, f_max, f_steps, V_0, del_V, G_frac, session_path = session_path, run_mode=True, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
+    result, message = run_impedance_simu(zimt_device_parameters, f_min, f_max, f_steps, V_0, G_frac, del_V=del_V,tVG_name=tVG_name,session_path = session_path, run_mode=True, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
 
     # Make the impedance plots
     plot_impedance(session_path)

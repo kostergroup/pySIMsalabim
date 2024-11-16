@@ -74,6 +74,6 @@ fitThreshold = 0.8                * threshold of fraction converged points in ca
 JVFile = JV.dat                   * name of the file with simulated JV characteristics
 varFile = Var.dat                 * name of the file with (x,V,n,p,Jn,etc) or none for no file.
 limitDigits = 1                   * if 1, then number of digits in output is limited
-outputRatio = 1                   * Output to varFile every outputRatio voltages
+outputRatio = 0                   * Output to varFile every outputRatio voltages
 scParsFile = scPars.dat           * name of file with solar cell parameters
 logFile = log.txt                 * name of log file

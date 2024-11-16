@@ -502,7 +502,7 @@ def Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode,
     
     return rms
 
-def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name, tj_name = 'tj.dat',varFile='none',
+def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name='tVG.txt', tj_name = 'tj.dat',varFile='none',
                   run_mode=False, Vmin=0.0, Vmax=0.0, steps =0, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin', **kwargs ):
     """Create a tVG file and perform a JV hysteresis experiment.
 
@@ -520,8 +520,8 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
         Perform a forward-backward (1) or backward-forward scan (-1).
     G_frac : float
         Device Parameter | Fractional generation rate
-    tVG_name : string
-        Device Parameter | Name of the tVG file
+    tVG_name : string, optional
+        Device Parameter | Name of the tVG file, by default 'tVG.txt'
     tj_name : string, optional
         Name of the tj file, by default 'tj.dat'
     varFile : string, optional
@@ -578,6 +578,7 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
 
     # Update the filenames with the UUID
     tj_name = os.path.join(session_path, tj_name)
+    tVG_name = os.path.join(session_path, tVG_name)
     if UUID != '':
         tj_file_name_base, tj_file_name_ext = os.path.splitext(tj_name)
         tj_name = tj_file_name_base + dum_str + tj_file_name_ext 
