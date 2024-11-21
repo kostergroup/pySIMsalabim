@@ -1,13 +1,20 @@
 """Perform capacitance simulations"""
 ######### Package Imports #########################################################################
 
-import os
+import os, sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
 import scipy.integrate
-import pySIMsalabim
+# import pySIMsalabim
+## Import pySIMsalabim, if not successful, add the parent directory to the system path
+try :
+    import pySIMsalabim as sim
+except ImportError:
+    # Add the parent directory to the system path
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    import pySIMsalabim as sim
 from pySIMsalabim.utils import general as utils_gen
 from pySIMsalabim.plots import plot_functions as utils_plot
 from pySIMsalabim.utils.utils import *
@@ -806,7 +813,7 @@ def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step
 
 ######### Running the function as a standalone script #############################################
 if __name__ == "__main__":
-    # Capacitance input parameters    
+    ## Manual CV input parameters. These are overwritten by command line arguments if provided
     freq = 1e4
     V_min = 0.5
     V_max = 1.0
@@ -814,22 +821,98 @@ if __name__ == "__main__":
     V_step = 0.1    
     G_frac = 0
 
+    # Define folder and file paths
+    session_path = os.path.join('../../','SIMsalabim','ZimT')
+
+    zimt_device_parameters = 'simulation_setup.txt'
+
+    tVG_name = 'tVG.txt'
+    tj_name = 'tj.dat'
+    output_name = 'freqZ.dat'
+
+    # UUID = str(uuid.uuid4()) # Add a UUID to the simulation
+    UUID = ''
+
     # Not user input
     ini_timeFactor = 1e-3 # Initial timestep factor, org 1e-3
     timeFactor = 1.02 # Increase in timestep every step to reduce the amount of datapoints necessary, use value close to 1 as this is best! Org 1.02
+    run_mode = False # If False, show verbose output in console
 
-    session_path = 'ZimT'
-    zimt_device_parameters = 'device_parameters.txt'
-    tVG_name = 'tVG.txt'
-    tj_name = 'tj.dat'
+    ############## Command line arguments  ##############
+    ## Notes
+    ## - The command line arguments are optional and can be provided in any order
+    ## - Each command line argument must be provided in the format -par_name value
+    ## - Possible arguments include all SIMsalabim parameters and CV specific parameters as listed before
+    ## - Special arguments
+    ##   - sp : string
+    ##     - The session path, i.e. the working directory for the simulation
+    ##   - simsetup : string
+    ##     - The name of the zimt simulation setup parameters file
+    ##   - UUID : string
+    ##     - An UUID to add to the simulation (output)
+
+    cmd_pars_dict = {}
+    cmd_pars = []
+
+    # Check if any arguments are provided.
+    if len(sys.argv) >= 2:
+        # Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name
+        if not len(sys.argv[1:]) % 2 == 0:
+            print('Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...')
+            sys.exit(1)
+        else:
+            input_list = sys.argv[1:]
+            # Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value
+            for i in range(0,len(input_list),2):
+                # Check if the key already exists, if not, add it to the cmd_pars_dict
+                if str(input_list[i][1:]) in cmd_pars_dict:
+                    print(f'Duplicate parameter found in the command line parameters: {str(input_list[i][1:])}')
+                    sys.exit(1)
+                else:
+                    cmd_pars_dict[str(input_list[i][1:])] = str(input_list[i+1])
+
+    # Check and process specific keys/arguments that are not native SIMsalabim arguments
+    # Handle the session_path/sp argument separately, as the other parameters depend on this
+    if 'sp' in cmd_pars_dict:
+        session_path = cmd_pars_dict['sp']
+        # remove from cmd_pars
+        cmd_pars_dict.pop('sp')
+
+    # Define mappings for keys and variables
+    key_action_map = {
+        'simsetup': lambda val: {'zimt_device_parameters': val},
+        'freq': lambda val: {'freq': float(val)},
+        'V_min': lambda val: {'V_min': float(val)},
+        'V_max': lambda val: {'V_max': float(val)},
+        'del_V': lambda val: {'del_V': float(val)},
+        'V_step': lambda val: {'V_step': float(val)},
+        'G_frac': lambda val: {'G_frac': float(val)},
+        'tVG_name': lambda val: {'tVG_name': val},
+        'tj_name': lambda val: {'tj_name': val},
+        'out_name': lambda val: {'output_name': val},
+        'UUID': lambda val: {'UUID': val},    
+    }
+
+    for key in list(cmd_pars_dict.keys()):  # Use list to avoid modifying the dictionary while iterating
+        if key in key_action_map:
+            # Apply the corresponding action
+            result = key_action_map[key](cmd_pars_dict[key])
+            globals().update(result)  # Dynamically update global variables
+            cmd_pars_dict.pop(key)
+
+    # Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list
+    cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
 
     # Run Capacitance-Voltage   
-    result, message = run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step, G_frac, del_V,run_mode=True, tVG_name=tVG_name, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
+    result, message = run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step, G_frac, del_V,run_mode=False, tVG_name=tVG_name, 
+                                    output_file = output_name, tj_name = tj_name, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor, cmd_pars=cmd_pars, UUID=UUID)
 
     # Make the capacitance-voltage plot
     if result == 0 or result == 95:
-        plot_capacitance(session_path)
+        plot_capacitance(session_path, os.path.basename(output_name))
     else:
         print(message)
+        sys.exit(1)
+
 
     

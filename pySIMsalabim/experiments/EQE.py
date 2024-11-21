@@ -2,12 +2,19 @@
 
 ######### Package Imports #########################################################################
 
-import os, uuid
+import os, uuid, sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import constants
-import pySIMsalabim
+# import pySIMsalabim
+## Import pySIMsalabim, if not successful, add the parent directory to the system path
+try :
+    import pySIMsalabim as sim
+except ImportError:
+    # Add the parent directory to the system path
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    import pySIMsalabim as sim
 from pySIMsalabim.utils import general as utils_gen
 from pySIMsalabim.utils.parallel_sim import *
 from pySIMsalabim.utils.utils import update_cmd_pars
@@ -359,29 +366,96 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
         return 0, msg_list
 
 if __name__ == '__main__':
-    simss_device_parameters = 'simulation_setup_simss.txt'
-    session_path = os.getcwd()
-    spectrum = 'Data_spectrum/AM15G.txt'
+     ## Manual EQE input parameters. These are overwritten by command line arguments if provided
+    lambda_min = 280 # Lower limit of the wavelength range in nm
+    lambda_max = 1000 # Upper limit of the wavelength range in nm
+    lambda_step = 20 # Step size of the wavelength range in nm
+    Vext = [0] # Array with applied voltages in V
 
-    lambda_min = 280
-    lambda_max = 1000
-    lambda_step = 20
-    Vext = [0]
+    # Define folder and file paths
+    session_path = os.path.join('../../','SIMsalabim','SimSS')
+
+    simss_device_parameters = 'simulation_setup.txt'
+    spectrum = os.path.join('..','Data','AM15G.txt')  # Path of the original spectrum file
+
+    # UUID = str(uuid.uuid4()) # Add a UUID to the simulation
+    UUID = ''
+
+    ############## Command line arguments  ##############
+    ## Notes
+    ## - The command line arguments are optional and can be provided in any order
+    ## - Each command line argument must be provided in the format -par_name value
+    ## - Possible arguments include all SIMsalabim parameters and EQE specific parameters as listed before
+    ## - Special arguments
+    ##   - sp : string
+    ##     - The session path, i.e. the working directory for the simulation
+    ##   - simsetup : string
+    ##     - The name of the simss simulation setup parameters file
+    ##   - UUID : string
+    ##     - An UUID to add to the simulation (output)
+
+    cmd_pars_dict = {}
+    cmd_pars = []
+
+ # Check if any arguments are provided.
+    if len(sys.argv) >= 2:
+        # Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name
+        if not len(sys.argv[1:]) % 2 == 0:
+            print('Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...')
+            sys.exit(1)
+        else:
+            input_list = sys.argv[1:]
+            # Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value
+            for i in range(0,len(input_list),2):
+                # Check if the key already exists, if not, add it to the cmd_pars_dict
+                if str(input_list[i][1:]) in cmd_pars_dict:
+                    print(f'Duplicate parameter found in the command line parameters: {str(input_list[i][1:])}')
+                    sys.exit(1)
+                else:
+                    cmd_pars_dict[str(input_list[i][1:])] = str(input_list[i+1])
+
+    # Check and process specific keys/arguments that are not native SIMsalabim arguments
+    # Handle the session_path/sp argument separately, as the other parameters depend on this
+    if 'sp' in cmd_pars_dict:
+        session_path = cmd_pars_dict['sp']
+        # remove from cmd_pars
+        cmd_pars_dict.pop('sp')
+
+    # Define mappings for keys and variables
+    key_action_map = {
+        'simsetup': lambda val: {'simss_device_parameters': val},
+        'lambda_min': lambda val: {'lambda_min': float(val)},
+        'lambda_max': lambda val: {'lambda_max': float(val)},
+        'lambda_step': lambda val: {'lambda_step': int(val)},
+        'Vext': lambda val: {'Vext': val.split(',')}, # IMPORTANT: if multiple voltages are provided, they must be separated by a comma!!
+        'spectrum': lambda val: {'spectrum': val},
+        'UUID': lambda val: {'UUID': val},
+    }
+
+    for key in list(cmd_pars_dict.keys()):  # Use list to avoid modifying the dictionary while iterating
+        if key in key_action_map:
+            # Apply the corresponding action
+            result = key_action_map[key](cmd_pars_dict[key])
+            globals().update(result)  # Dynamically update global variables
+            cmd_pars_dict.pop(key)
+
+    # Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list
+    cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
 
     for i in range(len(Vext)):
         output_file = f'output_{Vext[i]}V.dat'
-        retval = run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_max, lambda_step, Vext[i], output_file, remove_dirs=True, run_mode=False)
+        retval = run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_max, lambda_step, Vext[i], output_file, remove_dirs=True, run_mode=False, UUID=UUID)
     
-    #TMP
     plt.figure()
-    for i in Vext:
-        res = pd.read_csv(f'output_{Vext[i]}V.dat', sep=r'\s+')
-        plt.scatter(res['lambda'], res['EQE'], label=f'V = {i}')
+    for i in range(len(Vext)):
+        res = pd.read_csv(os.path.join(session_path,f'output_{Vext[i]}V.dat'), sep=r'\s+')
+        plt.scatter(res['lambda']/1E-9, res['EQE'], label=f'V = {i}')
         plt.title('EQE for solar cell', fontsize = 16)
         plt.tick_params(axis='both',direction='in')
-        plt.xlabel('Wavelength (m)', fontsize = 16)
-        plt.ylabel('EQE [%]', fontsize = 16)
+        plt.xlabel('Wavelength [nm]', fontsize = 16)
+        plt.ylabel('EQE', fontsize = 16)
         plt.xlim(lambda_min, lambda_max)
+        plt.ylim(0,1)
         plt.legend()
 
     plt.show()

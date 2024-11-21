@@ -219,10 +219,9 @@ def run_simulation(sim_type, cmd_pars, session_path, run_mode = False, verbose =
     else:
         # if verbose:
         if os.name == 'nt':
-            result = run(cmd_line, cwd=session_path,stdout=PIPE, check=False, shell=True)
+            result = run(cmd_line, cwd=session_path, check=False, shell=True)
         else:
-            result = run([cmd_line], cwd=session_path, stdout=PIPE, check=False, shell=True)
-
+            result = run([cmd_line], cwd=session_path, check=False, shell=True)
         message = ''
  
     return result, message

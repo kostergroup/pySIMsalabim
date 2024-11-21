@@ -5,7 +5,14 @@ import os,sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import pySIMsalabim
+# import pySIMsalabim
+## Import pySIMsalabim, if not successful, add the parent directory to the system path
+try :
+    import pySIMsalabim as sim
+except ImportError:
+    # Add the parent directory to the system path
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    import pySIMsalabim as sim
 from pySIMsalabim.utils import general as utils_gen
 from pySIMsalabim.plots import plot_functions as utils_plot
 from pySIMsalabim.utils.utils import update_cmd_pars
@@ -520,6 +527,8 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
         Perform a forward-backward (1) or backward-forward scan (-1).
     G_frac : float
         Device Parameter | Fractional generation rate
+    run_mode : bool, optional
+        Indicate whether the script is in 'web' mode (True) or standalone mode (False). Used to control the console output, by default False  
     tVG_name : string, optional
         Device Parameter | Name of the tVG file, by default 'tVG.txt'
     tj_name : string, optional
@@ -630,40 +639,110 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
 
 ## Running the function as a standalone script
 if __name__ == "__main__":
-    # SIMsalabim input/output files
-    session_path = 'tmp_zimt'
-    zimt_device_parameters = os.path.join('device_parameters_zimt.txt')
+    ## Manual Hysteresis input parameters. These are overwritten by command line arguments if provided
+    scan_speed = 1e1 # V/s
+    direction = 1 # Scan direction: 1 for Vmin-Vmax-Vmin, -1 for Vmax-Vmin-Vmax
+    G_frac = 1 # amount of suns
+    UseExpData = 0 # integer, if 1 read experimental data
+    Vmin = 0 # lower voltage boundary
+    Vmax = 1.15 # upper voltage boundary
+    steps = 1000 # Number of voltage steps
+    expJV_Vmin_Vmax = 'od05_f.txt' # Forward (direction=1)/Backward (direction=-1) JV scan file
+    expJV_Vmax_Vmin = 'od05_b.txt' # Backward (direction=1)/Forward (direction=-1) JV scan file
+
+    # Define folder and file paths
+    session_path = os.path.join('../../','SIMsalabim','ZimT')
+
+    zimt_device_parameters = 'simulation_setup.txt'
+
     tVG_name = 'tVG.txt'
     tj_name = 'tj.dat'
     
-    # Hysteresis input parameters
-    direction = 1
-    scan_speed = 1e1 # V/s
-    G_frac = 1 # amount of sun ('calc') or amount of generated electron-hole pairs ('Gehp')
-    
-    # # Hysteresis input when not fitting
-    Vmin = 0 # V
-    Vmax = 1.15 # V  
-    steps = 1000
-    
-    # Required input for fitting
-    UseExpData = 0 # integer, if 1 read experimental data
+    # UUID = str(uuid.uuid4()) # Add a UUID to the simulation
+    UUID = ''
+
+    # Not user input
     rms_mode = 'log' # lin or log
-    expJV_Vmin_Vmax = 'od05_f.txt' # Forward (direction=1)/Backward (direction=-1) JV scan file
-    expJV_Vmax_Vmin = 'od05_b.txt' # Backward (direction=1)/Forward (direction=-1) JV scan file
+
+    ############## Command line arguments  ##############
+    ## Notes
+    ## - The command line arguments are optional and can be provided in any order
+    ## - Each command line argument must be provided in the format -par_name value
+    ## - Possible arguments include all SIMsalabim parameters and Hysteresis JV specific parameters as listed before
+    ## - Special arguments
+    ##   - sp : string
+    ##     - The session path, i.e. the working directory for the simulation
+    ##   - simsetup : string
+    ##     - The name of the zimt simulation setup parameters file
+    ##   - UUID : string
+    ##     - An UUID to add to the simulation (output)
+
+    cmd_pars_dict = {}
+    cmd_pars = []
+
+    # Check if any arguments are provided.
+    if len(sys.argv) >= 2:
+        # Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name
+        if not len(sys.argv[1:]) % 2 == 0:
+            print('Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...')
+            sys.exit(1)
+        else:
+            input_list = sys.argv[1:]
+            # Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value
+            for i in range(0,len(input_list),2):
+                # Check if the key already exists, if not, add it to the cmd_pars_dict
+                if str(input_list[i][1:]) in cmd_pars_dict:
+                    print(f'Duplicate parameter found in the command line parameters: {str(input_list[i][1:])}')
+                    sys.exit(1)
+                else:
+                    cmd_pars_dict[str(input_list[i][1:])] = str(input_list[i+1])
+
+    # Check and process specific keys/arguments that are not native SIMsalabim arguments
+    # Handle the session_path/sp argument separately, as the other parameters depend on this
+    if 'sp' in cmd_pars_dict:
+        session_path = cmd_pars_dict['sp']
+        # remove from cmd_pars
+        cmd_pars_dict.pop('sp')
+
+    # Define mappings for keys and variables
+    key_action_map = {
+        'simsetup': lambda val: {'zimt_device_parameters': val},
+        'scan_speed': lambda val: {'scan_speed': float(val)},
+        'direction': lambda val: {'direction': int(val)},
+        'G_frac': lambda val: {'G_frac': float(val)},
+        'UseExpData': lambda val: {'UseExpData': int(val)},
+        'Vmin': lambda val: {'Vmin': float(val)},
+        'Vmax': lambda val: {'Vmax': float(val)},
+        'steps': lambda val: {'steps': int(val)},
+        'expJV_Vmin_Vmax': lambda val: {'expJV_Vmin_Vmax': val},
+        'expJV_Vmax_Vmin': lambda val: {'expJV_Vmax_Vmin': val},
+        'tVG_name': lambda val: {'tVG_name':  val},
+        'tj_name': lambda val: {'tj_name': val},
+        'UUID': lambda val: {'UUID': val},
+    }
+
+    for key in list(cmd_pars_dict.keys()):  # Use list to avoid modifying the dictionary while iterating
+        if key in key_action_map:
+            # Apply the corresponding action
+            result = key_action_map[key](cmd_pars_dict[key])
+            globals().update(result)  # Dynamically update global variables
+            cmd_pars_dict.pop(key)
+
+    # Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list
+    cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
     
     if UseExpData == 1:
-        result, message, rms = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name, 
-                                             expJV_Vmin_Vmax = expJV_Vmin_Vmax, expJV_Vmax_Vmin = expJV_Vmax_Vmin, rms_mode = rms_mode)
+        result, message, rms = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVG_name, tj_name = tj_name,
+                                             run_mode = False, expJV_Vmin_Vmax = expJV_Vmin_Vmax, expJV_Vmax_Vmin = expJV_Vmax_Vmin, rms_mode = rms_mode, cmd_pars = cmd_pars, UUID=UUID)
     else:
-        result, message, rms = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name, 
-                                             Vmin=Vmin, Vmax=Vmax, steps =steps, rms_mode = rms_mode)
+        result, message, rms = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVG_name, tj_name = tj_name, 
+                                              run_mode = False, Vmin=Vmin, Vmax=Vmax, steps =steps, rms_mode = rms_mode, cmd_pars = cmd_pars, UUID=UUID)
         
     if result == 0 or result == 95:
         if UseExpData == 1:
             print('Rms-value: ', "{:.5f}".format(round(rms, 5)))
     
-        ax = plot_hysteresis_JV(os.path.join(session_path,'tj.dat'))
+        ax = plot_hysteresis_JV(tj_name)
         if UseExpData == 1:
             JVExp = concatJVs(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, direction)
             ax.scatter(JVExp.Vext, JVExp.Jext, label='Experimental', color='r')

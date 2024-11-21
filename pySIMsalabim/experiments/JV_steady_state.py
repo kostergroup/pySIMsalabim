@@ -2,12 +2,19 @@
 
 ######### Package Imports #########################################################################
 
-import os, uuid
+import os, uuid, sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import constants
-import pySIMsalabim
+# import pySIMsalabim
+## Import pySIMsalabim, if not successful, add the parent directory to the system path
+try :
+    import pySIMsalabim as sim
+except ImportError:
+    # Add the parent directory to the system path
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    import pySIMsalabim as sim
 from pySIMsalabim.utils import general as utils_gen
 from pySIMsalabim.utils.parallel_sim import *
 from pySIMsalabim.utils.utils import update_cmd_pars
@@ -155,16 +162,98 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
         if all([res == 0 for res in results]):
             return 0, 'All JV simulations completed successfully'
         else:
-            return results, msg_list
-
-
-
+            return results, msg_list    
     
-    
+## Running the function as a standalone script
+if __name__ == "__main__":
+    ## Manual Steady State input parameters. These are overwritten by command line arguments if provided
+    # G_fracs = [0.9, 1.0]
+    G_fracs = None
 
+    # Define folder and file paths
+    session_path = os.path.join('../../','SIMsalabim','SimSS')
 
-    
-    
+    simss_device_parameters = 'simulation_setup.txt'
 
-    
-    
+    JV_name = 'JV.dat'
+    Var_name = 'Var.dat'
+
+    # UUID = str(uuid.uuid4()) # Add a UUID to the simulation
+    UUID = ''
+
+    # Not user input
+    parallel = False
+    run_mode = False # If False, show verbose output in console
+
+    ############## Command line arguments  ##############
+    ## Notes
+    ## - The command line arguments are optional and can be provided in any order
+    ## - Each command line argument must be provided in the format -par_name value
+    ## - Possible arguments include all SIMsalabim parameters and Steady State JV specific parameters as listed before
+    ## - Special arguments
+    ##   - G_fracs : string
+    ##     - The G fractions to simulate, separated by a comma
+    ##   - sp : string
+    ##     - The session path, i.e. the working directory for the simulation
+    ##   - simsetup : string
+    ##     - The name of the simss simulation setup parameters file
+    ##   - UUID : string
+    ##     - An UUID to add to the simulation (output)
+
+    cmd_pars_dict = {}
+    cmd_pars = []
+
+    # Check if any arguments are provided.
+    if len(sys.argv) >= 2:
+        # Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name
+        if not len(sys.argv[1:]) % 2 == 0:
+            print('Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...')
+            sys.exit(1)
+        else:
+            input_list = sys.argv[1:]
+            # Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value
+            for i in range(0,len(input_list),2):
+                # Check if the key already exists, if not, add it to the cmd_pars_dict
+                if str(input_list[i][1:]) in cmd_pars_dict:
+                    print(f'Duplicate parameter found in the command line parameters: {str(input_list[i][1:])}')
+                    sys.exit(1)
+                else:
+                    cmd_pars_dict[str(input_list[i][1:])] = str(input_list[i+1])
+
+    # Check and process specific keys/arguments that are not native SIMsalabim arguments
+    # Handle the session_path/sp argument separately, as the other parameters depend on this
+    if 'sp' in cmd_pars_dict:
+        session_path = cmd_pars_dict['sp']
+        # remove from cmd_pars
+        cmd_pars_dict.pop('sp')
+
+    # Define mappings for keys and variables
+    key_action_map = {
+        'simsetup': lambda val: {'zimt_device_parameters': val},
+        'G_fracs': lambda val: {'G_fracs': val.split(',')}, # IMPORTANT: if multiple Gfracs are provided, they must be separated by a comma!!
+        'JV_name': lambda val: {'JV_name': val},
+        'Var_name': lambda val: {'Var_name': val},
+        'UUID': lambda val: {'UUID': val},
+    }
+
+    for key in list(cmd_pars_dict.keys()):  # Use list to avoid modifying the dictionary while iterating
+        if key in key_action_map:
+            # Apply the corresponding action
+            result = key_action_map[key](cmd_pars_dict[key])
+            globals().update(result)  # Dynamically update global variables
+            cmd_pars_dict.pop(key)
+
+    # Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list
+    cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
+
+    # Run the function
+    results, message = run_SS_JV(simss_device_parameters, session_path, JV_name, Var_name, G_fracs, parallel = parallel, run_mode = run_mode, cmd_pars=cmd_pars, UUID=UUID)
+
+    # Print the results if simulation failed
+    if run_mode:
+        if G_fracs == None:
+            print(message)
+        else:
+            if results != 0:
+                for i, msg in enumerate(message):
+                    print(f'G_frac: {G_fracs[i]} - {msg}')
