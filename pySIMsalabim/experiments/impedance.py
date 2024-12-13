@@ -13,7 +13,7 @@ import scipy.integrate
 try :
     import pySIMsalabim as sim
 except ImportError:
-    # Add the parent directory to the system path
+    # Add the parent direc
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
     import pySIMsalabim as sim
 from pySIMsalabim.utils import general as utils_gen
