@@ -3,7 +3,7 @@ Change Log
 All notable changes to this project will be documented in this file.
 
 
-v1.00 (2021-10-16)
+v1 (2024-10-16) 
 -------------------
 (VMLC-PV)
 - Initial release of the project.
