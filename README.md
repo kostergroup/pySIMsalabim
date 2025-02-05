@@ -1,4 +1,4 @@
-# SIMsalabim-python
+# pySIMsalabim
 
 ## Description
 **pySIMsalabim** is a Python package used to interface drift-diffusion simulator [SIMsalabim](https://github.com/kostergroup/SIMsalabim) with Python. It provides many useful tools to set up and run simulations, as well as to analyze and visualize the results.
