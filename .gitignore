@@ -49,6 +49,9 @@ dist/
 !docs/source/*.rst
 !docs/source/*.py
 !docs/source/examples/*.ipynb
+build/
+dist/
+*.egg-info/
 
 
 

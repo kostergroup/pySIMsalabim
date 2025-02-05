@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="boar_pv", # Replace with your own username
-    version="1.00",
+    name="pySIMSalabim", # Replace with your own username
+    version="v1",
     author="Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster",
     author_email="",
     description="",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     license='GPLv3',
     url="https://github.com/kostergroup/pySIMsalabim",
-    download_url="https://github.com/kostergroup/pySIMsalabim/v1.00.tar.gz",
+    download_url="https://github.com/kostergroup/pySIMsalabim/v1.tar.gz",
     packages=setuptools.find_packages(),
     readme = "README.md",
     keywords=['Drift-diffusion', 'semiconductor', 'solar cells'],
@@ -23,7 +23,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     ],
-    python_requires='>=3.9, <=3.12',
+    python_requires='>=3.12',
     install_requires = [
         'numpy>=1.2, <=2.0',
         'pandas>=1.4',
