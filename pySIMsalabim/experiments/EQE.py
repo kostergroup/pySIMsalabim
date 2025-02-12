@@ -1,4 +1,6 @@
-"""Perform EQE simulations"""
+"""Perform EQE simulations
+## Version: 1 (16-10-2024) ## Internal version number for this script. Refer to the changelog to review changes ## 
+"""
 
 ######### Package Imports #########################################################################
 

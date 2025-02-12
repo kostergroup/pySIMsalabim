@@ -1,4 +1,6 @@
-"""Perform Intensity-Modulated Photocurrent Spectroscopy (IMPS) simulations"""
+"""Perform Intensity-Modulated Photocurrent Spectroscopy (IMPS) simulations
+## Version: 1 (16-10-2024) ## Internal version number for this script. Refer to the changelog to review changes ## 
+"""
 ######### Package Imports #########################################################################
 
 import os, sys

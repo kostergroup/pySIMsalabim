@@ -1,5 +1,7 @@
 
-"""Perform impedance simulations"""
+"""Perform impedance simulations
+## Version: 2 (12-02-2025) ## Internal version number for this script. Refer to the changelog to review changes ## 
+"""
 ######### Package Imports #########################################################################
 
 import os, sys
@@ -113,87 +115,44 @@ def create_tVG_SS(V_0, G_frac, tVG_name, session_path):
 
     return retval, msg
 
+def create_tVG_tolDens(V_0, del_V, ini_timeFactor, f_min, f_max, G, tVG_name, session_path):
+    """ Creates the tVG file for the steady state simulation with only t 0 and V_0
 
-# def read_tj_file(session_path, tj_file_name='tj.dat'):
-#     """ Read relevant parameters for impedance of the tj file
+    Parameters
+    ----------
+    V_0 : float 
+        Voltage at t=0
+    del_V : float
+        Voltage step that is applied after t=0
+    G_frac : float
+        Fractional light intensity
+    tVG_name : string
+        Name of the tVG file
+    session_path : string
+        Path of the simulation folder for this session
 
-#     Parameters
-#     ----------
-#     session_path : string
-#         Path of the simulation folder for this session
-#     data_tj : dataFrame
-#         Pandas dataFrame containing the tj output file from ZimT
+    Returns
+    -------
+    string
+        A message to indicate the result of the process
+    """    
 
-#     Returns
-#     -------
-#     DataFrame
-#         Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file
-#     """
+    del_t = ini_timeFactor/f_max # t_1 = 0 s + del_t
 
-#     data = pd.read_csv(os.path.join(session_path,tj_file_name), sep=r'\s+')
+    tVG_lines = ('t\tVext\tG_frac\n'
+                 f'0\t{V_0+del_V}\t{G:.3e}\n'
+                 f'0\t{V_0}\t{G:.3e}\n'
+                 f'{del_t}\t{V_0+del_V}\t{G:.3e}\n')
 
-#     return data
+    # Write the tVG lines to the tVG file
+    with open(os.path.join(session_path,tVG_name), 'w') as file:
+        file.write(tVG_lines)
 
-# def get_integral_bounds(data, f_min=1e-2, f_max=1e6, f_steps=20):
-#     """ Determine integral bounds in the time domain, used to compute the conductance and capacitance
+    # tVG file is created, message a success
+    msg = 'Success'
+    retval = 0
 
-#     Parameters
-#     ----------
-#     data : dataFrame
-#         Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file
-#     f_min : float
-#         Minimum frequency
-#     f_max : float
-#         Maximum frequency
-#     f_steps : float
-#         Frequency steps
-
-#     Returns
-#     -------
-#     list
-#         List of array indices that will be used in the plotting
-#     """
-
-#     # Total number of time points
-#     numTimePoints = len(data['t'])
-
-#     # Check which time index corresponds to 1/fmax. We call this istart:
-#     istart = -1
-#     for i in range(numTimePoints):
-#         if math.isclose(data['t'][i], 1/f_max, rel_tol = 2/f_steps): #note: don't use == to compare 2 floating points!
-#             istart = i
-
-#     # Starting time point could not be found.
-#     if istart == -1:
-#         msg = 'Could not find a time that corresponds to the highest frequency.'
-#         return -1, msg
-    
-#     # print('Found istart: ', istart)
-
-#     # ifin: last index we should plot, corresponds to time = 1/f_min:
-#     ifin = numTimePoints - 1
-
-#     # isToPlot starts with istart:
-#     isToPlot = [istart]
-
-#     PlotRatio = max(1, round( (ifin-istart)/(math.log10(f_max/f_min) * f_steps)))
-
-#     # Incorrect plot ratio
-#     if PlotRatio < 1:
-#         msg = 'PlotRatio smaller than 1. It should at least be 1'
-#         return -1, msg
-
-#     # Then add the other indices:
-#     for i in range(istart+1, ifin-1):
-#         if (i-istart) % PlotRatio == 0: # note: % is python's modulo operator.
-#             isToPlot.append(i) # add the index to our array
-
-#     # Also include the last index:
-#     isToPlot.append(ifin)
-
-#     # Integral bounds have been determined, return the array with indices and a success message
-#     msg = 'Success'
-#     return isToPlot, msg
+    return retval, msg
 
 def calc_impedance_limit_time(I, errI, time, VStep, imax):
     """Fourier Decomposition formula which computes the impedance at frequency freq (Hz) and its complex error
@@ -303,20 +262,6 @@ def calc_impedance(data, del_V, isToPlot,session_path,zimt_device_parameters,Rse
     G = np.empty(numFreqPoints)
     errC = np.empty(numFreqPoints)
     errG = np.empty(numFreqPoints)
-
-
-    # We need to know the series and shunt resistance to calculate the impedance correctly later on
-    # dev_val,lyrs_dum = load_device_parameters(session_path, zimt_device_parameters)
-    # for i in dev_val[zimt_device_parameters]:
-    #     if i[0] == 'Contacts':
-    #         contacts = i
-    #         break
-
-    # for i in contacts[1:]:
-    #     if i[1] == 'R_series':
-    #         Rseries = float(i[2])
-    #     elif i[1] == 'R_shunt':
-    #         Rshunt = float(i[2])
 
     for i in range(numFreqPoints):
         imax=isToPlot[i]
@@ -534,6 +479,110 @@ def plot_impedance(session_path, output_file='freqZ.dat'):
     # Capacitance plot
     Capacitance_plot(session_path,output_file)
 
+
+def get_tolDens(zimt_device_parameters, session_path, f_min, f_max, V_0, G_frac, del_V, run_mode, tVG_name, tj_name, varFile, ini_timeFactor, dum_str, cmd_pars):
+    """
+    Calculate the tolerance of the density solver, to ensure a reliable impedance spectrum
+
+    Parameters
+    ----------
+    zimt_device_parameters : string
+        Name of the zimt device parameters file
+    session_path : string
+        Working directory for zimt
+    f_min : float
+        Minimum frequency
+    f_max : float
+        Maximum frequency
+    V_0 : float
+        Voltage at t=0
+    G_frac : float
+        Fractional light intensity
+    del_V : float
+        Voltage step
+    run_mode : bool
+        Indicate whether the script is in 'web' mode (True) or standalone mode (False). Used to control the console output
+    tVG_name : string
+        Name of the tVG file
+    tj_name : string
+        Name of the tj file
+    varFile : string
+        Name of the var file
+    ini_timeFactor : float
+        Constant defining the size of the initial timestep
+    dum_str : string
+        dummy string with UUID string to append to the file names
+    cmd_pars : list
+        List of dictionaries with the command line parameters
+    
+    Returns
+    -------
+    integer
+        Return code of the simulation, 0 if successful, -1 if one of the steps failed else the return code of the simulation
+    string
+        Return message to display on the UI in case of failure
+    float
+        Tolerance of the density solver. If failed, returns None
+    """
+
+    # Determine J(t=0), J(t=∞), and J_dis to get the maximum allowed tolerance of the density solver to retrieve a
+    # reliable impedance spectrum, where tolDens = J(t=∞) - J(t=0) / J_displacement
+    result, message = create_tVG_tolDens(V_0, del_V, ini_timeFactor, f_min, f_max, G_frac, tVG_name, session_path)
+    
+    if result == 0:
+        # In order for zimt to converge, set absolute tolerance of Poisson solver small enough
+        tolPois = 10**(math.floor(math.log10(abs(del_V)))-5)
+        
+        tolDens_test = str(1e-10)
+        # Define mandatory options for ZimT to run well with impedance:
+        tolDens_args = [{'par':'dev_par_file','val':zimt_device_parameters},
+                             {'par':'tVGFile','val':tVG_name},
+                             {'par':'tolPois','val':str(tolPois)},
+                             {'par':'tolDens','val':tolDens_test},
+                             {'par':'limitDigits','val':'0'},
+                             {'par':'currDiffInt','val':'2'},
+                             {'par':'tJFile','val':tj_name},
+                             {'par':'varFile','val':varFile},
+                             {'par':'logFile','val':'log'+dum_str+'.txt'}]
+        
+        if cmd_pars is not None:
+            tolDens_args = update_cmd_pars(tolDens_args, cmd_pars)
+        
+        result, message = utils_gen.run_simulation('zimt', tolDens_args, session_path, run_mode)
+
+        if result.returncode == 0 or result.returncode == 95:
+            data = read_tj_file(session_path, tj_file_name=tj_name)
+            try:
+                J_0 = data['Jext'][1]
+                J_inf = data['Jext'][0]
+                J_dis = abs(data['Jext'][2] - J_0)
+            except KeyError as key:
+                if key == 0:
+                    message = f"J_inf does not exist in the tolDens tJ-file"
+                elif key == 1:
+                    message = f"J_0 does not exist in the tolDens tJ-file"
+                elif key == 2:
+                    message = f"J_spike does not exist in the tolDens tJ-file"
+                return -1, message, None
+            
+            # tolDens cannot be larger than 1E-6
+            tolDens = min(abs(J_inf - J_0) / J_dis * 1e-4, 1e-6)
+
+            # tolDens cannot be smaller than 1E-12
+            tolDens = max(tolDens, 1e-12)
+        else:
+            return result.returncode, message, None
+        
+        # Remove the tVG and tJ files as they are not needed anymore
+        os.remove(os.path.join(session_path,tVG_name))
+        os.remove(os.path.join(session_path,tj_name))
+        
+    else:
+        message = "Computing tolDens was unsuccesful"
+        return -1, message, None
+
+    return 0, '', tolDens
+
 def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V_0, G_frac = 1, del_V = 0.01, run_mode = False, tVG_name='tVG.txt', output_file = 'freqZ.dat', tj_name = 'tj.dat', varFile ='none', ini_timeFactor=1e-3, timeFactor=1.02, **kwargs):
     """Create a tVG file and run ZimT with impedance device parameters
 
@@ -696,6 +745,12 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
     if idx_Rshunt is not None:
         cmd_pars.pop(idx_Rshunt)
 
+    result, message, tolDens = get_tolDens(zimt_device_parameters, session_path, f_min, f_max, V_0, G_frac, del_V, run_mode, tVG_name, tj_name, varFile, ini_timeFactor, dum_str, cmd_pars)
+
+    if result != 0:
+        # Failed to calculate the tolerance of the density solver, return the error message
+        return result, message
+
     # Do the impedance simulation
     # Create tVG
     result, message = create_tVG_impedance(V_0, del_V, G_frac, tVG_name, session_path, f_min, f_max, ini_timeFactor, timeFactor)
@@ -709,6 +764,7 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
         Impedance_args = [{'par':'dev_par_file','val':zimt_device_parameters},
                              {'par':'tVGFile','val':tVG_name},
                              {'par':'tolPois','val':str(tolPois)},
+                             {'par':'tolDens','val':str(tolDens)},
                              {'par':'limitDigits','val':'0'},
                              {'par':'currDiffInt','val':'2'},
                              {'par':'tJFile','val':tj_name},
@@ -743,9 +799,9 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
 if __name__ == "__main__":
     ## Manual Impedance input parameters. These are overwritten by command line arguments if provided
     f_min = 1e-2 # org 1e-2
-    f_max = 1e8 # org 1e6
+    f_max = 1e6 # org 1e6
     f_steps = 20 # org 20
-    V_0 = 1.0 # Float or 'oc' for the open-circuit voltage
+    V_0 = 0.6 # Float or 'oc' for the open-circuit voltage
     del_V = 1e-2 # org 1e-2
     G_frac = 1
 
@@ -757,6 +813,7 @@ if __name__ == "__main__":
     tVG_name = 'tVG.txt'
     tj_name = 'tj.dat'
     output_name = 'freqZ.dat'
+    var_name = 'none'
     
     # UUID = str(uuid.uuid4()) # Add a UUID to the simulation
     UUID = ''
@@ -837,7 +894,7 @@ if __name__ == "__main__":
     ## Run impedance spectroscopy
     # result, message = run_impedance_simu(zimt_device_parameters, f_min, f_max, f_steps, V_0, G_frac, del_V=del_V,tVG_name=tVG_name,session_path = session_path, run_mode=True, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
     result, message = run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V_0, G_frac, del_V, run_mode=run_mode, tVG_name = tVG_name,
-                                         output_file = output_name, tj_name = tj_name,ini_timeFactor=ini_timeFactor, timeFactor=timeFactor, cmd_pars=cmd_pars, UUID=UUID)
+                                         output_file = output_name, tj_name = tj_name, varFile=var_name, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor, cmd_pars=cmd_pars, UUID=UUID)
 
     # Make the impedance plots
     if result == 0 or result == 95:
