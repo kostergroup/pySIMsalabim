@@ -1,6 +1,4 @@
-"""Perform capacitance simulations
-Version: 1 (16-10-2024) ## Internal version number for this script. Refer to the changelog to review changes ## 
-"""
+"""Perform capacitance simulations"""
 ######### Package Imports #########################################################################
 
 import os, sys

@@ -1,7 +1,5 @@
 
-"""Perform impedance simulations
-## Version: 2 (12-02-2025) ## Internal version number for this script. Refer to the changelog to review changes ## 
-"""
+"""Perform impedance simulations"""
 ######### Package Imports #########################################################################
 
 import os, sys
@@ -664,10 +662,54 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
             varFile = os.path.join(session_path,varFile)
     # varFile = 'none' # we don't use a var file for the hysteresis JV simulation
 
+    ##############################################################################
+    # If the voltage is set to Voc, firstly compute its value
+    if V_0 == 'oc':
+        # Create tVG
+        result, message = create_tVG_SS(V_0, G_frac, tVG_name, session_path)
+        
+        # Check if tVG file is created
+        if result == 0:
+            # In order for zimt to converge, set absolute tolerance of Poisson solver small enough
+            tolPois = 10**(math.floor(math.log10(abs(del_V)))-4)
+
+            # Define mandatory options for ZimT to run well with impedance:
+            Impedance_SS_args = [{'par':'dev_par_file','val':zimt_device_parameters},
+                                {'par':'tVGFile','val':tVG_name},
+                                {'par':'tolPois','val':str(tolPois)},
+                                {'par':'limitDigits','val':'0'},
+                                {'par':'currDiffInt','val':'2'},
+                                {'par':'tJFile','val':tj_name},
+                                {'par':'varFile','val':varFile},
+                                {'par':'logFile','val':'log'+dum_str+'.txt'}
+                                ]
+            
+            if turnoff_autoTidy:
+                Impedance_SS_args.append({'par':'autoTidy','val':'0'})
+
+            if cmd_pars is not None:
+                Impedance_SS_args = update_cmd_pars(Impedance_SS_args, cmd_pars)
+            
+            if threadsafe:
+                result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_SS_args, session_path, run_mode)
+            else:
+                result, message = utils_gen.run_simulation('zimt', Impedance_SS_args, session_path, run_mode)
+    
+            if result.returncode == 0 or result.returncode == 95:
+                data = read_tj_file(session_path, tj_file_name=tj_name)
+                
+                V_0 = data['Vext'][0]
+            else:
+                message = "Computing the value of Voc led to the following error: " + message
+                return result.returncode, message
+    else:
+        V_0 = float(V_0)
+
+    ##############################################################################
     # The simulations with Rseries and Rshunt often do not converge, so we first run a steady state simulation to get the internal voltage and then run the impedance simulation with Rseries = 0 and Rshunt = -Rshunt. We will correct the impedance afterwards. This is a workaround to improve the convergence of the impedance simulation that should remain accurate to estimate the impedance.
-    #default values for Rseries and Rshunt
+    # Default values for Rseries and Rshunt
     Rseries = 0
-    Rshunt = -1e3
+    Rshunt = -1 # Negative values are used for Rshunt in SIMsalabim to indicate infinite Rshunt
 
     # Do the steady state simulation to calculate the internal voltage in case of series resistance
     # Create tVG
@@ -740,11 +782,10 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
             return result, message
 
     # remove the Rseries and Rshunt from cmd_pars
-    if idx_Rseries is not None:
-        cmd_pars.pop(idx_Rseries)
-    if idx_Rshunt is not None:
-        cmd_pars.pop(idx_Rshunt)
+    if cmd_pars is not None:
+        cmd_pars = [dictionary for dictionary in cmd_pars if dictionary['par'] not in ('R_series', 'R_shunt')]
 
+    # Calculate the tolerance of the density solver
     result, message, tolDens = get_tolDens(zimt_device_parameters, session_path, f_min, f_max, V_0, G_frac, del_V, run_mode, tVG_name, tj_name, varFile, ini_timeFactor, dum_str, cmd_pars)
 
     if result != 0:
@@ -772,7 +813,7 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
                              {'par':'logFile','val':'log'+dum_str+'.txt'},
                              # We remove Rseries and Rshunt as the simulation is either to converge that way, we will correct the impedance afterwards
                              {'par':'R_series','val':str(0)},
-                             {'par':'R_shunt','val':str(-abs(Rshunt))}]
+                             {'par':'R_shunt','val':str(-1)}]
         
         if turnoff_autoTidy:
             Impedance_args.append({'par':'autoTidy','val':'0'})
@@ -810,10 +851,10 @@ if __name__ == "__main__":
 
     zimt_device_parameters = 'simulation_setup.txt'
 
-    tVG_name = 'tVG.txt'
-    tj_name = 'tj.dat'
+    tVGFile = 'tVG.txt'
+    tJFile = 'tj.dat'
     output_name = 'freqZ.dat'
-    var_name = 'none'
+    varFile = 'none'
     
     # UUID = str(uuid.uuid4()) # Add a UUID to the simulation
     UUID = ''
@@ -821,7 +862,7 @@ if __name__ == "__main__":
     # Not user input
     ini_timeFactor = 1e-3 # Initial timestep factor, org 1e-3
     timeFactor = 1.02 # Increase in timestep every step to reduce the amount of datapoints necessary, use value close to 1 as this is best! Org 1.02
-    run_mode = True # Show verbose output in console
+    run_mode = False # Show verbose output in console
 
     ############## Command line arguments  ##############
     ## Notes
@@ -831,7 +872,7 @@ if __name__ == "__main__":
     ## - Special arguments
     ##   - sp : string
     ##     - The session path, i.e. the working directory for the simulation
-    ##   - simsetup : string
+    ##   - zimt_device_parameters : string
     ##     - The name of the zimt simulation setup parameters file
     ##   - UUID : string
     ##     - An UUID to add to the simulation (output)
@@ -868,18 +909,24 @@ if __name__ == "__main__":
 
     # Define mappings for keys and variables
     key_action_map = {
-        'simsetup': lambda val: {'zimt_device_parameters': val},
+        'zimt_device_parameters': lambda val: {'zimt_device_parameters': val},
         'f_min': lambda val: {'f_min': float(val)},
         'f_max': lambda val: {'f_max': float(val)},
         'f_steps': lambda val: {'f_steps': int(val)},
-        'V_0': lambda val: {'V_0': float(val)},
+        'V_0': lambda val: {'V_0': val},
         'del_V': lambda val: {'del_V': float(val)},
         'G_frac': lambda val: {'G_frac': float(val)},
-        'tVG_name': lambda val: {'tVG_name': val},
-        'tj_name': lambda val: {'tj_name': val},
-        'out_name': lambda val: {'output_name': val},
+        'tVGFile': lambda val: {'tVGFile': val},
+        'tJFile': lambda val: {'tJFile': val},
+        'varFile': lambda val: {'varFile': val},        
+        'output_name': lambda val: {'output_name': val},
         'UUID': lambda val: {'UUID': val},
-    }
+    } 
+
+    # Use exactly the same names as in SIMsalabim and as the Manual input parameters, 
+    # if not than the tVG file name is not updated if putting e.g. "-tVGFile tVG_1.txt" in the command line in the terminal. 
+    # Instead two tVG files names are defined one from the manual input parameters and one from the command line wherefore 
+    # SIMsalabim gives the error "invalid input"
 
     for key in list(cmd_pars_dict.keys()):  # Use list to avoid modifying the dictionary while iterating
         if key in key_action_map:
@@ -892,9 +939,8 @@ if __name__ == "__main__":
     cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
 
     ## Run impedance spectroscopy
-    # result, message = run_impedance_simu(zimt_device_parameters, f_min, f_max, f_steps, V_0, G_frac, del_V=del_V,tVG_name=tVG_name,session_path = session_path, run_mode=True, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor)
-    result, message = run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V_0, G_frac, del_V, run_mode=run_mode, tVG_name = tVG_name,
-                                         output_file = output_name, tj_name = tj_name, varFile=var_name, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor, cmd_pars=cmd_pars, UUID=UUID)
+    result, message = run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V_0, G_frac, del_V, run_mode=run_mode, tVG_name=tVGFile,
+                                         output_file=output_name, tj_name=tJFile, varFile=varFile, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor, cmd_pars=cmd_pars, UUID=UUID)
 
     # Make the impedance plots
     if result == 0 or result == 95:

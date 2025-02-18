@@ -1,6 +1,4 @@
-"""Perform JV hysteresis simulations
-## Version: 1 (16-10-2024) ## Internal version number for this script. Refer to the changelog to review changes ## 
-"""
+"""Perform JV hysteresis simulations"""
 ######### Package Imports #########################################################################
 
 import os,sys
@@ -241,11 +239,13 @@ def create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps
     
     return retval, msg
 
-def plot_hysteresis_JV(path2file = 'tj.dat'):
+def plot_hysteresis_JV(session_path, path2file = 'tj.dat'):
     """Plot the hysteresis JV curve
 
     Parameters
     ----------
+    session_path : string
+        working directory for zimt
     path2file : string
         Path to the tj file
 
@@ -256,7 +256,7 @@ def plot_hysteresis_JV(path2file = 'tj.dat'):
 
     """
     # Read the data from tj-file
-    data_tj = pd.read_csv(path2file, sep=r'\s+')
+    data_tj = pd.read_csv(os.path.join(session_path,path2file), sep=r'\s+')
     
     fig, ax = plt.subplots()
     pars = {'Jext' : 'Simulation'} #'$J_{ext}$'}
@@ -511,6 +511,144 @@ def Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode,
     
     return rms
 
+def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='tVG.txt', plot_hyst_index = False):
+    """
+    Calculate the hysteresis index from the simulated JV curve using the difference area between the forward and backward scan
+    
+    Parameters
+    ----------
+    session_path : string
+        working directory for zimt
+    tj_file_name : string
+        Name of the tj file
+    tVG_file_ame : string
+        Name of the tVG file
+    plot_hyst_index : bool
+        If True, plot the JV curves with the normalisation and difference area
+
+    Returns
+    -------
+    float
+        Hysteresis index
+    """
+
+    # Read data from files. tj file for the JV curve and tVG file to get all possible voltage steps. 
+    # This is needed as not all voltages might be present in the tj file.
+    data_tj = pd.read_csv(os.path.join(session_path,tj_file_name), sep=r'\s+')
+    data_tVG = pd.read_csv(os.path.join(session_path,tVG_file_ame), sep=r'\s+')
+
+    # Store Vinput, Vext and Jext in arrays
+    Vinput = np.array(data_tVG['Vext'])
+    Vext = np.array(data_tj['Vext'])
+    Jext = np.array(data_tj['Jext'])
+
+    # Find the min and max values of Vext and Jext to span the normalisation area 
+    Jmin = min(Jext)
+    Jmax = max(Jext)
+    Vmin = min(Vext)
+    Vmax = max(Vext)
+
+    # As the forward and backward scan are in the same array, 
+    # we need to find the point where the JV curve changes direction, i.e. the turning point and split into two seperate arrays
+    # Vext,Jext array
+    diff = np.diff(Vext)
+    sign_change = np.where(np.diff(np.sign(diff)))
+    if len(sign_change[0]) == 0:
+        print('No sign change in the voltage array')
+        return 0
+    elif len(sign_change[0]) > 1:
+        print('Multiple sign changes in the voltage array')
+        return 0
+    else:
+        # Need to correct for the index change between Vinput and the sign_change array
+        idx_change = sign_change[0][0] + 2
+
+    # split the Vext and Jext arrays into two arrays
+    Vext_1 = Vext[:idx_change]
+    Jext_1 = Jext[:idx_change]
+    Vext_2 = Vext[idx_change:]
+    Jext_2 = Jext[idx_change:]
+
+    # append the last value of the first array to the first position of the second array to be able to include the turning point
+    Vext_2 = np.insert(Vext_2,0,Vext_1[-1])
+    Jext_2 = np.insert(Jext_2,0,Jext_1[-1])
+
+    # Vinput array
+    diff = np.diff(Vinput)
+    sign_change = np.where(np.diff(np.sign(diff)))
+
+    if len(sign_change[0]) == 0:
+        print('No sign change in the voltage array')
+        return 0
+    elif len(sign_change[0]) > 1:
+        print('Multiple sign changes in the voltage array')
+        return 0
+    else:
+        # Need to correct for the index change between Vinput and the sign_change array
+        sign_change_Vinput = sign_change[0][0] + 2
+
+    # We only need one of the arrays, as we will only use this as a reference
+    Vinput_1 = Vinput[:sign_change_Vinput]
+
+
+    # To calculate the difference area between the two curves, we need to reverse the order of the second arrays to match the order of the applied voltage
+    # reverse the second array
+    Vext_2 = Vext_2[::-1]
+    Jext_2 = Jext_2[::-1]
+
+    # Create empty arrays to store the final V,J values
+    Vfinal = []
+    Jfinal_1 = []
+    Jfinal_2 = []
+
+    # Loop over Vinput and check if the voltage exist in both V arrays
+    # If it does, add the current to the corresponding J array, else we cannot use it so we discard it
+    for i in range(len(Vinput_1)):
+        if (Vinput_1[i] in Vext_1) and (Vinput_1[i] in Vext_2):
+            # Get the index of the voltage in the corresponding V arrays
+            idx1 = np.where(Vext_1 == Vinput_1[i])[0][0]
+            idx2 = np.where(Vext_2 == Vinput_1[i])[0][0] 
+
+            # Append the values to the final arrays
+            Vfinal.append(Vext_1[idx1])
+            Jfinal_1.append(Jext_1[idx1])
+            Jfinal_2.append(Jext_2[idx2])
+
+    # Calculate the hysteresis index
+    hysteresis_index_num = np.trapezoid(np.abs(np.array(Jfinal_1) - np.array(Jfinal_2)),Vfinal)
+    hysteresis_index_denom = (Jmax - Jmin) * (Vmax - Vmin)
+    hysteresis_index = hysteresis_index_num / hysteresis_index_denom
+
+    if plot_hyst_index == True:
+
+        # Plot JV traces together with normalisation and difference area
+        fig, ax = plt.subplots()
+
+        # Normalisation area
+        ax.vlines(x = Vmin,ymin =  Jmin, ymax = Jmax, color='#919191',linestyles='dashed',label='Normalisation area')
+        ax.vlines(x = Vmax,ymin =  Jmin, ymax = Jmax, color='#919191',linestyles='dashed')
+        ax.hlines(y = Jmin,xmin =  Vmin, xmax = Vmax, color='#919191',linestyles='dashed')
+        ax.hlines(y = Jmax,xmin =  Vmin, xmax = Vmax, color='#919191',linestyles='dashed')
+
+        # Difference area
+        ax.fill_between(Vfinal,Jfinal_1,Jfinal_2, color='#b1f997',label='Difference area')
+    
+        # JV traces
+        ax.plot(Vfinal,Jfinal_2,label='Backward', color='r', linewidth=4)
+        ax.plot(Vfinal,Jfinal_1,label='Forward', color = 'b', linewidth=4)
+
+        ax.set_xlabel('$V_{ext}$ [V]')
+        ax.set_ylabel('$J_{ext}$ [Am$^{-2}$]')
+
+        # Reverse the legend order. Curves should be listed first, then norm/diff area. 
+        handles, labels = ax.get_legend_handles_labels()
+        ax.legend(handles[::-1], labels[::-1],framealpha=1, loc='center left', bbox_to_anchor=(0.07, 0.75))
+        plt.tight_layout()
+
+        plt.show()
+
+    return hysteresis_index
+
 def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name='tVG.txt', tj_name = 'tj.dat',varFile='none',
                   run_mode=False, Vmin=0.0, Vmax=0.0, steps =0, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin', **kwargs ):
     """Create a tVG file and perform a JV hysteresis experiment.
@@ -558,8 +696,8 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
         Output object of with returncode and console output of the simulation
     string
         Return message to display on the UI, for both success and failed
-    rms
-        The rms error between the simulated and experimental data. WHen not using experimental data, it is set to 0.0 and can be ignored
+    dict
+        Dictionary containing the special output values of the simulation. In this case, the rms error ('rms') and the hysteresis index ('hyst_index')
     """
 
     UUID = kwargs.get('UUID', '') # Check if the user wants to add a UUID to the tj file name
@@ -601,7 +739,10 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
             varFile = os.path.join(session_path, varFile)
     # varFile = 'none' # we don't use a var file for the hysteresis JV simulation
 
+    # Init output_vals rms & hyst_index
     rms = 0.0
+    hyst_index = 0.0
+
     if UseExpData == 1:
         # When fitting to experimental data, create a tVG file where Vext is the same as the voltages in the experimental JV file
         if os.path.exists(os.path.join(session_path, expJV_Vmin_Vmax)) and os.path.exists(os.path.join(session_path, expJV_Vmax_Vmin)):
@@ -635,9 +776,16 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
         if result.returncode == 0 or result.returncode == 95:
             if UseExpData == 1:
                 rms = Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode, direction, tj_name)
+
+        hyst_index = calc_hysteresis_index(session_path, tj_name, tVG_name)
+
         result = result.returncode
+
+        # Put all the output values in a dictionary to be returned. 
+        # By putting it in a dictionary we can add any number of values without breaking return arguments
+        output_vals = {'rms': rms, 'hyst_index': hyst_index}
     
-    return result, message, rms
+    return result, message, output_vals
 
 ## Running the function as a standalone script
 if __name__ == "__main__":
@@ -648,7 +796,7 @@ if __name__ == "__main__":
     UseExpData = 0 # integer, if 1 read experimental data
     Vmin = 0 # lower voltage boundary
     Vmax = 1.15 # upper voltage boundary
-    steps = 1000 # Number of voltage steps
+    steps = 200 # Number of voltage steps
     expJV_Vmin_Vmax = 'od05_f.txt' # Forward (direction=1)/Backward (direction=-1) JV scan file
     expJV_Vmax_Vmin = 'od05_b.txt' # Backward (direction=1)/Forward (direction=-1) JV scan file
 
@@ -734,17 +882,19 @@ if __name__ == "__main__":
     cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
     
     if UseExpData == 1:
-        result, message, rms = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVG_name, tj_name = tj_name,
+        result, message, output_vals = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVG_name, tj_name = tj_name,
                                              run_mode = False, expJV_Vmin_Vmax = expJV_Vmin_Vmax, expJV_Vmax_Vmin = expJV_Vmax_Vmin, rms_mode = rms_mode, cmd_pars = cmd_pars, UUID=UUID)
     else:
-        result, message, rms = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVG_name, tj_name = tj_name, 
+        result, message, output_vals = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVG_name, tj_name = tj_name, 
                                               run_mode = False, Vmin=Vmin, Vmax=Vmax, steps =steps, rms_mode = rms_mode, cmd_pars = cmd_pars, UUID=UUID)
-        
+    
     if result == 0 or result == 95:
         if UseExpData == 1:
-            print('Rms-value: ', "{:.5f}".format(round(rms, 5)))
-    
-        ax = plot_hysteresis_JV(tj_name)
+            print('Rms-value: ', "{:.5f}".format(round(output_vals['rms'], 5)))
+
+        print(f'hyst-index: {output_vals["hyst_index"]:.3f}')
+
+        ax = plot_hysteresis_JV(session_path, tj_name)
         if UseExpData == 1:
             JVExp = concatJVs(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, direction)
             ax.scatter(JVExp.Vext, JVExp.Jext, label='Experimental', color='r')
