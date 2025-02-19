@@ -269,6 +269,7 @@ def plot_hysteresis_JV(session_path, path2file = 'tj.dat'):
     plot_type = plt.plot
 
     ax = utils_plot.plot_result(data_tj, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type)
+    plt.tight_layout() # make it fit in the window
     
     return ax
 
@@ -532,6 +533,8 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
         Hysteresis index
     """
 
+    sign_dum = 0 # dummy value for sign change in voltage array
+
     # Read data from files. tj file for the JV curve and tVG file to get all possible voltage steps. 
     # This is needed as not all voltages might be present in the tj file.
     data_tj = pd.read_csv(os.path.join(session_path,tj_file_name), sep=r'\s+')
@@ -553,11 +556,20 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
     # Vext,Jext array
     diff = np.diff(Vext)
     sign_change = np.where(np.diff(np.sign(diff)))
+    
     if len(sign_change[0]) == 0:
-        print('No sign change in the voltage array')
+        print('Hysteresis index could not be calculated. No sign change in the voltage array')
         return 0
-    elif len(sign_change[0]) > 1:
-        print('Multiple sign changes in the voltage array')
+    elif len(sign_change[0]) ==2:
+        # Check if they are consecutive. If so, we might just be missing the 'flip'' point, as it could have not converged, so we need to correct for this.
+        if sign_change[0][1] - sign_change[0][0] == 1:
+            idx_change = sign_change[0][0] + 2
+            sign_dum = 1
+        else:
+            print('Hysteresis index could not be calculated. Multiple sign changes in the voltage array')
+            return 0
+    elif len(sign_change[0]) > 2:
+        print('Hysteresis index could not be calculated. Multiple sign changes in the voltage array')
         return 0
     else:
         # Need to correct for the index change between Vinput and the sign_change array
@@ -569,19 +581,20 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
     Vext_2 = Vext[idx_change:]
     Jext_2 = Jext[idx_change:]
 
-    # append the last value of the first array to the first position of the second array to be able to include the turning point
-    Vext_2 = np.insert(Vext_2,0,Vext_1[-1])
-    Jext_2 = np.insert(Jext_2,0,Jext_1[-1])
+    if sign_dum != 1:
+        # append the last value of the first array to the first position of the second array to be able to include the turning point
+        Vext_2 = np.insert(Vext_2,0,Vext_1[-1])
+        Jext_2 = np.insert(Jext_2,0,Jext_1[-1])
 
     # Vinput array
     diff = np.diff(Vinput)
     sign_change = np.where(np.diff(np.sign(diff)))
 
     if len(sign_change[0]) == 0:
-        print('No sign change in the voltage array')
+        print('Hysteresis index could not be calculated. No sign change in the voltage array')
         return 0
     elif len(sign_change[0]) > 1:
-        print('Multiple sign changes in the voltage array')
+        print('Hysteresis index could not be calculated.. Multiple sign changes in the voltage array')
         return 0
     else:
         # Need to correct for the index change between Vinput and the sign_change array
@@ -615,7 +628,7 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
             Jfinal_2.append(Jext_2[idx2])
 
     # Calculate the hysteresis index
-    hysteresis_index_num = np.trapezoid(np.abs(np.array(Jfinal_1) - np.array(Jfinal_2)),Vfinal)
+    hysteresis_index_num = abs(np.trapezoid(np.abs(np.array(Jfinal_1) - np.array(Jfinal_2)),Vfinal)) # Use abs around trapezoid to avoid negative values when Vfinal is flipped
     hysteresis_index_denom = (Jmax - Jmin) * (Vmax - Vmin)
     hysteresis_index = hysteresis_index_num / hysteresis_index_denom
 
@@ -776,9 +789,10 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
         if result.returncode == 0 or result.returncode == 95:
             if UseExpData == 1:
                 rms = Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode, direction, tj_name)
-
-        hyst_index = calc_hysteresis_index(session_path, tj_name, tVG_name)
-
+            hyst_index = calc_hysteresis_index(session_path, tj_name, tVG_name)
+        else:
+            message = result.stdout
+        
         result = result.returncode
 
         # Put all the output values in a dictionary to be returned. 
@@ -805,9 +819,10 @@ if __name__ == "__main__":
 
     zimt_device_parameters = 'simulation_setup.txt'
 
-    tVG_name = 'tVG.txt'
-    tj_name = 'tj.dat'
-    
+    tVGFile = 'tVG.txt'
+    tJFile = 'tj.dat'
+    varFile = 'none'
+
     # UUID = str(uuid.uuid4()) # Add a UUID to the simulation
     UUID = ''
 
@@ -856,7 +871,7 @@ if __name__ == "__main__":
 
     # Define mappings for keys and variables
     key_action_map = {
-        'simsetup': lambda val: {'zimt_device_parameters': val},
+        'zimt_device_parameters': lambda val: {'zimt_device_parameters': val},
         'scan_speed': lambda val: {'scan_speed': float(val)},
         'direction': lambda val: {'direction': int(val)},
         'G_frac': lambda val: {'G_frac': float(val)},
@@ -866,8 +881,9 @@ if __name__ == "__main__":
         'steps': lambda val: {'steps': int(val)},
         'expJV_Vmin_Vmax': lambda val: {'expJV_Vmin_Vmax': val},
         'expJV_Vmax_Vmin': lambda val: {'expJV_Vmax_Vmin': val},
-        'tVG_name': lambda val: {'tVG_name':  val},
-        'tj_name': lambda val: {'tj_name': val},
+        'tVGFile': lambda val: {'tVGFile':  val},
+        'tJFile': lambda val: {'tJFile': val},
+        'varFile': lambda val: {'varFile': val},
         'UUID': lambda val: {'UUID': val},
     }
 
@@ -882,10 +898,10 @@ if __name__ == "__main__":
     cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
     
     if UseExpData == 1:
-        result, message, output_vals = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVG_name, tj_name = tj_name,
+        result, message, output_vals = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVGFile, tj_name = tJFile,
                                              run_mode = False, expJV_Vmin_Vmax = expJV_Vmin_Vmax, expJV_Vmax_Vmin = expJV_Vmax_Vmin, rms_mode = rms_mode, cmd_pars = cmd_pars, UUID=UUID)
     else:
-        result, message, output_vals = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVG_name, tj_name = tj_name, 
+        result, message, output_vals = Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, direction, G_frac, tVG_name = tVGFile, tj_name = tJFile, 
                                               run_mode = False, Vmin=Vmin, Vmax=Vmax, steps =steps, rms_mode = rms_mode, cmd_pars = cmd_pars, UUID=UUID)
     
     if result == 0 or result == 95:
@@ -894,7 +910,7 @@ if __name__ == "__main__":
 
         print(f'hyst-index: {output_vals["hyst_index"]:.3f}')
 
-        ax = plot_hysteresis_JV(session_path, tj_name)
+        ax = plot_hysteresis_JV(session_path, tJFile)
         if UseExpData == 1:
             JVExp = concatJVs(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, direction)
             ax.scatter(JVExp.Vext, JVExp.Jext, label='Experimental', color='r')
@@ -902,4 +918,4 @@ if __name__ == "__main__":
         ax.legend()
         plt.show()
     else:
-        print('Convergence issues, no plot is printed')
+        print(message) #'Convergence issues, no plot is printed')
