@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     license='GPLv3',
     url="https://github.com/kostergroup/pySIMsalabim",
-    download_url="https://github.com/kostergroup/pySIMsalabim/v1.tar.gz",
+    download_url="https://github.com/kostergroup/pySIMsalabim/v1.01.tar.gz",
     packages=setuptools.find_packages(),
     readme = "README.md",
     keywords=['Drift-diffusion', 'semiconductor', 'solar cells'],
