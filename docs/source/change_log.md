@@ -9,9 +9,8 @@ v1.01 - 18-02-2025 - SH
 - Hysteresis.py: Included the calculation of the hysteresis index (HI). THe HI is defined as the area between the forward and backward scan normalised over the spanned area of the curves.
 
 
-v1 (2024-10-16) 
+v1 - 2024-10-16 - VMLC-PV
 -------------------
-(VMLC-PV)
 - Initial release of the project.
 - Includes new test and documentation.
 - added varFile as an input for the experiment functions.
