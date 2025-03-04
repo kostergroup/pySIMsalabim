@@ -791,7 +791,7 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
                 rms = Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode, direction, tj_name)
             hyst_index = calc_hysteresis_index(session_path, tj_name, tVG_name)
         else:
-            message = result.stdout
+            message = message
         
         result = result.returncode
 
