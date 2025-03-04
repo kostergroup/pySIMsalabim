@@ -297,8 +297,8 @@ def install_SIMsalabim(cwd, folder_name='kostergroup-SIMsalabim-',verbose=False)
             os.system('fpc zimt.pas')
             os.chdir(cwd)
 
-        if verbose:
-            print('SIMsalabim programs have been compiled successfully!')
+            if verbose:
+                print('SIMsalabim programs have been compiled successfully!')
 
         else: 
             # fpc version requirement not met
