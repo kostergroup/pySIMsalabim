@@ -1,4 +1,3 @@
-
 """Perform impedance simulations"""
 ######### Package Imports #########################################################################
 
@@ -355,7 +354,7 @@ def get_impedance(data, f_min, f_max, f_steps, del_V, session_path, output_file,
         store_impedance_data(session_path, freq, ReZ, ImZ, errZ, C, G, errC, errG, output_file)
 
         msg = 'Success'
-        return 0,msg
+        return 0, msg
     else:
         # Failed to determine integral bounds, exit with the error message
         return -1, msg
@@ -619,8 +618,8 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
         
     Returns
     -------
-    CompletedProcess
-        Output object of with returncode and console output of the simulation
+    Integer
+        Returncode of the creating the tVG or tolDens file OR returncode of the ZimT simulation
     string
         Return message to display on the UI, for both success and failed
     """
@@ -825,7 +824,7 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
             result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_args, session_path, run_mode)
         else:
             result, message = utils_gen.run_simulation('zimt', Impedance_args, session_path, run_mode)
-
+        
         if result.returncode == 0 or result.returncode == 95:
             data = read_tj_file(session_path, tj_file_name=tj_name) 
             result, message = get_impedance(data, f_min, f_max, f_steps, del_V, session_path, output_file, zimt_device_parameters, Rseries, Rshunt)
@@ -862,7 +861,7 @@ if __name__ == "__main__":
     # Not user input
     ini_timeFactor = 1e-3 # Initial timestep factor, org 1e-3
     timeFactor = 1.02 # Increase in timestep every step to reduce the amount of datapoints necessary, use value close to 1 as this is best! Org 1.02
-    run_mode = False # Show verbose output in console
+    run_mode = True # Show verbose output in console
 
     ############## Command line arguments  ##############
     ## Notes
@@ -946,8 +945,7 @@ if __name__ == "__main__":
     calc_Voc_output_string = 'Computing the value of Voc led to the following error:'
     if result == 0:
         plot_impedance(session_path, os.path.basename(output_name))
-    elif result.returncode == 95 and calc_Voc_output_string not in message:
-	plot_impedance(session_path, os.path.basename(output_name))
+    elif result == 95 and calc_Voc_output_string not in message:
+        plot_impedance(session_path, os.path.basename(output_name))
     else:
-        print(message)
-        sys.exit(1)
+        sys.exit(message)
