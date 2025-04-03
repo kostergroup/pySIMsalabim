@@ -944,10 +944,8 @@ if __name__ == "__main__":
 
     # Make the impedance plots
     calc_Voc_output_string = 'Computing the value of Voc led to the following error:'
-    if result == 0:
+    if result == 0 or (result.returncode == 95 and calc_Voc_output_string not in message):
         plot_impedance(session_path, os.path.basename(output_name))
-    elif result.returncode == 95 and calc_Voc_output_string not in message:
-	plot_impedance(session_path, os.path.basename(output_name))
     else:
         print(message)
         sys.exit(1)
