@@ -1,3 +1,5 @@
+<img src="./docs/logo/pysimsalabim_logo.png" alt="pySIMsalabim logo" width="100px">
+
 # pySIMsalabim
 
 ## Description
@@ -6,6 +8,7 @@
 ## Authors
 * [Vincent M. Le Corre](https://github.com/VMLC-PV)
 * [Sander Heester](https://github.com/sheester)
+* [Fransien Elhorst](https://github.com/Fransien-Elhorst)
 * [L. Jan Anton Koster](https://github.com/kostergroup)
 
 ## Institutions

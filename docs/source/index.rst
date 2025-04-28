@@ -23,6 +23,7 @@ Authors
 ==================
 * `Vincent M. Le Corre <https://github.com/VMLC-PV>`_
 * `Sander Heester <https://github.com/sheester>`_
+* `Fransien Elhorst <https://github.com/Fransien-Elhorst>`_
 * `L. Jan Anton Koster <https://github.com/kostergroup>`_
 
 Institutions
