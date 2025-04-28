@@ -1,4 +1,4 @@
-<img src="./docs/logo/pysimsalabim_logo.png" alt="pySIMsalabim logo" width="100px">
+<img src="./docs/logo/pySIMsalabim_logo.png" alt="pySIMsalabim logo" width="100px">
 
 # pySIMsalabim
 

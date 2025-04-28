@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 .. image:: ../logo/pySIMsalabim_logo.png
-   :alt: optimPV logo
+   :alt: pySIMsalabim logo
    :width: 200px
    :align: left
 
