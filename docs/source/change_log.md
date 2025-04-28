@@ -2,12 +2,14 @@ Change Log
 ==========
 All notable changes to this project will be documented in this file.
 
-v1.02 - 2025-04-28 - VMLC-PV, FE
---------------------------------
+v1.02 - 2025-04-28 - VMLC-PV, SH, FE
+------------------------------------
 - general.py: Modified the construcut_cmd to work on Windows with add "" around the parmeters names and values.
-- Impedance.py: Let the function 'run_impedance_simu' return a result and message. With this update 'result' is always a number, never an object.
-- Hysteresis.py: removed np.trapezoid and replaced it with scipy.integrate.trapezoid.
+- Impedance.py: Let the function 'run_impedance_simu' return a result and message. With this update 'result' is always a number, never an object. Handle failed to converge Voc simulation.
+- Hysteresis.py: removed np.trapezoid and replaced it with scipy.integrate.trapezoid, small update to the message output.
 - addons.py: Added some very simple functions to calculate the performance metrics of the solar cell. 
+- get_SIMsalabim.py: fix some indentation issues.
+- Removed redundant SIMsalabim folder.
 - update docs.
 
 
