@@ -118,7 +118,11 @@ def construct_cmd(sim_type, cmd_pars):
     for i in cmd_pars:
         # When specified, the device parameter file must be placed first, as is required by SIMsalabim
         if i['par'] == 'dev_par_file':
-            args_single = ' ''' + i['val']+ ' '''
+            if os.name == 'nt':
+                # Add the device parameters file as " -dev_par_file "dev_par_file"
+                args_single = ' "' + i['val']+ '"'
+            else:
+                args_single = ' ''' + i['val']+ ' '''
             cmd_line = cmd_line + args_single
             # After the dev_par_file key had been found once, stop the loop. If more than one dev_par_file is specified, the rest are ignored.
             break
@@ -127,7 +131,10 @@ def construct_cmd(sim_type, cmd_pars):
     for i in cmd_pars:
         if i['par'] != 'dev_par_file':
             # Add each parameter as " -par_name par_value"
-            args_single = ' -' +i['par'] + ' ' + i['val']
+            if os.name == 'nt': #add  "" to the parameter name if on Windows
+                args_single = ' -"' + i['par'] + '" "' + i['val'] + '"'
+            else:
+                args_single = ' -' +i['par'] + ' ' + i['val']
             cmd_line = cmd_line + args_single
     
     return cmd_line

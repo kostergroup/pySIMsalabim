@@ -355,7 +355,7 @@ def get_impedance(data, f_min, f_max, f_steps, del_V, session_path, output_file,
         store_impedance_data(session_path, freq, ReZ, ImZ, errZ, C, G, errC, errG, output_file)
 
         msg = 'Success'
-        return 0,msg
+        return 0, msg
     else:
         # Failed to determine integral bounds, exit with the error message
         return -1, msg
@@ -695,7 +695,7 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
             else:
                 result, message = utils_gen.run_simulation('zimt', Impedance_SS_args, session_path, run_mode)
     
-            if result.returncode == 0: # If result.returncode == 95, than one point failed to converge: Voc, so stop this simulation
+            if result.returncode == 0 or result.returncode == 95:
                 data = read_tj_file(session_path, tj_file_name=tj_name)
                 
                 V_0 = data['Vext'][0]
@@ -944,10 +944,9 @@ if __name__ == "__main__":
 
     # Make the impedance plots
     calc_Voc_output_string = 'Computing the value of Voc led to the following error:'
-    if result == 0:
+    if result == 0 or (result.returncode == 95 and calc_Voc_output_string not in message):
         plot_impedance(session_path, os.path.basename(output_name))
-    elif result.returncode == 95 and calc_Voc_output_string not in message:
-	plot_impedance(session_path, os.path.basename(output_name))
     else:
         print(message)
         sys.exit(1)
+

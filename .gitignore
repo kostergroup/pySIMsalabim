@@ -38,6 +38,7 @@ __pycache__/
 .vscode/
 .ipynb_checkpoints/
 dist/
+/SIMsalabim/
 # build/
 .eggs/
 .pypirc
@@ -48,6 +49,8 @@ dist/
 !docs/index.html
 !docs/source/*.rst
 !docs/source/*.py
+!docs/source/custom.css
+!docs/source/*.png
 !docs/source/examples/*.ipynb
 build/
 dist/

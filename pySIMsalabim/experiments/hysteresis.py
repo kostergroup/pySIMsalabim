@@ -5,6 +5,7 @@ import os,sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from scipy.integrate import trapezoid
 # import pySIMsalabim
 ## Import pySIMsalabim, if not successful, add the parent directory to the system path
 try :
@@ -628,7 +629,7 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
             Jfinal_2.append(Jext_2[idx2])
 
     # Calculate the hysteresis index
-    hysteresis_index_num = abs(np.trapezoid(np.abs(np.array(Jfinal_1) - np.array(Jfinal_2)),Vfinal)) # Use abs around trapezoid to avoid negative values when Vfinal is flipped
+    hysteresis_index_num = abs(trapezoid(np.abs(np.array(Jfinal_1) - np.array(Jfinal_2)),Vfinal)) # Use abs around trapezoid to avoid negative values when Vfinal is flipped
     hysteresis_index_denom = (Jmax - Jmin) * (Vmax - Vmin)
     hysteresis_index = hysteresis_index_num / hysteresis_index_denom
 
