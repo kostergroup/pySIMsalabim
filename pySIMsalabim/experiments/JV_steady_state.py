@@ -160,9 +160,14 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
                 msg_list.append(message)
         
         # check if results is a list of CompletedProcess objects
-        if isinstance(results, list) and all(isinstance(res[0], subprocess.CompletedProcess) for res in results):
-            # Extract the return codes from the CompletedProcess objects
-            results = [res[0].returncode for res in results]
+
+        if isinstance(results, list) :
+            if len(results) > 0 and not isinstance(results[0], subprocess.CompletedProcess):
+                pass
+            else:    
+                if len(results) > 0 and isinstance(results[0], tuple) and all(isinstance(res[0], subprocess.CompletedProcess) for res in results):
+                    # Extract the return codes from the CompletedProcess objects
+                    results = [res[0].returncode for res in results]
         # Check if all simulations were successful
         if all([res == 0 for res in results]):
             return 0, 'All JV simulations completed successfully'
