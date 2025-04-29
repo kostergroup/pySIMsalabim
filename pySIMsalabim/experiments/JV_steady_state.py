@@ -160,12 +160,14 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
                 msg_list.append(message)
         
         # check if results is a list of CompletedProcess objects
-        if isinstance(results, list) and all(isinstance(res, subprocess.CompletedProcess) for res in results):
+        if isinstance(results, list) and all(isinstance(res[0], subprocess.CompletedProcess) for res in results):
             # Extract the return codes from the CompletedProcess objects
-            results = [res.returncode for res in results]
+            results = [res[0].returncode for res in results]
         # Check if all simulations were successful
         if all([res == 0 for res in results]):
             return 0, 'All JV simulations completed successfully'
+        elif all([(res == 0 or res == 95) for res in results]):
+            return 0, 'All JV simulations completed successfully, but some had some points that did not converge'
         else:
             return results, msg_list    
     
