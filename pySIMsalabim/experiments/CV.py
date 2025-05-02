@@ -7,7 +7,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 import scipy.integrate
-# import pySIMsalabim
 ## Import pySIMsalabim, if not successful, add the parent directory to the system path
 try :
     import pySIMsalabim as sim
@@ -19,6 +18,15 @@ from pySIMsalabim.utils import general as utils_gen
 from pySIMsalabim.plots import plot_functions as utils_plot
 from pySIMsalabim.utils.utils import *
 from pySIMsalabim.utils.device_parameters import *
+
+class InvalidInputError(Exception):
+    pass
+
+class fileCreationError(Exception):
+    pass
+
+class ComputationError(Exception):
+    pass
 
 ######### Function Definitions ####################################################################
 
@@ -61,16 +69,53 @@ def create_tVG_CV(V_0, V_max, del_V, V_step, G_frac, tVG_name, session_path, fre
     while V_0 <= V_max + V_max*1E-5:
         time = 0
         del_t = ini_timeFactor/freq
-        tVG_lines += f'{time:.3e} {V_0:.3e} {G_frac:.3e}\n'
+        tVG_lines += f'{time:.3e} {V_0} {G_frac:.3e}\n'
         
         # Make the other lines in the tVG file
         while time < 1/freq: #max time: 1/f_min is enough!
             time += del_t
             del_t = del_t * timeFactor
-            tVG_lines += f'{time:.3e} {V_0+del_V:.3e} {G_frac:.3e}\n'
+            tVG_lines += f'{time:.3e} {V_0+del_V} {G_frac:.3e}\n'
     
         V_0 += V_step
 
+    # Write the tVG lines to the tVG file
+    with open(os.path.join(session_path,tVG_name), 'w') as file:
+        file.write(tVG_lines)
+
+    # tVG file is created, message a success
+    msg = 'Success'
+    retval = 0
+
+    return retval, msg
+
+def create_tVG_SS(V_0, G_frac, tVG_name, session_path):
+    """ Creates the tVG file for the steady state simulation with only t 0 and V_0
+
+    Parameters
+    ----------
+    V_0 : float 
+        Voltage at t=0
+    del_V : float
+        Voltage step that is applied after t=0
+    G_frac : float
+        Fractional light intensity
+    tVG_name : string
+        Name of the tVG file
+    session_path : string
+        Path of the simulation folder for this session
+
+    Returns
+    -------
+    string
+        A message to indicate the result of the process
+
+    
+    """    
+
+    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header
+    tVG_lines = 't Vext G_frac\n' + f'{0} {V_0} {G_frac:.3e}\n'
+   
     # Write the tVG lines to the tVG file
     with open(os.path.join(session_path,tVG_name), 'w') as file:
         file.write(tVG_lines)
@@ -147,7 +192,7 @@ def create_tVG_CV_Rseries(Vint, del_V, G_frac, tVG_name, session_path, freq, ini
 
     return retval, msg
 
-def create_tVG_SS_CV(V_min, V_max,Vstep, G_frac, tVG_name, session_path):
+def create_tVG_SS_CV(V_min, V_max, Vstep, G_frac, tVG_name, session_path):
     """ Creates the tVG file for the steady state simulation with only t 0 and V_0
 
     Parameters
@@ -175,11 +220,50 @@ def create_tVG_SS_CV(V_min, V_max,Vstep, G_frac, tVG_name, session_path):
 
     # Starting line of the tVG file: header + datapoints at time=0. Set the correct header
     tVG_lines = 't Vext G_frac\n' #+ f'{0} {V_0} {G_frac:.3e}\n'
-    V_0 =V_min
+    V_0 = V_min
     while V_0 <= V_max + V_max*1E-5:
         time = 0
         tVG_lines += f'{time:.3e} {V_0:.3e} {G_frac:.3e}\n'
         V_0 += Vstep
+
+    # Write the tVG lines to the tVG file
+    with open(os.path.join(session_path,tVG_name), 'w') as file:
+        file.write(tVG_lines)
+
+    # tVG file is created, message a success
+    msg = 'Success'
+    retval = 0
+
+    return retval, msg
+
+def create_tVG_tolDens(V_0, del_V, G_frac, tVG_name, session_path, freq, ini_timeFactor):
+    """ Creates the tVG file for the steady state simulation with only t 0 and V_0
+
+    Parameters
+    ----------
+    V_0 : float 
+        Voltage at t=0
+    del_V : float
+        Voltage step that is applied after t=0
+    G_frac : float
+        Fractional light intensity
+    tVG_name : string
+        Name of the tVG file
+    session_path : string
+        Path of the simulation folder for this session
+
+    Returns
+    -------
+    string
+        A message to indicate the result of the process
+    """    
+
+    del_t = ini_timeFactor/freq
+
+    tVG_lines = ('t\tVext\tG_frac\n'
+                 f'0\t{V_0+del_V}\t{G_frac:.3e}\n'
+                 f'0\t{V_0}\t{G_frac:.3e}\n'
+                 f'{del_t}\t{V_0+del_V}\t{G_frac:.3e}\n')
 
     # Write the tVG lines to the tVG file
     with open(os.path.join(session_path,tVG_name), 'w') as file:
@@ -315,7 +399,7 @@ def calc_impedance_limit_time(I, errI, time, VStep, imax):
         Numerical error in calculated impedance Z(f)
     """
 
-    freq=1/time[-1] #we obtain the frequency from the time array
+    freq= 1/time[-1] #we obtain the frequency from the time array
     Iinf = I[-1] # I at infinite time, i.e. the last one we have.
     imax = len(I)
     #prepare array for integrants:
@@ -352,7 +436,7 @@ def calc_impedance_limit_time(I, errI, time, VStep, imax):
     #now return complex impedance, its error and the corresponding frequency:	
     return freq, Z, errZ
 
-def calc_impedance_CV(data, del_V, isToPlot,session_path,zimt_device_parameters,Rseries=0,Rshunt=-1e3):
+def calc_impedance_CV(data, del_V, isToPlot, session_path, zimt_device_parameters, Rseries=0, Rshunt=-1e3):
     """ Calculate the impedance over the frequency range
     
     Parameters
@@ -410,7 +494,7 @@ def calc_impedance_CV(data, del_V, isToPlot,session_path,zimt_device_parameters,
     #         Rshunt = float(i[2])
 
     for i in range(numFreqPoints):
-        imax=isToPlot[i]
+        imax = isToPlot[i]
         if i == 0:
             data_dum = data.loc[0:imax]
         else:
@@ -464,7 +548,7 @@ def store_capacitance_data(session_path, V, cap, errC, output_file='CapVol.dat')
         for i in range(len(V)):
             file.write(f'{V[i]:.6e} {cap[i]:.6e} {errC[i]:.6e}' + '\n')
 
-def get_capacitance(data, freq, V_0, V_max, del_V, V_step, session_path, zimt_device_parameters, output_file):
+def get_capacitance(data, freq, V_min, V_max, del_V, V_step, session_path, zimt_device_parameters, output_file):
     """Calculate the capacitance from the simulation result
 
     Parameters
@@ -473,8 +557,8 @@ def get_capacitance(data, freq, V_0, V_max, del_V, V_step, session_path, zimt_de
         DataFrame with the simulation results (tj.dat) file
     freq : float
         Frequency at which the capacitance-voltage measurement is performed
-    V_0 : float
-        Initial voltage
+    V_min : float
+        Minimum voltage
     V_max : float
         Maximum voltage
     del_V : float
@@ -493,15 +577,18 @@ def get_capacitance(data, freq, V_0, V_max, del_V, V_step, session_path, zimt_de
     """  
     # get indexes of the time points where the voltage changes
     isToPlot = data.index[data['t'] == 0]
+    
+    # Obtain all simulated potentials/DC voltages
+    V = np.array(data['Vext'][isToPlot])
+    
     # do -1 to get the last index
     isToPlot = isToPlot - 1
     # remove the first index, because we start at t=0
     isToPlot = isToPlot[1:]
     # add the last index to the end
     isToPlot = np.append(isToPlot, len(data['t'])-1)
-    V = np.linspace(V_0, V_max, num=math.ceil((V_max-V_0)/V_step)+1, endpoint=True)
 
-    ReZ, ImZ, errZ, C, G, errC, errG = calc_impedance_CV(data, del_V, isToPlot,session_path, zimt_device_parameters)
+    ReZ, ImZ, errZ, C, G, errC, errG = calc_impedance_CV(data, del_V, isToPlot, session_path, zimt_device_parameters)
 
     # Write the capacitance results to a file
     store_capacitance_data(session_path, V, C, errC, output_file)
@@ -537,7 +624,7 @@ def cap_plot(session_path, output_file, xscale='linear', yscale='linear', plot_t
     par_x = 'V'
     xlabel = 'Voltage [V]'
     ylabel = 'Capacitance [Fm$^{-2}$]'
-    title = 'Capacitance-Voltage'
+    title = f'f = {freq} Hz' # 'Capacitance-Voltage'
     
     # Plot with or without errorbars
     if plot_type == plt.errorbar:
@@ -546,6 +633,8 @@ def cap_plot(session_path, output_file, xscale='linear', yscale='linear', plot_t
     else:
         ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
 
+    if len(data) == 1:
+        plt.ticklabel_format(axis='y', style='sci', useOffset=False)
     plt.show()
 
 def MottSchottky_plot(session_path, output_file, xscale='linear', yscale='linear', plot_type = plt.errorbar):
@@ -572,7 +661,7 @@ def MottSchottky_plot(session_path, output_file, xscale='linear', yscale='linear
     pars = {'1/C2' : 'Capacitance' }
     par_x = 'V'
     xlabel = 'Voltage [V]'
-    ylabel = '1/Capacitance$^2$ [Fm$^{-2}$]$^{-2}$'
+    ylabel = '1/Capacitance$^2$ [F$^{-2}$m$^4$]'
     title = 'Mott-Schottky'
     
     data['1/C2'] = 1/(data['C'])**2
@@ -584,6 +673,8 @@ def MottSchottky_plot(session_path, output_file, xscale='linear', yscale='linear
     else:
         ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
 
+    if len(data) == 1:
+        plt.ticklabel_format(axis='y', style='sci', useOffset=False)
     plt.show()
 
 def plot_capacitance(session_path, output_file='CapVol.dat'):
@@ -599,7 +690,113 @@ def plot_capacitance(session_path, output_file='CapVol.dat'):
 
     MottSchottky_plot(session_path, output_file)
 
-def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step, G_frac=1, del_V=0.01,  run_mode=False,tVG_name='tVG.txt',  output_file = 'CapVol.dat', tj_name = 'tj.dat', varFile = 'none', ini_timeFactor=1e-3, timeFactor=1.02,**kwargs):
+def get_tolDens(zimt_device_parameters, session_path, freq, V_0, G_frac, del_V, run_mode, varFile, ini_timeFactor, dum_str, cmd_pars, tVG_name='tVG_tolDens.txt', tj_name='tJ_tolDens.dat'):
+    """
+    Calculate the tolerance of the density solver, to ensure a reliable impedance spectrum
+
+    Parameters
+    ----------
+    zimt_device_parameters : string
+        Name of the zimt device parameters file
+    session_path : string
+        Working directory for zimt
+    f_min : float
+        Minimum frequency
+    f_max : float
+        Maximum frequency
+    V_0 : float
+        Voltage at t=0
+    G_frac : float
+        Fractional light intensity
+    del_V : float
+        Voltage step
+    run_mode : bool
+        Indicate whether the script is in 'web' mode (True) or standalone mode (False). Used to control the console output
+    tVG_name : string
+        Name of the tVG file
+    tj_name : string
+        Name of the tj file
+    varFile : string
+        Name of the var file
+    ini_timeFactor : float
+        Constant defining the size of the initial timestep
+    dum_str : string
+        dummy string with UUID string to append to the file names
+    cmd_pars : list
+        List of dictionaries with the command line parameters
+    
+    Returns
+    -------
+    integer
+        Return code of the simulation, 0 if successful, -1 if one of the steps failed else the return code of the simulation
+    string
+        Return message to display on the UI in case of failure
+    float
+        Tolerance of the density solver. If failed, returns None
+    """
+
+    # Determine J(t=0), J(t=∞), and J_dis to get the maximum allowed tolerance of the density solver to retrieve a
+    # reliable impedance spectrum, where tolDens = J(t=∞) - J(t=0) / J_displacement
+    result, message = create_tVG_tolDens(V_0, del_V, G_frac, tVG_name, session_path, freq, ini_timeFactor)
+    
+    if result == 0:
+        # In order for zimt to converge, set absolute tolerance of Poisson solver small enough
+        tolPois = 10**(math.floor(math.log10(abs(del_V)))-4)
+        
+        tolDens_test = str(1e-10)
+        # Define mandatory options for ZimT to run well with impedance:
+        tolDens_args = [{'par':'dev_par_file','val':zimt_device_parameters},
+                             {'par':'tVGFile','val':tVG_name},
+                             {'par':'tolPois','val':str(tolPois)},
+                             {'par':'tolDens','val':tolDens_test},
+                             {'par':'limitDigits','val':'0'},
+                             {'par':'currDiffInt','val':'2'},
+                             {'par':'tJFile','val':tj_name},
+                             {'par':'varFile','val':varFile},
+                             {'par':'logFile','val':logFile}]
+        
+        if cmd_pars is not None:
+            tolDens_args = update_cmd_pars(tolDens_args, cmd_pars)
+        
+        result, message = utils_gen.run_simulation('zimt', tolDens_args, session_path, run_mode)
+
+        if result.returncode == 0 or result.returncode == 95:
+            data = read_tj_file(session_path, tj_file_name=tj_name)
+            try:
+                J_0 = data['Jext'][1]
+                J_inf = data['Jext'][0]
+                J_dis = abs(data['Jext'][2] - J_0)
+            except KeyError as key:
+                row_num_error = key.args[0] # Row number that raises the error
+                if row_num_error == 0:
+                    message = "J_inf does not exist in the tolDens tJ-file"
+                    raise ComputationError(message)
+                elif row_num_error == 1:
+                    message = "J_0 does not exist in the tolDens tJ-file"
+                    raise ComputationError(message)
+                elif row_num_error == 2:
+                    message = "J_spike does not exist in the tolDens tJ-file"
+                    raise ComputationError(message)
+            
+            # tolDens cannot be larger than 1E-6
+            tolDens = min(abs(J_inf - J_0) / J_dis * 1e-4, 1e-6)
+
+            # tolDens cannot be smaller than 1E-12
+            tolDens = max(tolDens, 1e-12)
+            
+            # Remove the tVG and tJ files as they are not needed anymore
+            os.remove(os.path.join(session_path,tVG_name))
+            os.remove(os.path.join(session_path,tj_name))
+            
+            return result, message, tolDens
+        else:
+            return result, message, None
+    else:
+        message = "Computing tolDens was unsuccesful"
+        raise fileCreationError('Creating the tVG file for tolDens was unsuccesful')
+        # return result, message, None
+
+def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step, G_frac=1, del_V=0.01, run_mode=False, tVG_name='tVG.txt', output_file = 'CapVol.dat', tj_name = 'tj.dat', logFile = 'log.txt', varFile = 'none', ini_timeFactor=1e-3, timeFactor=1.02,**kwargs):
     """Create a tVG file and run ZimT with capacitance device parameters
 
     Parameters
@@ -669,21 +866,87 @@ def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step
     tVG_name = os.path.join(session_path, tVG_name)
     if UUID != '':
         tj_file_name_base, tj_file_name_ext = os.path.splitext(tj_name)
-        tj_name = tj_file_name_base + dum_str + tj_file_name_ext 
+        tj_name = tj_file_name_base + dum_str + tj_file_name_ext
+        
         tVG_name_base, tVG_name_ext = os.path.splitext(tVG_name)
         tVG_name = tVG_name_base + dum_str + tVG_name_ext
+        
+        log_file_base, log_file_ext = os.path.splitext(logFile)
+        logFile = log_file_base + dum_str + log_file_ext
+        
         output_file_base, output_file_ext = os.path.splitext(output_file)
         output_file = output_file_base + dum_str + output_file_ext
+        
         if varFile != 'none':
             var_file_base, var_file_ext = os.path.splitext(varFile)
             varFile = var_file_base + dum_str + var_file_ext
             varFile = os.path.join(session_path,varFile)
     # varFile = 'none' # we don't use a var file for this simulation
 
+    ##############################################################################
+    # COMPUTE Voc 
+    # If the voltage of V_min or V_max is set to Voc
+    if V_min == 'oc' or V_max == 'oc':
+        # Create tVG
+        result, message = create_tVG_SS('oc', G_frac, tVG_name, session_path)
+        
+        # Check if tVG file is created
+        if result == 0:
+            # In order for zimt to converge, set absolute tolerance of Poisson solver small enough
+            tolPois = 10**(math.floor(math.log10(abs(del_V)))-4)
+
+            # Define mandatory options for ZimT to run well with impedance:
+            Impedance_SS_args = [{'par':'dev_par_file','val':zimt_device_parameters},
+                                {'par':'tVGFile','val':tVG_name},
+                                {'par':'tolPois','val':str(tolPois)},
+                                {'par':'limitDigits','val':'0'},
+                                {'par':'currDiffInt','val':'2'},
+                                {'par':'tJFile','val':tj_name},
+                                {'par':'varFile','val':varFile},
+                                {'par':'logFile','val':logFile}
+                                ]
+            
+            if turnoff_autoTidy:
+                Impedance_SS_args.append({'par':'autoTidy','val':'0'})
+
+            if cmd_pars is not None:
+                Impedance_SS_args = update_cmd_pars(Impedance_SS_args, cmd_pars)
+            
+            if threadsafe:
+                result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_SS_args, session_path, run_mode)
+            else:
+                result, message = utils_gen.run_simulation('zimt', Impedance_SS_args, session_path, run_mode)
+    
+            if result.returncode == 0: # If result.returncode == 95, than one point failed to converge: Voc, so stop this simulation
+                data = read_tj_file(session_path, tj_file_name=tj_name)
+                Voc = data['Vext'][0]
+                print(f'Computed Voc is {Voc:.2e} V')
+                
+                if V_min == 'oc' and V_max == 'oc':
+                    V_min = Voc
+                    V_max = Voc
+                elif V_min == 'oc':
+                    V_min = Voc
+                    V_max = float(V_max)
+                elif V_max == 'oc':
+                    V_min = float(V_min)
+                    V_max = Voc
+            else:
+                message = "Computing the value of Voc led to the following error: " + message
+                return result, message
+        else:
+            raise fileCreationError('Creating the tVG file to calculate Voc was unsuccesful')
+    else:
+        V_min = float(V_min)
+        V_max = float(V_max)
+
+    if V_min > V_max:
+        raise InvalidInputError(f'V_min cannot be larger than V_max. V_min = {V_min:.2e} V and V_max = {V_max:2e} V')
+    ##############################################################################
     # The simulations with Rseries and Rshunt often do not converge, so we first run a steady state simulation to get the internal voltage and then run the impedance simulation with Rseries = 0 and Rshunt = -Rshunt. We will correct the impedance afterwards. This is a workaround to improve the convergence of the impedance simulation that should remain accurate to estimate the impedance.
-    #default values for Rseries and Rshunt
+    # Default values for Rseries and Rshunt
     Rseries = 0
-    Rshunt = -1e3
+    Rshunt = -1 # Negative values for Rshunt are used in SIMsalabim to indicate infinite Rshunt
 
     # Do the steady state simulation to calculate the internal voltage in case of series resistance
     # Create tVG
@@ -721,14 +984,14 @@ def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step
 
             # Define mandatory options for ZimT to run well with impedance:
             CV_SS_args = [{'par':'dev_par_file','val':zimt_device_parameters},
-                                {'par':'tVGFile','val':tVG_name},
-                                {'par':'tolPois','val':str(tolPois)},
-                                {'par':'limitDigits','val':'0'},
-                                {'par':'currDiffInt','val':'2'},
-                                {'par':'tJFile','val':tj_name},
-                                {'par':'varFile','val':varFile},
-                                {'par':'logFile','val':'log'+dum_str+'.txt'}
-                                ]
+                            {'par':'tVGFile','val':tVG_name},
+                            {'par':'tolPois','val':str(tolPois)},
+                            {'par':'limitDigits','val':'0'},
+                            {'par':'currDiffInt','val':'2'},
+                            {'par':'tJFile','val':tj_name},
+                            {'par':'varFile','val':varFile},
+                            {'par':'logFile','val':logFile}
+                            ]
             if turnoff_autoTidy:
                 CV_SS_args.append({'par':'autoTidy','val':'0'})
 
@@ -747,16 +1010,9 @@ def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step
                 Jext = np.asarray(data['Jext'])
                 Vint = Vext - Jext*Rseries
             else:
-                return result.returncode, message
+                return result, message
         else:
-            return result, message
-
-        # Create tVG
-        result, message = create_tVG_CV_Rseries(Vint, del_V, G_frac, tVG_name, session_path, freq, ini_timeFactor, timeFactor)
-
-    else:            
-        # Create tVG
-        result, message = create_tVG_CV(V_min, V_max, del_V, V_step, G_frac, tVG_name, session_path, freq, ini_timeFactor, timeFactor)
+            raise fileCreationError('Creating the tVG file to calculate the internal voltage was unsuccesful, consider removing the series resistance')
 
     # remove the Rseries and Rshunt from cmd_pars
     if idx_Rseries is not None and idx_Rshunt is not None:
@@ -770,54 +1026,78 @@ def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step
         cmd_pars.pop(idx_Rseries)
     elif idx_Rshunt is not None and idx_Rseries is None:
         cmd_pars.pop(idx_Rshunt)
-
-    # Check if tVG file is created
-    if result == 0:
-        # In order for zimt to converge, set absolute tolerance of Poisson solver small enough
-        tolPois = 10**(math.floor(math.log10(abs(del_V)))-4)
-
-        # Define mandatory options for ZimT to run well with CV:
-        CV_args = [{'par':'dev_par_file','val':zimt_device_parameters},
-                        {'par':'tVGFile','val':tVG_name},
-                        {'par':'tolPois','val':str(tolPois)},
-                        {'par':'limitDigits','val':'0'},
-                        {'par':'currDiffInt','val':'2'},
-                        {'par':'tJFile','val':tj_name},
-                        {'par':'varFile','val':varFile},
-                        {'par':'logFile','val':'log'+dum_str+'.txt'},
-                        # We remove Rseries and Rshunt as the simulation is either to converge that way, we will correct the impedance afterwards
-                        {'par':'R_series','val':str(0)},
-                        {'par':'R_shunt','val':str(-abs(Rshunt))}]
         
-        if turnoff_autoTidy:
-            CV_args.append({'par':'autoTidy','val':'0'})
-            
-        if cmd_pars is not None:
-                CV_args = update_cmd_pars(CV_args, cmd_pars)
+    ##############################################################################
+    # Calculate the tolerance of the density solver
+    if Rseries > 0:
+        result, message, tolDens_Vmin = get_tolDens(zimt_device_parameters, session_path, freq, min(Vint), G_frac, del_V, run_mode, varFile, ini_timeFactor, dum_str, cmd_pars, tVG_name=tVG_name, tj_name=tj_name)
+        result, message, tolDens_Vmax = get_tolDens(zimt_device_parameters, session_path, freq, max(Vint), G_frac, del_V, run_mode, varFile, ini_timeFactor, dum_str, cmd_pars, tVG_name=tVG_name, tj_name=tj_name)
+    else:
+        result, message, tolDens_Vmin = get_tolDens(zimt_device_parameters, session_path, freq, V_min, G_frac, del_V, run_mode, varFile, ini_timeFactor, dum_str, cmd_pars, tVG_name=tVG_name, tj_name=tj_name)
+        result, message, tolDens_Vmax = get_tolDens(zimt_device_parameters, session_path, freq, V_max, G_frac, del_V, run_mode, varFile, ini_timeFactor, dum_str, cmd_pars, tVG_name=tVG_name, tj_name=tj_name)
+    tolDens = min(tolDens_Vmin, tolDens_Vmax)
 
-        if threadsafe:
-            result, message = utils_gen.run_simulation_filesafe('zimt', CV_args, session_path, run_mode)
-        else:
-            result, message = utils_gen.run_simulation('zimt', CV_args, session_path, run_mode)
+    if result.returncode != 0 and result.returncode != 95:
+        # Failed to calculate the tolerance of the density solver, return the error message
+        return result, message
 
-        if result.returncode == 0 or result.returncode == 95:
-            data = read_tj_file(session_path, tj_file_name=tj_name)
+    ##############################################################################
+    ### MAIN CV calculation ###
+    ##############################################################################
 
-            result, message = get_capacitance(data, freq, V_min, V_max, del_V, V_step, session_path, zimt_device_parameters, output_file)
-            return result, message
+    # Create tVG for the CV calculations
+    if Rseries > 0:
+        result, message = create_tVG_CV_Rseries(Vint, del_V, G_frac, tVG_name, session_path, freq, ini_timeFactor, timeFactor)
+    else:
+        result, message = create_tVG_CV(V_min, V_max, del_V, V_step, G_frac, tVG_name, session_path, freq, ini_timeFactor, timeFactor)
 
-        else:
-            return result.returncode, message
+    if result != 0:
+        raise fileCreationError('Creating the tVG file was unsuccesful')
+
+    # In order for zimt to converge, set absolute tolerance of Poisson solver small enough
+    tolPois = 10**(math.floor(math.log10(abs(del_V)))-4)
+
+    # Define mandatory options for ZimT to run well with CV:
+    CV_args = [{'par':'dev_par_file','val':zimt_device_parameters},
+                    {'par':'tVGFile','val':tVG_name},
+                    {'par':'tolPois','val':str(tolPois)},
+                    {'par':'tolDens','val':str(tolDens)},
+                    {'par':'limitDigits','val':'0'},
+                    {'par':'currDiffInt','val':'2'},
+                    {'par':'tJFile','val':tj_name},
+                    {'par':'varFile','val':varFile},
+                    {'par':'logFile','val':logFile},
+                    # We remove Rseries and Rshunt as the simulation is either to converge that way, we will correct the impedance afterwards
+                    {'par':'R_series','val':str(0)},
+                    {'par':'R_shunt','val':str(-abs(Rshunt))}]
+    
+    if turnoff_autoTidy:
+        CV_args.append({'par':'autoTidy','val':'0'})
         
-    return result, message
+    if cmd_pars is not None:
+        CV_args = update_cmd_pars(CV_args, cmd_pars)
+
+    if threadsafe:
+        result, message = utils_gen.run_simulation_filesafe('zimt', CV_args, session_path, run_mode)
+    else:
+        result, message = utils_gen.run_simulation('zimt', CV_args, session_path, run_mode)
+
+    if result.returncode == 0 or result.returncode == 95:
+        data = read_tj_file(session_path, tj_file_name=tj_name)
+
+        get_capacitance(data, freq, V_min, V_max, del_V, V_step, session_path, zimt_device_parameters, output_file)
+        return result, message
+    else:
+        return result, message
+        
 
 ######### Running the function as a standalone script #############################################
 if __name__ == "__main__":
     ## Manual CV input parameters. These are overwritten by command line arguments if provided
     freq = 1e4
-    V_min = 0.5
-    V_max = 1.0
-    del_V = 10e-3
+    V_min = 0
+    V_max = 0.5
+    del_V = 1e-2
     V_step = 0.1    
     G_frac = 0
 
@@ -826,9 +1106,11 @@ if __name__ == "__main__":
 
     zimt_device_parameters = 'simulation_setup.txt'
 
-    tVG_name = 'tVG.txt'
-    tj_name = 'tj.dat'
+    tVGFile = 'tVG.txt'
+    tJFile = 'tj.dat'
     output_name = 'freqZ.dat'
+    logFile = 'logFile.txt'
+    varFile = 'none'
 
     # UUID = str(uuid.uuid4()) # Add a UUID to the simulation
     UUID = ''
@@ -872,24 +1154,30 @@ if __name__ == "__main__":
                     cmd_pars_dict[str(input_list[i][1:])] = str(input_list[i+1])
 
     # Check and process specific keys/arguments that are not native SIMsalabim arguments
-    # Handle the session_path/sp argument separately, as the other parameters depend on this
+    # Handle the session_path/sp and zimt_device_parameters/dp argument separately, as the other parameters depend on this
     if 'sp' in cmd_pars_dict:
         session_path = cmd_pars_dict['sp']
         # remove from cmd_pars
         cmd_pars_dict.pop('sp')
+    if 'dp' in cmd_pars_dict:
+        zimt_device_parameters = cmd_pars_dict['dp']
+        # remove from cmd_pars
+        cmd_pars_dict.pop('dp')
 
     # Define mappings for keys and variables
     key_action_map = {
-        'simsetup': lambda val: {'zimt_device_parameters': val},
+        'zimt_device_parameters': lambda val: {'zimt_device_parameters': val},
         'freq': lambda val: {'freq': float(val)},
-        'V_min': lambda val: {'V_min': float(val)},
-        'V_max': lambda val: {'V_max': float(val)},
+        'V_min': lambda val: {'V_min': val},
+        'V_max': lambda val: {'V_max': val},
         'del_V': lambda val: {'del_V': float(val)},
         'V_step': lambda val: {'V_step': float(val)},
         'G_frac': lambda val: {'G_frac': float(val)},
-        'tVG_name': lambda val: {'tVG_name': val},
-        'tj_name': lambda val: {'tj_name': val},
-        'out_name': lambda val: {'output_name': val},
+        'tVGFile': lambda val: {'tVGFile': val},
+        'tJFile': lambda val: {'tJFile': val},
+        'logFile': lambda val: {'logFile': val},
+        'varFile': lambda val: {'varFile': val},
+        'output_name': lambda val: {'output_name': val},
         'UUID': lambda val: {'UUID': val},    
     }
 
@@ -904,15 +1192,12 @@ if __name__ == "__main__":
     cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
 
     # Run Capacitance-Voltage   
-    result, message = run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step, G_frac, del_V,run_mode=False, tVG_name=tVG_name, 
-                                    output_file = output_name, tj_name = tj_name, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor, cmd_pars=cmd_pars, UUID=UUID)
+    result, message = run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step, G_frac, del_V,run_mode=False, tVG_name=tVGFile, 
+                                    output_file = output_name, tj_name = tJFile, logFile=logFile, varFile=varFile, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor, cmd_pars=cmd_pars, UUID=UUID)
 
-    # Make the capacitance-voltage plot
-    if result == 0 or result == 95:
+    # Make the capacitance-voltage and Mott-Schottky plot
+    calc_Voc_output_string = 'Computing the value of Voc led to the following error:'
+    if result.returncode == 0 or (result.returncode == 95 and calc_Voc_output_string not in message):
         plot_capacitance(session_path, os.path.basename(output_name))
     else:
-        print(message)
-        sys.exit(1)
-
-
-    
+        sys.exit(message)
