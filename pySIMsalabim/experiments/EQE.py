@@ -159,7 +159,7 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
     int
         0 if the function runs successfully.
     """
-    
+    verbose = kwargs.get('verbose', False) # Check if the user wants to print messages to the console
     UUID = kwargs.get('UUID', '') # Check if the user wants to add a UUID to the JV file name
     cmd_pars = kwargs.get('cmd_pars', None) # Check if the user wants to add additional command line parameters to the simulation
     force_multithreading = kwargs.get('force_multithreading', False) # Check if the user wants to force multithreading instead of using GNU parallel 
@@ -236,17 +236,17 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
         EQE_args = update_cmd_pars(EQE_args, cmd_pars)
     
     if threadsafe:
-        result, message = utils_gen.run_simulation_filesafe('simss', EQE_args, session_path, run_mode)
+        result, message = utils_gen.run_simulation_filesafe('simss', EQE_args, session_path, run_mode,verbose=verbose)
     else:
-        result, message = utils_gen.run_simulation('simss', EQE_args, session_path, run_mode)
+        result, message = utils_gen.run_simulation('simss', EQE_args, session_path, run_mode,verbose=verbose)
     # result, message = run_sim_EQE(simss_device_parameters, session_path, spectrum, Vext, JV_file_name, run_mode)
     
     # If the simulation fails, stop running the script and exit
-    if not result.returncode == 0:
-        if result.returncode == 95:
-            message = f'SIMsalabim raised an error with errorcode {result.returncode}, simulation did not converge.'
+    if not result == 0:
+        if result== 95:
+            message = f'SIMsalabim raised an error with errorcode {result}, simulation did not converge.'
         msg_list.append(message)
-        return result.returncode, msg_list
+        return result, msg_list
     
     # Get the current density Jext and its error
     J0_single, J0_err_single = get_CurrDens(JV_file_name, session_path)
@@ -285,7 +285,7 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
                 dum_args = update_cmd_pars(dum_args, cmd_pars)
             EQE_args_list.append(dum_args)
         
-        results = run_simulation_parallel('simss', EQE_args_list, session_path, max_jobs, force_multithreading=force_multithreading)
+        results = run_simulation_parallel('simss', EQE_args_list, session_path, max_jobs, force_multithreading=force_multithreading,verbose=verbose)
         
         for i in lambda_array:
             JV_file_name_single = f'{JV_file_name_base}{dum_str}_{int(i*1e9)}nm{JV_file_name_ext}'
@@ -293,8 +293,6 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
             Jext.append(J_single)
             Jext_err.append(Jerr_single)
             
-            
-
     else:
         for i in lambda_array:
             JV_file_name_base, JV_file_name_ext = os.path.splitext(JV_file_name)
@@ -325,12 +323,11 @@ def run_EQE(simss_device_parameters, session_path, spectrum, lambda_min, lambda_
                 EQE_args = update_cmd_pars(EQE_args, cmd_pars)
 
             if threadsafe:
-                result, message = utils_gen.run_simulation_filesafe('simss', EQE_args, session_path, run_mode)
+                result, message = utils_gen.run_simulation_filesafe('simss', EQE_args, session_path, run_mode,verbose=verbose)
             else:
-                result, message = utils_gen.run_simulation('simss', EQE_args, session_path, run_mode)
-            # result, message = run_sim_EQE(simss_device_parameters, session_path, os.path.join('tmp_spectrum',f'{int(i*1e9)}_{os.path.basename(spectrum)}'), Vext, JV_file_name_single,run_mode)
-            
-            if not result.returncode == 0:
+                result, message = utils_gen.run_simulation('simss', EQE_args, session_path, run_mode,verbose=verbose)
+
+            if not result == 0:
                 msg_list.append(message)
 
             J_single, Jerr_single = get_CurrDens(JV_file_name_single,session_path)

@@ -53,7 +53,7 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
         Message from the simulation.
 
     """
-
+    verbose = kwargs.get('verbose', False) # Check if the user wants to show verbose output in the console
     UUID = kwargs.get('UUID', '') # Check if the user wants to add a UUID to the JV file name
     cmd_pars = kwargs.get('cmd_pars', None) # Check if the user wants to add additional command line parameters to the 
     force_multithreading = kwargs.get('force_multithreading', False) # Check if the user wants to force multithreading instead of using GNU parallel
@@ -112,7 +112,11 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
         if cmd_pars is not None:
             SS_JV_args = update_cmd_pars(SS_JV_args, cmd_pars)
 
-        result, message = utils_gen.run_simulation('simss',SS_JV_args,session_path,run_mode = run_mode)
+        if threadsafe:
+            # Run the simulation in thread safe mode
+            result, message = utils_gen.run_simulation_filesafe('simss', SS_JV_args, session_path, run_mode = run_mode,verbose=verbose)
+        else:
+            result, message = utils_gen.run_simulation('simss',SS_JV_args,session_path,run_mode = run_mode,verbose=verbose)
 
         return result, message
 
@@ -145,22 +149,21 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
             SS_JV_args_list.append(dum_args)                             
                                        
         if parallel and len(G_fracs) > 1:
-            results = run_simulation_parallel('simss', SS_JV_args_list, session_path, max_jobs, force_multithreading=force_multithreading)
+            results = run_simulation_parallel('simss', SS_JV_args_list, session_path, max_jobs, force_multithreading=force_multithreading,verbose=verbose)
             msg_list = ['' for i in range(len(results))]
         else:
             results, msg_list = [], []
             for dum_args in SS_JV_args_list:
 
                 if threadsafe:
-                    result, message = utils_gen.run_simulation_filesafe('simss', dum_args, session_path, run_mode)
+                    result, message = utils_gen.run_simulation_filesafe('simss', dum_args, session_path, run_mode,verbose=verbose)
                 else:
-                    result, message = utils_gen.run_simulation('simss', dum_args, session_path, run_mode)
+                    result, message = utils_gen.run_simulation('simss', dum_args, session_path, run_mode,verbose=verbose)
                 
-                results.append(result.returncode)
+                results.append(result)
                 msg_list.append(message)
         
         # check if results is a list of CompletedProcess objects
-
         if isinstance(results, list) :
             if len(results) > 0 and not isinstance(results[0], subprocess.CompletedProcess):
                 pass
@@ -168,14 +171,35 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
                 if len(results) > 0 and isinstance(results[0], tuple) and all(isinstance(res[0], subprocess.CompletedProcess) for res in results):
                     # Extract the return codes from the CompletedProcess objects
                     results = [res[0].returncode for res in results]
+        
         # Check if all simulations were successful
         if all([res == 0 for res in results]):
+            if verbose and not run_mode:
+                print('All JV simulations completed successfully\n')
+                for mess in msg_list:
+                    print(mess)
             return 0, 'All JV simulations completed successfully'
         elif all([(res == 0 or res == 95) for res in results]):
+            if verbose and not run_mode:
+                print('All JV simulations completed successfully, but some had some points that did not converge\n')
+                for mess in msg_list:
+                    print(mess)
             return 0, 'All JV simulations completed successfully, but some had some points that did not converge'
         else:
-            return results, msg_list    
-    
+            if verbose and not run_mode:
+                print('Some JV simulations failed\n')
+                for i, res in enumerate(results):
+                    print(f'Simulation {i+1} failed with return code {res}')
+
+            # get all results that are not 0
+            failed_results = [res for i, res in enumerate(results) if res != 0 and res != 95]
+            # If there is only one failed result, return it with the error message
+            if len(failed_results) == 1:
+                return failed_results[0], utils_gen.error_message(failed_results[0])
+            else:
+                return 666, utils_gen.error_message(666)
+            
+
 ## Running the function as a standalone script
 if __name__ == "__main__":
     ## Manual Steady State input parameters. These are overwritten by command line arguments if provided

@@ -33,62 +33,65 @@ def fatal_error_message(errorcode):
         message = 'A fatal error occured.'
     return message
 
-# def parallel_error_message(errorcode):
-#     """When a 'standard Pascal' fatal error occurs, add the standard error message to be used with parallel which does not read the 
+def error_message(errorcode):
+    """When a 'standard Pascal' fatal error occurs, add the standard error message to be used with parallel which does not read the 
 
-#     Parameters
-#     ----------
-#     errorcode : int
-#         the error code
+    Parameters
+    ----------
+    errorcode : int
+        the error code
 
-#     Returns
-#     -------
-#     str
-#         the error message
+    Returns
+    -------
+    str
+        the error message
 
-#     """
-#     message = ''
-#     if errorcode >= 90 and errorcode < 100:
-#         message = 'Error '+str(errorcode) +': '
-#         if errorcode == 90:
-#             message += 'Device parameter file corrupted.'
-#         elif errorcode == 91:
-#             message += 'Invalid input. Please check your input files for either incorrect layer definition (see SIMsalabim docs), wrong physics, or voltage in tVG_file too large).'
-#         elif errorcode == 92:
-#             message += 'Invalid input from command line.'
-#         elif errorcode == 93:
-#             message += 'Numerical failure.'
-#         elif errorcode == 94:
-#             message += 'Failed to converge, halt (FailureMode = 0).'
-#         elif errorcode == 95:
-#             message += ' Failed to converge at least 1 point, not halt (FailureMode != 0).'
-#         elif errorcode == 96:
-#             message += 'Missing input file.'
-#         elif errorcode == 97:
-#             message += 'Runtime exceeds limit set by timeout.'
-#         elif errorcode == 99:
-#             message += 'Programming error (i.e. not due to the user!).'
-#     elif errorcode > 100:
-#         message = 'Fatal error '+str(errorcode) +': '
-#         if errorcode == 106:
-#             message += 'Invalid numeric format: Reported when a non-numeric value is read from a text file.'
-#         elif errorcode == 200:
-#             message += 'Division by zero: The application attempted to divide a number by zero.'
-#         elif errorcode == 201:
-#             message += 'Range check error.'
-#         elif errorcode == 202:
-#             message += 'Stack overflow error: This error is only reported when stack checking is enabled.'
-#         elif errorcode == 205:
-#             message += 'Floating point overflow.'
-#         elif errorcode == 206:
-#             message = 'Floating point underflow.'
-#         else:
-#             message = 'Unknown error code '+str(errorcode) + ' occurred.'
+    """
+    message = ''
+    if errorcode >= 90 and errorcode < 100:
+        message = 'Error '+str(errorcode) +': '
+        if errorcode == 90:
+            message += 'Device parameter file corrupted.'
+        elif errorcode == 91:
+            message += 'Invalid input. Please check your input files for either incorrect layer definition (see SIMsalabim docs), wrong physics, or voltage in tVG_file too large).'
+        elif errorcode == 92:
+            message += 'Invalid input from command line.'
+        elif errorcode == 93:
+            message += 'Numerical failure.'
+        elif errorcode == 94:
+            message += 'Failed to converge, halt (FailureMode = 0).'
+        elif errorcode == 95:
+            message += ' Failed to converge at least 1 point, not halt (FailureMode != 0).'
+        elif errorcode == 96:
+            message += 'Missing input file.'
+        elif errorcode == 97:
+            message += 'Runtime exceeds limit set by timeout.'
+        elif errorcode == 99:
+            message += 'Programming error (i.e. not due to the user!).'
+    elif errorcode > 100:
+        message = 'Fatal error '+str(errorcode) +': '
+        if errorcode == 106:
+            message += 'Invalid numeric format: Reported when a non-numeric value is read from a text file.'
+        elif errorcode == 200:
+            message += 'Division by zero: The application attempted to divide a number by zero.'
+        elif errorcode == 201:
+            message += 'Range check error.'
+        elif errorcode == 202:
+            message += 'Stack overflow error: This error is only reported when stack checking is enabled.'
+        elif errorcode == 205:
+            message += 'Floating point overflow.'
+        elif errorcode == 206:
+            message += 'Floating point underflow.'
+        elif errorcode == 666:
+            message += 'Multiple simulations failed with different error codes during parallel execution.'
+        else:
+            message = 'Unknown error code '+str(errorcode) + ' occurred.'
+    elif errorcode == 3:
+        message = 'Warning-like exit.'
+    else:
+        message = 'Unknown error code '+str(errorcode) + ' occurred.'
 
-#     else:
-#         message = 'Unknown error code '+str(errorcode) + ' occurred.'
-
-#     return message
+    return message
 
 def construct_cmd(sim_type, cmd_pars):
     """Construct a single string to use as command to run a SIMsalabim executable
@@ -161,8 +164,8 @@ def run_simulation(sim_type, cmd_pars, session_path, run_mode = False, verbose =
 
     Returns
     -------
-    CompletedProcess
-        Output object of with returncode and console output of the simulation
+    int
+        Return code of the simulation process, 0 for success, other values for errors.
     string
         Return message to display on the UI, for both success and failed
     """
@@ -213,7 +216,7 @@ def run_simulation(sim_type, cmd_pars, session_path, run_mode = False, verbose =
                     if 'Program will be terminated.' in line_console:
                         # Last 'regular' line of the console output. The next line is from the error message.
                         startMessage = True
-
+               
                 # Show the message as a success on the screen
                 message = 'Simulation completed but raised errorcode: ' + str(result.returncode) + '\n\n' + 'The simulation finished but at least 1 point did not converge. \n\n' + message
             elif result.returncode == 3:
@@ -229,13 +232,25 @@ def run_simulation(sim_type, cmd_pars, session_path, run_mode = False, verbose =
             result = run(cmd_line, cwd=session_path,stdout=PIPE, check=False, shell=True)
         else:
             result = run([cmd_line], cwd=session_path, stdout=PIPE, check=False, shell=True)
-
+        
+        if verbose:
+            startMessage = False
+            message = ''
+            result_decode = result.stdout.decode('utf-8')
+            for line_console in result_decode.split('\n'):
+                if startMessage is True:
+                    # The actual error message. Since the error message can be multi-line, append each line.
+                    message = message + line_console + '\n'
+                if 'Program will be terminated.' in line_console:
+                    # Last 'regular' line of the console output. The next line is from the error message.
+                    startMessage = True
+            print(message)
         message = ''
- 
+    result = result.returncode
     return result, message
 
 
-def run_simulation_filesafe(sim_type, cmd_pars, session_path, run_mode = False, verbose = False):
+def run_simulation_filesafe(sim_type, cmd_pars, session_path, run_mode = False, verbose = False, **kwargs):
     """Run the SIMsalabim simulation executable with the chosen device parameters. 
         Return the complete result object of the process accompanied by a message with information, 
         in case of both success and failure.
@@ -254,14 +269,17 @@ def run_simulation_filesafe(sim_type, cmd_pars, session_path, run_mode = False, 
         Prevents using streamlit components outside of The Shell.
     verbose : boolean
         True if the console output of the simulation should be printed to the console
+    **kwargs : dict
+        Additional keyword arguments, not used in this function but can be used to pass additional parameters to the function.
 
     Returns
     -------
-    CompletedProcess
-        Output object of with returncode and console output of the simulation
+    result : int
+        Return code of the simulation process, 0 for success, other values for errors.
     string
         Return message to display on the UI, for both success and failed
     """
+    max_wait_time = kwargs.get('max_wait_time', 100)  # seconds
     # Create a temp folder to store the simulation results
     ID = str(uuid.uuid4())
     tmp_folder = os.path.join(session_path, 'tmp_'+ID)
@@ -289,7 +307,7 @@ def run_simulation_filesafe(sim_type, cmd_pars, session_path, run_mode = False, 
         shutil.copy(os.path.join(session_path, sim_type), tmp_folder)
 
     device_parameters = os.path.basename(device_parameters)
-    
+    #
     while True:
         # copy the file to the temp folder
         try:
@@ -298,6 +316,27 @@ def run_simulation_filesafe(sim_type, cmd_pars, session_path, run_mode = False, 
         except:
             pass 
         time.sleep(0.002)
+
+    if os.name != 'nt':
+        try:
+            dev_par, layers = load_device_parameters(session_path, device_parameters, run_mode = False)
+        except Exception as e:
+            raise ValueError('Error loading device parameters check that all the input files are in the right directory. \n Error: {}'.format(e))
+    else:
+        warning_timeout = kwargs.get('warning_timeout', 10)
+        exit_timeout = kwargs.get('exit_timeout', 60)
+        t_wait = 0
+        while True: # need this to be thread safe
+            try:
+                dev_par, layers = load_device_parameters(session_path, device_parameters, run_mode = False)
+                break
+            except Exception as e:
+                time.sleep(0.002)
+                t_wait = t_wait + 0.002
+                if t_wait > warning_timeout:
+                    print('Warning: SIMsalabim is not responding, please check that all the input files are in the right directory')
+                if t_wait > exit_timeout:
+                    raise ValueError('Error loading device parameters check that all the input files are in the right directory. \n Error: {}'.format(e))
 
     # check for new layers in the cmd_pars
     newlayers = []
@@ -495,6 +534,7 @@ def run_simulation_filesafe(sim_type, cmd_pars, session_path, run_mode = False, 
             # shutil.move(os.path.join(tmp_folder, tJFile), os.path.join(session_path, tJFile))
             make_thread_safe_file_copy(os.path.join(tmp_folder, tJFile), session_path)
 
+    result = result.returncode
     return result, message
 
 

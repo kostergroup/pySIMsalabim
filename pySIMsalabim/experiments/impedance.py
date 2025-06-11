@@ -548,7 +548,7 @@ def get_tolDens(zimt_device_parameters, session_path, f_min, f_max, V_0, G_frac,
         
         result, message = utils_gen.run_simulation('zimt', tolDens_args, session_path, run_mode)
 
-        if result.returncode == 0 or result.returncode == 95:
+        if result == 0 or result == 95:
             data = read_tj_file(session_path, tj_file_name=tj_name)
             try:
                 J_0 = data['Jext'][1]
@@ -569,7 +569,7 @@ def get_tolDens(zimt_device_parameters, session_path, f_min, f_max, V_0, G_frac,
             # tolDens cannot be smaller than 1E-12
             tolDens = max(tolDens, 1e-12)
         else:
-            return result.returncode, message, None
+            return result, message, None
         
         # Remove the tVG and tJ files as they are not needed anymore
         os.remove(os.path.join(session_path,tVG_name))
@@ -624,6 +624,7 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
     string
         Return message to display on the UI, for both success and failed
     """
+    verbose = kwargs.get('verbose', False) # Check if the user wants to see the console output
     UUID = kwargs.get('UUID', '') # Check if the user wants to add a UUID to the tj file name
     cmd_pars = kwargs.get('cmd_pars', None) # Check if the user wants to add additional command line parameters
     # Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations
@@ -691,17 +692,17 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
                 Impedance_SS_args = update_cmd_pars(Impedance_SS_args, cmd_pars)
             
             if threadsafe:
-                result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_SS_args, session_path, run_mode)
+                result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_SS_args, session_path, run_mode, verbose=verbose)
             else:
-                result, message = utils_gen.run_simulation('zimt', Impedance_SS_args, session_path, run_mode)
+                result, message = utils_gen.run_simulation('zimt', Impedance_SS_args, session_path, run_mode, verbose=verbose)
     
-            if result.returncode == 0 or result.returncode == 95:
+            if result == 0 or result == 95:
                 data = read_tj_file(session_path, tj_file_name=tj_name)
                 
                 V_0 = data['Vext'][0]
             else:
                 message = "Computing the value of Voc led to the following error: " + message
-                return result.returncode, message
+                return result, message
     else:
         V_0 = float(V_0)
 
@@ -763,11 +764,11 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
                 Impedance_SS_args = update_cmd_pars(Impedance_SS_args, cmd_pars)
             
             if threadsafe:
-                result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_SS_args, session_path, run_mode)
+                result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_SS_args, session_path, run_mode, verbose=verbose)
             else:
-                result, message = utils_gen.run_simulation('zimt', Impedance_SS_args, session_path, run_mode)
+                result, message = utils_gen.run_simulation('zimt', Impedance_SS_args, session_path, run_mode, verbose=verbose)
     
-            if result.returncode == 0 or result.returncode == 95:
+            if result == 0 or result == 95:
                 data = read_tj_file(session_path, tj_file_name=tj_name)
 
                 Vext = data['Vext'][0]
@@ -777,7 +778,7 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
                 V_0 = Vint # we need to shift the voltage to the internal voltage to account for the series resistance
 
             else:
-                return result.returncode, message
+                return result, message
         else:
             return result, message
 
@@ -822,18 +823,18 @@ def run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_ste
             Impedance_args = update_cmd_pars(Impedance_args, cmd_pars)
 
         if threadsafe:
-            result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_args, session_path, run_mode)
+            result, message = utils_gen.run_simulation_filesafe('zimt', Impedance_args, session_path, run_mode, verbose=verbose)
         else:
-            result, message = utils_gen.run_simulation('zimt', Impedance_args, session_path, run_mode)
+            result, message = utils_gen.run_simulation('zimt', Impedance_args, session_path, run_mode, verbose=verbose)
 
-        if result.returncode == 0 or result.returncode == 95:
+        if result == 0 or result == 95:
             data = read_tj_file(session_path, tj_file_name=tj_name) 
             result, message = get_impedance(data, f_min, f_max, f_steps, del_V, session_path, output_file, zimt_device_parameters, Rseries, Rshunt)
             return result, message
 
         else:
-            return result.returncode, message
-        
+            return result, message
+
     return result, message
 
 ## Running the function as a standalone script
@@ -944,7 +945,7 @@ if __name__ == "__main__":
 
     # Make the impedance plots
     calc_Voc_output_string = 'Computing the value of Voc led to the following error:'
-    if result == 0 or (result.returncode == 95 and calc_Voc_output_string not in message):
+    if result == 0 or (result == 95 and calc_Voc_output_string not in message):
         plot_impedance(session_path, os.path.basename(output_name))
     else:
         print(message)

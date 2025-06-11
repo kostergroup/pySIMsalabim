@@ -447,6 +447,7 @@ def run_IMPS_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V
     string
         Return message to display on the UI, for both success and failed
     """
+    verbose = kwargs.get('verbose', False) # Check if the user wants to see the console output
     UUID = kwargs.get('UUID', '') # Check if the user wants to add a UUID to the tj file name
     cmd_pars = kwargs.get('cmd_pars', None) # Check if the user wants to add additional command line parameters
     # Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations
@@ -506,18 +507,18 @@ def run_IMPS_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V
             IMPS_args = update_cmd_pars(IMPS_args, cmd_pars)
 
         if threadsafe:
-            result, message = utils_gen.run_simulation_filesafe('zimt', IMPS_args, session_path, run_mode)
+            result, message = utils_gen.run_simulation_filesafe('zimt', IMPS_args, session_path, run_mode, verbose=verbose)
         else:
-            result, message = utils_gen.run_simulation('zimt', IMPS_args, session_path, run_mode)
+            result, message = utils_gen.run_simulation('zimt', IMPS_args, session_path, run_mode, verbose=verbose)
 
-        if result.returncode == 0 or result.returncode == 95:
+        if result == 0 or result == 95:
             data = read_tj_file(session_path, tj_file_name=tj_name)
 
             result, message = get_IMPS(data, f_min, f_max, f_steps, session_path, output_file)
             return result, message
 
         else:
-            return result.returncode, message
+            return result, message
 
     return result, message
 

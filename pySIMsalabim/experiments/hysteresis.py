@@ -713,7 +713,7 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
     dict
         Dictionary containing the special output values of the simulation. In this case, the rms error ('rms') and the hysteresis index ('hyst_index')
     """
-
+    verbose = kwargs.get('verbose', False) # Check if the user wants to see the console output
     UUID = kwargs.get('UUID', '') # Check if the user wants to add a UUID to the tj file name
     cmd_pars = kwargs.get('cmd_pars', None) # Check if the user wants to add additional command line parameters
     # Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations
@@ -783,18 +783,18 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
             Hysteresis_JV_args = update_cmd_pars(Hysteresis_JV_args, cmd_pars)
 
         if threadsafe:
-            result, message = utils_gen.run_simulation_filesafe('zimt', Hysteresis_JV_args, session_path, run_mode)
+            result, message = utils_gen.run_simulation_filesafe('zimt', Hysteresis_JV_args, session_path, run_mode, verbose=verbose)
         else:
-            result, message = utils_gen.run_simulation('zimt', Hysteresis_JV_args, session_path, run_mode)
+            result, message = utils_gen.run_simulation('zimt', Hysteresis_JV_args, session_path, run_mode, verbose=verbose)
 
-        if result.returncode == 0 or result.returncode == 95:
+        if result == 0 or result == 95:
             if UseExpData == 1:
                 rms = Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode, direction, tj_name)
             hyst_index = calc_hysteresis_index(session_path, tj_name, tVG_name)
         else:
             message = message
         
-        result = result.returncode
+        result = result
 
         # Put all the output values in a dictionary to be returned. 
         # By putting it in a dictionary we can add any number of values without breaking return arguments

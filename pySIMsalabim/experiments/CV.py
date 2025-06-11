@@ -642,6 +642,7 @@ def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step
     string
         Return message to display on the UI, for both success and failed
     """
+    verbose = kwargs.get('verbose', False) # Check if the user wants to see the console output
     UUID = kwargs.get('UUID', '') # Check if the user wants to add a UUID to the tj file name
     cmd_pars = kwargs.get('cmd_pars', None) # Check if the user wants to add additional command line parameters
     # Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations
@@ -736,18 +737,18 @@ def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step
                 CV_SS_args = update_cmd_pars(CV_SS_args, cmd_pars)
             
             if threadsafe:
-                result, message = utils_gen.run_simulation_filesafe('zimt', CV_SS_args, session_path, run_mode)
+                result, message = utils_gen.run_simulation_filesafe('zimt', CV_SS_args, session_path, run_mode, verbose=verbose)
             else:
-                result, message = utils_gen.run_simulation('zimt', CV_SS_args, session_path, run_mode)
+                result, message = utils_gen.run_simulation('zimt', CV_SS_args, session_path, run_mode, verbose=verbose)
             
-            if result.returncode == 0 or result.returncode == 95:
+            if result == 0 or result == 95:
                 data = read_tj_file(session_path, tj_file_name=tj_name)
 
                 Vext = np.asarray(data['Vext'])
                 Jext = np.asarray(data['Jext'])
                 Vint = Vext - Jext*Rseries
             else:
-                return result.returncode, message
+                return result, message
         else:
             return result, message
 
@@ -796,18 +797,18 @@ def run_CV_simu(zimt_device_parameters, session_path, freq, V_min, V_max, V_step
                 CV_args = update_cmd_pars(CV_args, cmd_pars)
 
         if threadsafe:
-            result, message = utils_gen.run_simulation_filesafe('zimt', CV_args, session_path, run_mode)
+            result, message = utils_gen.run_simulation_filesafe('zimt', CV_args, session_path, run_mode, verbose=verbose)
         else:
-            result, message = utils_gen.run_simulation('zimt', CV_args, session_path, run_mode)
+            result, message = utils_gen.run_simulation('zimt', CV_args, session_path, run_mode, verbose=verbose)
 
-        if result.returncode == 0 or result.returncode == 95:
+        if result == 0 or result == 95:
             data = read_tj_file(session_path, tj_file_name=tj_name)
 
             result, message = get_capacitance(data, freq, V_min, V_max, del_V, V_step, session_path, zimt_device_parameters, output_file)
             return result, message
 
         else:
-            return result.returncode, message
+            return result, message
         
     return result, message
 
