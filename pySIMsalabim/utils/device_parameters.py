@@ -62,7 +62,7 @@ def load_device_parameters(session_path, dev_par_file_name, default_path=os.path
                 par_line = line.split('*')
                 if '=' in par_line[0]:  # Line contains a parameter
                     par_split = par_line[0].split('=')
-                    par = ['par', par_split[0].strip(), par_split[1].strip(),par_line[1].strip()] # The element with index 2 contains the actual file name!
+                    par = ['par', par_split[0].strip(), par_split[1].strip()] # The element with index 2 contains the actual file name!
                     if layersSection: # If the line is in the layer section, it contains the name of a layer file, thus add it to the Layers list
                         layers.append(par) # Add sublist to the layers list 
         fp.close()
