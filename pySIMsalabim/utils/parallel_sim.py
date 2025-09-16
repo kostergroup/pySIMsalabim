@@ -96,14 +96,15 @@ def run_simulation_parallel(sim_type, cmd_pars_list, session_path, max_jobs = ma
 
     if os.name == 'nt':
         # Windows
-        result_list = run_simulation_multithreaded_windows(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
+        result, msg_list, return_code_list = run_simulation_multithreaded_windows(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
+        result_list = return_code_list
     else:
         # Linux
         if shutil.which('parallel') is not None and not force_multithreading:
             result, msg_list, return_code_list  = run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
             result_list = return_code_list
         else:
-            result_list = run_simulation_multithreaded_linux(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
+            result, msg_list, return_code_list = run_simulation_multithreaded_linux(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
 
     return result_list
 
@@ -269,7 +270,25 @@ def run_simulation_multithreaded_windows(sim_type,cmd_pars_list,session_path,max
     # # Clean up
     shutil.rmtree(tmp_folder)
 
-    return result_list
+    return_code_list = [res[0].returncode for res in result_list]
+    message_list = [parallel_error_message(res) for res in return_code_list]
+    if not all(val in [0, 95, 3] for val in return_code_list):
+        # check if only one error code different from 0, 95 or 3
+        if len(set([val for val in return_code_list if val not in [0, 95, 3]])) == 1:
+            # if so, return that error code and the corresponding message
+            idx = return_code_list.index([val for val in return_code_list if val not in [0, 95, 3]][0])
+            result = return_code_list[idx]
+            message = message_list[idx]
+            result_list = [(result, message)]
+        else:
+            result = 666
+    elif all(val in [0, 95] for val in return_code_list):
+        result = 95
+    elif all(val in [0, 3] for val in return_code_list):
+        result = 3
+    else:
+        result = 0
+    return result, message_list, return_code_list
 
 def worker_windows(q,lock,tmp_folder,semaphore,verbose=False):
     """Worker function that runs the simulation in a temporary folder and moves the output files to the original folder. 
@@ -623,8 +642,27 @@ def run_simulation_multithreaded_linux(sim_type,cmd_pars_list,session_path,max_j
     result_list = []
     for t in threads:
         result_list.append(t.join())
-    
-    return result_list
+
+    return_code_list = [res[0].returncode for res in result_list]
+    message_list = [parallel_error_message(res) for res in return_code_list]
+    if not all(val in [0, 95, 3] for val in return_code_list):
+        # check if only one error code different from 0, 95 or 3
+        if len(set([val for val in return_code_list if val not in [0, 95, 3]])) == 1:
+            # if so, return that error code and the corresponding message
+            idx = return_code_list.index([val for val in return_code_list if val not in [0, 95, 3]][0])
+            result = return_code_list[idx]
+            message = message_list[idx]
+            result_list = [(result, message)]
+        else:
+            result = 666
+    elif all(val in [0, 95] for val in return_code_list):
+        result = 95
+    elif all(val in [0, 3] for val in return_code_list):
+        result = 3
+    else:
+        result = 0
+    return result, message_list, return_code_list
+    # return result_list
 
 # Custom thread class to return the result of the thread
 class CustomThread(Thread):
