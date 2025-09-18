@@ -30,7 +30,7 @@ def parallel_error_message(errorcode):
         if errorcode == 90:
             message += 'Device parameter file corrupted.'
         elif errorcode == 91:
-            message += 'Invalid input. Please check your input files for either incorrect layer definition (see SIMsalabim docs), wrong physics, or voltage in tVG_file too large).'
+            message += 'Invalid input (physics, or voltage in tVGFile too large).'
         elif errorcode == 92:
             message += 'Invalid input from command line.'
         elif errorcode == 93:
@@ -153,6 +153,7 @@ def run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs 
         cmd_line = construct_cmd(sim_type, cmd_pars)
         cmd_line_list.append(cmd_line)
     
+   
     # Construct the file and command to run the GNU parallel
     uuid_str = str(uuid.uuid4())
     filename = 'Str4Parallel_'+uuid_str+'.txt'
@@ -175,7 +176,27 @@ def run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs 
         for idx, val in enumerate(log['Exitval']):
             message = ''
             if val != 0 and val != 95 and val != 3:
-                if val >= 90 :
+                if val == 91:
+                    # look for the logfile to get more information about the error
+                    for c in cmd_pars_list[idx]:
+                        if c['par'] == 'logFile':
+                            logFile = c['val']
+                            break
+                    if os.path.isfile(os.path.join(session_path,logFile)):
+                        # find line with 'Program will be terminated.' and store the next lines as the error message
+                        startMessage = False
+                        with open(os.path.join(session_path,logFile),'r') as f:
+                            for line_console in f:
+                                if startMessage is True:
+                                    # The actual error message. Since the error message can be multi-line, append each line.
+                                    message = message + line_console + '\n'
+                                if 'Program will be terminated.' in line_console:
+                                    # Last 'regular' line of the console output. The next line is from the error message.
+                                    startMessage = True
+                    if message == '':
+                        message = 'Simulation raised an error with Errorcode: ' + str(val) + '\n\n' + parallel_error_message(val)
+
+                elif val >= 90:
                     # Show the message as an error on the screen. Do not continue to the simulation results page.
                     msg_list.append('Simulation raised an error with Errorcode: ' + str(val) + '\n\n' + parallel_error_message(val))
                 else:
@@ -271,7 +292,36 @@ def run_simulation_multithreaded_windows(sim_type,cmd_pars_list,session_path,max
     shutil.rmtree(tmp_folder)
 
     return_code_list = [res[0].returncode for res in result_list]
-    message_list = [parallel_error_message(res) for res in return_code_list]
+    message_list = []
+    for res in return_code_list:
+        if res == 91:
+            # look for the logfile to get more information about the error
+            for cmd_pars in cmd_pars_list:
+                for c in cmd_pars:
+                    if c['par'] == 'logFile':
+                        logFile = c['val']
+                        break
+            if os.path.isfile(os.path.join(session_path,logFile)):
+                # find line with 'Program will be terminated.' and store the next lines as the error message
+                startMessage = False
+                message = ''
+                with open(os.path.join(session_path,logFile),'r') as f:
+                    for line_console in f:
+                        if startMessage is True:
+                            # The actual error message. Since the error message can be multi-line, append each line.
+                            message = message + line_console + '\n'
+                        if 'Program will be terminated.' in line_console:
+                            # Last 'regular' line of the console output. The next line is from the error message.
+                            startMessage = True
+                if message == '':
+                    message = 'Simulation raised an error with Errorcode: ' + str(res) + '\n\n' + parallel_error_message(res)
+                message_list.append(message)
+            else:
+                message_list.append('Simulation raised an error with Errorcode: ' + str(res) + '\n\n' + parallel_error_message(res))
+        else:
+            message_list.append(parallel_error_message(res))
+
+    # message_list = [parallel_error_message(res) for res in return_code_list]
     if not all(val in [0, 95, 3] for val in return_code_list):
         # check if only one error code different from 0, 95 or 3
         if len(set([val for val in return_code_list if val not in [0, 95, 3]])) == 1:
@@ -644,7 +694,35 @@ def run_simulation_multithreaded_linux(sim_type,cmd_pars_list,session_path,max_j
         result_list.append(t.join())
 
     return_code_list = [res[0].returncode for res in result_list]
-    message_list = [parallel_error_message(res) for res in return_code_list]
+    # message_list = [parallel_error_message(res) for res in return_code_list]
+    message_list = []
+    for res in return_code_list:
+        if res == 91:
+            # look for the logfile to get more information about the error
+            for cmd_pars in cmd_pars_list:
+                for c in cmd_pars:
+                    if c['par'] == 'logFile':
+                        logFile = c['val']
+                        break
+            if os.path.isfile(os.path.join(session_path,logFile)):
+                # find line with 'Program will be terminated.' and store the next lines as the error message
+                startMessage = False
+                message = ''
+                with open(os.path.join(session_path,logFile),'r') as f:
+                    for line_console in f:
+                        if startMessage is True:
+                            # The actual error message. Since the error message can be multi-line, append each line.
+                            message = message + line_console + '\n'
+                        if 'Program will be terminated.' in line_console:
+                            # Last 'regular' line of the console output. The next line is from the error message.
+                            startMessage = True
+                if message == '':
+                    message = 'Simulation raised an error with Errorcode: ' + str(res) + '\n\n' + parallel_error_message(res)
+                message_list.append(message)
+            else:
+                message_list.append('Simulation raised an error with Errorcode: ' + str(res) + '\n\n' + parallel_error_message(res))
+        else:
+            message_list.append(parallel_error_message(res))
     if not all(val in [0, 95, 3] for val in return_code_list):
         # check if only one error code different from 0, 95 or 3
         if len(set([val for val in return_code_list if val not in [0, 95, 3]])) == 1:

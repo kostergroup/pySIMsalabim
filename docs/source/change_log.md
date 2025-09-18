@@ -6,7 +6,7 @@ v1.03 - 2025-05-11 - VMLC-PV
 ------------------------------------
 - JV_steady_state.py, hysteresis.py, impedance.py, imps.py, EQE.py, CV.py: Added verbose output option for simulation functions made sure that we only return an integer (return code) and a message (string) from the simulation functions. This is to ensure that the return value is always an integer, never an object.
 - general.py: remade the 'error_message' function to provide more informative error messages and implemented an error code 666 when multiple simulations ran in parallel failed with different error messages.
-- parallel_sim.py: made the parallel output consitent between linux and windows.
+- parallel_sim.py: made the parallel output consitent between linux and windows. Improved error message when error code 91 is returned to make it easier to find which input parameters caused the error.
 
 
 v1.02 - 2025-04-28 - VMLC-PV, SH, FE

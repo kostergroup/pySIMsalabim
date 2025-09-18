@@ -176,8 +176,8 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
         if all([res == 0 for res in results]):
             if verbose and not run_mode:
                 print('All JV simulations completed successfully\n')
-                for mess in msg_list:
-                    print(mess)
+                # for mess in msg_list:
+                #     print(mess)
             return 0, 'All JV simulations completed successfully'
         elif all([(res == 0 or res == 95) for res in results]):
             if verbose and not run_mode:

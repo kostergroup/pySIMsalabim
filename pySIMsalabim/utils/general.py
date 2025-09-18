@@ -53,7 +53,7 @@ def error_message(errorcode):
         if errorcode == 90:
             message += 'Device parameter file corrupted.'
         elif errorcode == 91:
-            message += 'Invalid input. Please check your input files for either incorrect layer definition (see SIMsalabim docs), wrong physics, or voltage in tVG_file too large).'
+            message += 'Invalid input (physics, or voltage in tVGFile too large).'
         elif errorcode == 92:
             message += 'Invalid input from command line.'
         elif errorcode == 93:
