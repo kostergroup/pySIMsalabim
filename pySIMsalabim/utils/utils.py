@@ -121,9 +121,11 @@ def update_cmd_pars(main_pars, cmd_pars):
         for main in main_pars:
             if par['par'] == main['par']:
                 main['val'] = str(par['val']) # convert to string
+                found = True
                 break
         if not found:
             main_pars.append(par)          
     
     return main_pars
+
 
