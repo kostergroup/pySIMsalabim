@@ -614,7 +614,7 @@ if __name__ == "__main__":
         if UseExpData == 1:
             print('Rms-value: ', "{:.5f}".format(round(output_vals['rms'], 5)))
 
-        ax = plot_JV(session_path, tJFile)
+        ax = plot_JV_sweep(session_path, tJFile)
         if UseExpData == 1:
             JVExp = read_Exp_JV(session_path, expJV_file)
             ax.scatter(JVExp.Vext, JVExp.Jext, label='Experimental', color='r')
