@@ -75,7 +75,7 @@ def build_tVG_arrays(Vmin,Vmax,scan_speed,direction,steps,G_frac):
     V, G = np.asarray(V), np.asarray(G)
     return t,V,G
 
-def build_tVG_arrays_log(Vmin,Vmax,scan_speed,direction,steps,G_frac,Vminexpo= 1e-2):
+def build_tVG_arrays_log(Vmin,Vmax,Vacc,scan_speed,direction,steps,G_frac):
     """Build the Arrays for time, voltage and Generation rate for a hysteresis experiment with an exponential voltage sweep.
 
     Parameters
@@ -104,70 +104,39 @@ def build_tVG_arrays_log(Vmin,Vmax,scan_speed,direction,steps,G_frac,Vminexpo= 1
     np.array
         Array of generation rates
     """ 
+    if Vacc >= Vmin and Vacc <= Vmax:
+        raise ValueError('Vacc must not be between Vmin and Vmax')
+    
+    d = Vacc-Vmax
+    V_min_to_max = [ Vacc - d * np.exp((1 - i/(steps/2 - 1)) * np.log((Vacc - Vmin)/d)) for i in range(steps//2) ]
+    V_min_to_max = np.array(V_min_to_max)
+    if Vmin == 0:
+        # find idx of the min of Vmin_to_max and set it to 0
+        min_idx = np.argmin(V_min_to_max)
+        V_min_to_max[min_idx] = 0
+    elif Vmax == 0:
+        # find idx of the max of Vmin_to_max and set it to 0
+        max_idx = np.argmax(V_min_to_max)
+        V_min_to_max[max_idx] = 0
 
-    if Vmin*Vmax >= 0:
-        if Vmin == 0:
-            V_min_to_max = np.logspace(np.log10(abs(Vminexpo)),np.log10(abs(Vmax)),int(steps/2))
-            # add 0 to the beginning of the array
-            V_min_to_max = np.insert(V_min_to_max,0,0)
-        elif Vmax == 0:
-            V_min_to_max = np.logspace(np.log10(abs(Vmin)),np.log10(abs(Vminexpo)),int(steps/2))
-            # add 0 to the end of the array
-            V_min_to_max = np.append(V_min_to_max,0)
-        else:
-            if Vmin > 0:
-                V_min_to_max = np.logspace(np.log10(abs(Vmin)),np.log10(abs(Vmax)),int(steps/2))
-            else:
-                V_min_to_max = -np.logspace(np.log10(abs(Vmax)),np.log10(abs(Vmin)),int(steps/2))
+    V_max_to_min = V_min_to_max[::-1]
+    if direction == 1:
+        # forward -> backward
+        V_max_to_min = np.delete(V_max_to_min,[0])# remove double entry
+        V = np.append(V_min_to_max,V_max_to_min)
+    elif direction == -1:
+        # backward -> forward
+        V_min_to_max = np.delete(V_min_to_max,[0])# remove double entry
+        V = np.append(V_max_to_min,V_min_to_max)
+    G = G_frac * np.ones(len(V))
+    # calculate the time array based on the voltage array and the scan speed
+    t = np.zeros(len(V))
+    for i in range(1,len(V)):
+        t[i] = t[i-1] + abs((V[i]-V[i-1])/scan_speed)
 
-        V_max_to_min = V_min_to_max[::-1]
-       
-        
-        # Create t,G arrays for both sweep directions
-        if direction == 1:
-            # forward -> backward
-            V_max_to_min = np.delete(V_max_to_min,[0])# remove double entry
-            V = np.append(V_min_to_max,V_max_to_min)
-            
-        elif direction == -1:
-            # backward -> forward
-            V_min_to_max = np.delete(V_min_to_max,[0])# remove double entry
-            V = np.append(V_max_to_min,V_min_to_max)
-        
-        G = G_frac * np.ones(len(V))
-
-        # calculate the time array based on the voltage array and the scan speed
-        t = np.zeros(len(V))
-        for i in range(1,len(V)):
-            t[i] = t[i-1] + abs((V[i]-V[i-1])/scan_speed)
-
-    else:
-        negative_V = -np.logspace(np.log10(abs(Vmin)),np.log10(abs(Vminexpo)),int(steps/4))
-        positive_V = np.logspace(np.log10(abs(Vminexpo)),np.log10(abs(Vmax)),int(steps/4))
-        # add 0 at the beginning
-        positive_V = np.append(0,positive_V)
-        V = np.append(negative_V,positive_V)
-        # make back to back
-        Vback = V[::-1]
-
-        if direction == 1:
-            # remove the first element
-            Vback = Vback[1:]
-            V = np.append(V,Vback)
-            G = G_frac * np.ones(len(V))
-        elif direction == -1:
-            # remove the last element
-            Vback = Vback[:-1]
-            V = np.append(Vback,V)
-            G = G_frac * np.ones(len(V))
-        
-        # calculate the time array based on the voltage array and the scan speed
-        t = np.zeros(len(V))
-        for i in range(1,len(V)):
-            t[i] = t[i-1] + abs((V[i]-V[i-1])/scan_speed)
     return t,V,G
 
-def create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps, G_frac, tVG_name, **kwargs):
+def create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps, G_frac, tVG_name, Vacc=None,Vdist=1,**kwargs):
     """Create a tVG file for hysteresis experiments. 
 
     Parameters
@@ -186,10 +155,15 @@ def create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps
         Number of time steps
     G_frac : float
         Device Parameter | Fractional Generation rate
+    Vacc : float, optional
+        Point of accumulation of row of V's, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin, only needed if Vdist=2, else ignored, default is None
+    Vdist : integer, optional
+        Voltage distribution type (1: linear, 2: exponential), default is 1
     tVG_name : string
         Device Parameter | Name of the tVG file
     **kwargs : dict
         Additional keyword arguments
+
 
     Returns
     -------
@@ -199,14 +173,19 @@ def create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps
         A message to indicate the result of the process
     """
     # kwargs
-    expo_mode = kwargs.get('expo_mode', False) # whether to use exponential voltage steps
-    Vminexpo = kwargs.get('Vminexpo', 1e-2) # Voltage at which the exponential voltage steps start if Vmin or Vmax is 0
-    # check that Vminexpo is positive
-    if Vminexpo <= 0:
-        msg = 'Vminexpo must be strictly positive'
+    
+    expo_mode = True if Vdist == 2 else False
+    # Vminexpo = kwargs.get('Vminexpo', 1e-2) # Voltage at which the exponential voltage steps start if Vmin or Vmax is 0
+    # # check that Vminexpo is positive
+    # if Vminexpo <= 0:
+    #     msg = 'Vminexpo must be strictly positive'
+    #     retval = 1
+    #     return retval, msg
+    if expo_mode and Vacc is None:
+        msg = 'When expo_mode is True, Vacc must be provided'
         retval = 1
         return retval, msg
-
+    
     # check that direction is either 1 or -1
     if direction != 1 and direction != -1:
         msg = 'Incorrect scan direction, choose either 1 for a forward - backward scan or -1 for a backward - forward scan'
@@ -221,7 +200,7 @@ def create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps
 
     # Create two arrays for both time sweeps
     if expo_mode:
-        t,V,G = build_tVG_arrays_log(Vmin,Vmax,scan_speed,direction,steps,G_frac,Vminexpo)
+        t,V,G = build_tVG_arrays_log(Vmin,Vmax,Vacc,scan_speed,direction,steps,G_frac)
     else:
         t,V,G = build_tVG_arrays(Vmin,Vmax,scan_speed,direction,steps,G_frac)
         
@@ -716,6 +695,9 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
     verbose = kwargs.get('verbose', False) # Check if the user wants to see the console output
     UUID = kwargs.get('UUID', '') # Check if the user wants to add a UUID to the tj file name
     cmd_pars = kwargs.get('cmd_pars', None) # Check if the user wants to add additional command line parameters
+    Vdist = kwargs.get('Vdist', 1) # Voltage distribution type (1: linear, 2: exponential)
+    Vacc = kwargs.get('Vacc', None) # Point of accumulation of row of V's, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin, only needed if Vdist=2, else ignored
+
     # Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations
     if os.name == 'nt':  
         threadsafe = kwargs.get('threadsafe', True) # Check if the user wants to force the use of threads instead of processes
@@ -730,8 +712,8 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
             turnoff_autoTidy = False
 
     # tVG file generation additional parameters
-    expo_mode = kwargs.get('expo_mode', False) # whether to use exponential time steps
-    Vminexpo = kwargs.get('Vminexpo', 1e-2) # minimum voltage after 0 to start the log steps
+    # expo_mode = kwargs.get('expo_mode', False) # whether to use exponential time steps
+    # Vminexpo = kwargs.get('Vminexpo', 1e-2) # minimum voltage after 0 to start the log steps
 
     # Update the JV file name with the UUID
     if UUID != '':
@@ -765,7 +747,7 @@ def Hysteresis_JV(zimt_device_parameters, session_path, UseExpData, scan_speed, 
             result = 1
             message = 'Experimental JV files not found'
     else:
-        result, message = create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps, G_frac, tVG_name, expo_mode=expo_mode, Vminexpo=Vminexpo)
+        result, message = create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps, G_frac, tVG_name, Vacc=Vacc, Vdist=Vdist)
 
     if result == 0:
         # tVG file created

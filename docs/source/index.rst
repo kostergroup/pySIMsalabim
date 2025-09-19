@@ -56,6 +56,7 @@ CAPE - Centre for Advanced Photovoltaics and Thin-film Energy Devices, Universit
 
    /examples/light_dep_JVs.ipynb
    /examples/hysteresis.ipynb
+   /examples/JV_sweep.ipynb
    /examples/EQE.ipynb
    /examples/impedance.ipynb
    /examples/CV.ipynb

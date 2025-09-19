@@ -1,4 +1,4 @@
-""" Test the hysteresis module of pySIMsalabim """
+""" Test the JV_sweep module of pySIMsalabim """
 
 ######### Package Imports #########################################################################
 import os, sys, uuid 
@@ -11,12 +11,12 @@ except ImportError:
     # Add the parent directory to the system path
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
     import pySIMsalabim as sim
-from pySIMsalabim.experiments.hysteresis import *
+from pySIMsalabim.experiments.JV_sweep import *
 
 ######### Test Functions #########################################################################
 
-def test_run_hysteresis_simu():
-    """ Test the run_hysteresis_simu function """
+def test_run_JV_sweep_simu():
+    """ Test the run_JV_sweep_simu function """
     # Set the path to the simulation setup file
     if os.path.exists('SIMsalabim'):
         cwd = os.path.abspath('.')
@@ -24,7 +24,7 @@ def test_run_hysteresis_simu():
         cwd = os.path.abspath('../..')
     zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
-    # Set the hysteresis parameters
+    # Set the JV_sweep parameters
     scan_speed = 0.1
     cmd_pars = [{'par': 'l2.L', 'val': '500e-9'}]
     direction = -1
@@ -33,18 +33,18 @@ def test_run_hysteresis_simu():
     Vmin = 0.0
     Vmax = 1.3
     steps = 200
-    # Run the hysteresis simulation
-    ret, mess, rms = Hysteresis_JV(zimt_device_parameters, session_path, 0, scan_speed, direction, G_frac, tVG_name, run_mode=False, Vmin=Vmin, Vmax=Vmax, steps = steps, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin',threadsafe=False,expo_mode = False, Vminexpo = 5e-3, UUID=str(uuid.uuid4()), cmd_pars=cmd_pars)
+    # Run the JV_sweep simulation
+    ret, mess, rms = JV_sweep(zimt_device_parameters, session_path, 0, scan_speed, direction, G_frac, tVG_name, run_mode=False, Vmin=Vmin, Vmax=Vmax, steps = steps, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin',threadsafe=False,expo_mode = False, Vminexpo = 5e-3, UUID=str(uuid.uuid4()), cmd_pars=cmd_pars)
     # Clean up the output
     sim.clean_all_output(session_path)
-    sim.clean_up_output('hysteresis',session_path)
+    sim.clean_up_output('JV_sweep',session_path)
     sim.delete_folders('tmp',session_path)
     # Check the output
     # print(ret)
-    assert ret == 0, 'Hysteresis simulation failed'
+    assert ret == 0, 'JV_sweep simulation failed'
 
-def test_run_hysteresis_logstep_simu():
-    """ Test the test_run_hysteresis_logstep_simu function """
+def test_run_JV_sweep_logstep_simu():
+    """ Test the test_run_JV_sweep_logstep_simu function """
     # Set the path to the simulation setup file
     if os.path.exists('SIMsalabim'):
         cwd = os.path.abspath('.')
@@ -52,7 +52,7 @@ def test_run_hysteresis_logstep_simu():
         cwd = os.path.abspath('../..')
     zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
-    # Set the hysteresis parameters
+    # Set the JV_sweep parameters
     scan_speed = 0.1
     cmd_pars = [{'par': 'l2.L', 'val': '500e-9'}]
     direction = -1
@@ -63,18 +63,18 @@ def test_run_hysteresis_logstep_simu():
     steps = 200
     Vdist = 2
     Vacc = -1e-2
-    # Run the hysteresis simulation
-    ret, mess, rms = Hysteresis_JV(zimt_device_parameters, session_path, 0, scan_speed, direction, G_frac, tVG_name, run_mode=False, Vmin=Vmin, Vmax=Vmax, steps = steps, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin',threadsafe=False,expo_mode = False, Vminexpo = 5e-3, UUID=str(uuid.uuid4()), cmd_pars=cmd_pars, Vdist=Vdist, Vacc=Vacc)
+    # Run the JV_sweep simulation
+    ret, mess, rms = JV_sweep(zimt_device_parameters, session_path, 0, scan_speed, direction, G_frac, tVG_name, run_mode=False, Vmin=Vmin, Vmax=Vmax, steps = steps, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin',threadsafe=False,expo_mode = False, Vminexpo = 5e-3, UUID=str(uuid.uuid4()), cmd_pars=cmd_pars, Vdist=Vdist, Vacc=Vacc)
     # Clean up the output
     sim.clean_all_output(session_path)
-    sim.clean_up_output('hysteresis',session_path)
+    sim.clean_up_output('JV_sweep',session_path)
     sim.delete_folders('tmp',session_path)
     # Check the output
     # print(ret)
-    assert ret == 0, 'Hysteresis with logarithmic voltage steps simulation failed'
+    assert ret == 0, 'JV_sweep with logarithmic voltage steps simulation failed'
 
-def test_hysteresis_parallel():
-    """ Test the hysteresis_parallel function """
+def test_JV_sweep_parallel():
+    """ Test the JV_sweep_parallel function """
     try:
         if os.path.exists('SIMsalabim'):
             cwd = os.path.abspath('.')
@@ -83,7 +83,7 @@ def test_hysteresis_parallel():
         zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
         session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
 
-        def run(scan_speed,ID): # function to run the hysteresis simulation in parallel
+        def run(scan_speed,ID): # function to run the JV_sweep simulation in parallel
             cmd_pars = [{'par': 'l2.L', 'val': '500e-9'}]
             direction = -1
             G_frac = 1
@@ -92,7 +92,7 @@ def test_hysteresis_parallel():
             Vmax = 1.3
             steps = 200
             print('Running')
-            ret, mess, rms = Hysteresis_JV(zimt_device_parameters, session_path, 0, scan_speed, direction, G_frac, tVG_name, run_mode=False, Vmin=Vmin, Vmax=Vmax, steps = steps, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin',threadsafe=True,expo_mode = False, Vminexpo = 5e-3, UUID=ID, cmd_pars=cmd_pars)
+            ret, mess, rms = JV_sweep(zimt_device_parameters, session_path, 0, scan_speed, direction, G_frac, tVG_name, run_mode=False, Vmin=Vmin, Vmax=Vmax, steps = steps, expJV_Vmin_Vmax='', expJV_Vmax_Vmin='',rms_mode='lin',threadsafe=True,expo_mode = False, Vminexpo = 5e-3, UUID=ID, cmd_pars=cmd_pars)
 
         scan_speeds = np.logspace(-3,3,7)
         ID_list = [str(uuid.uuid4()) for i in range(len(scan_speeds))]
@@ -108,15 +108,16 @@ def test_hysteresis_parallel():
         # plt.show()
 
         sim.clean_all_output(session_path)
-        sim.clean_up_output('hysteresis',session_path)
+        sim.clean_up_output('JV_sweep',session_path)
         sim.delete_folders('tmp',session_path)
         assert True
     except Exception as e:
         print(e)
-        assert False, 'Hysteresis parallel simulation failed'
+        assert False, 'JV_sweep parallel simulation failed'
 
 
 if __name__ == '__main__':
-    test_run_hysteresis_simu()
-    test_hysteresis_parallel()
-    print('All hysteresis tests passed')
+    test_run_JV_sweep_simu()
+    test_JV_sweep_parallel()
+    test_run_JV_sweep_logstep_simu()
+    print('All JV_sweep tests passed')
