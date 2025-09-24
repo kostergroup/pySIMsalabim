@@ -2,12 +2,13 @@ Change Log
 ==========
 All notable changes to this project will be documented in this file.
 
-v1.03 - 2025-05-11 - VMLC-PV
+v1.03 - 2025-09-24 - VMLC-PV
 ------------------------------------
 - JV_steady_state.py, hysteresis.py, impedance.py, imps.py, EQE.py, CV.py: Added verbose output option for simulation functions made sure that we only return an integer (return code) and a message (string) from the simulation functions. This is to ensure that the return value is always an integer, never an object.
 - general.py: remade the 'error_message' function to provide more informative error messages and implemented an error code 666 when multiple simulations ran in parallel failed with different error messages.
 - parallel_sim.py: made the parallel output consitent between linux and windows. Improved error message when error code 91 is returned to make it easier to find which input parameters caused the error.
 - JV_sweep.py: added a new experiment to perform single sweep JV simulations using zimt.
+- Added a warning for Windows users in the README.md about the maximum path length of 260 characters in Windows and the issues it can cause when running simulations. Recommended to use Linux or WSL2 instead of Windows. Also created the PathChecksWin.py file to handle long paths in Windows by adding the \\?\ prefix to paths longer than 260 characters, which might help in some cases.
 
 
 v1.02 - 2025-04-28 - VMLC-PV, SH, FE

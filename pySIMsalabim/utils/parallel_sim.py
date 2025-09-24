@@ -8,6 +8,8 @@ from functools import partial
 from threading import Thread
 from pySIMsalabim.utils.general import *
 from pySIMsalabim.utils.device_parameters import *
+if os.name != 'nt':
+    from pySIMsalabim.aux_funcs.PathChecksWin import convert_to_long_path
 
 ######### Function Definitions ####################################################################
 def parallel_error_message(errorcode):
@@ -102,7 +104,7 @@ def run_simulation_parallel(sim_type, cmd_pars_list, session_path, max_jobs = ma
         # Linux
         if shutil.which('parallel') is not None and not force_multithreading:
             result, msg_list, return_code_list  = run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
-            result_list = return_code_list
+            result_list = return_code_list           
         else:
             result, msg_list, return_code_list = run_simulation_multithreaded_linux(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
 
@@ -195,10 +197,12 @@ def run_simulation_GNU_parallel(sim_type, cmd_pars_list, session_path, max_jobs 
                                     startMessage = True
                     if message == '':
                         message = 'Simulation raised an error with Errorcode: ' + str(val) + '\n\n' + parallel_error_message(val)
-
+                elif val == 217:
+                    print(cmd_line_list[idx])
                 elif val >= 90:
                     # Show the message as an error on the screen. Do not continue to the simulation results page.
                     msg_list.append('Simulation raised an error with Errorcode: ' + str(val) + '\n\n' + parallel_error_message(val))
+                
                 else:
                     msg_list.append(parallel_error_message(val))
             else:
@@ -331,6 +335,7 @@ def run_simulation_multithreaded_windows(sim_type,cmd_pars_list,session_path,max
             message = message_list[idx]
             result_list = [(result, message)]
         else:
+            print(f"Multiple different errors occurred during the parallel simulations: {set([val for val in return_code_list if val not in [0, 95, 3]])}. Returning error code 666.")
             result = 666
     elif all(val in [0, 95] for val in return_code_list):
         result = 95
@@ -390,7 +395,8 @@ def worker_windows(q,lock,tmp_folder,semaphore,verbose=False):
         # copy the executable to the temporary folder
 
         if os.name == 'nt':
-            shutil.copy(os.path.join(session_path, sim_type + '.exe'), tmp_folder)
+            sim_exe_path = convert_to_long_path(os.path.join(session_path, sim_type + '.exe'))
+            shutil.copy(sim_exe_path, tmp_folder)
         else:
             shutil.copy(os.path.join(session_path, sim_type), tmp_folder)
 
@@ -435,8 +441,13 @@ def worker_windows(q,lock,tmp_folder,semaphore,verbose=False):
 
         # move all layers to the temporary folder
         for layer in layers:
-            shutil.copy(os.path.join(session_path, layer[2]), tmp_folder)
-        
+            if os.name == 'nt':
+                layer_path = convert_to_long_path(os.path.join(session_path, layer[2]))
+                shutil.copy(layer_path, tmp_folder)
+            else:
+                shutil.copy(os.path.join(session_path, layer[2]), tmp_folder)
+
+
         res = store_file_names(dev_par, sim_type, device_parameters, layers, run_mode = False)
         layer_files = res[0]
         optical_files = res[1]
@@ -474,9 +485,13 @@ def worker_windows(q,lock,tmp_folder,semaphore,verbose=False):
         # Copy the files to the temporary folder
         for file in layer_files + optical_files + traps_int_files + traps_bulk_files + [ExpJV_file] + [tVGFile]:
             if file is not None and os.path.isfile(file):
-                shutil.copy(file, tmp_folder)
-            
-            # update temp folder files with basename 
+                if os.name == 'nt':
+                    file_path = convert_to_long_path(file)
+                    shutil.copy(file_path, tmp_folder)
+                else:
+                    shutil.copy(file, tmp_folder)
+
+            # update temp folder files with basename
             if file in layer_files:
                 make_basename_input_files(os.path.join(tmp_folder, os.path.basename(file)))       
 
@@ -566,22 +581,37 @@ def worker_windows(q,lock,tmp_folder,semaphore,verbose=False):
         lock.acquire()
         if sim_type.lower() == 'simss':
             if os.path.isfile(os.path.join(tmp_folder, varFile)):
-                shutil.move(os.path.join(tmp_folder, varFile), os.path.join(session_path, varFile))
+                varFile_path = convert_to_long_path(os.path.join(tmp_folder, varFile))
+                newFile_path = convert_to_long_path(os.path.join(session_path, varFile))
+                shutil.move(varFile_path, newFile_path)
             if os.path.isfile(os.path.join(tmp_folder, logFile)):
-                shutil.move(os.path.join(tmp_folder, logFile), os.path.join(session_path, logFile))
+                logFile_path = convert_to_long_path(os.path.join(tmp_folder, logFile))
+                newLog_path = convert_to_long_path(os.path.join(session_path, logFile))
+                shutil.move(logFile_path, newLog_path)
             if os.path.isfile(os.path.join(tmp_folder, JVFile)):
-                shutil.move(os.path.join(tmp_folder, JVFile), session_path)
+                JVFile_path = convert_to_long_path(os.path.join(tmp_folder, JVFile))
+                shutil.move(JVFile_path, session_path)
             if os.path.isfile(os.path.join(tmp_folder, scParsFile)):
-                shutil.move(os.path.join(tmp_folder, scParsFile), os.path.join(session_path, scParsFile))
+                scParsFile_path = convert_to_long_path(os.path.join(tmp_folder, scParsFile))
+                newScPars_path = convert_to_long_path(os.path.join(session_path, scParsFile))
+                shutil.move(scParsFile_path, newScPars_path)
         elif sim_type.lower() == 'zimt':
             if os.path.isfile(os.path.join(tmp_folder, varFile)):
-                shutil.move(os.path.join(tmp_folder, varFile), os.path.join(session_path, varFile))
+                varFile_path = convert_to_long_path(os.path.join(tmp_folder, varFile))
+                newFile_path = convert_to_long_path(os.path.join(session_path, varFile))
+                shutil.move(varFile_path, newFile_path)
             if os.path.isfile(os.path.join(tmp_folder, logFile)):
-                shutil.move(os.path.join(tmp_folder, logFile), os.path.join(session_path, logFile))
+                logFile_path = convert_to_long_path(os.path.join(tmp_folder, logFile))
+                newLog_path = convert_to_long_path(os.path.join(session_path, logFile))
+                shutil.move(logFile_path, newLog_path)
             if os.path.isfile(os.path.join(tmp_folder, tVGFile)):
-             shutil.move(os.path.join(tmp_folder, tVGFile), os.path.join(session_path, tVGFile))
+                tVGFile_path = convert_to_long_path(os.path.join(tmp_folder, tVGFile))
+                newTVG_path = convert_to_long_path(os.path.join(session_path, tVGFile))
+                shutil.move(tVGFile_path, newTVG_path)
             if os.path.isfile(os.path.join(tmp_folder, tJFile)):
-                shutil.move(os.path.join(tmp_folder, tJFile), os.path.join(session_path, tJFile))
+                tJFile_path = convert_to_long_path(os.path.join(tmp_folder, tJFile))
+                newTJ_path = convert_to_long_path(os.path.join(session_path, tJFile))
+                shutil.move(tJFile_path, newTJ_path)
         lock.release()
 
         # Release semaphore
@@ -732,6 +762,7 @@ def run_simulation_multithreaded_linux(sim_type,cmd_pars_list,session_path,max_j
             message = message_list[idx]
             result_list = [(result, message)]
         else:
+            print(f"Multiple different errors occurred during the parallel simulations: {set([val for val in return_code_list if val not in [0, 95, 3]])}. Returning error code 666.")
             result = 666
     elif all(val in [0, 95] for val in return_code_list):
         result = 95

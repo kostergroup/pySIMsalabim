@@ -116,6 +116,14 @@ install_GNU_parallel_Linux()
 
 If you are on Windows, pySIMsalabim will use the default threading or multiprocessing from Python.
 
+## Warning for Windows users
+If you are using Windows, please be aware that Windows typically has a maximum path length of 260 characters. This can cause issues when running simulations with long file paths. To avoid this, you can try to shorten the paths used in your simulations or enable long path support in Windows.  
+
+We also recommend that you do not run the simulations on synced folders (e.g. OneDrive, Google Drive, Dropbox, etc.) as this can cause issues with file access.
+All these issues are not related to pySIMsalabim or SIMsalabim, but to the Windows operating system itself.
+ 
+If this annoys you, we recommend using Linux or WSL2 (Windows Subsystem for Linux) instead of Windows.  
+
 ## Testing
 The physics and implementation of the drift-diffusion simulator are tested in the main SIMsalabim repository. The tests in pySIMsalabim are mainly focused on the interface between SIMsalabim and Python. The tests can be run using the following command:
 

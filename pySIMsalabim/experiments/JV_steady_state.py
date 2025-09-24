@@ -107,6 +107,8 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
 
         if varFile != 'none':
             SS_JV_args.append({'par':'varFile','val':varFile})
+        else:
+            SS_JV_args.append({'par':'outputRatio','val':'0'})
 
         # Update the cmd_pars with the SS_JV_args
         if cmd_pars is not None:
@@ -137,9 +139,11 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
                                     {'par':'JVFile','val':JV_file_name_base + f'_Gfrac_{G_frac}' + dum_str + JV_file_name_ext},
                                     {'par':'logFile','val':os.path.join(session_path,'log'+f'_Gfrac_{G_frac}'+dum_str+'.txt')},
                                     {'par':'scParsFile','val':os.path.join(session_path,'scPars'+f'_Gfrac_{G_frac}'+dum_str+'.txt')},
-                                    {'par':'varFile','val':os.path.join(session_path,var_file_base + f'_Gfrac_{G_frac}' + dum_str +var_file_ext)} if varFile != 'none' else {'par':'varFile','val':'none'}
+                                    {'par':'varFile','val':os.path.join(session_path,var_file_base + f'_Gfrac_{G_frac}' + dum_str +var_file_ext)} if varFile != 'none' else {'par':'varFile','val':'none'},
                                     ]
-            
+            if varFile == 'none':
+                dum_args.append({'par':'outputRatio','val':'0'})
+
             if turnoff_autoTidy:
                 dum_args.append({'par':'autoTidy','val':'0'})
                 
@@ -194,10 +198,17 @@ def run_SS_JV(simss_device_parameters, session_path, JV_file_name = 'JV.dat', va
             # get all results that are not 0
             failed_results = [res for i, res in enumerate(results) if res != 0 and res != 95]
             # If there is only one failed result, return it with the error message
+            # get only unique values in failed_results
+            failed_results = list(set(failed_results))
             if len(failed_results) == 1:
                 return failed_results[0], utils_gen.error_message(failed_results[0])
             else:
+                print(failed_results)
+                # if len(failed_results) > 1:
+                print(f"Multiple different errors occurred during the parallel simulations: {set([val for val in failed_results if val not in [0, 95, 3]])}. Returning error code 666.")
                 return 666, utils_gen.error_message(666)
+                # else:
+
             
 
 ## Running the function as a standalone script
