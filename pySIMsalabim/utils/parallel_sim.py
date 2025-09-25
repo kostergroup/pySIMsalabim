@@ -8,7 +8,7 @@ from functools import partial
 from threading import Thread
 from pySIMsalabim.utils.general import *
 from pySIMsalabim.utils.device_parameters import *
-if os.name != 'nt':
+if os.name == 'nt':
     from pySIMsalabim.aux_funcs.PathChecksWin import convert_to_long_path
 
 ######### Function Definitions ####################################################################
