@@ -107,6 +107,7 @@ def run_simulation_parallel(sim_type, cmd_pars_list, session_path, max_jobs = ma
             result_list = return_code_list           
         else:
             result, msg_list, return_code_list = run_simulation_multithreaded_linux(sim_type, cmd_pars_list, session_path, max_jobs, verbose)
+            result_list = return_code_list
 
     return result_list
 
@@ -722,8 +723,8 @@ def run_simulation_multithreaded_linux(sim_type,cmd_pars_list,session_path,max_j
     result_list = []
     for t in threads:
         result_list.append(t.join())
-
-    return_code_list = [res[0].returncode for res in result_list]
+    print(result_list)
+    return_code_list = [res[0] for res in result_list]
     # message_list = [parallel_error_message(res) for res in return_code_list]
     message_list = []
     for res in return_code_list:
