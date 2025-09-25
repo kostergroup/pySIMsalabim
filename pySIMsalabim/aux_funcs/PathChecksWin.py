@@ -11,7 +11,7 @@ from pathlib import Path
 ######### Function Definitions ##############################################################
 
 def convert_to_long_path(tempPath):
-    """ Convert a path to a Windows long path by adding the \\?\ prefix
+    """ Convert a path to a Windows long path by adding the \\\\?\\ prefix
 
     Parameters
     ----------
