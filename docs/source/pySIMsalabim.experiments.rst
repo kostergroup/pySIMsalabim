@@ -28,6 +28,14 @@ pySIMsalabim.experiments.JV\_steady\_state module
    :undoc-members:
    :show-inheritance:
 
+pySIMsalabim.experiments.JV\_sweep module
+-----------------------------------------
+
+.. automodule:: pySIMsalabim.experiments.JV_sweep
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pySIMsalabim.experiments.hysteresis module
 ------------------------------------------
 

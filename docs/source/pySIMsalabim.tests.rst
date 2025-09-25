@@ -36,6 +36,14 @@ pySIMsalabim.tests.test\_JV module
    :undoc-members:
    :show-inheritance:
 
+pySIMsalabim.tests.test\_JV\_sweep module
+-----------------------------------------
+
+.. automodule:: pySIMsalabim.tests.test_JV_sweep
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pySIMsalabim.tests.test\_hyst module
 ------------------------------------
 

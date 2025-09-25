@@ -4,6 +4,14 @@ pySIMsalabim.aux\_funcs package
 Submodules
 ----------
 
+pySIMsalabim.aux\_funcs.PathChecksWin module
+--------------------------------------------
+
+.. automodule:: pySIMsalabim.aux_funcs.PathChecksWin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pySIMsalabim.aux\_funcs.SCLC\_funcs module
 ------------------------------------------
 
