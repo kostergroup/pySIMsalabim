@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.install.compile_simsalabim &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.install.compile_simsalabim</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.install.compile_simsalabim</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Compile program with fpc&quot;&quot;&quot;</span>
+<span class="c1"># Description:</span>
+<span class="c1"># ------------</span>
+<span class="c1"># Compile program using fpc</span>
+
+<span class="c1">######### Package Imports ###################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="nn">subprocess</span>
+
+<span class="c1">######### Function Definitions ##############################################################</span>
+
+<div class="viewcode-block" id="fpc_prog">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.compile_simsalabim.fpc_prog">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fpc_prog</span><span class="p">(</span><span class="n">prog_name</span><span class="p">,</span><span class="n">path2prog</span><span class="p">,</span><span class="n">show_term_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">force_fpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compile program using fpc</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prog_name : str</span>
+<span class="sd">        Program name (e.g. &#39;SimSS&#39;, &#39;zimt&#39;, &#39;SIMsalabim)</span>
+<span class="sd">    path2prog : str</span>
+<span class="sd">        String of the absolute path to the program</span>
+<span class="sd">    show_term_output : bool, optional</span>
+<span class="sd">        show terminal output from the compilation, by default True</span>
+<span class="sd">    force_fpc : bool, optional  </span>
+<span class="sd">        force recompile with fpc even if compiled program already exists, by default True</span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        print output of the compilation, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+
+    <span class="n">is_windows</span> <span class="o">=</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">)</span>          <span class="c1"># Check if we are on Windows</span>
+    <span class="n">path2prog</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path2prog</span><span class="p">)</span>                  <span class="c1"># Convert to string</span>
+    <span class="c1"># Check if the program is already compiled</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path2prog</span><span class="p">,</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39;.exe&#39;</span><span class="p">))</span> <span class="ow">and</span> <span class="n">is_windows</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path2prog</span><span class="p">,</span><span class="n">prog_name</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_windows</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">force_fpc</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">show_term_output</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">output_direct</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">output_direct</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;fpc&#39;</span><span class="p">,</span> <span class="n">prog_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;.pas&#39;</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">output_direct</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">path2prog</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="n">is_windows</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error compiling &#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; in &#39;</span><span class="o">+</span><span class="n">path2prog</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ChildProcessError</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; already existed but was recompiled&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>  
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; already compiled&#39;</span><span class="p">)</span>
+    
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># Compile the program</span>
+        <span class="k">if</span> <span class="n">show_term_output</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">output_direct</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output_direct</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;fpc&#39;</span><span class="p">,</span> <span class="n">prog_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;.pas&#39;</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">output_direct</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">path2prog</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="n">is_windows</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; was not compiled so we did it!&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error compiling &#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; in &#39;</span><span class="o">+</span><span class="n">path2prog</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ChildProcessError</span>    </div>
+
+
+    
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;I am not doing anything, please import me in your script&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+<span class="c1">#     System = platform.system()                  # Operating system</span>
+<span class="c1">#     is_windows = (System == &#39;Windows&#39;)          # Check if we are on Windows</span>
+<span class="c1">#     if is_windows:</span>
+<span class="c1">#         fpc_prog(&#39;SimSS&#39;, &#39;c:/Users/lecor/Desktop/GitHub/SIMsalabim/SimSS&#39;)</span>
+<span class="c1">#         fpc_prog(&#39;zimt&#39;, &#39;c:/Users/lecor/Desktop/GitHub/SIMsalabim/ZimT&#39;)</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         fpc_prog(&#39;SimSS&#39;, &#39;/mnt/c/Users/lecor/Desktop/GitHub/SIMsalabim/SimSS&#39;)</span>
+<span class="c1">#         fpc_prog(&#39;zimt&#39;, &#39;/mnt/c/Users/lecor/Desktop/GitHub/SIMsalabim/ZimT&#39;)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

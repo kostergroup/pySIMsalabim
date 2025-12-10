@@ -1,0 +1,731 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.aux_funcs.SCLC_funcs &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.aux_funcs.SCLC_funcs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.aux_funcs.SCLC_funcs</h1><div class="highlight"><pre>
+<span></span><span class="c1">###################################################</span>
+<span class="c1">############### Useful function ###################</span>
+<span class="c1">###################################################</span>
+<span class="c1"># by Vincent M. Le Corre</span>
+<span class="c1"># Package import</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="nn">shutil</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">glob</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span><span class="p">,</span><span class="n">optimize</span><span class="p">,</span><span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lmfit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+<span class="c1"># Don&#39;t show warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="c1">## Physics constants</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;elementary charge&#39;</span><span class="p">)</span>
+<span class="n">eps_0</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;electric constant&#39;</span><span class="p">)</span>
+<span class="n">kb</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Boltzmann constant in eV/K&#39;</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Boltzmann constant&#39;</span><span class="p">)</span>
+<span class="c1">#############################################################</span>
+<span class="c1">################ SCLC analysis functions ####################</span>
+<span class="c1">#############################################################</span>
+
+<div class="viewcode-block" id="MottGurney">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.MottGurney">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">MottGurney</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">eps_r</span><span class="p">,</span><span class="n">Vbi</span><span class="p">,</span><span class="n">L</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mott-Gurney equation typically used to fit single carrier devices JVs to get the mobility.</span>
+
+<span class="sd">    J = (9/8)*eps_0*eps_r*mu*((V-Vbi)**2)/(L**3)</span>
+
+<span class="sd">    Refs:</span>
+<span class="sd">    Mott N F and Gurney R W 1940 Electronic Processes in Ionic Crystals (Oxford: Oxford University Press)</span>
+<span class="sd">    Nice paper to read on MG ==&gt; J. Phys.: Condens. Matter 30 (2018) 105901</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages (V)</span>
+<span class="sd">    mu : float</span>
+<span class="sd">        Mobility (m^2/(Vs))</span>
+<span class="sd">    eps_r : float</span>
+<span class="sd">        Relative dielectric constant</span>
+<span class="sd">    Vbi : float</span>
+<span class="sd">        Built-in voltage (V)</span>
+<span class="sd">    L : float</span>
+<span class="sd">        Thickness (m)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        Array containing the current-density (A m^-2)</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">return</span> <span class="p">(</span><span class="mi">9</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">eps_0</span><span class="o">*</span><span class="n">eps_r</span><span class="o">*</span><span class="n">mu</span><span class="o">*</span><span class="p">((</span><span class="n">V</span><span class="o">-</span><span class="n">Vbi</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">L</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fit_MottGurney">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.fit_MottGurney">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_MottGurney</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">eps_r</span><span class="p">,</span><span class="n">Vbi</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">var2fit</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit the Mott-Gurney equation to the data</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages (V)</span>
+<span class="sd">    J : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-density (A m^-2)</span>
+<span class="sd">    mu : float</span>
+<span class="sd">        Mobility (m^2/(Vs))</span>
+<span class="sd">    eps_r : float</span>
+<span class="sd">        Relative dielectric constant</span>
+<span class="sd">    Vbi : float</span>
+<span class="sd">        Built-in voltage (V)</span>
+<span class="sd">    L : float</span>
+<span class="sd">        Thickness (m)</span>
+<span class="sd">    var2fit : list, optional</span>
+<span class="sd">        Chose variable to fit (can be multiple), by default [&#39;mu&#39;]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        list of the fitted values in the same order than var2fit</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">fixed_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">,</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span><span class="s1">&#39;eps_r&#39;</span><span class="p">,</span><span class="s1">&#39;Vbi&#39;</span><span class="p">,</span><span class="s1">&#39;L&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">var2fit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fixed_var</span><span class="p">:</span>
+            <span class="n">fixed_var</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    
+    <span class="n">Mod_MottGurney</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">MottGurney</span><span class="p">,</span> <span class="n">independent_vars</span><span class="o">=</span><span class="n">fixed_var</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">Mod_MottGurney</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="n">V</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span><span class="n">eps_r</span><span class="o">=</span><span class="n">eps_r</span><span class="p">,</span><span class="n">Vbi</span><span class="o">=</span><span class="n">Vbi</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="n">L</span><span class="p">)</span>
+   
+    <span class="n">best_fit</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">var2fit</span><span class="p">:</span>
+        <span class="n">best_fit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">best_fit</span></div>
+
+
+<div class="viewcode-block" id="deriv">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.deriv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the derivative of input data dy/dx</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : 1-D sequence of floats</span>
+<span class="sd">        x-axis data</span>
+<span class="sd">    y : 1-D sequence of floats</span>
+<span class="sd">        y-axis data</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        dy/dx</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">dum</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> 
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dy</span><span class="p">,[</span><span class="n">dum</span><span class="p">])</span>
+    <span class="c1"># dum = (y[1] - y[0])/(x[1] - x[0]) </span>
+    <span class="c1"># dy = np.append([dum],dy)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_slope">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.log_slope">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_slope</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the slope of the logarithmic data</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : 1-D sequence of floats</span>
+<span class="sd">        x-axis data</span>
+<span class="sd">    y : 1-D sequence of floats</span>
+<span class="sd">        y-axis data</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        slope of the logarithmic data</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+    <span class="c1"># Convert data into np.arrays</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>   
+    <span class="c1"># remove V = 0V before getting log</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">idx_0</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx_0</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx_0</span><span class="p">)</span>
+    <span class="n">log_xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">log_yf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="c1"># Take derivative of data</span>
+    <span class="n">slopef</span> <span class="o">=</span> <span class="n">deriv</span><span class="p">(</span><span class="n">log_xf</span><span class="p">,</span><span class="n">log_yf</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">slopef</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="calc_Vsat">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vsat">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_Vsat</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">Nc</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span><span class="n">eps_r</span><span class="p">,</span><span class="n">T</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculate Vsat for SCLC measurement </span>
+<span class="sd">    as defined in equation (15) in https://doi.org/10.1021/acsenergylett.0c02599</span>
+
+<span class="sd">    Vsat = (8/9) * ((q*Nc*L**2)/(eps_0*eps_r))*exp(-q*phi/k*T)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L : float</span>
+<span class="sd">        Thickness (m)</span>
+<span class="sd">    Nc : float</span>
+<span class="sd">        Effective density of states (m^-3)</span>
+<span class="sd">    phi : float</span>
+<span class="sd">        Injection barrier (V)</span>
+<span class="sd">    eps_r : float</span>
+<span class="sd">        Relative dielectric constant</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Temperature (K)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        returns Vsat as defined in </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">Vsat</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">q</span><span class="o">*</span><span class="n">Nc</span><span class="o">*</span><span class="n">L</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">eps_0</span><span class="o">*</span><span class="n">eps_r</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">q</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Vsat</span></div>
+
+
+<div class="viewcode-block" id="calc_Vtfl">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vtfl">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_Vtfl</span><span class="p">(</span><span class="n">traps</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">eps_r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate VTFL for SCLC measurement </span>
+<span class="sd">    as defined in equation (2) in ACS Energy Lett. 2021, 6, 3, 1087–1094</span>
+<span class="sd">    https://doi.org/10.1021/acsenergylett.0c02599</span>
+
+<span class="sd">    Vnet = q * n_traps * L**2 /( 2 * eps_0 * eps_r) </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    traps : float</span>
+<span class="sd">        Trap density (m^-3)</span>
+<span class="sd">    L : float</span>
+<span class="sd">        Thickness (m)</span>
+<span class="sd">    eps_r : float</span>
+<span class="sd">        Relative dielectric constant</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        returns vnet as defined in </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">vtfl</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="p">(</span><span class="n">traps</span><span class="p">)</span> <span class="o">*</span> <span class="n">L</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span><span class="p">(</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eps_0</span> <span class="o">*</span> <span class="n">eps_r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vtfl</span></div>
+
+
+<div class="viewcode-block" id="calc_trap_charge">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.calc_trap_charge">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_trap_charge</span><span class="p">(</span><span class="n">Vnet</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">eps_r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the trap charges for SCLC measurement</span>
+<span class="sd">    as defined in equation (2) in ACS Energy Lett. 2021, 6, 3, 1087–1094</span>
+<span class="sd">    https://doi.org/10.1021/acsenergylett.0c02599</span>
+
+<span class="sd">    Vnet = q * n_trap * L**2 /( 2 * eps_0 * eps_r) </span>
+
+<span class="sd">    Note that if there are not ions or dopant n_net = traps</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vtfl : float</span>
+<span class="sd">        Vtfl see ref</span>
+<span class="sd">    L : float</span>
+<span class="sd">        Thickness (m)</span>
+<span class="sd">    eps_r : float</span>
+<span class="sd">        Relative dielectric constant</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        trapped charges in the bulk</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">n_trap</span> <span class="o">=</span> <span class="n">Vtfl</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eps_0</span> <span class="o">*</span> <span class="n">eps_r</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="n">q</span> <span class="o">*</span> <span class="n">L</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n_trap</span> <span class="c1"># m^-3</span></div>
+
+
+<div class="viewcode-block" id="calc_Vnet_with_ions">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vnet_with_ions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_Vnet_with_ions</span><span class="p">(</span><span class="n">ions</span><span class="p">,</span><span class="n">traps</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">eps_r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate Vnet for SCLC measurement in the presence of Ions</span>
+<span class="sd">    as defined in equation (4) in ACS Energy Lett. 2021, 6, 3, 1087–1094</span>
+<span class="sd">    https://doi.org/10.1021/acsenergylett.0c02599</span>
+
+<span class="sd">    Vnet = q * n_net * L**2 /( 2 * eps_0 * eps_r) = q * (traps-ions) * L**2 /( 2 * eps_0 * eps_r)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ions : float</span>
+<span class="sd">        Ion density (m^-3)</span>
+<span class="sd">    traps : float</span>
+<span class="sd">        Trap density (m^-3)</span>
+<span class="sd">    L : float</span>
+<span class="sd">        Thickness (m)</span>
+<span class="sd">    eps_r : float</span>
+<span class="sd">        Relative dielectric constant</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        returns vnet as defined in </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">vnet</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="p">(</span><span class="n">traps</span><span class="o">-</span><span class="n">ions</span><span class="p">)</span> <span class="o">*</span> <span class="n">L</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span><span class="p">(</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eps_0</span> <span class="o">*</span> <span class="n">eps_r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vnet</span></div>
+
+
+<div class="viewcode-block" id="calc_net_charge">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.calc_net_charge">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_net_charge</span><span class="p">(</span><span class="n">Vnet</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">eps_r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the net charge for SCLC measurement</span>
+<span class="sd">    as defined in equation (4) in ACS Energy Lett. 2021, 6, 3, 1087–1094</span>
+<span class="sd">    https://doi.org/10.1021/acsenergylett.0c02599</span>
+
+<span class="sd">    Vnet = q * n_net * L**2 /( 2 * eps_0 * eps_r) </span>
+
+<span class="sd">    Note that if there are not ions or dopant n_net = traps</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vnet : float</span>
+<span class="sd">        Vnet see ref</span>
+<span class="sd">    L : float</span>
+<span class="sd">        Thickness (m)</span>
+<span class="sd">    eps_r : float</span>
+<span class="sd">        Relative dielectric constant</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        net-charge in the bulk</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">net_charge</span><span class="o">=</span> <span class="n">Vnet</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eps_0</span> <span class="o">*</span> <span class="n">eps_r</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="n">q</span> <span class="o">*</span> <span class="n">L</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">net_charge</span> <span class="c1"># m^-3</span></div>
+
+
+<div class="viewcode-block" id="calc_nt_min">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.calc_nt_min">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_nt_min</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">eps_r</span><span class="p">,</span><span class="n">T</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the minimum appearant trap density for SCLC measurement</span>
+<span class="sd">    as defined in equation (3) in ACS Energy Lett. 2021, 6, 3, 1087–1094</span>
+<span class="sd">    https://doi.org/10.1021/acsenergylett.0c02599</span>
+
+<span class="sd">    Ntmin = 4*np.Pi()**2*((k*T)/(q**2))*((eps_0*eps_r)/(L**2))</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L : float</span>
+<span class="sd">        Thickness (m)</span>
+<span class="sd">    eps_r : float</span>
+<span class="sd">        Relative dielectric constant</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Temperature (K)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        minimum appearant trap density</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">Ntmin</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">((</span><span class="n">k</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="p">((</span><span class="n">eps_0</span><span class="o">*</span><span class="n">eps_r</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">L</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Ntmin</span> <span class="c1"># m^-3</span></div>
+
+
+
+<div class="viewcode-block" id="SCLC_get_data_plot">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.SCLC_get_data_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">SCLC_get_data_plot</span><span class="p">(</span><span class="n">volt</span><span class="p">,</span><span class="n">curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the data for the SCLC plot</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    volt : 1-D sequence of floats</span>
+<span class="sd">        Voltage data</span>
+<span class="sd">    curr : 1-D sequence of floats</span>
+<span class="sd">        Current data</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    V_slopef : 1-D sequence of floats</span>
+<span class="sd">        Voltage data after filtering</span>
+<span class="sd">    J_slopef : 1-D sequence of floats</span>
+<span class="sd">        Current data after filtering</span>
+<span class="sd">    slopesf : 1-D sequence of floats</span>
+<span class="sd">        logarithmic slopes of the JV after filtering</span>
+<span class="sd">    get_tangentf : bool</span>
+<span class="sd">        True if tangents are calculated i.e. if max(slopef) &gt; 2, False if not</span>
+<span class="sd">    idx_maxf : int</span>
+<span class="sd">        index of the max slope of the JV after filtering</span>
+<span class="sd">    max_slopesf : float</span>
+<span class="sd">        max slope of the JV after filtering</span>
+<span class="sd">    tang_val_V1f : 1-D sequence of floats</span>
+<span class="sd">        tangent values of the JV after filtering for the first tangent point. Typically crossing between the ohmic and Trap filled limited regime.</span>
+<span class="sd">    tang_val_V2f : 1-D sequence of floats</span>
+<span class="sd">        tangent values of the JV after filtering for the second tangent point (here the inflexion point)</span>
+<span class="sd">    tang_val_V3f : 1-D sequence of floats</span>
+<span class="sd">        tangent values of the JV after filtering for the third tangent point. Typically crossing between the Trap filled limited regime and the Mott-Gurney regime.</span>
+<span class="sd">    V1f : float</span>
+<span class="sd">        Voltage value of the first crossing point</span>
+<span class="sd">    J1f : float</span>
+<span class="sd">        current value of the first crossing point</span>
+<span class="sd">    V2f : float</span>
+<span class="sd">        Voltage value of the second crossing point</span>
+<span class="sd">    J2f : float</span>
+<span class="sd">        current value of the second crossing point</span>
+<span class="sd">    Vinf : float</span>
+<span class="sd">        Voltage value of the inflexion point</span>
+<span class="sd">    Jinf : float</span>
+<span class="sd">        current value of the inflexion point</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">volt</span><span class="p">)</span>
+    <span class="n">curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span>
+
+    <span class="c1"># remove volt = 0V before getting log</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">volt</span><span class="p">:</span>
+        <span class="n">idx_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">volt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">volt</span><span class="p">,</span><span class="n">idx_0</span><span class="p">)</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">curr</span><span class="p">,</span><span class="n">idx_0</span><span class="p">)</span>
+    
+    <span class="c1"># if we get a 0 or negative value in volt or curr raise an error</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">volt</span> <span class="ow">or</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">curr</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;We got a 0 value in the voltage or current data, please check your input data&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">volt</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">curr</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;We got a negative value in the voltage or current data, please check your input data&#39;</span><span class="p">)</span>
+
+    <span class="c1"># remove first offset_noise points in case it is noisy</span>
+    <span class="c1"># offset_noise = 0</span>
+    <span class="c1"># volt = volt[offset_noise:]</span>
+    <span class="c1"># curr = curr[offset_noise:]</span>
+
+    <span class="n">slopesf</span> <span class="o">=</span> <span class="n">log_slope</span><span class="p">(</span><span class="n">volt</span><span class="p">,</span><span class="n">curr</span><span class="p">)</span>
+    <span class="n">V_slopef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">volt</span><span class="p">)</span>
+    <span class="n">J_slopef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span>
+
+    <span class="c1"># Get max slope if max slopes &gt; 2.2</span>
+    <span class="n">idx_maxf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">slopesf</span><span class="p">)</span> 
+    <span class="n">max_slopesf</span> <span class="o">=</span> <span class="n">slopesf</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">max_slopesf</span><span class="o">&gt;</span><span class="mf">2.0</span><span class="p">:</span>
+        <span class="n">get_tangentf</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">get_tangentf</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+    <span class="c1"># Calculate tangent and crossing point</span>
+    <span class="n">tang_val_V1f</span><span class="p">,</span><span class="n">tang_val_V2f</span><span class="p">,</span><span class="n">tang_val_V3f</span><span class="p">,</span><span class="n">V1f</span><span class="p">,</span><span class="n">J1f</span><span class="p">,</span><span class="n">V2f</span><span class="p">,</span><span class="n">J2f</span><span class="p">,</span><span class="n">Vinf</span><span class="p">,</span><span class="n">Jinf</span> <span class="o">=</span> <span class="p">[],[],[],[],[],[],[],[],[]</span>
+    <span class="k">if</span> <span class="n">get_tangentf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tang_val_V1f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">J_slopef</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">slopesf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+            <span class="n">tang_val_V2f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">J_slopef</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">])</span><span class="o">+</span><span class="n">max_slopesf</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">])))</span>
+            <span class="n">tang_val_V3f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">J_slopef</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">slopesf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+            <span class="n">V1f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">slopesf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">max_slopesf</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">J_slopef</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">slopesf</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="n">J_slopef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">]</span><span class="o">**</span><span class="n">max_slopesf</span><span class="p">)))))</span>
+            <span class="n">J1f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">J_slopef</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">slopesf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V1f</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+            <span class="n">V2f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">slopesf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">max_slopesf</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">J_slopef</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="n">slopesf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="n">J_slopef</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">]</span><span class="o">**</span><span class="n">max_slopesf</span><span class="p">)))))</span>
+            <span class="n">J2f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">J_slopef</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">slopesf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V2f</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+            <span class="n">Vinf</span> <span class="o">=</span> <span class="n">V_slopef</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">]</span>
+            <span class="n">Jinf</span> <span class="o">=</span> <span class="n">J_slopef</span><span class="p">[</span><span class="n">idx_maxf</span><span class="p">]</span>
+
+    <span class="c1"># print(calc_net_charge(V1,thick))</span>
+    <span class="c1"># print(calc_net_charge(V2,thick))</span>
+   
+    <span class="k">return</span> <span class="n">V_slopef</span><span class="p">,</span><span class="n">J_slopef</span><span class="p">,</span><span class="n">slopesf</span><span class="p">,</span><span class="n">get_tangentf</span><span class="p">,</span><span class="n">idx_maxf</span><span class="p">,</span><span class="n">max_slopesf</span><span class="p">,</span><span class="n">tang_val_V1f</span><span class="p">,</span><span class="n">tang_val_V2f</span><span class="p">,</span><span class="n">tang_val_V3f</span><span class="p">,</span><span class="n">V1f</span><span class="p">,</span><span class="n">J1f</span><span class="p">,</span><span class="n">V2f</span><span class="p">,</span><span class="n">J2f</span><span class="p">,</span><span class="n">Vinf</span><span class="p">,</span><span class="n">Jinf</span></div>
+
+
+<div class="viewcode-block" id="Make_SCLC_plot">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.SCLC_funcs.Make_SCLC_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Make_SCLC_plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">data_JV</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">],</span><span class="n">show_tangent</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="n">xlimits</span><span class="o">=</span><span class="p">[],</span><span class="n">ylimits</span><span class="o">=</span><span class="p">[],</span><span class="n">plot_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">line_type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">mark</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">plot_jvexp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">data_JVexp</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span><span class="n">save_yes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">pic_save_name</span><span class="o">=</span><span class="s1">&#39;JV.jpg&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Make typical plot for SCLC measurement analysis for SIMsalabim  </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    num_fig : int</span>
+<span class="sd">        number of the fig to plot JV</span>
+
+<span class="sd">    data_JV : DataFrame</span>
+<span class="sd">        Panda DataFrame containing JV_file</span>
+
+<span class="sd">    x : str, optional</span>
+<span class="sd">        xaxis data  (default = &#39;Vext&#39;), by default &#39;Vext&#39;</span>
+
+<span class="sd">    y : list of str, optional</span>
+<span class="sd">        yaxis data can be multiple like [&#39;Jext&#39;,&#39;Jbimo&#39;]  (default = [&#39;Jext&#39;]), by default [&#39;Jext&#39;]</span>
+<span class="sd">    </span>
+<span class="sd">    show_tangent : list of int, optional</span>
+<span class="sd">        show tangent line at V1,Vinf,V2  (default = [1,2,3]), by default [1,2,3]</span>
+
+<span class="sd">    xlimits : list, optional</span>
+<span class="sd">        x axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    ylimits : list, optional</span>
+<span class="sd">        y axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    plot_type : int, optional</span>
+<span class="sd">        type of plot 1 = logx, 2 = logy, 3 = loglog else linlin (default = linlin), by default 0</span>
+
+<span class="sd">    labels : str, optional</span>
+<span class="sd">        label of the JV, by default &#39;&#39;</span>
+
+<span class="sd">    colors : str, optional</span>
+<span class="sd">        color for the JV line, by default &#39;b&#39;</span>
+
+<span class="sd">    line_type : list, optional</span>
+<span class="sd">        type of line for simulated data plot</span>
+<span class="sd">        size line_type need to be = size(y), by default [&#39;-&#39;]</span>
+
+<span class="sd">    mark : str, optional</span>
+<span class="sd">        type of Marker for the JV, by default &#39;&#39;</span>
+
+<span class="sd">    legend : bool, optional</span>
+<span class="sd">        Display legend or not, by default True</span>
+
+<span class="sd">    plot_jvexp : bool, optional</span>
+<span class="sd">        plot an experimental JV or not, by default False</span>
+
+<span class="sd">    data_JVexp : [type], optional</span>
+<span class="sd">        Panda DataFrame containing experimental JV_file with &#39;V&#39; the voltage and &#39;J&#39; the current, by default pd.DataFrame()</span>
+
+<span class="sd">    save_yes : bool, optional</span>
+<span class="sd">        If True, save JV as an image with the  file name defined by &quot;pic_save_name&quot;, by default False</span>
+
+<span class="sd">    pic_save_name : str, optional</span>
+<span class="sd">        name of the file where the figure is saved, by default &#39;JV.jpg&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Vslopef : list</span>
+<span class="sd">        list of of the Voltage values after filtering</span>
+<span class="sd">    Jslopef : list</span>
+<span class="sd">        list of of the current values after filtering</span>
+<span class="sd">    slopesf : list</span>
+<span class="sd">        list of logarithmic slopes of the JV after filtering</span>
+<span class="sd">    get_tangentf : bool</span>
+<span class="sd">        True if tangents are calculated i.e. if max(slopef) &gt; 2, False if not</span>
+<span class="sd">    idx_maxf : int</span>
+<span class="sd">        index of the max slope of the JV after filtering</span>
+<span class="sd">    max_slopesf : float</span>
+<span class="sd">        max slope of the JV after filtering</span>
+<span class="sd">    tang_val_V1f : list</span>
+<span class="sd">        list of the tangent values of the JV after filtering for the first tangent point. Typically crossing between the ohmic and Trap filled limited regime.</span>
+<span class="sd">    tang_val_V2f : list</span>
+<span class="sd">        list of the tangent values of the JV after filtering for the second tangent point (here the inflexion point)</span>
+<span class="sd">    tang_val_V3f : list</span>
+<span class="sd">        list of the tangent values of the JV after filtering for the third tangent point. Typically crossing between the Trap filled limited regime and the Mott-Gurney regime.</span>
+<span class="sd">    V1f : float</span>
+<span class="sd">        Voltage value of the first crossing point</span>
+<span class="sd">    J1f : float</span>
+<span class="sd">        current value of the first crossing point</span>
+<span class="sd">    V2f : float</span>
+<span class="sd">        Voltage value of the second crossing point</span>
+<span class="sd">    J2f : float</span>
+<span class="sd">        current value of the second crossing point</span>
+<span class="sd">    Vinf : float</span>
+<span class="sd">        Voltage value of the inflexion point</span>
+<span class="sd">    Jinf : float</span>
+<span class="sd">        current value of the inflexion point</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="c1"># Filter data for V &lt; 0 and J &lt; 0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In Make_SCLC_plot&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Filtering data for V &lt; 0 and J &lt; 0&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you want to plot JV with V &lt; 0, you need to change modify your input first&#39;</span><span class="p">)</span>
+    <span class="n">data_JV</span> <span class="o">=</span> <span class="n">data_JV</span><span class="p">[</span><span class="n">data_JV</span><span class="o">.</span><span class="n">Vext</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">data_JV</span> <span class="o">=</span> <span class="n">data_JV</span><span class="p">[</span><span class="n">data_JV</span><span class="o">.</span><span class="n">Jext</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Get tangent and crossing point data</span>
+    <span class="k">if</span> <span class="n">show_tangent</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">V_slopef</span><span class="p">,</span><span class="n">J_slopef</span><span class="p">,</span><span class="n">slopesf</span><span class="p">,</span><span class="n">get_tangentf</span><span class="p">,</span><span class="n">idx_maxf</span><span class="p">,</span><span class="n">max_slopesf</span><span class="p">,</span><span class="n">tang_val_V1f</span><span class="p">,</span><span class="n">tang_val_V2f</span><span class="p">,</span><span class="n">tang_val_V3f</span><span class="p">,</span><span class="n">V1f</span><span class="p">,</span><span class="n">J1f</span><span class="p">,</span><span class="n">V2f</span><span class="p">,</span><span class="n">J2f</span><span class="p">,</span><span class="n">Vinf</span><span class="p">,</span><span class="n">Jinf</span> <span class="o">=</span> <span class="n">SCLC_get_data_plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">]))</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">get_tangentf</span> <span class="o">=</span> <span class="kc">False</span>                
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">line_type</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid line_type list, we meed len(y) == len(line_type)&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We will use default line type instead&#39;</span><span class="p">)</span>
+        <span class="n">line_type</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="n">line_type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+    <span class="c1"># plt.figure(num_fig)</span>
+    <span class="c1"># ax_JVs_plot = plt.axes()</span>
+    <span class="n">ax_JVs_plot</span> <span class="o">=</span> <span class="n">ax</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">line</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">line_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">],</span><span class="n">data_JV</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="n">mark</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">plot_jvexp</span><span class="p">:</span>
+                <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">data_JVexp</span><span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">],</span><span class="n">data_JVexp</span><span class="p">[</span><span class="s1">&#39;J&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+            
+        
+        <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">],</span><span class="n">data_JV</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="n">mark</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>   
+            <span class="k">if</span> <span class="n">plot_jvexp</span><span class="p">:</span>
+                <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">data_JVexp</span><span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">],</span><span class="n">data_JVexp</span><span class="p">[</span><span class="s1">&#39;J&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+            
+        <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">],</span><span class="n">data_JV</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="n">mark</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">plot_jvexp</span><span class="p">:</span>
+                <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">data_JVexp</span><span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">],</span><span class="n">data_JVexp</span><span class="p">[</span><span class="s1">&#39;J&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">get_tangentf</span> <span class="ow">and</span> <span class="n">show_tangent</span> <span class="o">!=</span> <span class="p">[]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Plotting tangents and crossing points&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">show_tangent</span><span class="p">:</span>
+                    <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">,</span><span class="n">tang_val_V1f</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">if</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">show_tangent</span><span class="p">:</span>
+                    <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">,</span><span class="n">tang_val_V2f</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">if</span> <span class="mi">3</span> <span class="ow">in</span> <span class="n">show_tangent</span><span class="p">:</span>
+                    <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">V_slopef</span><span class="p">,</span><span class="n">tang_val_V3f</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">show_tangent</span> <span class="ow">and</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">show_tangent</span><span class="p">:</span>
+                    <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">V1f</span><span class="p">,</span><span class="n">J1f</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;rs&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+                <span class="k">if</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">show_tangent</span> <span class="ow">and</span> <span class="mi">3</span> <span class="ow">in</span> <span class="n">show_tangent</span><span class="p">:</span>
+                    <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">V2f</span><span class="p">,</span><span class="n">J2f</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;m^&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+                <span class="k">if</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">show_tangent</span><span class="p">:</span>
+                    <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">Vinf</span><span class="p">,</span><span class="n">Jinf</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;bo&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">],</span><span class="n">data_JV</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="n">mark</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">plot_jvexp</span><span class="p">:</span>
+                <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_JVexp</span><span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">],</span><span class="n">data_JVexp</span><span class="p">[</span><span class="s1">&#39;J&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+        
+    
+    <span class="c1"># legend</span>
+    <span class="k">if</span> <span class="n">legend</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="c1">#,fontsize = 30)</span>
+    <span class="k">if</span> <span class="n">xlimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlimits</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylimits</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Applied Voltage [V]&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Current Density [mA cm$^{-2}$]&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">save_yes</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">pic_save_name</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">show_tangent</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="k">return</span> <span class="n">ax</span><span class="p">,</span><span class="n">V_slopef</span><span class="p">,</span><span class="n">J_slopef</span><span class="p">,</span><span class="n">slopesf</span><span class="p">,</span><span class="n">get_tangentf</span><span class="p">,</span><span class="n">idx_maxf</span><span class="p">,</span><span class="n">max_slopesf</span><span class="p">,</span><span class="n">tang_val_V1f</span><span class="p">,</span><span class="n">tang_val_V2f</span><span class="p">,</span><span class="n">tang_val_V3f</span><span class="p">,</span><span class="n">V1f</span><span class="p">,</span><span class="n">J1f</span><span class="p">,</span><span class="n">V2f</span><span class="p">,</span><span class="n">J2f</span><span class="p">,</span><span class="n">Vinf</span><span class="p">,</span><span class="n">Jinf</span></div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

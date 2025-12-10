@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.tests package &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pySIMsalabim.utils package" href="pySIMsalabim.utils.html" />
+    <link rel="prev" title="pySIMsalabim.plots package" href="pySIMsalabim.plots.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pySIMsalabim</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pySIMsalabim.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html">pySIMsalabim.aux_funcs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html">pySIMsalabim.experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html">pySIMsalabim.install package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html">pySIMsalabim.plots package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pySIMsalabim.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html">pySIMsalabim.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.html#module-pySIMsalabim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pySIMsalabim</a></li>
+          <li class="breadcrumb-item"><a href="pySIMsalabim.html">pySIMsalabim package</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.tests package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/pySIMsalabim.tests.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysimsalabim-tests-package">
+<h1>pySIMsalabim.tests package<a class="headerlink" href="#pysimsalabim-tests-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pySIMsalabim.tests.test_CV">
+<span id="pysimsalabim-tests-test-cv-module"></span><h2>pySIMsalabim.tests.test_CV module<a class="headerlink" href="#module-pySIMsalabim.tests.test_CV" title="Link to this heading"></a></h2>
+<p>Test the CV module of pySIMsalabim</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_CV.test_CV_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_CV.</span></span><span class="sig-name descname"><span class="pre">test_CV_parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_CV.html#test_CV_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_CV.test_CV_parallel" title="Link to this definition"></a></dt>
+<dd><p>Test the CV_parallel function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_CV.test_run_CV_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_CV.</span></span><span class="sig-name descname"><span class="pre">test_run_CV_simu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_CV.html#test_run_CV_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_CV.test_run_CV_simu" title="Link to this definition"></a></dt>
+<dd><p>Test the run_CV_simu function</p>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.tests.test_EQE">
+<span id="pysimsalabim-tests-test-eqe-module"></span><h2>pySIMsalabim.tests.test_EQE module<a class="headerlink" href="#module-pySIMsalabim.tests.test_EQE" title="Link to this heading"></a></h2>
+<p>Test EQE module with pySIMsalabim</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_EQE.test_EQE_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_EQE.</span></span><span class="sig-name descname"><span class="pre">test_EQE_parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_EQE.html#test_EQE_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_EQE.test_EQE_parallel" title="Link to this definition"></a></dt>
+<dd><p>Test the EQE_parallel function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_EQE.test_run_EQE">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_EQE.</span></span><span class="sig-name descname"><span class="pre">test_run_EQE</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_EQE.html#test_run_EQE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_EQE.test_run_EQE" title="Link to this definition"></a></dt>
+<dd><p>Test the run_EQE function</p>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.tests.test_IMPS">
+<span id="pysimsalabim-tests-test-imps-module"></span><h2>pySIMsalabim.tests.test_IMPS module<a class="headerlink" href="#module-pySIMsalabim.tests.test_IMPS" title="Link to this heading"></a></h2>
+<p>Test the IMPS module of pySIMsalabim</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_IMPS.test_IMPS_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_IMPS.</span></span><span class="sig-name descname"><span class="pre">test_IMPS_parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_IMPS.html#test_IMPS_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_IMPS.test_IMPS_parallel" title="Link to this definition"></a></dt>
+<dd><p>Test the IMPS_parallel function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_IMPS.test_run_IMPS_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_IMPS.</span></span><span class="sig-name descname"><span class="pre">test_run_IMPS_simu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_IMPS.html#test_run_IMPS_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_IMPS.test_run_IMPS_simu" title="Link to this definition"></a></dt>
+<dd><p>Test the run_IMPS_simu function</p>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.tests.test_JV">
+<span id="pysimsalabim-tests-test-jv-module"></span><h2>pySIMsalabim.tests.test_JV module<a class="headerlink" href="#module-pySIMsalabim.tests.test_JV" title="Link to this heading"></a></h2>
+<p>Test the JV module of pySIMsalabim</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_JV.test_SS_JV_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_JV.</span></span><span class="sig-name descname"><span class="pre">test_SS_JV_parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_JV.html#test_SS_JV_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_JV.test_SS_JV_parallel" title="Link to this definition"></a></dt>
+<dd><p>Test the SS_JV_parallel function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_JV.test_run_SS_JV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_JV.</span></span><span class="sig-name descname"><span class="pre">test_run_SS_JV</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_JV.html#test_run_SS_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_JV.test_run_SS_JV" title="Link to this definition"></a></dt>
+<dd><p>Test the run_SS_JV function</p>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.tests.test_JV_sweep">
+<span id="pysimsalabim-tests-test-jv-sweep-module"></span><h2>pySIMsalabim.tests.test_JV_sweep module<a class="headerlink" href="#module-pySIMsalabim.tests.test_JV_sweep" title="Link to this heading"></a></h2>
+<p>Test the JV_sweep module of pySIMsalabim</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_JV_sweep.test_JV_sweep_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_JV_sweep.</span></span><span class="sig-name descname"><span class="pre">test_JV_sweep_parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_JV_sweep.html#test_JV_sweep_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_JV_sweep.test_JV_sweep_parallel" title="Link to this definition"></a></dt>
+<dd><p>Test the JV_sweep_parallel function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_JV_sweep.test_run_JV_sweep_logstep_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_JV_sweep.</span></span><span class="sig-name descname"><span class="pre">test_run_JV_sweep_logstep_simu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_JV_sweep.html#test_run_JV_sweep_logstep_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_JV_sweep.test_run_JV_sweep_logstep_simu" title="Link to this definition"></a></dt>
+<dd><p>Test the test_run_JV_sweep_logstep_simu function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_JV_sweep.test_run_JV_sweep_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_JV_sweep.</span></span><span class="sig-name descname"><span class="pre">test_run_JV_sweep_simu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_JV_sweep.html#test_run_JV_sweep_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_JV_sweep.test_run_JV_sweep_simu" title="Link to this definition"></a></dt>
+<dd><p>Test the run_JV_sweep_simu function</p>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.tests.test_hyst">
+<span id="pysimsalabim-tests-test-hyst-module"></span><h2>pySIMsalabim.tests.test_hyst module<a class="headerlink" href="#module-pySIMsalabim.tests.test_hyst" title="Link to this heading"></a></h2>
+<p>Test the hysteresis module of pySIMsalabim</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_hyst.test_hysteresis_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_hyst.</span></span><span class="sig-name descname"><span class="pre">test_hysteresis_parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_hyst.html#test_hysteresis_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_hyst.test_hysteresis_parallel" title="Link to this definition"></a></dt>
+<dd><p>Test the hysteresis_parallel function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_hyst.test_run_hysteresis_logstep_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_hyst.</span></span><span class="sig-name descname"><span class="pre">test_run_hysteresis_logstep_simu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_hyst.html#test_run_hysteresis_logstep_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_hyst.test_run_hysteresis_logstep_simu" title="Link to this definition"></a></dt>
+<dd><p>Test the test_run_hysteresis_logstep_simu function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_hyst.test_run_hysteresis_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_hyst.</span></span><span class="sig-name descname"><span class="pre">test_run_hysteresis_simu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_hyst.html#test_run_hysteresis_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_hyst.test_run_hysteresis_simu" title="Link to this definition"></a></dt>
+<dd><p>Test the run_hysteresis_simu function</p>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.tests.test_impedance">
+<span id="pysimsalabim-tests-test-impedance-module"></span><h2>pySIMsalabim.tests.test_impedance module<a class="headerlink" href="#module-pySIMsalabim.tests.test_impedance" title="Link to this heading"></a></h2>
+<p>Test the impedance module of pySIMsalabim</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_impedance.test_impedance_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_impedance.</span></span><span class="sig-name descname"><span class="pre">test_impedance_parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_impedance.html#test_impedance_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_impedance.test_impedance_parallel" title="Link to this definition"></a></dt>
+<dd><p>Test the impedance_parallel function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.tests.test_impedance.test_run_impedance_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.tests.test_impedance.</span></span><span class="sig-name descname"><span class="pre">test_run_impedance_simu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/tests/test_impedance.html#test_run_impedance_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.tests.test_impedance.test_run_impedance_simu" title="Link to this definition"></a></dt>
+<dd><p>Test the run_impedance_simu function</p>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pySIMsalabim.tests" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pySIMsalabim.plots.html" class="btn btn-neutral float-left" title="pySIMsalabim.plots package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pySIMsalabim.utils.html" class="btn btn-neutral float-right" title="pySIMsalabim.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

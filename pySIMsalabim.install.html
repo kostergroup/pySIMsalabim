@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.install package &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pySIMsalabim.plots package" href="pySIMsalabim.plots.html" />
+    <link rel="prev" title="pySIMsalabim.experiments package" href="pySIMsalabim.experiments.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pySIMsalabim</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pySIMsalabim.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html">pySIMsalabim.aux_funcs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html">pySIMsalabim.experiments package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pySIMsalabim.install package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html">pySIMsalabim.plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html">pySIMsalabim.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html">pySIMsalabim.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.html#module-pySIMsalabim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pySIMsalabim</a></li>
+          <li class="breadcrumb-item"><a href="pySIMsalabim.html">pySIMsalabim package</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.install package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/pySIMsalabim.install.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysimsalabim-install-package">
+<h1>pySIMsalabim.install package<a class="headerlink" href="#pysimsalabim-install-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pySIMsalabim.install.compile_simsalabim">
+<span id="pysimsalabim-install-compile-simsalabim-module"></span><h2>pySIMsalabim.install.compile_simsalabim module<a class="headerlink" href="#module-pySIMsalabim.install.compile_simsalabim" title="Link to this heading"></a></h2>
+<p>Compile program with fpc</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.compile_simsalabim.fpc_prog">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.compile_simsalabim.</span></span><span class="sig-name descname"><span class="pre">fpc_prog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prog_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path2prog</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_term_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_fpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/compile_simsalabim.html#fpc_prog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.compile_simsalabim.fpc_prog" title="Link to this definition"></a></dt>
+<dd><p>Compile program using fpc</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prog_name</strong> (<em>str</em>) – Program name (e.g. ‘SimSS’, ‘zimt’, ‘SIMsalabim)</p></li>
+<li><p><strong>path2prog</strong> (<em>str</em>) – String of the absolute path to the program</p></li>
+<li><p><strong>show_term_output</strong> (<em>bool</em><em>, </em><em>optional</em>) – show terminal output from the compilation, by default True</p></li>
+<li><p><strong>force_fpc</strong> (<em>bool</em><em>, </em><em>optional</em>) – force recompile with fpc even if compiled program already exists, by default True</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – print output of the compilation, by default True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.install.get_SIMsalabim">
+<span id="pysimsalabim-install-get-simsalabim-module"></span><h2>pySIMsalabim.install.get_SIMsalabim module<a class="headerlink" href="#module-pySIMsalabim.install.get_SIMsalabim" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_SIMsalabim.clear_current_working_directory">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_SIMsalabim.</span></span><span class="sig-name descname"><span class="pre">clear_current_working_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kostergroup-SIMsalabim-'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_SIMsalabim.html#clear_current_working_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_SIMsalabim.clear_current_working_directory" title="Link to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cwd</strong> (<em>string</em>) – Current working directory</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the folder to download, by default ‘kostergroup-SIMsalabim-’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the folder was removed or not</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_SIMsalabim.cmd_yes_no_question">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_SIMsalabim.</span></span><span class="sig-name descname"><span class="pre">cmd_yes_no_question</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'yes'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_SIMsalabim.html#cmd_yes_no_question"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_SIMsalabim.cmd_yes_no_question" title="Link to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question</strong> (<em>str</em>) – question to ask the user</p></li>
+<li><p><strong>default</strong> (<em>str</em><em>, </em><em>optional</em>) – default answer, by default “yes”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>whether the default answer is valid or not</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the default answer is not valid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_SIMsalabim.fpc_prog">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_SIMsalabim.</span></span><span class="sig-name descname"><span class="pre">fpc_prog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_term_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_fpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_SIMsalabim.html#fpc_prog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_SIMsalabim.fpc_prog" title="Link to this definition"></a></dt>
+<dd><p>Compile program using fpc</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cwd</strong> (<em>string</em>) – String of the absolute path to the program</p></li>
+<li><p><strong>prog_name</strong> (<em>string</em>) – Name of the program to compile</p></li>
+<li><p><strong>show_term_output</strong> (<em>bool</em><em>, </em><em>optional</em>) – show terminal output from the compilation, by default True</p></li>
+<li><p><strong>force_fpc</strong> (<em>bool</em><em>, </em><em>optional</em>) – force recompile with fpc even if compiled program already exists, by default True</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – print output of the compilation, by default True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_SIMsalabim.get_SIMsalabim_assets">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_SIMsalabim.</span></span><span class="sig-name descname"><span class="pre">get_SIMsalabim_assets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kostergroup-SIMsalabim-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_SIMsalabim.html#get_SIMsalabim_assets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_SIMsalabim.get_SIMsalabim_assets" title="Link to this definition"></a></dt>
+<dd><p>Get the latest compiled binaries from the Kostergroup Github</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cwd</strong> (<em>string</em>) – Current working directory</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the folder to download, by default ‘kostergroup-SIMsalabim-’</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Print verbose output, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>int</em></p></li>
+<li><p><strong>0</strong> (<em>Success</em>)</p></li>
+<li><p><strong>1</strong> (<em>Success</em>)</p></li>
+<li><p><strong>2</strong> (<em>Failed</em>)</p></li>
+<li><p><strong>3</strong> (<em>Failed</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_SIMsalabim.get_SIMsalabim_source">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_SIMsalabim.</span></span><span class="sig-name descname"><span class="pre">get_SIMsalabim_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kostergroup-SIMsalabim-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_SIMsalabim.html#get_SIMsalabim_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_SIMsalabim.get_SIMsalabim_source" title="Link to this definition"></a></dt>
+<dd><p>Get the latest release from the Kostergroup Github</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cwd</strong> (<em>string</em>) – Current working directory</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the folder to download, by default ‘kostergroup-SIMsalabim-’</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Print verbose output, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>int</em></p></li>
+<li><p><strong>0</strong> (<em>Success</em>)</p></li>
+<li><p><strong>2</strong> (<em>Failed</em>)</p></li>
+<li><p><strong>3</strong> (<em>Failed</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_SIMsalabim.install_SIMsalabim">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_SIMsalabim.</span></span><span class="sig-name descname"><span class="pre">install_SIMsalabim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kostergroup-SIMsalabim-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_SIMsalabim.html#install_SIMsalabim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_SIMsalabim.install_SIMsalabim" title="Link to this definition"></a></dt>
+<dd><p>Install SIMsalabim in the current working directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cwd</strong> (<em>string</em>) – Current working directory</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the folder to download, by default ‘kostergroup-SIMsalabim-’</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Print verbose output, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>int</em></p></li>
+<li><p><strong>0</strong> (<em>Success</em>)</p></li>
+<li><p><strong>1</strong> (<em>Success</em>)</p></li>
+<li><p><strong>2</strong> (<em>Failed</em>)</p></li>
+<li><p><strong>3</strong> (<em>Failed</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_SIMsalabim.install_fpc_Linux">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_SIMsalabim.</span></span><span class="sig-name descname"><span class="pre">install_fpc_Linux</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_SIMsalabim.html#install_fpc_Linux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_SIMsalabim.install_fpc_Linux" title="Link to this definition"></a></dt>
+<dd><p>Install Free Pascal Compiler on Linux</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_SIMsalabim.use_SIMsalabim_source">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_SIMsalabim.</span></span><span class="sig-name descname"><span class="pre">use_SIMsalabim_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kostergroup-SIMsalabim-'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_SIMsalabim.html#use_SIMsalabim_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_SIMsalabim.use_SIMsalabim_source" title="Link to this definition"></a></dt>
+<dd><p>Use the SIMsalabim source code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cwd</strong> (<em>string</em>) – Current working directory</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the folder to download, by default ‘kostergroup-SIMsalabim-’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>int</em></p></li>
+<li><p><strong>0</strong> (<em>Success</em>)</p></li>
+<li><p><strong>2</strong> (<em>Failed</em>)</p></li>
+<li><p><strong>3</strong> (<em>Failed</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.install.get_gnu_parallel">
+<span id="pysimsalabim-install-get-gnu-parallel-module"></span><h2>pySIMsalabim.install.get_gnu_parallel module<a class="headerlink" href="#module-pySIMsalabim.install.get_gnu_parallel" title="Link to this heading"></a></h2>
+<p>install GNU parallel</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.install.get_gnu_parallel.install_GNU_parallel_Linux">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.install.get_gnu_parallel.</span></span><span class="sig-name descname"><span class="pre">install_GNU_parallel_Linux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/install/get_gnu_parallel.html#install_GNU_parallel_Linux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.install.get_gnu_parallel.install_GNU_parallel_Linux" title="Link to this definition"></a></dt>
+<dd><p>Download GNU parallel if on Linux and install it if possible (requires sudo)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Print the download progress, by default False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If GNU parallel could not be installed</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.install">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pySIMsalabim.install" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pySIMsalabim.experiments.html" class="btn btn-neutral float-left" title="pySIMsalabim.experiments package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pySIMsalabim.plots.html" class="btn btn-neutral float-right" title="pySIMsalabim.plots package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

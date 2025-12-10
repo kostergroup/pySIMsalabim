@@ -1,0 +1,1594 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.experiments package &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pySIMsalabim.install package" href="pySIMsalabim.install.html" />
+    <link rel="prev" title="pySIMsalabim.aux_funcs package" href="pySIMsalabim.aux_funcs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pySIMsalabim</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pySIMsalabim.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html">pySIMsalabim.aux_funcs package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pySIMsalabim.experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html">pySIMsalabim.install package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html">pySIMsalabim.plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html">pySIMsalabim.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html">pySIMsalabim.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.html#module-pySIMsalabim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pySIMsalabim</a></li>
+          <li class="breadcrumb-item"><a href="pySIMsalabim.html">pySIMsalabim package</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.experiments package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/pySIMsalabim.experiments.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysimsalabim-experiments-package">
+<h1>pySIMsalabim.experiments package<a class="headerlink" href="#pysimsalabim-experiments-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pySIMsalabim.experiments.CV">
+<span id="pysimsalabim-experiments-cv-module"></span><h2>pySIMsalabim.experiments.CV module<a class="headerlink" href="#module-pySIMsalabim.experiments.CV" title="Link to this heading"></a></h2>
+<p>Perform capacitance simulations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.MottSchottky_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">MottSchottky_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type=&lt;function</span> <span class="pre">errorbar&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#MottSchottky_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.MottSchottky_plot" title="Link to this definition"></a></dt>
+<dd><p>Plot the 1/capacitance^2 against voltage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em>) – Filename where the capacitance data is stored</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale</strong> (<em>string</em>) – Scale of the y-axis. E.g linear or log</p></li>
+<li><p><strong>plot_type</strong> (<em>matplotlib.pyplot</em>) – Type of plot to display</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.calc_capacitance">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">calc_capacitance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#calc_capacitance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.calc_capacitance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the capacitance over the time range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step that is applied directly after t=0</p></li>
+<li><p><strong>freq</strong> (<em>float</em>) – Frequency at which the capacitance-voltage measurement is performed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of the capacitance</p></li>
+<li><p><em>np.array</em> – Array of the capacitance error</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.calc_capacitance_forOneVoltage">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">calc_capacitance_forOneVoltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VStep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#calc_capacitance_forOneVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.calc_capacitance_forOneVoltage" title="Link to this definition"></a></dt>
+<dd><p>Fourier Decomposition formula which computes the capacitance at frequency freq (Hz) and its complex error
+Based on S.E. Laux, IEEE Trans. Electron Dev. 32 (10), 2028 (1985), eq. 5b
+We integrate from 0 to time[imax] at frequency 1/time[imax]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>np.array</em>) – Array of currents</p></li>
+<li><p><strong>errI</strong> (<em>np.array</em>) – Numerical error in calculated currents (output of ZimT)</p></li>
+<li><p><strong>time</strong> (<em>np.array</em>) – Array with all time positions, from 0 to tmax</p></li>
+<li><p><strong>VStep</strong> (<em>float</em>) – Voltage step</p></li>
+<li><p><strong>imax</strong> (<em>integer</em>) – Index of the last timestep/first frequency for which the integrals are calculated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>float</em> – Capacitance at frequency f: C(f)</p></li>
+<li><p><em>float</em> – Numerical error in calculated capacitance</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.calc_impedance_CV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">calc_impedance_CV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isToPlot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rseries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rshunt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1000.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#calc_impedance_CV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.calc_impedance_CV" title="Link to this definition"></a></dt>
+<dd><p>Calculate the impedance over the frequency range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step</p></li>
+<li><p><strong>isToPlot</strong> (<em>list</em>) – List of array indices that will be used in the plotting</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of frequencies</p></li>
+<li><p><em>np.array</em> – Array of the real component of impedance</p></li>
+<li><p><em>np.array</em> – Array of the imaginary component of impedance</p></li>
+<li><p><em>np.array</em> – Array of complex error</p></li>
+<li><p><em>np.array</em> – Array of capacitance</p></li>
+<li><p><em>np.array</em> – Array of conductance</p></li>
+<li><p><em>np.array</em> – Array of error in capacitance</p></li>
+<li><p><em>np.array</em> – Array of error in conductance</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.calc_impedance_limit_time">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">calc_impedance_limit_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VStep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#calc_impedance_limit_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.calc_impedance_limit_time" title="Link to this definition"></a></dt>
+<dd><p>Fourier Decomposition formula which computes the impedance at frequency freq (Hz) and its complex error
+Based on S.E. Laux, IEEE Trans. Electron Dev. 32 (10), 2028 (1985), eq. 5a, 5b
+We integrate from 0 to time[imax] at frequency 1/time[imax]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>np.array</em>) – Array of currents</p></li>
+<li><p><strong>errI</strong> (<em>np.array</em>) – Numerical error in calculated currents (output of ZimT)</p></li>
+<li><p><strong>time</strong> (<em>np.array</em>) – Array with all time positions, from 0 to tmax</p></li>
+<li><p><strong>VStep</strong> (<em>float</em>) – Voltage step</p></li>
+<li><p><strong>imax</strong> (<em>integer</em>) – Index of the last timestep/first frequency for which the integrals are calculated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>float</em> – Frequency belonging to Z(f)</p></li>
+<li><p><em>complex number</em> – Impedance at frequency f: Z(f)</p></li>
+<li><p><em>complex number</em> – Numerical error in calculated impedance Z(f)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.cap_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">cap_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type=&lt;function</span> <span class="pre">errorbar&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#cap_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.cap_plot" title="Link to this definition"></a></dt>
+<dd><p>Plot the capacitance against voltage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em>) – Filename where the capacitance data is stored</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale</strong> (<em>string</em>) – Scale of the y-axis. E.g linear or log</p></li>
+<li><p><strong>plot_type</strong> (<em>matplotlib.pyplot</em>) – Type of plot to display</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.create_tVG_CV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">create_tVG_CV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeFactor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#create_tVG_CV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.create_tVG_CV" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file for capacitance experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V_0</strong> (<em>float</em>) – Initial voltage</p></li>
+<li><p><strong>V_max</strong> (<em>float</em>) – Maximum voltage</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step that is applied directly after t=0</p></li>
+<li><p><strong>V_step</strong> (<em>float</em>) – Voltage difference, determines at which voltages the capacitance is determined</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>freq</strong> (<em>float</em>) – Frequency at which the capacitance-voltage measurement is performed</p></li>
+<li><p><strong>ini_timeFactor</strong> (<em>float</em>) – Constant defining the size of the initial timestep</p></li>
+<li><p><strong>timeFactor</strong> (<em>float</em>) – Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message to indicate the result of the process</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.create_tVG_CV_Rseries">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">create_tVG_CV_Rseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeFactor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#create_tVG_CV_Rseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.create_tVG_CV_Rseries" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file for capacitance experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V_int</strong> (<em>float</em>) – Adjusted internal voltage to correct for series resistance later</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step that is applied directly after t=0</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>freq</strong> (<em>float</em>) – Frequency at which the capacitance-voltage measurement is performed</p></li>
+<li><p><strong>ini_timeFactor</strong> (<em>float</em>) – Constant defining the size of the initial timestep</p></li>
+<li><p><strong>timeFactor</strong> (<em>float</em>) – Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message to indicate the result of the process</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.create_tVG_SS_CV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">create_tVG_SS_CV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#create_tVG_SS_CV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.create_tVG_SS_CV" title="Link to this definition"></a></dt>
+<dd><p>Creates the tVG file for the steady state simulation with only t 0 and V_0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V_min</strong> (<em>float</em>) – Initial voltage</p></li>
+<li><p><strong>V_max</strong> (<em>float</em>) – Maximum voltage</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step that is applied after t=0</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message to indicate the result of the process</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.get_capacitance">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">get_capacitance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#get_capacitance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.get_capacitance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the capacitance from the simulation result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>DataFrame</em>) – DataFrame with the simulation results (tj.dat) file</p></li>
+<li><p><strong>freq</strong> (<em>float</em>) – Frequency at which the capacitance-voltage measurement is performed</p></li>
+<li><p><strong>V_0</strong> (<em>float</em>) – Initial voltage</p></li>
+<li><p><strong>V_max</strong> (<em>float</em>) – Maximum voltage</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step that is applied directly after t=0</p></li>
+<li><p><strong>V_step</strong> (<em>float</em>) – Voltage difference, determines at which voltages the capacitance is determined</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em>) – Filename where the capacitance data is stored</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns -1 (failed) or 1 (success), including a message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer,string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.plot_capacitance">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">plot_capacitance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CapVol.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#plot_capacitance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.plot_capacitance" title="Link to this definition"></a></dt>
+<dd><p>Make a plot of the capacitance against voltage and the Mott-Schottky plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.run_CV_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">run_CV_simu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tVG.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CapVol.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.02</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#run_CV_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.run_CV_simu" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file and run ZimT with capacitance device parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zimt_device_parameters</strong> (<em>string</em>) – Name of the zimt device parameters file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em><em>, </em><em>optional</em>) – working directory for zimt</p></li>
+<li><p><strong>freq</strong> (<em>float</em>) – Frequency at which the capacitance-voltage measurement is performed</p></li>
+<li><p><strong>V_min</strong> (<em>float</em>) – Initial voltage</p></li>
+<li><p><strong>V_max</strong> (<em>float</em>) – Maximum voltage</p></li>
+<li><p><strong>V_step</strong> (<em>float</em>) – Voltage difference, determines at which voltages the capacitance is determined</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em><em>, </em><em>optional</em>) – Fractional light intensity, by default 1</p></li>
+<li><p><strong>del_V</strong> (<em>float</em><em>, </em><em>optional</em>) – Voltage step that is applied directly after t=0, by default 0.01</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default False</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the tVG file, by default tVG.txt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the file where the capacitance data is stored, by default CapVol.dat</p></li>
+<li><p><strong>tj_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the tj file where the capacitance data is stored, by default tj.dat</p></li>
+<li><p><strong>varFile</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the var file, by default ‘none’</p></li>
+<li><p><strong>ini_timeFactor</strong> (<em>float</em><em>, </em><em>optional</em>) – Constant defining the size of the initial timestep, by default 1e-3</p></li>
+<li><p><strong>timeFactor</strong> (<em>float</em><em>, </em><em>optional</em>) – Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1., by default 1.02</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>CompletedProcess</em> – Output object of with returncode and console output of the simulation</p></li>
+<li><p><em>string</em> – Return message to display on the UI, for both success and failed</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.CV.store_capacitance_data">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.CV.</span></span><span class="sig-name descname"><span class="pre">store_capacitance_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CapVol.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/CV.html#store_capacitance_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.CV.store_capacitance_data" title="Link to this definition"></a></dt>
+<dd><p>Save the capacitance &amp; its error in one file called CapVol.dat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>V</strong> (<em>np.array</em>) – Array of frequencies</p></li>
+<li><p><strong>cap</strong> (<em>np.array</em>) – Array of the capacitance</p></li>
+<li><p><strong>errC</strong> (<em>np.array</em>) – Array of the capacitance error</p></li>
+<li><p><strong>output_file</strong> (<em>string</em>) – Filename where the capacitance data is stored</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.experiments.EQE">
+<span id="pysimsalabim-experiments-eqe-module"></span><h2>pySIMsalabim.experiments.EQE module<a class="headerlink" href="#module-pySIMsalabim.experiments.EQE" title="Link to this heading"></a></h2>
+<p>Perform EQE simulations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.EQE.EQE_create_spectrum_files">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.EQE.</span></span><span class="sig-name descname"><span class="pre">EQE_create_spectrum_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lambda_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectrum_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_spectrum_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/EQE.html#EQE_create_spectrum_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.EQE.EQE_create_spectrum_files" title="Link to this definition"></a></dt>
+<dd><p>Create all the spectrum files with monochromatic peaks at the specified wavelength,
+with a fixed height set by the number of added photons p. The files are stored in a temporary folder: tmp_spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lambda_array</strong> (<em>array</em>) – Array with the wavelengths at which the monochromatic peaks will be created.</p></li>
+<li><p><strong>p</strong> (<em>float</em>) – Number of photons that are added to the irradiance.</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path to the session folder where the files must be created.</p></li>
+<li><p><strong>spectrum_path</strong> (<em>string</em>) – Path to the original spectrum file.</p></li>
+<li><p><strong>tmp_spectrum_path</strong> (<em>string</em>) – Path to the temporary folder where the modified spectrum files will be stored.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.EQE.calc_EQE">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.EQE.</span></span><span class="sig-name descname"><span class="pre">calc_EQE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Jext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Jext_err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J0_single</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J0_err_single</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/EQE.html#calc_EQE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.EQE.calc_EQE" title="Link to this definition"></a></dt>
+<dd><p>Calculate the EQE values for the monochromatic peaks at each wavelength. Based on the change in the short-circuit current and the number of added photons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Jext</strong> (<em>array</em>) – Short-circuit current density for each monochromatic peak.</p></li>
+<li><p><strong>Jext_err</strong> (<em>array</em>) – Error in the short-circuit current density for each monochromatic peak.</p></li>
+<li><p><strong>J0_single</strong> (<em>float</em>) – Short-circuit current density for the normal spectrum.</p></li>
+<li><p><strong>J0_err_single</strong> (<em>float</em>) – Error in the short-circuit current density for the normal spectrum.</p></li>
+<li><p><strong>lambda_array</strong> (<em>array</em>) – Array with the wavelengths at which the monochromatic peaks were created.</p></li>
+<li><p><strong>p</strong> (<em>float</em>) – Number of photons that are added to the irradiance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Arrays with the change in short-circuit current density, error in the change in short-circuit currentdensity,
+monochromatic intensity, EQE values and error in the EQE values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array, array, array, array, array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.EQE.get_CurrDens">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.EQE.</span></span><span class="sig-name descname"><span class="pre">get_CurrDens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">JV_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/EQE.html#get_CurrDens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.EQE.get_CurrDens" title="Link to this definition"></a></dt>
+<dd><p>Get the current density  and its from the JV_file as stored in the first row.
+:param JV_file: Name of the file where the JV data is stored. Must be unique for each simulation, by default ‘JV.dat’
+:type JV_file: str, optional
+:param session_path: Path to the session folder where the simulation will run.
+:type session_path: string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Short-circuit current and its error.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float, float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.EQE.run_EQE">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.EQE.</span></span><span class="sig-name descname"><span class="pre">run_EQE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simss_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'EQE.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">JV_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'JV.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_dirs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/EQE.html#run_EQE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.EQE.run_EQE" title="Link to this definition"></a></dt>
+<dd><p>Run the EQE calculation for a given spectrum and external voltage, and save the results in a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>simss_device_parameters</strong> (<em>string</em>) – Name of the device parameters file.</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path to the session folder where the simulation will run.</p></li>
+<li><p><strong>spectrum</strong> (<em>string</em>) – Path to the original spectrum file.</p></li>
+<li><p><strong>lambda_min</strong> (<em>float</em>) – Minimum wavelength for the spectrum.</p></li>
+<li><p><strong>lambda_max</strong> (<em>float</em>) – Maximum wavelength for the spectrum.</p></li>
+<li><p><strong>lambda_step</strong> (<em>float</em>) – Step size for the wavelength.</p></li>
+<li><p><strong>Vext</strong> (<em>float</em>) – External voltage at which the simulation will run and the EQE must be calculated.</p></li>
+<li><p><strong>output_file</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the file where the results will be stored. The file will be stored in the session folder, by default ‘EQE.dat’</p></li>
+<li><p><strong>JV_file_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the JV file. Must be unique for each simulation, by default ‘JV.dat’</p></li>
+<li><p><strong>varFile</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the var file, by default ‘none’</p></li>
+<li><p><strong>remove_dirs</strong> (<em>bool</em><em>, </em><em>optional</em>) – Remove the temporary directories, by default True</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em><em>, </em><em>optional</em>) – Run the simulations in parallel, by default False</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum number of parallel jobs, by default max(1,os.cpu_count()-1)</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default True</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional arguments to be passed to the function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>0 if the function runs successfully.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.experiments.JV_steady_state">
+<span id="pysimsalabim-experiments-jv-steady-state-module"></span><h2>pySIMsalabim.experiments.JV_steady_state module<a class="headerlink" href="#module-pySIMsalabim.experiments.JV_steady_state" title="Link to this heading"></a></h2>
+<p>Perform steady-state JV simulations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_steady_state.run_SS_JV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_steady_state.</span></span><span class="sig-name descname"><span class="pre">run_SS_JV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simss_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">JV_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'JV.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_fracs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_steady_state.html#run_SS_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_steady_state.run_SS_JV" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>simss_device_parameters</strong> (<em>string</em>) – Name of the device parameters file.</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path to the session folder where the simulation will run.</p></li>
+<li><p><strong>JV_file_name</strong> (<em>string</em>) – Name of the JV file.</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em><em>, </em><em>optional</em>) – Run the simulations in parallel, by default False</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum number of parallel jobs, by default max(1,os.cpu_count()-1)</p></li>
+<li><p><strong>cmd_pars</strong> (<em>_type_</em><em>, </em><em>optional</em>) – _description_, by default None</p></li>
+<li><p><strong>UUID</strong> (<em>str</em><em>, </em><em>optional</em>) – _description_, by default ‘’</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default True</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional arguments to be passed to the function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>int</em> – Exitcode of the simulation.</p></li>
+<li><p><em>str</em> – Message from the simulation.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.experiments.JV_sweep">
+<span id="pysimsalabim-experiments-jv-sweep-module"></span><h2>pySIMsalabim.experiments.JV_sweep module<a class="headerlink" href="#module-pySIMsalabim.experiments.JV_sweep" title="Link to this heading"></a></h2>
+<p>Perform JV sweep simulations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_sweep.Compare_Exp_Sim_JV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_sweep.</span></span><span class="sig-name descname"><span class="pre">Compare_Exp_Sim_JV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rms_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_sweep.html#Compare_Exp_Sim_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_sweep.Compare_Exp_Sim_JV" title="Link to this definition"></a></dt>
+<dd><p>Calculate the root-mean-square (rms) error of the simulated data compared to the experimental data. The used formulas are
+described in the Manual (see the variable rms_mode in the section ‘Description of simulated device parameters’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>expJV_file</strong> (<em>string</em>) – Name of the file of the experimental JV scan</p></li>
+<li><p><strong>rms_mode</strong> (<em>string</em>) – Indicates how the normalised rms error should be calculated: either in linear or logarithmic form</p></li>
+<li><p><strong>tj_file_name</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the tj output file from ZimT</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Calculated rms-error</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_sweep.JV_sweep">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_sweep.</span></span><span class="sig-name descname"><span class="pre">JV_sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">UseExpData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tVG.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rms_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stabilized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_sweep.html#JV_sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_sweep.JV_sweep" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file and perform a JV sweep experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zimt_device_parameters</strong> (<em>string</em>) – name of the zimt device parameters file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>UseExpData</strong> (<em>integer</em>) – If 1, use experimental JV curves. If 0, Use Vmin, Vmax as boundaries</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em><em>, </em><em>optional</em>) – Voltage scan speed [V/s], by default None</p></li>
+<li><p><strong>direction</strong> (<em>integer</em><em>, </em><em>optional</em>) – Perform a forward (1) or backward scan (-1), by default 1</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em><em>, </em><em>optional</em>) – Device Parameter | Fractional generation rate, by default 1</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default False</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Device Parameter | Name of the tVG file, by default ‘tVG.txt’</p></li>
+<li><p><strong>tj_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the tj file, by default ‘tj.dat’</p></li>
+<li><p><strong>varFile</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the var file, by default ‘none’</p></li>
+<li><p><strong>run_mode</strong> – indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default False</p></li>
+<li><p><strong>Vmin</strong> (<em>float</em><em>, </em><em>optional</em>) – Left voltage boundary, by default 0.0</p></li>
+<li><p><strong>Vmax</strong> (<em>float</em><em>, </em><em>optional</em>) – Right voltage boundary, by default 0.0</p></li>
+<li><p><strong>steps</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of time steps, by default 0</p></li>
+<li><p><strong>expJV_file</strong> (<em>str</em><em>, </em><em>optional</em>) – file name of the expJV curve, by default ‘’</p></li>
+<li><p><strong>rms_mode</strong> (<em>str</em><em>, </em><em>optional</em>) – Either ‘lin’ or ‘log’ to specify how the rms error is calculated</p></li>
+<li><p><strong>stabilized</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, perform a stabilized JV sweep i.e. steady-state. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>CompletedProcess</em> – Output object of with returncode and console output of the simulation</p></li>
+<li><p><em>string</em> – Return message to display on the UI, for both success and failed</p></li>
+<li><p><em>dict</em> – Dictionary containing the special output values of the simulation. In this case, the rms error (‘rms’).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_sweep.build_tVG_arrays">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_sweep.</span></span><span class="sig-name descname"><span class="pre">build_tVG_arrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stabilized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_sweep.html#build_tVG_arrays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_sweep.build_tVG_arrays" title="Link to this definition"></a></dt>
+<dd><p>Build the Arrays for time, voltage and Generation rate for a JV experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vmin</strong> (<em>float</em>) – minimum voltage</p></li>
+<li><p><strong>Vmax</strong> (<em>float</em>) – maximum voltage</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em>) – Voltage scan speed [V/s]</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax (1) or Vmax-Vmin scan (-1)</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – Number of time steps</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Device Parameter | Fractional Generation rate</p></li>
+<li><p><strong>stabilized</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, create a tVG file for a stabilized JV sweep i.e. steady-state. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of time points</p></li>
+<li><p><em>np.array</em> – Array of voltages</p></li>
+<li><p><em>np.array</em> – Array of generation rates</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_sweep.build_tVG_arrays_log">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_sweep.</span></span><span class="sig-name descname"><span class="pre">build_tVG_arrays_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vacc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stabilized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_sweep.html#build_tVG_arrays_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_sweep.build_tVG_arrays_log" title="Link to this definition"></a></dt>
+<dd><p>Build the Arrays for time, voltage and Generation rate for a JV experiment with an exponential voltage sweep.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vmin</strong> (<em>float</em>) – minimum voltage</p></li>
+<li><p><strong>Vmax</strong> (<em>float</em>) – maximum voltage</p></li>
+<li><p><strong>Vacc</strong> (<em>float</em>) – Point of accumulation of row of V’s, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em>) – Voltage scan speed [V/s]</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax (1) or Vmax-Vmin scan (-1)</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – Number of time steps</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Device Parameter | Fractional Generation rate</p></li>
+<li><p><strong>stabilized</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, create a tVG file for a stabilized JV sweep i.e. steady-state. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of time points</p></li>
+<li><p><em>np.array</em> – Array of voltages</p></li>
+<li><p><em>np.array</em> – Array of generation rates</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_sweep.create_tVG_sweep">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_sweep.</span></span><span class="sig-name descname"><span class="pre">create_tVG_sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vacc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vdist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stabilized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_sweep.html#create_tVG_sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_sweep.create_tVG_sweep" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file for JV experiments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>Vmin</strong> (<em>float</em>) – Left voltage boundary</p></li>
+<li><p><strong>Vmax</strong> (<em>float</em>) – Right voltage boundary</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em>) – Voltage scan speed [V/s]</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax (1) or Vmax-Vmin scan (-1)</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – Number of time steps</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Device Parameter | Fractional Generation rate</p></li>
+<li><p><strong>Vacc</strong> (<em>float</em><em>, </em><em>optional</em>) – Point of accumulation of row of V’s, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin, only needed if Vdist=2, else ignored, default is None</p></li>
+<li><p><strong>Vdist</strong> (<em>integer</em><em>, </em><em>optional</em>) – Voltage distribution type (1: linear, 2: exponential), default is 1</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Device Parameter | Name of the tVG file</p></li>
+<li><p><strong>stabilized</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, create a tVG file for a stabilized JV sweep i.e. steady-state. Default is False.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>integer</em> – Value to indicate the result of the process</p></li>
+<li><p><em>string</em> – A message to indicate the result of the process</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_sweep.plot_JV_sweep">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_sweep.</span></span><span class="sig-name descname"><span class="pre">plot_JV_sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path2file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_sweep.html#plot_JV_sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_sweep.plot_JV_sweep" title="Link to this definition"></a></dt>
+<dd><p>Plot the JV curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>path2file</strong> (<em>string</em>) – Path to the tj file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Axes object for the plot</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Axes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_sweep.read_Exp_JV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_sweep.</span></span><span class="sig-name descname"><span class="pre">read_Exp_JV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_sweep.html#read_Exp_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_sweep.read_Exp_JV" title="Link to this definition"></a></dt>
+<dd><p>Read experimental JV file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>expJV_file</strong> (<em>string</em>) – Name of the file of the JV scan</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame of current and voltage of experimental JV</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.JV_sweep.read_tj_file">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.JV_sweep.</span></span><span class="sig-name descname"><span class="pre">read_tj_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/JV_sweep.html#read_tj_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.JV_sweep.read_tj_file" title="Link to this definition"></a></dt>
+<dd><p>Read relevant parameters for admittance of the tj file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>data_tj</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the tj output file from ZimT</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pandas dataFrame of the tj_file containing the time, current density, numerical error in the current density and the photogenerated current density</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.experiments.hysteresis">
+<span id="pysimsalabim-experiments-hysteresis-module"></span><h2>pySIMsalabim.experiments.hysteresis module<a class="headerlink" href="#module-pySIMsalabim.experiments.hysteresis" title="Link to this heading"></a></h2>
+<p>Perform JV hysteresis simulations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.Compare_Exp_Sim_JV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">Compare_Exp_Sim_JV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmin_Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmax_Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rms_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#Compare_Exp_Sim_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.Compare_Exp_Sim_JV" title="Link to this definition"></a></dt>
+<dd><p>Calculate the root-mean-square (rms) error of the simulated data compared to the experimental data. The used formulas are
+described in the Manual (see the variable rms_mode in the section ‘Description of simulated device parameters’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>expJV_Vmin_Vmax</strong> (<em>string</em>) – Name of the file of the forward JV scan</p></li>
+<li><p><strong>expJV_Vmax_Vmin</strong> (<em>string</em>) – Name of the file of the backward JV scan</p></li>
+<li><p><strong>rms_mode</strong> (<em>string</em>) – Indicates how the normalised rms error should be calculated: either in linear or logarithmic form</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</p></li>
+<li><p><strong>tj_file_name</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the tj output file from ZimT</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Calculated rms-error</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.Hysteresis_JV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">Hysteresis_JV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">UseExpData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tVG.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmin_Vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmax_Vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rms_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lin'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#Hysteresis_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.Hysteresis_JV" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file and perform a JV hysteresis experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zimt_device_parameters</strong> (<em>string</em>) – name of the zimt device parameters file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>UseExpData</strong> (<em>integer</em>) – If 1, use experimental JV curves. If 0, Use Vmin, Vmax as boundaries</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em>) – Voltage scan speed [V/s]</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a forward-backward (1) or backward-forward scan (-1).</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Device Parameter | Fractional generation rate</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default False</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Device Parameter | Name of the tVG file, by default ‘tVG.txt’</p></li>
+<li><p><strong>tj_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the tj file, by default ‘tj.dat’</p></li>
+<li><p><strong>varFile</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the var file, by default ‘none’</p></li>
+<li><p><strong>run_mode</strong> – indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default False</p></li>
+<li><p><strong>Vmin</strong> (<em>float</em><em>, </em><em>optional</em>) – Left voltage boundary, by default 0.0</p></li>
+<li><p><strong>Vmax</strong> (<em>float</em><em>, </em><em>optional</em>) – Right voltage boundary, by default 0.0</p></li>
+<li><p><strong>steps</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of time steps, by default 0</p></li>
+<li><p><strong>expJV_Vmin_Vmax</strong> (<em>str</em><em>, </em><em>optional</em>) – file name of the first expJV curve, by default ‘’</p></li>
+<li><p><strong>expJV_Vmax_Vmin</strong> (<em>str</em><em>, </em><em>optional</em>) – file name of the second expJV curve, by default ‘’</p></li>
+<li><p><strong>rms_mode</strong> (<em>str</em><em>, </em><em>optional</em>) – Either ‘lin’ or ‘log’ to specify how the rms error is calculated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>CompletedProcess</em> – Output object of with returncode and console output of the simulation</p></li>
+<li><p><em>string</em> – Return message to display on the UI, for both success and failed</p></li>
+<li><p><em>dict</em> – Dictionary containing the special output values of the simulation. In this case, the rms error (‘rms’) and the hysteresis index (‘hyst_index’)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.build_tVG_arrays">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">build_tVG_arrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#build_tVG_arrays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.build_tVG_arrays" title="Link to this definition"></a></dt>
+<dd><p>Build the Arrays for time, voltage and Generation rate for a hysteresis experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vmin</strong> (<em>float</em>) – minimum voltage</p></li>
+<li><p><strong>Vmax</strong> (<em>float</em>) – maximum voltage</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em>) – Voltage scan speed [V/s]</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – Number of time steps</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Device Parameter | Fractional Generation rate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of time points</p></li>
+<li><p><em>np.array</em> – Array of voltages</p></li>
+<li><p><em>np.array</em> – Array of generation rates</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.build_tVG_arrays_log">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">build_tVG_arrays_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vacc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#build_tVG_arrays_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.build_tVG_arrays_log" title="Link to this definition"></a></dt>
+<dd><p>Build the Arrays for time, voltage and Generation rate for a hysteresis experiment with an exponential voltage sweep.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vmin</strong> (<em>float</em>) – minimum voltage</p></li>
+<li><p><strong>Vmax</strong> (<em>float</em>) – maximum voltage</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em>) – Voltage scan speed [V/s]</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – Number of time steps</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Device Parameter | Fractional Generation rate</p></li>
+<li><p><strong>Vminexpo</strong> (<em>float</em>) – Voltage at which the exponential voltage steps start if Vmin or Vmax is 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of time points</p></li>
+<li><p><em>np.array</em> – Array of voltages</p></li>
+<li><p><em>np.array</em> – Array of generation rates</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.calc_hysteresis_index">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">calc_hysteresis_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_file_ame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tVG.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_hyst_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#calc_hysteresis_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.calc_hysteresis_index" title="Link to this definition"></a></dt>
+<dd><p>Calculate the hysteresis index from the simulated JV curve using the difference area between the forward and backward scan</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>tj_file_name</strong> (<em>string</em>) – Name of the tj file</p></li>
+<li><p><strong>tVG_file_ame</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>plot_hyst_index</strong> (<em>bool</em>) – If True, plot the JV curves with the normalisation and difference area</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Hysteresis index</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.concatJVs">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">concatJVs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmin_Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmax_Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#concatJVs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.concatJVs" title="Link to this definition"></a></dt>
+<dd><p>Put the experimental forward and backward JV arrays together</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>expJV_Vmin_Vmax</strong> (<em>string</em>) – Name of the file of the forward JV scan</p></li>
+<li><p><strong>expJV_Vmax_Vmin</strong> (<em>string</em>) – Name of the file of the backward JV scan</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of current and voltage of experimental JV</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.create_tVG_hysteresis">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">create_tVG_hysteresis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vacc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vdist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#create_tVG_hysteresis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.create_tVG_hysteresis" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file for hysteresis experiments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>Vmin</strong> (<em>float</em>) – Left voltage boundary</p></li>
+<li><p><strong>Vmax</strong> (<em>float</em>) – Right voltage boundary</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em>) – Voltage scan speed [V/s]</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – Number of time steps</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Device Parameter | Fractional Generation rate</p></li>
+<li><p><strong>Vacc</strong> (<em>float</em><em>, </em><em>optional</em>) – Point of accumulation of row of V’s, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin, only needed if Vdist=2, else ignored, default is None</p></li>
+<li><p><strong>Vdist</strong> (<em>integer</em><em>, </em><em>optional</em>) – Voltage distribution type (1: linear, 2: exponential), default is 1</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Device Parameter | Name of the tVG file</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>integer</em> – Value to indicate the result of the process</p></li>
+<li><p><em>string</em> – A message to indicate the result of the process</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.plot_hysteresis_JV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">plot_hysteresis_JV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path2file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#plot_hysteresis_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.plot_hysteresis_JV" title="Link to this definition"></a></dt>
+<dd><p>Plot the hysteresis JV curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>path2file</strong> (<em>string</em>) – Path to the tj file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Axes object for the plot</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Axes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.read_Exp_JV">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">read_Exp_JV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmin_Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmax_Vmin</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#read_Exp_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.read_Exp_JV" title="Link to this definition"></a></dt>
+<dd><p>Read experimental forward and backward JV files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>expJV_Vmin_Vmax</strong> (<em>string</em>) – Name of the file of the forward JV scan</p></li>
+<li><p><strong>expJV_Vmax_Vmin</strong> (<em>string</em>) – Name of the file of the backward JV scan</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of current and voltage of experimental JV from Vmin to Vmax</p></li>
+<li><p><em>np.array</em> – Array of current and voltage of experimental JV from Vmax to Vmin</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.read_tj_file">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">read_tj_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#read_tj_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.read_tj_file" title="Link to this definition"></a></dt>
+<dd><p>Read relevant parameters for admittance of the tj file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>data_tj</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the tj output file from ZimT</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pandas dataFrame of the tj_file containing the time, current density, numerical error in the current density and the photogenerated current density</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.hysteresis.tVG_exp">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.hysteresis.</span></span><span class="sig-name descname"><span class="pre">tVG_exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmin_Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expJV_Vmax_Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/hysteresis.html#tVG_exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.hysteresis.tVG_exp" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file for hysteresis experiments where Vext is the same as the voltages in the experimental JV file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>expJV_Vmin_Vmax</strong> (<em>string</em>) – Name of the file of the Vmin-Vmax JV scan</p></li>
+<li><p><strong>expJV_Vmax_Vmin</strong> (<em>string</em>) – Name of the file of the Vmax-Vmin JV scan</p></li>
+<li><p><strong>scan_speed</strong> (<em>float</em>) – Voltage scan speed [V/s]</p></li>
+<li><p><strong>direction</strong> (<em>integer</em>) – Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional Generation rate</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>integer</em> – Value to indicate the result of the process</p></li>
+<li><p><em>string</em> – A message to indicate the result of the process</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.experiments.impedance">
+<span id="pysimsalabim-experiments-impedance-module"></span><h2>pySIMsalabim.experiments.impedance module<a class="headerlink" href="#module-pySIMsalabim.experiments.impedance" title="Link to this heading"></a></h2>
+<p>Perform impedance simulations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.Bode_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">Bode_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale='log'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale_1='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale_2='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type=&lt;function</span> <span class="pre">errorbar&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#Bode_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.Bode_plot" title="Link to this definition"></a></dt>
+<dd><p>Plot the real and imaginary part of the impedance against frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale_ax1</strong> (<em>string</em>) – Scale of the left y-axis. E.g linear or log</p></li>
+<li><p><strong>yscale_ax2</strong> (<em>string</em>) – Scale of the right y-axis. E.g linear or log</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.Capacitance_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">Capacitance_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'log'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#Capacitance_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.Capacitance_plot" title="Link to this definition"></a></dt>
+<dd><p>Plot the capacitance against frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale</strong> (<em>string</em>) – Scale of the y-axis. E.g linear or log</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.Nyquist_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">Nyquist_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type=&lt;function</span> <span class="pre">errorbar&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#Nyquist_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.Nyquist_plot" title="Link to this definition"></a></dt>
+<dd><p>Plot the real and imaginary part of the impedance against each other</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale</strong> (<em>string</em>) – Scale of the y-axis. E.g linear or log</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.calc_impedance">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">calc_impedance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isToPlot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rseries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rshunt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1000.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#calc_impedance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.calc_impedance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the impedance over the frequency range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step</p></li>
+<li><p><strong>isToPlot</strong> (<em>list</em>) – List of array indices that will be used in the plotting</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of frequencies</p></li>
+<li><p><em>np.array</em> – Array of the real component of impedance</p></li>
+<li><p><em>np.array</em> – Array of the imaginary component of impedance</p></li>
+<li><p><em>np.array</em> – Array of complex error</p></li>
+<li><p><em>np.array</em> – Array of capacitance</p></li>
+<li><p><em>np.array</em> – Array of conductance</p></li>
+<li><p><em>np.array</em> – Array of error in capacitance</p></li>
+<li><p><em>np.array</em> – Array of error in conductance</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.calc_impedance_limit_time">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">calc_impedance_limit_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VStep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#calc_impedance_limit_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.calc_impedance_limit_time" title="Link to this definition"></a></dt>
+<dd><p>Fourier Decomposition formula which computes the impedance at frequency freq (Hz) and its complex error
+Based on S.E. Laux, IEEE Trans. Electron Dev. 32 (10), 2028 (1985), eq. 5a, 5b
+We integrate from 0 to time[imax] at frequency 1/time[imax]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>np.array</em>) – Array of currents</p></li>
+<li><p><strong>errI</strong> (<em>np.array</em>) – Numerical error in calculated currents (output of ZimT)</p></li>
+<li><p><strong>time</strong> (<em>np.array</em>) – Array with all time positions, from 0 to tmax</p></li>
+<li><p><strong>VStep</strong> (<em>float</em>) – Voltage step</p></li>
+<li><p><strong>imax</strong> (<em>integer</em>) – Index of the last timestep/first frequency for which the integrals are calculated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>float</em> – Frequency belonging to Z(f)</p></li>
+<li><p><em>complex number</em> – Impedance at frequency f: Z(f)</p></li>
+<li><p><em>complex number</em> – Numerical error in calculated impedance Z(f)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.create_tVG_SS">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">create_tVG_SS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#create_tVG_SS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.create_tVG_SS" title="Link to this definition"></a></dt>
+<dd><p>Creates the tVG file for the steady state simulation with only t 0 and V_0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V_0</strong> (<em>float</em>) – Voltage at t=0</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step that is applied after t=0</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message to indicate the result of the process</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.create_tVG_impedance">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">create_tVG_impedance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeFactor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#create_tVG_impedance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.create_tVG_impedance" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file for impedance experiments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V_0</strong> (<em>float</em>) – Voltage at t=0</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step that is applied after t=0</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – Minimum frequency</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – Maximum frequency</p></li>
+<li><p><strong>ini_timeFactor</strong> (<em>float</em>) – Constant defining the size of the initial timestep</p></li>
+<li><p><strong>timeFactor</strong> (<em>float</em>) – Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message to indicate the result of the process</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.create_tVG_tolDens">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">create_tVG_tolDens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#create_tVG_tolDens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.create_tVG_tolDens" title="Link to this definition"></a></dt>
+<dd><p>Creates the tVG file for the steady state simulation with only t 0 and V_0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V_0</strong> (<em>float</em>) – Voltage at t=0</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step that is applied after t=0</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message to indicate the result of the process</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.get_impedance">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">get_impedance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rseries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rshunt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1000.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#get_impedance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.get_impedance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the impedance from the simulation result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>DataFrame</em>) – DataFrame with the simulation results (tj.dat) file</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – Minimum frequency</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – Maximum frequency</p></li>
+<li><p><strong>f_steps</strong> (<em>float</em>) – Frequency step</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em>) – name of the file where the impedance data is stored</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns -1 (failed) or 1 (success), including a message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer,string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.get_tolDens">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">get_tolDens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dum_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#get_tolDens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.get_tolDens" title="Link to this definition"></a></dt>
+<dd><p>Calculate the tolerance of the density solver, to ensure a reliable impedance spectrum</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zimt_device_parameters</strong> (<em>string</em>) – Name of the zimt device parameters file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Working directory for zimt</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – Minimum frequency</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – Maximum frequency</p></li>
+<li><p><strong>V_0</strong> (<em>float</em>) – Voltage at t=0</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>del_V</strong> (<em>float</em>) – Voltage step</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em>) – Indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>tj_name</strong> (<em>string</em>) – Name of the tj file</p></li>
+<li><p><strong>varFile</strong> (<em>string</em>) – Name of the var file</p></li>
+<li><p><strong>ini_timeFactor</strong> (<em>float</em>) – Constant defining the size of the initial timestep</p></li>
+<li><p><strong>dum_str</strong> (<em>string</em>) – dummy string with UUID string to append to the file names</p></li>
+<li><p><strong>cmd_pars</strong> (<em>list</em>) – List of dictionaries with the command line parameters</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>integer</em> – Return code of the simulation, 0 if successful, -1 if one of the steps failed else the return code of the simulation</p></li>
+<li><p><em>string</em> – Return message to display on the UI in case of failure</p></li>
+<li><p><em>float</em> – Tolerance of the density solver. If failed, returns None</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.plot_impedance">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">plot_impedance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'freqZ.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#plot_impedance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.plot_impedance" title="Link to this definition"></a></dt>
+<dd><p>Make a Bode and Nyquist plot of the impedance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.run_impedance_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">run_impedance_simu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tVG.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'freqZ.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.02</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#run_impedance_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.run_impedance_simu" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file and run ZimT with impedance device parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zimt_device_parameters</strong> (<em>string</em>) – Name of the zimt device parameters file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Working directory for zimt</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – Minimum frequency</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – Maximum frequency</p></li>
+<li><p><strong>f_steps</strong> (<em>float</em>) – Frequency step</p></li>
+<li><p><strong>V_0</strong> (<em>float</em>) – Voltage at t=0</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em><em>, </em><em>optional</em>) – Fractional light intensity, by default 1</p></li>
+<li><p><strong>del_V</strong> (<em>float</em><em>, </em><em>optional</em>) – Voltage step, by default 0.01</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default False</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the tVG file, by default tVG.txt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the file where the impedance data is stored, by default freqZ.dat</p></li>
+<li><p><strong>tj_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the tj file where the impedance data is stored, by default tj.dat</p></li>
+<li><p><strong>varFile</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the var file, by default ‘none’</p></li>
+<li><p><strong>ini_timeFactor</strong> (<em>float</em><em>, </em><em>optional</em>) – Constant defining the size of the initial timestep, by default 1e-3</p></li>
+<li><p><strong>timeFactor</strong> (<em>float</em><em>, </em><em>optional</em>) – Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1., by default 1.02</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>CompletedProcess</em> – Output object of with returncode and console output of the simulation</p></li>
+<li><p><em>string</em> – Return message to display on the UI, for both success and failed</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.impedance.store_impedance_data">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.impedance.</span></span><span class="sig-name descname"><span class="pre">store_impedance_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReZ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ImZ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errZ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/impedance.html#store_impedance_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.impedance.store_impedance_data" title="Link to this definition"></a></dt>
+<dd><p>Save the frequency, real &amp; imaginary part of the impedance &amp; impedance error in one file called freqZ.dat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>freq</strong> (<em>np.array</em>) – Array of frequencies</p></li>
+<li><p><strong>ReZ</strong> (<em>np.array</em>) – Array of the real component of impedance</p></li>
+<li><p><strong>ImZ</strong> (<em>np.array</em>) – Array of the imaginary component of impedance</p></li>
+<li><p><strong>errZ</strong> (<em>np.array</em>) – Array of complex error</p></li>
+<li><p><strong>C</strong> (<em>np.array</em>) – Array of capacitance</p></li>
+<li><p><strong>G</strong> (<em>np.array</em>) – Array of conductance</p></li>
+<li><p><strong>errC</strong> (<em>np.array</em>) – Array of error in capacitance</p></li>
+<li><p><strong>errG</strong> (<em>np.array</em>) – Array of error in conductance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.experiments.imps">
+<span id="pysimsalabim-experiments-imps-module"></span><h2>pySIMsalabim.experiments.imps module<a class="headerlink" href="#module-pySIMsalabim.experiments.imps" title="Link to this heading"></a></h2>
+<p>Perform Intensity-Modulated Photocurrent Spectroscopy (IMPS) simulations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.ColeCole_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">ColeCole_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale='linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type=&lt;function</span> <span class="pre">errorbar&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#ColeCole_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.ColeCole_plot" title="Link to this definition"></a></dt>
+<dd><p>Plot the Cole-Cole plot with the real and imaginary part of the admittance against frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em>) – Filename where the admittance data is stored</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale</strong> (<em>string</em>) – Scale of the y-axis. E.g linear or log</p></li>
+<li><p><strong>plot_type</strong> (<em>matplotlib.pyplot</em>) – Type of plot to display</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.IMPS_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">IMPS_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale='log'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale='log'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type=&lt;function</span> <span class="pre">plot&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#IMPS_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.IMPS_plot" title="Link to this definition"></a></dt>
+<dd><p>Plot the real and imaginary part of the admittance against frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale_ax1</strong> (<em>string</em>) – Scale of the left y-axis. E.g linear or log</p></li>
+<li><p><strong>yscale_ax2</strong> (<em>string</em>) – Scale of the right y-axis. E.g linear or log</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.calc_IMPS">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">calc_IMPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isToPlot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#calc_IMPS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.calc_IMPS" title="Link to this definition"></a></dt>
+<dd><p>Calculate the admittance over the frequency range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the time, current density, numerical error in the current density and the photogenerated current density of the tj_file</p></li>
+<li><p><strong>isToPlot</strong> (<em>list</em>) – List of array indices that will be used in the plotting</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Array of frequencies</p></li>
+<li><p><em>np.array</em> – Array of the real component of admittance</p></li>
+<li><p><em>np.array</em> – Array of the imaginary component of admittance</p></li>
+<li><p><em>np.array</em> – Array of complex error</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.calc_IMPS_limit_time">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">calc_IMPS_limit_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#calc_IMPS_limit_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.calc_IMPS_limit_time" title="Link to this definition"></a></dt>
+<dd><p>Fourier Decomposition formula which computes the admittance at frequency freq (Hz) and its complex error
+Based on S.E. Laux, IEEE Trans. Electron Dev. 32 (10), 2028 (1985), eq. 5a, 5b
+We integrate from 0 to time[imax] at frequency 1/time[imax]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>np.array</em>) – Array of currents</p></li>
+<li><p><strong>errI</strong> (<em>np.array</em>) – Numerical error in calculated currents (output of ZimT)</p></li>
+<li><p><strong>time</strong> (<em>np.array</em>) – Array with all time positions, from 0 to tmax</p></li>
+<li><p><strong>imax</strong> (<em>integer</em>) – Index of the last timestep/first frequency for which the integrals are calculated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>float</em> – Frequency belonging to Y(f)</p></li>
+<li><p><em>complex number</em> – Admittance at frequency f: Y(f)</p></li>
+<li><p><em>complex number</em> – Numerical error in calculated admittance Y(f)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.create_tVG_IMPS">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">create_tVG_IMPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeFactor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#create_tVG_IMPS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.create_tVG_IMPS" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file for IMPS experiments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>float</em>) – Voltage, the voltage is constant over the whole time range</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>del_G</strong> (<em>float</em>) – Applied generation rate increase at t=0</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em>) – Name of the tVG file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – Minimum frequency</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – Maximum frequency</p></li>
+<li><p><strong>ini_timeFactor</strong> (<em>float</em>) – Constant defining the size of the initial timestep</p></li>
+<li><p><strong>timeFactor</strong> (<em>float</em>) – Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message to indicate the result of the process</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.get_IMPS">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">get_IMPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#get_IMPS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.get_IMPS" title="Link to this definition"></a></dt>
+<dd><p>Calculate the IMPS from the simulation result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>DataFrame</em>) – DataFrame with the simulation results (tj.dat) file</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – Minimum frequency</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – Maximum frequency</p></li>
+<li><p><strong>f_steps</strong> (<em>float</em>) – Frequency step</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em>) – name of the file where the IMPS data is stored</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns -1 (failed) or 1 (success), including a message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer,string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.plot_IMPS">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">plot_IMPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'freqY.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#plot_IMPS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.plot_IMPS" title="Link to this definition"></a></dt>
+<dd><p>Plot admittance of IMPS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.run_IMPS_simu">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">run_IMPS_simu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zimt_device_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_frac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">GStep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tVG_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tVG.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'freqY.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_timeFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.02</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#run_IMPS_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.run_IMPS_simu" title="Link to this definition"></a></dt>
+<dd><p>Create a tVG file and run ZimT with admittance device parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zimt_device_parameters</strong> (<em>string</em>) – Name of the zimt device parameters file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – Minimum frequency</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – Maximum frequency</p></li>
+<li><p><strong>f_steps</strong> (<em>float</em>) – Frequency step</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – Voltage, the voltage is constant over the whole time range</p></li>
+<li><p><strong>G_frac</strong> (<em>float</em>) – Fractional light intensity</p></li>
+<li><p><strong>GStep</strong> (<em>float</em><em>, </em><em>optional</em>) – Applied generation rate increase at t=0, by default 0.05</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default False</p></li>
+<li><p><strong>tVG_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the tVG file, by default tVG.txt</p></li>
+<li><p><strong>output_file</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the file where the admittance data is stored, by default freqY.dat</p></li>
+<li><p><strong>tj_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the tj file where the admittance data is stored, by default tj.dat</p></li>
+<li><p><strong>varFile</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the var file, by default ‘none’</p></li>
+<li><p><strong>ini_timeFactor</strong> (<em>float</em><em>, </em><em>optional</em>) – Constant defining the size of the initial timestep, by default 1e-3</p></li>
+<li><p><strong>timeFactor</strong> (<em>float</em><em>, </em><em>optional</em>) – Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1., by default 1.02</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>CompletedProcess</em> – Output object of with returncode and console output of the simulation</p></li>
+<li><p><em>string</em> – Return message to display on the UI, for both success and failed</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.experiments.imps.store_IMPS_data">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.experiments.imps.</span></span><span class="sig-name descname"><span class="pre">store_IMPS_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ImY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/experiments/imps.html#store_IMPS_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.experiments.imps.store_IMPS_data" title="Link to this definition"></a></dt>
+<dd><p>Save the frequency, real &amp; imaginary part of the admittance &amp; its error in one file called freqY.dat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – working directory for zimt</p></li>
+<li><p><strong>freq</strong> (<em>np.array</em>) – Array of frequencies</p></li>
+<li><p><strong>ReY</strong> (<em>np.array</em>) – Array of the real component of admittance</p></li>
+<li><p><strong>ImY</strong> (<em>np.array</em>) – Array of the imaginary component of admittance</p></li>
+<li><p><strong>errY</strong> (<em>np.array</em>) – Array of complex error in admittance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.experiments">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pySIMsalabim.experiments" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pySIMsalabim.aux_funcs.html" class="btn btn-neutral float-left" title="pySIMsalabim.aux_funcs package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pySIMsalabim.install.html" class="btn btn-neutral float-right" title="pySIMsalabim.install package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
