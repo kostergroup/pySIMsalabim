@@ -2,6 +2,10 @@ Change Log
 ==========
 All notable changes to this project will be documented in this file.
 
+v1.04 - 2025-12-10 - VMLC-PV
+------------------------------------
+- Removing the limitation for the numpy version in setup.py to allow for more flexibility in the numpy version used. Previously the version was constrained to be >=1.2 and <=2.0.0.
+
 v1.03 - 2025-09-24 - VMLC-PV
 ------------------------------------
 - JV_steady_state.py, hysteresis.py, impedance.py, imps.py, EQE.py, CV.py: Added verbose output option for simulation functions made sure that we only return an integer (return code) and a message (string) from the simulation functions. This is to ensure that the return value is always an integer, never an object.

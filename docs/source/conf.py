@@ -14,9 +14,9 @@ from pathlib import Path
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'pySIMsalabim'
-copyright = '2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster'
+copyright = '2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster'
 author = 'Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster'
-release = '1.03'
+release = '1.04'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

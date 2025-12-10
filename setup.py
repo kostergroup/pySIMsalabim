@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pySIMsalabim", # Replace with your own username
-    version="v1.03",
+    version="v1.04",
     author="Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster",
     author_email="",
     description="",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     license='GPLv3',
     url="https://github.com/kostergroup/pySIMsalabim",
-    download_url="https://github.com/kostergroup/pySIMsalabim/v1.03.tar.gz",
+    download_url="https://github.com/kostergroup/pySIMsalabim/v1.04.tar.gz",
     packages=setuptools.find_packages(),
     readme = "README.md",
     keywords=['Drift-diffusion', 'semiconductor', 'solar cells'],
@@ -25,7 +25,7 @@ setuptools.setup(
     ],
     python_requires='>=3.12',
     install_requires = [
-        'numpy>=1.2, <=2.0',
+        'numpy>=1.2',
         'pandas>=1.4',
         'matplotlib>=3.5',
         'jupyterlab>=3.4',
