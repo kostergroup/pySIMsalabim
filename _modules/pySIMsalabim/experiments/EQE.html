@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.experiments.EQE &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.experiments.EQE</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.experiments.EQE</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Perform EQE simulations&quot;&quot;&quot;</span>
+
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">uuid</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="c1"># import pySIMsalabim</span>
+<span class="c1">## Import pySIMsalabim, if not successful, add the parent directory to the system path</span>
+<span class="k">try</span> <span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Add the parent directory to the system path</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;../..&#39;</span><span class="p">)))</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">general</span> <span class="k">as</span> <span class="n">utils_gen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.parallel_sim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">update_cmd_pars</span>
+
+<span class="c1">######### Constants #################################################################################</span>
+
+<span class="n">h</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">h</span>
+<span class="n">c</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">c</span>
+<span class="n">q</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span>
+
+<span class="c1">######### Functions #################################################################################</span>
+
+<div class="viewcode-block" id="EQE_create_spectrum_files">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.EQE.EQE_create_spectrum_files">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">EQE_create_spectrum_files</span><span class="p">(</span><span class="n">lambda_array</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">spectrum_path</span><span class="p">,</span> <span class="n">tmp_spectrum_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create all the spectrum files with monochromatic peaks at the specified wavelength, </span>
+<span class="sd">    with a fixed height set by the number of added photons p. The files are stored in a temporary folder: tmp_spectrum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lambda_array : array</span>
+<span class="sd">        Array with the wavelengths at which the monochromatic peaks will be created.</span>
+<span class="sd">    p : float</span>
+<span class="sd">        Number of photons that are added to the irradiance.</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path to the session folder where the files must be created.</span>
+<span class="sd">    spectrum_path : string</span>
+<span class="sd">        Path to the original spectrum file.</span>
+<span class="sd">    tmp_spectrum_path : string</span>
+<span class="sd">        Path to the temporary folder where the modified spectrum files will be stored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lambda_array</span><span class="p">:</span>
+        <span class="c1"># Reset the spectrum data on every iteration to avoid accumulation of the added photons at each wavelength</span>
+        <span class="n">org_spectrum_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">spectrum_path</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Get the filename of the spectrum without any possible path</span>
+        <span class="n">spectrum_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">spectrum_path</span><span class="p">)</span>
+
+        <span class="c1">#find row with value closest to i and multiply the value in the irradiance column with 10</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">org_spectrum_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[(</span><span class="n">org_spectrum_data</span><span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[:</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">org_spectrum_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="mf">1e-9</span><span class="p">)</span> <span class="c1">#2% of absorbed photons of Si</span>
+        <span class="n">org_spectrum_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_spectrum_path</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm_</span><span class="si">{</span><span class="n">spectrum_filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_CurrDens">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.EQE.get_CurrDens">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_CurrDens</span><span class="p">(</span><span class="n">JV_file</span><span class="p">,</span> <span class="n">session_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Get the current density  and its from the JV_file as stored in the first row.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    JV_file : str, optional</span>
+<span class="sd">        Name of the file where the JV data is stored. Must be unique for each simulation, by default &#39;JV.dat&#39;</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path to the session folder where the simulation will run. </span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float, float</span>
+<span class="sd">        Short-circuit current and its error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>     
+    <span class="n">data_JV</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">JV_file</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+    <span class="n">J0</span><span class="o">=</span><span class="n">data_JV</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">J0_err</span><span class="o">=</span><span class="n">data_JV</span><span class="p">[</span><span class="s1">&#39;errJ&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Remove the JV file as it is not needed anymore</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">JV_file</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">J0</span><span class="p">,</span> <span class="n">J0_err</span></div>
+
+
+<div class="viewcode-block" id="calc_EQE">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.EQE.calc_EQE">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_EQE</span><span class="p">(</span><span class="n">Jext</span><span class="p">,</span><span class="n">Jext_err</span><span class="p">,</span><span class="n">J0_single</span><span class="p">,</span> <span class="n">J0_err_single</span><span class="p">,</span> <span class="n">lambda_array</span><span class="p">,</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the EQE values for the monochromatic peaks at each wavelength. Based on the change in the short-circuit current and the number of added photons.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Jext : array</span>
+<span class="sd">        Short-circuit current density for each monochromatic peak.</span>
+<span class="sd">    Jext_err : array</span>
+<span class="sd">        Error in the short-circuit current density for each monochromatic peak.</span>
+<span class="sd">    J0_single : float</span>
+<span class="sd">        Short-circuit current density for the normal spectrum.</span>
+<span class="sd">    J0_err_single : float</span>
+<span class="sd">        Error in the short-circuit current density for the normal spectrum.</span>
+<span class="sd">    lambda_array : array</span>
+<span class="sd">        Array with the wavelengths at which the monochromatic peaks were created.</span>
+<span class="sd">    p : float</span>
+<span class="sd">        Number of photons that are added to the irradiance.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    array, array, array, array, array</span>
+<span class="sd">        Arrays with the change in short-circuit current density, error in the change in short-circuit currentdensity,</span>
+<span class="sd">        monochromatic intensity, EQE values and error in the EQE values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the change in short-circuit current density and its error</span>
+    <span class="n">deltaJ</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">J0_single</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Jext</span><span class="p">]</span>
+    <span class="n">deltaJerr</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">J0_err_single</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Jext_err</span><span class="p">]</span>
+
+    <span class="c1"># Calculate the increase in intensity/photon flux/energy of the monochromatic peaks</span>
+    <span class="n">I_diff</span> <span class="o">=</span> <span class="p">[((</span><span class="n">p</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e-9</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lambda_array</span><span class="p">]</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="mf">1e-9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">I_diff</span><span class="p">)</span>
+    <span class="n">E_photon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">h</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lambda_array</span><span class="p">])</span>
+
+    <span class="c1"># Calculate the EQE values and their errors</span>
+    <span class="n">EQE_val</span><span class="o">=</span><span class="n">deltaJ</span><span class="o">/</span><span class="p">((</span><span class="n">q</span><span class="o">*</span><span class="n">area</span><span class="p">)</span><span class="o">/</span><span class="n">E_photon</span><span class="p">)</span>
+    <span class="n">EQE_err</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">deltaJerr</span><span class="p">,((</span><span class="n">q</span><span class="o">*</span><span class="n">area</span><span class="p">)</span><span class="o">/</span><span class="n">E_photon</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">deltaJ</span><span class="p">,</span> <span class="n">deltaJerr</span><span class="p">,</span> <span class="n">I_diff</span><span class="p">,</span> <span class="n">EQE_val</span><span class="p">,</span> <span class="n">EQE_err</span></div>
+
+
+<div class="viewcode-block" id="run_EQE">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.EQE.run_EQE">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_EQE</span><span class="p">(</span><span class="n">simss_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">,</span> <span class="n">lambda_min</span><span class="p">,</span> <span class="n">lambda_max</span><span class="p">,</span> <span class="n">lambda_step</span><span class="p">,</span> <span class="n">Vext</span><span class="p">,</span> <span class="n">output_file</span> <span class="o">=</span> <span class="s1">&#39;EQE.dat&#39;</span><span class="p">,</span> <span class="n">JV_file_name</span> <span class="o">=</span> <span class="s1">&#39;JV.dat&#39;</span><span class="p">,</span> <span class="n">varFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="n">remove_dirs</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">max_jobs</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the EQE calculation for a given spectrum and external voltage, and save the results in a file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    simss_device_parameters : string</span>
+<span class="sd">        Name of the device parameters file.</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path to the session folder where the simulation will run.</span>
+<span class="sd">    spectrum : string</span>
+<span class="sd">        Path to the original spectrum file.</span>
+<span class="sd">    lambda_min : float</span>
+<span class="sd">        Minimum wavelength for the spectrum.</span>
+<span class="sd">    lambda_max : float</span>
+<span class="sd">        Maximum wavelength for the spectrum.</span>
+<span class="sd">    lambda_step : float</span>
+<span class="sd">        Step size for the wavelength.</span>
+<span class="sd">    Vext : float</span>
+<span class="sd">        External voltage at which the simulation will run and the EQE must be calculated.</span>
+<span class="sd">    output_file : string, optional</span>
+<span class="sd">        Name of the file where the results will be stored. The file will be stored in the session folder, by default &#39;EQE.dat&#39;</span>
+<span class="sd">    JV_file_name : string, optional</span>
+<span class="sd">        Name of the JV file. Must be unique for each simulation, by default &#39;JV.dat&#39;</span>
+<span class="sd">    varFile : string, optional</span>
+<span class="sd">        Name of the var file, by default &#39;none&#39;</span>
+<span class="sd">    remove_dirs : bool, optional</span>
+<span class="sd">        Remove the temporary directories, by default True</span>
+<span class="sd">    parallel : bool, optional</span>
+<span class="sd">        Run the simulations in parallel, by default False</span>
+<span class="sd">    max_jobs : int, optional</span>
+<span class="sd">        Maximum number of parallel jobs, by default max(1,os.cpu_count()-1)</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        indicate whether the script is in &#39;web&#39; mode (True) or standalone mode (False). Used to control the console output, by default True</span>
+<span class="sd">    **kwargs : dict</span>
+<span class="sd">        Additional arguments to be passed to the function.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        0 if the function runs successfully.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to print messages to the console</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;UUID&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1"># Check if the user wants to add a UUID to the JV file name</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cmd_pars&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to add additional command line parameters to the simulation</span>
+    <span class="n">force_multithreading</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;force_multithreading&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to force multithreading instead of using GNU parallel </span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>  
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threadsafe&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threadsafe&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+
+    <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;turnoff_autoTidy&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to turn off the autoTidy function in SIMsalabim</span>
+    <span class="k">if</span> <span class="n">turnoff_autoTidy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Update the JV file name with the UUID</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">UUID</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    
+    <span class="n">JV_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">JV_file_name</span><span class="p">)</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">JV_file_name_base</span><span class="p">,</span> <span class="n">JV_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">JV_file_name</span><span class="p">)</span>
+        <span class="n">JV_file_name</span> <span class="o">=</span> <span class="n">JV_file_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">JV_file_name_ext</span>
+        <span class="n">output_file_base</span><span class="p">,</span> <span class="n">output_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">output_file_ext</span>
+        <span class="k">if</span> <span class="n">varFile</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">varFile</span><span class="p">)</span>
+            <span class="n">var_file_base</span><span class="p">,</span> <span class="n">var_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">varFile</span><span class="p">)</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">var_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">var_file_ext</span>
+    <span class="c1"># varFile = &#39;none&#39; # we don&#39;t use a var file for this simulation</span>
+    
+    <span class="n">msg_list</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Init the returnmessage list</span>
+    <span class="n">p</span><span class="o">=</span><span class="mf">0.03</span><span class="o">*</span><span class="mf">1e21</span> <span class="c1">#number of photons that are added to the irradiance. in this example it is 3% of the number of photons absorbed by a Silicon solar cell in m-2</span>
+    
+    <span class="c1"># Create a tmp folder to store the modified AM1.5G spectra</span>
+    <span class="c1"># rnd_ID = str(uuid.uuid4())</span>
+    <span class="n">tmp_spectrum_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="s1">&#39;tmp_spectrum&#39;</span><span class="o">+</span><span class="n">UUID</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmp_spectrum_path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">tmp_spectrum_path</span><span class="p">)</span>
+
+    <span class="c1"># Create wavelength array. If the last point in the array is outside the specified range, remove it</span>
+    <span class="n">lambda_array_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lambda_min</span><span class="p">,</span><span class="n">lambda_max</span><span class="o">+</span><span class="n">lambda_step</span><span class="p">,</span><span class="n">lambda_step</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lambda_array_init</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lambda_max</span><span class="p">:</span>
+        <span class="n">lambda_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">lambda_array_init</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lambda_array</span> <span class="o">=</span> <span class="n">lambda_array_init</span>
+
+    <span class="c1"># convert to m</span>
+    <span class="n">lambda_array</span> <span class="o">=</span> <span class="n">lambda_array</span><span class="o">*</span><span class="mf">1e-9</span>
+
+    <span class="n">EQE_create_spectrum_files</span><span class="p">(</span><span class="n">lambda_array</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">,</span> <span class="n">tmp_spectrum_path</span><span class="p">)</span>
+
+    <span class="c1">#runs for no monochromatic peak (normal spectrum) and obtains J0 and its err</span>
+    <span class="c1"># Prepare the arguments for the simulation</span>
+    <span class="n">EQE_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">simss_device_parameters</span><span class="p">},</span>
+                    <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;outputRatio&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)},</span> <span class="c1"># we don&#39;t care about the var file here</span>
+                    <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;Vmin&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">Vext</span><span class="p">)},</span>
+                    <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;Vmax&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">Vext</span><span class="p">)},</span>
+                    <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;spectrum&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">spectrum</span><span class="p">},</span>
+                    <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;JVFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">JV_file_name</span><span class="p">)},</span> <span class="c1"># need to add the session path to the JV file name to make sure it is stored in the session folder</span>
+                    <span class="c1"># below are unecessary output files but we asign them to avoid errors</span>
+                    <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">},</span>
+                    <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                    <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;scParsFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;scPars&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">}</span>
+                    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+        <span class="n">EQE_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span>
+
+    <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">EQE_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">EQE_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">&#39;simss&#39;</span><span class="p">,</span> <span class="n">EQE_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;simss&#39;</span><span class="p">,</span> <span class="n">EQE_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="c1"># result, message = run_sim_EQE(simss_device_parameters, session_path, spectrum, Vext, JV_file_name, run_mode)</span>
+    
+    <span class="c1"># If the simulation fails, stop running the script and exit</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">result</span><span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;SIMsalabim raised an error with errorcode </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">, simulation did not converge.&#39;</span>
+        <span class="n">msg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">msg_list</span>
+    
+    <span class="c1"># Get the current density Jext and its error</span>
+    <span class="n">J0_single</span><span class="p">,</span> <span class="n">J0_err_single</span> <span class="o">=</span> <span class="n">get_CurrDens</span><span class="p">(</span><span class="n">JV_file_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">)</span>
+
+    <span class="n">Jext</span><span class="p">,</span><span class="n">Jext_err</span> <span class="o">=</span> <span class="p">[],[]</span>
+
+    <span class="c1">#obtains Jext and Jext error for a monochromatic peak at each wavelength        </span>
+    <span class="k">if</span> <span class="n">parallel</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">lambda_array</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">:</span> <span class="c1"># Run the simulations in parallel</span>
+        <span class="n">JV_file_name_base</span><span class="p">,</span> <span class="n">JV_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">JV_file_name</span><span class="p">)</span>
+        <span class="n">log_file_name_base</span><span class="p">,</span> <span class="n">log_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+        <span class="n">scParsFile_name_base</span><span class="p">,</span> <span class="n">scParsFile_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="s1">&#39;scPars&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+        
+        <span class="n">EQE_args_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lambda_array</span><span class="p">:</span>
+            <span class="n">JV_file_name_single</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">JV_file_name_base</span><span class="si">}{</span><span class="n">dum_str</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">JV_file_name_ext</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">if</span> <span class="n">varFile</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                <span class="n">varFile_single</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var_file_base</span><span class="si">}</span><span class="s1">+</span><span class="si">{</span><span class="n">dum_str</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">var_file_ext</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">varFile_single</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">varFile_single</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">varFile_single</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+            <span class="n">dum_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">simss_device_parameters</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;outputRatio&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)},</span> <span class="c1"># we don&#39;t care about the var file here</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;Vmin&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">Vext</span><span class="p">)},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;Vmax&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">Vext</span><span class="p">)},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;spectrum&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_spectrum_path</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm_</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">spectrum</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;JVFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">JV_file_name_single</span><span class="p">)},</span> <span class="c1"># makes sure that the JV file is unique for each simulation and is stored in the session folder</span>
+                        <span class="c1"># below are unecessary output files but we asign them to avoid errors</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">log_file_name_base</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">log_file_name_ext</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile_single</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;scParsFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">scParsFile_name_base</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">scParsFile_name_ext</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+                        <span class="p">]</span>
+            <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+                <span class="n">dum_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span> <span class="c1"># necessary to avoid autoTidy messing up the files in parallel mode</span>
+
+            <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">dum_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">dum_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+            <span class="n">EQE_args_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dum_args</span><span class="p">)</span>
+        
+        <span class="n">results</span> <span class="o">=</span> <span class="n">run_simulation_parallel</span><span class="p">(</span><span class="s1">&#39;simss&#39;</span><span class="p">,</span> <span class="n">EQE_args_list</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">max_jobs</span><span class="p">,</span> <span class="n">force_multithreading</span><span class="o">=</span><span class="n">force_multithreading</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lambda_array</span><span class="p">:</span>
+            <span class="n">JV_file_name_single</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">JV_file_name_base</span><span class="si">}{</span><span class="n">dum_str</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">JV_file_name_ext</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">J_single</span><span class="p">,</span> <span class="n">Jerr_single</span> <span class="o">=</span> <span class="n">get_CurrDens</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">JV_file_name_single</span><span class="p">),</span><span class="n">session_path</span><span class="p">)</span>
+            <span class="n">Jext</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">J_single</span><span class="p">)</span>
+            <span class="n">Jext_err</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Jerr_single</span><span class="p">)</span>
+            
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lambda_array</span><span class="p">:</span>
+            <span class="n">JV_file_name_base</span><span class="p">,</span> <span class="n">JV_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">JV_file_name</span><span class="p">)</span>
+            <span class="n">JV_file_name_single</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">JV_file_name_base</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">JV_file_name_ext</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">log_file_name_base</span><span class="p">,</span> <span class="n">log_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+            <span class="n">scParsFile_name_base</span><span class="p">,</span> <span class="n">scParsFile_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="s1">&#39;scPars&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">varFile</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                <span class="n">varFile_single</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var_file_base</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">var_file_ext</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">varFile_single</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">varFile_single</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">varFile_single</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+            
+            <span class="n">EQE_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">simss_device_parameters</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;outputRatio&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)},</span> <span class="c1"># we don&#39;t care about the var file here</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;Vmin&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">Vext</span><span class="p">)},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;Vmax&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">Vext</span><span class="p">)},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;spectrum&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_spectrum_path</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm_</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">spectrum</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;JVFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">JV_file_name_single</span><span class="p">)},</span><span class="c1">#JV_file_name_single}, # makes sure that the JV file is unique for each simulation and is stored in the session folder</span>
+                        <span class="c1"># below are unecessary output files but we asign them to avoid errors</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">log_file_name_base</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">log_file_name_ext</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile_single</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;scParsFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">scParsFile_name_base</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s1">nm</span><span class="si">{</span><span class="n">scParsFile_name_ext</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+                        <span class="p">]</span>  
+            <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+                <span class="n">EQE_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span>
+
+            <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">EQE_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">EQE_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">&#39;simss&#39;</span><span class="p">,</span> <span class="n">EQE_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;simss&#39;</span><span class="p">,</span> <span class="n">EQE_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">msg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+            <span class="n">J_single</span><span class="p">,</span> <span class="n">Jerr_single</span> <span class="o">=</span> <span class="n">get_CurrDens</span><span class="p">(</span><span class="n">JV_file_name_single</span><span class="p">,</span><span class="n">session_path</span><span class="p">)</span>
+            
+            <span class="n">Jext</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">J_single</span><span class="p">)</span>
+            <span class="n">Jext_err</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Jerr_single</span><span class="p">)</span>
+
+
+    <span class="c1"># Remove the tmp folder as it is not needed anymore</span>
+    <span class="k">if</span> <span class="n">remove_dirs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">tmp_spectrum_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_spectrum_path</span><span class="p">,</span><span class="n">file</span><span class="p">))</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_spectrum_path</span><span class="p">))</span>
+
+    <span class="c1"># remove all files starting with &#39;log&#39;+dum_str and &#39;scPars&#39;+dum_str</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">session_path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;scPars&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">file</span><span class="p">))</span>
+            
+    <span class="c1"># Calculate EQE</span>
+    <span class="n">deltaJ</span><span class="p">,</span> <span class="n">deltaJerr</span><span class="p">,</span> <span class="n">I_diff</span><span class="p">,</span> <span class="n">EQE_val</span><span class="p">,</span> <span class="n">EQE_err</span> <span class="o">=</span> <span class="n">calc_EQE</span><span class="p">(</span><span class="n">Jext</span><span class="p">,</span><span class="n">Jext_err</span><span class="p">,</span><span class="n">J0_single</span><span class="p">,</span> <span class="n">J0_err_single</span><span class="p">,</span> <span class="n">lambda_array</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+
+    <span class="c1"># Save the results in a file</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;lambda Jext Jerr deltaJ deltaJerr Imonopeak EQE EQEerr</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lambda_array</span><span class="p">)):</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">lambda_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">Jext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">Jext_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">deltaJ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">deltaJerr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">I_diff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">EQE_val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">EQE_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg_list</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">,</span> <span class="n">msg_list</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg_list</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+     <span class="c1">## Manual EQE input parameters. These are overwritten by command line arguments if provided</span>
+    <span class="n">lambda_min</span> <span class="o">=</span> <span class="mi">280</span> <span class="c1"># Lower limit of the wavelength range in nm</span>
+    <span class="n">lambda_max</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># Upper limit of the wavelength range in nm</span>
+    <span class="n">lambda_step</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># Step size of the wavelength range in nm</span>
+    <span class="n">Vext</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Array with applied voltages in V</span>
+
+    <span class="c1"># Define folder and file paths</span>
+    <span class="n">session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;../../&#39;</span><span class="p">,</span><span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;SimSS&#39;</span><span class="p">)</span>
+
+    <span class="n">simss_device_parameters</span> <span class="o">=</span> <span class="s1">&#39;simulation_setup.txt&#39;</span>
+    <span class="n">spectrum</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span><span class="s1">&#39;AM15G.txt&#39;</span><span class="p">)</span>  <span class="c1"># Path of the original spectrum file</span>
+
+    <span class="c1"># UUID = str(uuid.uuid4()) # Add a UUID to the simulation</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1">############## Command line arguments  ##############</span>
+    <span class="c1">## Notes</span>
+    <span class="c1">## - The command line arguments are optional and can be provided in any order</span>
+    <span class="c1">## - Each command line argument must be provided in the format -par_name value</span>
+    <span class="c1">## - Possible arguments include all SIMsalabim parameters and EQE specific parameters as listed before</span>
+    <span class="c1">## - Special arguments</span>
+    <span class="c1">##   - sp : string</span>
+    <span class="c1">##     - The session path, i.e. the working directory for the simulation</span>
+    <span class="c1">##   - simsetup : string</span>
+    <span class="c1">##     - The name of the simss simulation setup parameters file</span>
+    <span class="c1">##   - UUID : string</span>
+    <span class="c1">##     - An UUID to add to the simulation (output)</span>
+
+    <span class="n">cmd_pars_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="p">[]</span>
+
+ <span class="c1"># Check if any arguments are provided.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="c1"># Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">),</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1"># Check if the key already exists, if not, add it to the cmd_pars_dict</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Duplicate parameter found in the command line parameters: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Check and process specific keys/arguments that are not native SIMsalabim arguments</span>
+    <span class="c1"># Handle the session_path/sp argument separately, as the other parameters depend on this</span>
+    <span class="k">if</span> <span class="s1">&#39;sp&#39;</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+        <span class="n">session_path</span> <span class="o">=</span> <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="s1">&#39;sp&#39;</span><span class="p">]</span>
+        <span class="c1"># remove from cmd_pars</span>
+        <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;sp&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Define mappings for keys and variables</span>
+    <span class="n">key_action_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;simsetup&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;simss_device_parameters&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;lambda_min&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;lambda_min&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;lambda_max&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;lambda_max&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;lambda_step&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;lambda_step&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;Vext&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Vext&#39;</span><span class="p">:</span> <span class="n">val</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)},</span> <span class="c1"># IMPORTANT: if multiple voltages are provided, they must be separated by a comma!!</span>
+        <span class="s1">&#39;spectrum&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;spectrum&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;UUID&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;UUID&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>  <span class="c1"># Use list to avoid modifying the dictionary while iterating</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_action_map</span><span class="p">:</span>
+            <span class="c1"># Apply the corresponding action</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">key_action_map</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">cmd_pars_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Dynamically update global variables</span>
+            <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list</span>
+    <span class="n">cmd_pars</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Vext</span><span class="p">)):</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;output_</span><span class="si">{</span><span class="n">Vext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">V.dat&#39;</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="n">run_EQE</span><span class="p">(</span><span class="n">simss_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">,</span> <span class="n">lambda_min</span><span class="p">,</span> <span class="n">lambda_max</span><span class="p">,</span> <span class="n">lambda_step</span><span class="p">,</span> <span class="n">Vext</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">remove_dirs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">run_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">UUID</span><span class="o">=</span><span class="n">UUID</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Vext</span><span class="p">)):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;output_</span><span class="si">{</span><span class="n">Vext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">V.dat&#39;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">]</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;EQE&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;V = </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;EQE for solar cell&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength [nm]&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;EQE&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">lambda_min</span><span class="p">,</span> <span class="n">lambda_max</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

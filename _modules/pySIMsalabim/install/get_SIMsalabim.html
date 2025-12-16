@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.install.get_SIMsalabim &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.install.get_SIMsalabim</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.install.get_SIMsalabim</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">shutil</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span><span class="o">,</span><span class="w"> </span><span class="nn">zipfile</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">packaging</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">getpass</span><span class="w"> </span><span class="kn">import</span> <span class="n">getpass</span>
+
+<span class="c1">######### Parameter Definitions ###################################################################</span>
+<span class="n">cwd</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="n">folder_name</span> <span class="o">=</span> <span class="s1">&#39;kostergroup-SIMsalabim-&#39;</span>
+<span class="n">min_fpc_version</span> <span class="o">=</span> <span class="s1">&#39;3.2.0&#39;</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+<div class="viewcode-block" id="cmd_yes_no_question">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.get_SIMsalabim.cmd_yes_no_question">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cmd_yes_no_question</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    question : str</span>
+<span class="sd">        question to ask the user</span>
+<span class="sd">    default : str, optional</span>
+<span class="sd">        default answer, by default &quot;yes&quot;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        whether the default answer is valid or not</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the default answer is not valid</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># valid answers (yes/no)</span>
+    <span class="n">valid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;yes&#39;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;ye&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+    <span class="c1"># Set the default answer.</span>
+    <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot; [y/n] &quot;</span>
+    <span class="k">elif</span> <span class="n">default</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot; [Y/n] &quot;</span>
+    <span class="k">elif</span> <span class="n">default</span> <span class="o">==</span> <span class="s1">&#39;no&#39;</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot; [y/N] &quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid default answer: </span><span class="si">{</span><span class="n">default</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Capture user input</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">question</span> <span class="o">+</span> <span class="n">prompt</span><span class="p">)</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+        <span class="c1"># convert the input to lowercase</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="n">choice</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="c1"># Use default value</span>
+            <span class="k">return</span> <span class="n">valid</span><span class="p">[</span><span class="n">default</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">valid</span><span class="p">:</span>
+            <span class="c1"># Use user input</span>
+            <span class="k">return</span> <span class="n">valid</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Incorrect input</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Please respond with &quot;y&quot; or &quot;n&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="clear_current_working_directory">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.get_SIMsalabim.clear_current_working_directory">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">clear_current_working_directory</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">folder_name</span><span class="o">=</span><span class="s1">&#39;kostergroup-SIMsalabim-&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cwd : string</span>
+<span class="sd">        Current working directory</span>
+<span class="sd">    folder_name : string, optional</span>
+<span class="sd">        Name of the folder to download, by default &#39;kostergroup-SIMsalabim-&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        Whether the folder was removed or not</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># Clear the current working directory</span>
+    <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">cwd</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">dirname</span> <span class="ow">in</span> <span class="n">dirnames</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dirname</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">folder_name</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">cmd_yes_no_question</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Are you sure you want to overwrite the </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2"> folder?&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="n">dirname</span><span class="p">))</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found and removed a folder named </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not allowed to write into folder </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># print(f&quot;No folder found named SIMsalabim, continue.&quot;)</span>
+                <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="get_SIMsalabim_source">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.get_SIMsalabim.get_SIMsalabim_source">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_SIMsalabim_source</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">folder_name</span><span class="o">=</span><span class="s1">&#39;kostergroup-SIMsalabim-&#39;</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Get the latest release from the Kostergroup Github</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cwd : string</span>
+<span class="sd">        Current working directory</span>
+<span class="sd">    folder_name : string, optional</span>
+<span class="sd">        Name of the folder to download, by default &#39;kostergroup-SIMsalabim-&#39;</span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        Print verbose output, by default False</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+
+<span class="sd">    0 : Success</span>
+<span class="sd">    2 : Failed</span>
+<span class="sd">    3 : Failed</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Getting the latest release from the Kostergroup Github&quot;</span><span class="p">)</span>
+    <span class="c1"># Get the SIMsalabim source code.</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;SIMsalabim&#39;</span><span class="p">)):</span>
+    <span class="c1"># Pop out dialog box to confirm overwriting</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cmd_yes_no_question</span><span class="p">(</span><span class="s2">&quot;Are you sure you want to overwrite the &#39;SIMsalabim&#39; folder?&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Remove folder</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;SIMsalabim&#39;</span><span class="p">))</span>
+
+            <span class="c1"># # Get the files from the latest release</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://api.github.com/repos/kostergroup/SIMsalabim/zipball&#39;</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+            <span class="c1"># Open the zip file</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+
+            <span class="c1"># Extract all the files</span>
+            <span class="n">z</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">cwd</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">dirname</span> <span class="ow">in</span> <span class="n">dirnames</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">dirname</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">folder_name</span><span class="p">):</span>
+                        <span class="c1"># Rename folder</span>
+                        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">dirname</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;SIMsalabim&#39;</span><span class="p">))</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Got the latest release of SIMsalabim&quot;</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We keep the current SIMsalabim version&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># # Get the files from the latest release</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://api.github.com/repos/kostergroup/SIMsalabim/zipball&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="c1"># Open the zip file</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+
+        <span class="c1"># Extract all the files</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">cwd</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">dirname</span> <span class="ow">in</span> <span class="n">dirnames</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dirname</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">folder_name</span><span class="p">):</span>
+                    <span class="c1"># print(f&quot;Found a folder named {dirname}&quot;)</span>
+                    <span class="c1"># Rename folder</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">dirname</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;SIMsalabim&#39;</span><span class="p">))</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Got the latest release of SIMsalabim&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="get_SIMsalabim_assets">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.get_SIMsalabim.get_SIMsalabim_assets">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_SIMsalabim_assets</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="n">folder_name</span><span class="o">=</span><span class="s1">&#39;kostergroup-SIMsalabim-&#39;</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Get the latest compiled binaries from the Kostergroup Github</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cwd : string</span>
+<span class="sd">        Current working directory</span>
+<span class="sd">    folder_name : string, optional</span>
+<span class="sd">        Name of the folder to download, by default &#39;kostergroup-SIMsalabim-&#39;</span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        Print verbose output, by default False</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+
+<span class="sd">    0 : Success</span>
+<span class="sd">    1 : Success</span>
+<span class="sd">    2 : Failed</span>
+<span class="sd">    3 : Failed</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Getting the latest compiled binaries from the Kostergroup Github&quot;</span><span class="p">)</span>
+    <span class="c1"># Get the assets from the latest release</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.github.com/repos/kostergroup/SIMsalabim/releases/latest&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;assets&quot;</span><span class="p">]:</span>
+        <span class="n">download_url</span> <span class="o">=</span> <span class="n">asset</span><span class="p">[</span><span class="s2">&quot;browser_download_url&quot;</span><span class="p">]</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">asset</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">download_url</span><span class="p">)</span>
+        <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="n">filename</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">cwd</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;simss&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">filename</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found a folder named </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="c1"># Rename folder</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;SimSS&#39;</span><span class="p">,</span><span class="n">filename</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">filename</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found a folder named </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="c1"># Rename folder</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;ZimT&#39;</span><span class="p">,</span><span class="n">filename</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span>
+    <span class="k">return</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="use_SIMsalabim_source">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.get_SIMsalabim.use_SIMsalabim_source">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">use_SIMsalabim_source</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">folder_name</span><span class="o">=</span><span class="s1">&#39;kostergroup-SIMsalabim-&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Use the SIMsalabim source code</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cwd : string</span>
+<span class="sd">        Current working directory</span>
+<span class="sd">    folder_name : string, optional</span>
+<span class="sd">        Name of the folder to download, by default &#39;kostergroup-SIMsalabim-&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+
+<span class="sd">    0 : Success</span>
+<span class="sd">    2 : Failed</span>
+<span class="sd">    3 : Failed</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># Clear the working directory. TEMP disabled</span>
+    <span class="c1"># result = clear_current_working_directory(cwd, folder_name)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">result_get</span> <span class="o">=</span> <span class="n">get_SIMsalabim_source</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_get</span>
+    <span class="k">elif</span> <span class="n">result</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Script terminated manually&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">3</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Failed&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="install_SIMsalabim">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.get_SIMsalabim.install_SIMsalabim">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">install_SIMsalabim</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">folder_name</span><span class="o">=</span><span class="s1">&#39;kostergroup-SIMsalabim-&#39;</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Install SIMsalabim in the current working directory</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cwd : string</span>
+<span class="sd">        Current working directory</span>
+<span class="sd">    folder_name : string, optional</span>
+<span class="sd">        Name of the folder to download, by default &#39;kostergroup-SIMsalabim-&#39;</span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        Print verbose output, by default False</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+
+<span class="sd">    0 : Success</span>
+<span class="sd">    1 : Success</span>
+<span class="sd">    2 : Failed</span>
+<span class="sd">    3 : Failed</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="c1"># Check if fpc installed</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking for Free Pascal Compiler (fpc) package&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;fpc&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># fpc is installed, check the version and print to stdout.</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;fpc&quot;</span><span class="p">,</span> <span class="s2">&quot;-iV&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">fpc_version</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span>
+
+        <span class="c1"># remove possible newline character</span>
+        <span class="k">if</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">fpc_version</span><span class="p">:</span>
+            <span class="n">fpc_version</span> <span class="o">=</span> <span class="n">fpc_version</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># fpc version must be larger than min_fpc_version</span>
+        <span class="k">if</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fpc_version</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">min_fpc_version</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Free Pascal Compiler (fpc) is installed with version &gt;= </span><span class="si">{</span><span class="n">min_fpc_version</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">result_fpc</span> <span class="o">=</span> <span class="n">use_SIMsalabim_source</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">)</span>
+            <span class="c1"># sys.exit(result_fpc)</span>
+
+            <span class="c1"># Compile the programs</span>
+            <span class="c1"># compile simss with fpc in os.path.join(path2prog,&#39;SimSS&#39;)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;SimSS&#39;</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;fpc simss.pas&#39;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">cwd</span><span class="p">)</span>
+
+            <span class="c1"># compile zimt with fpc in os.path.join(path2prog,&#39;ZimT&#39;)</span>
+            <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c1"># Get current working directory</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;ZimT&#39;</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;fpc zimt.pas&#39;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">cwd</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SIMsalabim programs have been compiled successfully!&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="c1"># fpc version requirement not met</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Installed Free Pascal Compiler (fpc) version is </span><span class="si">{</span><span class="n">fpc_version</span><span class="si">}</span><span class="s1">, but must be at least 3.2.0</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">cmd_yes_no_question</span><span class="p">(</span><span class="s2">&quot;Do you want to continue with the pre-compiled binaries (y) or abort and update the Free Pascal Compiler (n) (recommended)&quot;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># download assets</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">download assets&quot;</span><span class="p">)</span>
+                <span class="n">result_assets</span> <span class="o">=</span> <span class="n">get_SIMsalabim_assets</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">result_assets</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="c1"># return and exit</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># fpc is not installed.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free Pascal Compiler is not installed.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cmd_yes_no_question</span><span class="p">(</span><span class="s2">&quot;Do you want to continue with the pre-compiled binaries (y) or abort and install the Free Pascal Compiler (n) (recommended)&quot;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># download assets</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">download assets&quot;</span><span class="p">)</span>
+            <span class="n">result_assets</span> <span class="o">=</span> <span class="n">get_SIMsalabim_assets</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">result_assets</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="c1"># return and exit</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="install_fpc_Linux">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.get_SIMsalabim.install_fpc_Linux">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">install_fpc_Linux</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Install Free Pascal Compiler on Linux</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+    <span class="c1"># check if system is Linux</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This function is only available on Linux systems&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    
+    <span class="c1"># check if apt-get is available</span>
+    <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;apt-get&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;apt-get is not available on this system&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="c1"># Install Free Pascal Compiler</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="p">(</span><span class="s1">&#39;Sudo password:&#39;</span><span class="p">)</span>
+    <span class="c1"># run the command sudo apt-get install fp-compiler and enter the password and print the output</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;echo </span><span class="si">{}</span><span class="s1"> | sudo -S apt-get install fp-compiler&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">password</span><span class="p">))</span></div>
+
+
+<span class="c1"># def install_parallel_Linux():</span>
+<span class="c1">#     &quot;&quot;&quot; Install GNU Parallel on Linux</span>
+<span class="c1">#     &quot;&quot;&quot;   </span>
+<span class="c1">#     # check if system is Linux</span>
+<span class="c1">#     if os.name != &#39;posix&#39;:</span>
+<span class="c1">#         print(&#39;This function is only available on Linux systems&#39;)</span>
+<span class="c1">#         sys.exit()</span>
+    
+<span class="c1">#     # check if apt-get is available</span>
+<span class="c1">#     if shutil.which(&quot;apt-get&quot;) is None:</span>
+<span class="c1">#         print(&#39;apt-get is not available on this system&#39;)</span>
+<span class="c1">#         sys.exit()</span>
+
+<span class="c1">#     # Install GNU Parallel</span>
+<span class="c1">#     password = getpass(&#39;Sudo password:&#39;)</span>
+<span class="c1">#     # run the command sudo apt-get install parallel and enter the password and print the output</span>
+<span class="c1">#     os.system(&#39;echo {} | sudo -S apt-get install parallel&#39;.format(password))</span>
+
+<span class="c1"># def fpc_prog(cwd,prog_name):</span>
+<span class="c1">#     &quot;&quot;&quot;_summary_</span>
+
+<span class="c1">#     Parameters</span>
+<span class="c1">#     ----------</span>
+<span class="c1">#     cwd : string</span>
+<span class="c1">#         Current working directory</span>
+<span class="c1">#     prog_name : string</span>
+<span class="c1">#         Name of the program to compile</span>
+
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     # Check if fpc installed</span>
+<span class="c1">#     if verbose:</span>
+<span class="c1">#         print(&quot;Checking for Free Pascal Compiler (fpc) package&quot;)</span>
+<span class="c1">#     if shutil.which(&quot;fpc&quot;) is not None:</span>
+<span class="c1">#         # fpc is installed, check the version and print to stdout.</span>
+<span class="c1">#         result = subprocess.run([&quot;fpc&quot;, &quot;-iV&quot;], stdout=subprocess.PIPE, text=True)</span>
+<span class="c1">#         fpc_version = result.stdout</span>
+
+<span class="c1">#         # remove possible newline character</span>
+<span class="c1">#         if &#39;\n&#39; in fpc_version:</span>
+<span class="c1">#             fpc_version = fpc_version.strip(&#39;\n&#39;)</span>
+
+<span class="c1">#         # fpc version must be larger than min_fpc_version</span>
+<span class="c1">#         if version.parse(fpc_version) &gt; version.parse(min_fpc_version):</span>
+<span class="c1">#             if verbose:</span>
+<span class="c1">#                 print(f&#39;Free Pascal Compiler (fpc) is installed with version &gt;= {min_fpc_version}\n&#39;)</span>
+<span class="c1">#             # Compile the programs</span>
+<span class="c1">#             os.chdir(os.path.join(cwd,prog_name))</span>
+<span class="c1">#             os.system(f&#39;fpc {prog_name}.pas&#39;)</span>
+<span class="c1">#             os.chdir(cwd)</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             # fpc version requirement not met</span>
+<span class="c1">#             print(f&#39;Installed Free Pascal Compiler (fpc) version is {fpc_version}, but must be at least 3.2.0\n&#39;)</span>
+<span class="c1">#             result = cmd_yes_no_question(&quot;Do you want to continue with the pre-compiled binaries (y) or abort and update the Free Pascal Compiler (n) (recommended)&quot;, &#39;no&#39;)</span>
+<span class="c1">#             if result is True:</span>
+<span class="c1">#                 # download assets</span>
+<span class="c1">#                 print(&quot;\ndownload assets&quot;)</span>
+<span class="c1">#                 result_assets = get_SIMsalabim_assets(cwd, verbose)</span>
+<span class="c1">#                 sys.exit(result_assets)</span>
+<span class="c1">#             elif result is False:</span>
+<span class="c1">#                 # return and exit</span>
+<span class="c1">#                 sys.exit(3)</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         # fpc is not installed.</span>
+<span class="c1">#         print(&quot;Free Pascal Compiler is not installed.\n&quot;)</span>
+        
+<span class="c1">#         sys.exit(3)</span>
+
+<div class="viewcode-block" id="fpc_prog">
+<a class="viewcode-back" href="../../../pySIMsalabim.install.html#pySIMsalabim.install.get_SIMsalabim.fpc_prog">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fpc_prog</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="n">prog_name</span><span class="p">,</span><span class="n">show_term_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">force_fpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compile program using fpc</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cwd : string</span>
+<span class="sd">        String of the absolute path to the program</span>
+<span class="sd">    prog_name : string</span>
+<span class="sd">        Name of the program to compile</span>
+<span class="sd">    show_term_output : bool, optional</span>
+<span class="sd">        show terminal output from the compilation, by default True</span>
+<span class="sd">    force_fpc : bool, optional  </span>
+<span class="sd">        force recompile with fpc even if compiled program already exists, by default True</span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        print output of the compilation, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+
+    <span class="n">is_windows</span> <span class="o">=</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">)</span>          <span class="c1"># Check if we are on Windows</span>
+    <span class="n">cwd</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cwd</span><span class="p">)</span>                  <span class="c1"># Convert to string</span>
+
+    <span class="c1"># check if</span>
+    <span class="n">compiled</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">compiled</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;fpc&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># fpc is installed, check the version and print to stdout.</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;fpc&quot;</span><span class="p">,</span> <span class="s2">&quot;-iV&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">fpc_version</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span>
+
+            <span class="c1"># remove possible newline character</span>
+            <span class="k">if</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">fpc_version</span><span class="p">:</span>
+                <span class="n">fpc_version</span> <span class="o">=</span> <span class="n">fpc_version</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="c1"># fpc version must be larger than min_fpc_version</span>
+            <span class="k">if</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fpc_version</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">min_fpc_version</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Free Pascal Compiler (fpc) is installed with version &gt;= </span><span class="si">{</span><span class="n">min_fpc_version</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> 
+                <span class="c1"># Check if the program is already compiled</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39;.exe&#39;</span><span class="p">))</span> <span class="ow">and</span> <span class="n">is_windows</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="n">prog_name</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_windows</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">force_fpc</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">show_term_output</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="n">output_direct</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">output_direct</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;fpc&#39;</span><span class="p">,</span> <span class="n">prog_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;.pas&#39;</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">output_direct</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="n">is_windows</span><span class="p">)</span>
+                        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error compiling &#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; in &#39;</span><span class="o">+</span><span class="n">cwd</span><span class="p">)</span>
+                            <span class="k">raise</span> <span class="ne">ChildProcessError</span>
+                        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; already existed but was recompiled&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>  
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; already compiled&#39;</span><span class="p">)</span>
+                
+                <span class="k">else</span><span class="p">:</span> <span class="c1"># Compile the program</span>
+                    <span class="k">if</span> <span class="n">show_term_output</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">output_direct</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">output_direct</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;fpc&#39;</span><span class="p">,</span> <span class="n">prog_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;.pas&#39;</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">output_direct</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="n">is_windows</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; was not compiled so we did it!&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error compiling &#39;</span><span class="o">+</span><span class="n">prog_name</span><span class="o">+</span><span class="s1">&#39; in &#39;</span><span class="o">+</span><span class="n">cwd</span><span class="p">)</span>
+                        <span class="k">raise</span> <span class="ne">ChildProcessError</span> 
+                <span class="n">compiled</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># fpc version requirement not met</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Installed Free Pascal Compiler (fpc) version is </span><span class="si">{</span><span class="n">fpc_version</span><span class="si">}</span><span class="s1">, but must be at least 3.2.0</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please update the Free Pascal Compiler to the latest version&#39;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># fpc is not installed.</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free Pascal Compiler is not installed.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">cmd_yes_no_question</span><span class="p">(</span><span class="s2">&quot;Do you want to continue and install the Free Pascal Compiler (only works on Linux) (y) or abort (n) (recommended)&quot;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># install fpc</span>
+                <span class="n">install_fpc_Linux</span><span class="p">()</span>
+                <span class="c1"># sys.exit(0)</span>
+            <span class="k">elif</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="c1"># return and exit</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></div>
+
+
+        
+
+
+  
+<span class="c1">######### Script ##################################################################################</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">install_SIMsalabim</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

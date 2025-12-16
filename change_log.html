@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Change Log &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Steady-state light-intensity dependent JV simulation" href="examples/light_dep_JVs.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Change Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-04-2025-12-16-vmlc-pv-sh">v1.04 - 2025-12-16 - VMLC-PV, SH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-03-2025-09-24-vmlc-pv">v1.03 - 2025-09-24 - VMLC-PV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-02-2025-04-28-vmlc-pv-sh-fe">v1.02 - 2025-04-28 - VMLC-PV, SH, FE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-01-18-02-2025-sh">v1.01 - 18-02-2025 - SH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2024-10-16-vmlc-pv">v1 - 2024-10-16 - VMLC-PV</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Change Log</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/change_log.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="change-log">
+<h1>Change Log<a class="headerlink" href="#change-log" title="Link to this heading"></a></h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<section id="v1-04-2025-12-16-vmlc-pv-sh">
+<h2>v1.04 - 2025-12-16 - VMLC-PV, SH<a class="headerlink" href="#v1-04-2025-12-16-vmlc-pv-sh" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Removing the limitation for the numpy version in setup.py to allow for more flexibility in the numpy version used. Previously the version was constrained to be &gt;=1.2 and &lt;=2.0.0.</p></li>
+<li><p>Fixed bug in utils.py/update_cmd_pars: When a parameter was provided both in the main parameters, as well as in the command line parameters, the found parameter was not set to True, leading to duplicate parameters in the cmd line.</p></li>
+</ul>
+</section>
+<section id="v1-03-2025-09-24-vmlc-pv">
+<h2>v1.03 - 2025-09-24 - VMLC-PV<a class="headerlink" href="#v1-03-2025-09-24-vmlc-pv" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>JV_steady_state.py, hysteresis.py, impedance.py, imps.py, EQE.py, CV.py: Added verbose output option for simulation functions made sure that we only return an integer (return code) and a message (string) from the simulation functions. This is to ensure that the return value is always an integer, never an object.</p></li>
+<li><p>general.py: remade the ‘error_message’ function to provide more informative error messages and implemented an error code 666 when multiple simulations ran in parallel failed with different error messages.</p></li>
+<li><p>parallel_sim.py: made the parallel output consitent between linux and windows. Improved error message when error code 91 is returned to make it easier to find which input parameters caused the error.</p></li>
+<li><p>JV_sweep.py: added a new experiment to perform single sweep JV simulations using zimt.</p></li>
+<li><p>Added a warning for Windows users in the README.md about the maximum path length of 260 characters in Windows and the issues it can cause when running simulations. Recommended to use Linux or WSL2 instead of Windows. Also created the PathChecksWin.py file to handle long paths in Windows by adding the \?\ prefix to paths longer than 260 characters, which might help in some cases.</p></li>
+<li><p>Fixed some bug in the test files for the EQE simulations.</p></li>
+</ul>
+</section>
+<section id="v1-02-2025-04-28-vmlc-pv-sh-fe">
+<h2>v1.02 - 2025-04-28 - VMLC-PV, SH, FE<a class="headerlink" href="#v1-02-2025-04-28-vmlc-pv-sh-fe" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>general.py: Modified the construct_cmd to work on Windows by adding “” around the parameter names and values.</p></li>
+<li><p>Impedance.py: Let the function ‘run_impedance_simu’ return a result and message. With this update, ‘result’ is always a number, never an object. Handle failed to converge Voc simulation.</p></li>
+<li><p>Hysteresis.py: removed np.trapezoid and replaced it with scipy.integrate.trapezoid, small update to the message output.</p></li>
+<li><p>addons.py: Added some very simple functions to calculate the performance metrics of the solar cell.</p></li>
+<li><p>get_SIMsalabim.py: fix some indentation issues.</p></li>
+<li><p>Removed redundant SIMsalabim folder.</p></li>
+<li><p>update docs.</p></li>
+</ul>
+</section>
+<section id="v1-01-18-02-2025-sh">
+<h2>v1.01 - 18-02-2025 - SH<a class="headerlink" href="#v1-01-18-02-2025-sh" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Impedance.py: If the tolerance of the density solver (tolDens) was not strict enough when doing impedance, the calculated spectrum could be wrong/incorrect in some cases due to not high enough accuracy. As a small delta t creates a very large spike in current, we need sufficient accuracy to resolve this, hence the tolerance must be strict enough. We added a function to calculate the tolerance of the density solver to ensure that it is sufficiently strict. It is calculated using tolDens = J(t=∞) - J(t=0) / J_displacement.</p></li>
+<li><p>Impedance.py: Added the option to calculate impedance at open-circuit voltage (Set applied voltage <em>V<sub>0</sub></em> to ‘oc’). When set, first the Voc is calculated by SIMsalabim, after which the just calculated Voc is then used as the applied voltage for the impedance calculation.</p></li>
+<li><p>Hysteresis.py: Included the calculation of the hysteresis index (HI). The HI is defined as the area between the forward and backward scan normalised over the spanned area of the curves.</p></li>
+</ul>
+</section>
+<section id="v1-2024-10-16-vmlc-pv">
+<h2>v1 - 2024-10-16 - VMLC-PV<a class="headerlink" href="#v1-2024-10-16-vmlc-pv" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Initial release of the project.</p></li>
+<li><p>Includes new test and documentation.</p></li>
+<li><p>added varFile as an input for the experiment functions.</p></li>
+<li><p>added turn_off_autoTidy as a kwargs for the experiment functions to avoid autoTidy when not using threadsafe functions.</p></li>
+<li><p>created setup.py and requirements.txt files.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples/light_dep_JVs.html" class="btn btn-neutral float-right" title="Steady-state light-intensity dependent JV simulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

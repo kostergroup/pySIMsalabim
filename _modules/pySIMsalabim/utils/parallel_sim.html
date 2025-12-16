@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.utils.parallel_sim &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.utils.parallel_sim</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.utils.parallel_sim</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functions for general use&quot;&quot;&quot;</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">zipfile</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">uuid</span><span class="o">,</span><span class="w"> </span><span class="nn">shutil</span><span class="o">,</span><span class="w"> </span><span class="nn">threading</span><span class="o">,</span><span class="w"> </span><span class="nn">queue</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">subprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">run</span><span class="p">,</span> <span class="n">PIPE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.general</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.device_parameters</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.aux_funcs.PathChecksWin</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_to_long_path</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+<div class="viewcode-block" id="parallel_error_message">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.parallel_error_message">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parallel_error_message</span><span class="p">(</span><span class="n">errorcode</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;When a &#39;standard Pascal&#39; fatal error occurs, add the standard error message to be used with parallel which does not read the </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    errorcode : int</span>
+<span class="sd">        the error code</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        the error message</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">errorcode</span> <span class="o">&gt;=</span> <span class="mi">90</span> <span class="ow">and</span> <span class="n">errorcode</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Error &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">errorcode</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;: &#39;</span>
+        <span class="k">if</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Device parameter file corrupted.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">91</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Invalid input (physics, or voltage in tVGFile too large).&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">92</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Invalid input from command line.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">93</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Numerical failure.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">94</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Failed to converge, halt (FailureMode = 0).&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39; Failed to converge at least 1 point, not halt (FailureMode != 0).&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">96</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Missing input file.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">97</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Runtime exceeds limit set by timeout.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Programming error (i.e. not due to the user!).&#39;</span>
+    <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Fatal error &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">errorcode</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;: &#39;</span>
+        <span class="k">if</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">106</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Invalid numeric format: Reported when a non-numeric value is read from a text file.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Division by zero: The application attempted to divide a number by zero.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Range check error.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">202</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Stack overflow error: This error is only reported when stack checking is enabled.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">205</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Floating point overflow.&#39;</span>
+        <span class="k">elif</span> <span class="n">errorcode</span> <span class="o">==</span> <span class="mi">206</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Floating point underflow.&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Unknown error code &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">errorcode</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; occurred.&#39;</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Unknown error code &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">errorcode</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; occurred.&#39;</span>
+
+    <span class="k">return</span> <span class="n">message</span></div>
+
+
+<div class="viewcode-block" id="run_simulation_parallel">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.run_simulation_parallel">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_simulation_parallel</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars_list</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">max_jobs</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the SIMsalabim simulation executable with the chosen device parameters.  </span>
+<span class="sd">    Select the correct function to run the simulation in parallel based on the operating system.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sim_type : string</span>
+<span class="sd">        Which type of simulation to run: simss or zimt</span>
+<span class="sd">    cmd_pars_list : List</span>
+<span class="sd">        List of list with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys. </span>
+<span class="sd">        Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        File path of the simss or zimt executable </span>
+<span class="sd">    max_jobs : int</span>
+<span class="sd">        Maximum number of parallel jobs to run. Default is the number of CPU cores - 1</span>
+<span class="sd">    verbose : bool</span>
+<span class="sd">        If True, print the output of the simulation to the console</span>
+<span class="sd">    **kwargs : dict</span>
+<span class="sd">        Additional keyword arguments to pass to the function</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    CompletedProcess</span>
+<span class="sd">        Output object of with returncode and console output of the simulation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">force_multithreading</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;force_multithreading&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+        <span class="c1"># Windows</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">msg_list</span><span class="p">,</span> <span class="n">return_code_list</span> <span class="o">=</span> <span class="n">run_simulation_multithreaded_windows</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars_list</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">max_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="n">return_code_list</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Linux</span>
+        <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s1">&#39;parallel&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force_multithreading</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">msg_list</span><span class="p">,</span> <span class="n">return_code_list</span>  <span class="o">=</span> <span class="n">run_simulation_GNU_parallel</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars_list</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">max_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+            <span class="n">result_list</span> <span class="o">=</span> <span class="n">return_code_list</span>           
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">msg_list</span><span class="p">,</span> <span class="n">return_code_list</span> <span class="o">=</span> <span class="n">run_simulation_multithreaded_linux</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars_list</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">max_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+            <span class="n">result_list</span> <span class="o">=</span> <span class="n">return_code_list</span>
+
+    <span class="k">return</span> <span class="n">result_list</span></div>
+
+
+<div class="viewcode-block" id="run_simulation_GNU_parallel">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.run_simulation_GNU_parallel">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_simulation_GNU_parallel</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars_list</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">max_jobs</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the SIMsalabim simulation executable with the chosen device parameters.  </span>
+<span class="sd">        The simulation is run in parallel using the GNU Parallel program. (https://www.gnu.org/software/parallel/).</span>
+<span class="sd">        If this command is used please cite:</span>
+<span class="sd">        Tange, O. (2021, August 22). GNU Parallel 20210822 (&#39;Kabul&#39;).</span>
+<span class="sd">        Zenodo. https://doi.org/10.5281/zenodo.5233953</span>
+
+<span class="sd">        To Install GNU Parallel on linux: (not available on Windows)</span>
+<span class="sd">        sudo apt-get update</span>
+<span class="sd">        sudo apt-get install parallel</span>
+<span class="sd">        </span>
+<span class="sd">        or try to run the install_GNU_parallel_Linux() function from the install module.</span>
+<span class="sd">        import pySIMsalabim.install as install</span>
+<span class="sd">        install.install_GNU_parallel_Linux()</span>
+
+<span class="sd">        Return the complete result object of the process accompanied by a message with information, </span>
+<span class="sd">        in case of both success and failure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sim_type : string</span>
+<span class="sd">        Which type of simulation to run: simss or zimt</span>
+<span class="sd">    cmd_pars_list : List</span>
+<span class="sd">        List of list with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys. </span>
+<span class="sd">        Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        File path of the simss or zimt executable </span>
+<span class="sd">    max_jobs : int</span>
+<span class="sd">        Maximum number of parallel jobs to run. Default is the number of CPU cores - 1</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    CompletedProcess</span>
+<span class="sd">        Output object of with returncode and console output of the simulation</span>
+<span class="sd">    List</span>
+<span class="sd">        Return list of messages for each simulation</span>
+<span class="sd">    List</span>
+<span class="sd">        Return list of return codes for each simulation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Construct the command to run the executable</span>
+    <span class="n">cmd_line_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">cmd_pars</span> <span class="ow">in</span> <span class="n">cmd_pars_list</span><span class="p">:</span>
+        <span class="n">cmd_line</span> <span class="o">=</span> <span class="n">construct_cmd</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+        <span class="n">cmd_line_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_line</span><span class="p">)</span>
+    
+   
+    <span class="c1"># Construct the file and command to run the GNU parallel</span>
+    <span class="n">uuid_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;Str4Parallel_&#39;</span><span class="o">+</span><span class="n">uuid_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span>
+    <span class="n">log_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="s1">&#39;logjob_&#39;</span><span class="o">+</span><span class="n">uuid_str</span><span class="o">+</span> <span class="s1">&#39;.dat&#39;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">filename</span><span class="p">),</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempfilepar</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">cmd_line</span> <span class="ow">in</span> <span class="n">cmd_line_list</span><span class="p">:</span>
+            <span class="n">tempfilepar</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cmd_line</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">cmd_parallel</span> <span class="o">=</span> <span class="s1">&#39;parallel --joblog &#39;</span><span class="o">+</span> <span class="n">log_file</span> <span class="o">+</span><span class="s1">&#39; --jobs &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">max_jobs</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; -a &#39;</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">filename</span><span class="p">)</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">([</span><span class="n">cmd_parallel</span><span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">session_path</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">msg_list</span><span class="p">,</span><span class="n">return_code_list</span> <span class="o">=</span> <span class="p">[],[]</span>
+
+    <span class="c1"># if result.returncode != 0:</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">log_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Exitval&#39;</span><span class="p">],</span><span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+
+    <span class="c1"># check if all jobs have been completed successfully, i.e. all exitvals are 0, 95 or 3</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;Exitval&#39;</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">log</span><span class="p">[</span><span class="s1">&#39;Exitval&#39;</span><span class="p">]):</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">val</span> <span class="o">!=</span> <span class="mi">95</span> <span class="ow">and</span> <span class="n">val</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">91</span><span class="p">:</span>
+                    <span class="c1"># look for the logfile to get more information about the error</span>
+                    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cmd_pars_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;logFile&#39;</span><span class="p">:</span>
+                            <span class="n">logFile</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span>
+                            <span class="k">break</span>
+                    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">logFile</span><span class="p">)):</span>
+                        <span class="c1"># find line with &#39;Program will be terminated.&#39; and store the next lines as the error message</span>
+                        <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">logFile</span><span class="p">),</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                            <span class="k">for</span> <span class="n">line_console</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">startMessage</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                                    <span class="c1"># The actual error message. Since the error message can be multi-line, append each line.</span>
+                                    <span class="n">message</span> <span class="o">=</span> <span class="n">message</span> <span class="o">+</span> <span class="n">line_console</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                <span class="k">if</span> <span class="s1">&#39;Program will be terminated.&#39;</span> <span class="ow">in</span> <span class="n">line_console</span><span class="p">:</span>
+                                    <span class="c1"># Last &#39;regular&#39; line of the console output. The next line is from the error message.</span>
+                                    <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Simulation raised an error with Errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">parallel_error_message</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">217</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">cmd_line_list</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                <span class="k">elif</span> <span class="n">val</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+                    <span class="c1"># Show the message as an error on the screen. Do not continue to the simulation results page.</span>
+                    <span class="n">msg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Simulation raised an error with Errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">parallel_error_message</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+                
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">msg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parallel_error_message</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+                    <span class="c1"># In case of errorcode 95, failures during the simulations were encountered but the simulation did not halt. Show &#39;error&#39; messages on the UI.</span>
+                    <span class="n">msg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Simulation completed but raised errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;The simulation finished but at least 1 point did not converge.&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="c1"># Special case, should not occur in the web version.</span>
+                    <span class="c1"># When the program exits as a success but no simulation has been run, e.g. in the case of the autotidy functionality. </span>
+                    <span class="n">msg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Action completed&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Simulation completed as expected.</span>
+                    <span class="n">msg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Simulation completed.&#39;</span><span class="p">)</span>
+
+    <span class="n">return_code_list</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;Exitval&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  
+
+    <span class="c1"># remove the temporary files</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">filename</span><span class="p">))</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">log_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">msg_list</span><span class="p">,</span> <span class="n">return_code_list</span></div>
+
+
+<div class="viewcode-block" id="run_simulation_multithreaded_windows">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.run_simulation_multithreaded_windows">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_simulation_multithreaded_windows</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span><span class="n">cmd_pars_list</span><span class="p">,</span><span class="n">session_path</span><span class="p">,</span><span class="n">max_jobs</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs simulations in parallel on max_jobs number of threads.  </span>
+<span class="sd">    This procedure should work on Windows and Linux but it is not as efficient as run_parallel_simu on Linux.</span>
+<span class="sd">    Yet, it is the only way to run simulations in parallel on Windows in a thread safe way and making sure that two thread do not try to write to the same file at the same time.</span>
+<span class="sd">    This is achieved by running the simulation in a temporary folder with a copy of all the necessary input files and then moving the output files to the original folder.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sim_type : string</span>
+<span class="sd">        Which type of simulation to run: simss or zimt</span>
+<span class="sd">    cmd_pars_list : List</span>
+<span class="sd">        List of list with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys. </span>
+<span class="sd">        Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        File path of the simss or zimt executable </span>
+<span class="sd">    max_jobs : int</span>
+<span class="sd">        Maximum number of parallel jobs to run. Default is the number of CPU cores - 1</span>
+<span class="sd">    verbose : bool</span>
+<span class="sd">        If True, print the output of the simulation to the console</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List</span>
+<span class="sd">        List of CompletedProcess objects with returncode and console output of the simulation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>    <span class="c1"># Create a lock   </span>
+    <span class="n">semaphore</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="n">max_jobs</span><span class="p">)</span>  <span class="c1"># Create a semaphore</span>
+
+    <span class="c1"># Create tmp folder</span>
+    <span class="n">rnd_ID</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+    <span class="n">tmp_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="o">+</span><span class="n">rnd_ID</span><span class="p">)</span> <span class="c1"># Generate a unique ID for the temporary folder to make sure there are no conflicts with other processes</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">)</span>
+
+    <span class="n">tmp_folder_lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmp_folder</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_pars_list</span><span class="p">)</span>
+
+    <span class="c1"># Create a queue to communicate with the worker threads</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># Start worker threads</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cmd_pars_list</span><span class="p">)):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">CustomThread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">worker_windows</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">,</span><span class="n">tmp_folder</span><span class="o">=</span><span class="n">tmp_folder_lst</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">semaphore</span><span class="o">=</span><span class="n">semaphore</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">))</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># Add tasks to the queue</span>
+    <span class="k">for</span> <span class="n">code_name</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">sim_type</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_pars_list</span><span class="p">),</span> <span class="n">cmd_pars_list</span><span class="p">,</span> <span class="n">tmp_folder_lst</span><span class="p">):</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">code_name</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">session_path</span><span class="p">))</span>
+
+    <span class="c1"># Wait for all tasks to be finished</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    
+    <span class="c1"># Stop workers</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cmd_pars_list</span><span class="p">)):</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    
+    <span class="n">result_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+        <span class="n">result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">())</span>
+     
+    <span class="c1"># # Clean up</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">)</span>
+
+    <span class="n">return_code_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">returncode</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">result_list</span><span class="p">]</span>
+    <span class="n">message_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">return_code_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="mi">91</span><span class="p">:</span>
+            <span class="c1"># look for the logfile to get more information about the error</span>
+            <span class="k">for</span> <span class="n">cmd_pars</span> <span class="ow">in</span> <span class="n">cmd_pars_list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;logFile&#39;</span><span class="p">:</span>
+                        <span class="n">logFile</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span>
+                        <span class="k">break</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">logFile</span><span class="p">)):</span>
+                <span class="c1"># find line with &#39;Program will be terminated.&#39; and store the next lines as the error message</span>
+                <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">logFile</span><span class="p">),</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">line_console</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">startMessage</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="c1"># The actual error message. Since the error message can be multi-line, append each line.</span>
+                            <span class="n">message</span> <span class="o">=</span> <span class="n">message</span> <span class="o">+</span> <span class="n">line_console</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                        <span class="k">if</span> <span class="s1">&#39;Program will be terminated.&#39;</span> <span class="ow">in</span> <span class="n">line_console</span><span class="p">:</span>
+                            <span class="c1"># Last &#39;regular&#39; line of the console output. The next line is from the error message.</span>
+                            <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Simulation raised an error with Errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">parallel_error_message</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                <span class="n">message_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">message_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Simulation raised an error with Errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">parallel_error_message</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parallel_error_message</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+
+    <span class="c1"># message_list = [parallel_error_message(res) for res in return_code_list]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span><span class="p">):</span>
+        <span class="c1"># check if only one error code different from 0, 95 or 3</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># if so, return that error code and the corresponding message</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">return_code_list</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">3</span><span class="p">]][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">return_code_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">message_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">result_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">result</span><span class="p">,</span> <span class="n">message</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiple different errors occurred during the parallel simulations: </span><span class="si">{</span><span class="nb">set</span><span class="p">([</span><span class="n">val</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">return_code_list</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]])</span><span class="si">}</span><span class="s2">. Returning error code 666.&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="mi">666</span>
+    <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">95</span>
+    <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message_list</span><span class="p">,</span> <span class="n">return_code_list</span></div>
+
+
+<div class="viewcode-block" id="worker_windows">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.worker_windows">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">worker_windows</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">lock</span><span class="p">,</span><span class="n">tmp_folder</span><span class="p">,</span><span class="n">semaphore</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Worker function that runs the simulation in a temporary folder and moves the output files to the original folder. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    q : queue</span>
+<span class="sd">        Queue to communicate with the main thread</span>
+<span class="sd">    lock : threading.Lock</span>
+<span class="sd">        Lock to prevent multiple threads from writing to the same file at the same time</span>
+<span class="sd">    tmp_folder : string</span>
+<span class="sd">        Temporary folder to run the simulation in</span>
+<span class="sd">    semaphore : threading.Semaphore</span>
+<span class="sd">        Semaphore to limit the number of parallel jobs</span>
+<span class="sd">    verbose : bool</span>
+<span class="sd">        If True, print the output of the simulation to the console</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Get task from the queue</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Unpack task</span>
+        <span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">session_path</span> <span class="o">=</span> <span class="n">task</span>
+
+        <span class="n">device_parameters</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">cmd_par</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;dev_par_file&#39;</span><span class="p">:</span>
+                <span class="n">device_parameters</span> <span class="o">=</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span>
+                <span class="k">break</span>
+    
+        <span class="k">if</span> <span class="n">device_parameters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Device parameters file not found in the command parameters list.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Acquire semaphore</span>
+        <span class="n">semaphore</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+
+        <span class="c1"># create a temporary folder for the simulation</span>
+        <span class="n">ID</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span> <span class="c1"># Generate a unique ID for the temporary folder</span>
+        <span class="n">tmp_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">ID</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">)</span>
+
+        <span class="c1"># Copy all necessary files to the temporary folder</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="c1"># copy the executable to the temporary folder</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+            <span class="n">sim_exe_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">sim_type</span> <span class="o">+</span> <span class="s1">&#39;.exe&#39;</span><span class="p">))</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">sim_exe_path</span><span class="p">,</span> <span class="n">tmp_folder</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">sim_type</span><span class="p">),</span> <span class="n">tmp_folder</span><span class="p">)</span>
+
+        <span class="n">dev_par</span><span class="p">,</span> <span class="n">layers</span> <span class="o">=</span> <span class="n">load_device_parameters</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">device_parameters</span><span class="p">,</span> <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># check for new layers in the cmd_pars</span>
+        <span class="n">newlayers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">idx_layers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cmd_par</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">newlayers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+                <span class="n">idx_layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]))</span>
+        
+        <span class="c1"># update layer files with cmd_pars</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">newlayers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">cmd_par</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">layer</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                        <span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span>
+                        <span class="k">break</span>
+        
+        <span class="c1"># check if we need to add new layers</span>
+        <span class="n">newlayers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">idx_layers</span><span class="p">,</span> <span class="n">newlayers</span><span class="p">))]</span>
+        <span class="n">idx_layers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">idx_layers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_layers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">idx_layers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="c1"># means we need to add new layers</span>
+                <span class="c1"># check that all the layers between len(layers)-&amp; and max(idx_layers) are in the idx_layers list</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">idx_layers</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">idx_layers</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Missing layer definition for layer &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; in the command parameters list.&#39;</span><span class="p">)</span>
+                <span class="c1"># add the new layers</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">idx_layers</span><span class="p">,</span> <span class="n">newlayers</span><span class="p">):</span>
+                    <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;par&#39;</span><span class="p">,</span><span class="s1">&#39;l&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">layer</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]],</span><span class="s1">&#39;parameter file for layer &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            
+                <span class="c1"># update dev_par layer files with cmd_pars</span>
+                <span class="n">dev_par_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dev_par</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">section</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dev_par</span><span class="p">[</span><span class="n">dev_par_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]):</span>
+                    <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;layers&#39;</span><span class="p">:</span>
+                        <span class="c1"># update section with layers[1:]</span>
+                        <span class="n">dev_par</span><span class="p">[</span><span class="n">dev_par_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>                  
+
+
+        <span class="c1"># move all layers to the temporary folder</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+                <span class="n">layer_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">layer_path</span><span class="p">,</span> <span class="n">tmp_folder</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">tmp_folder</span><span class="p">)</span>
+
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">store_file_names</span><span class="p">(</span><span class="n">dev_par</span><span class="p">,</span> <span class="n">sim_type</span><span class="p">,</span> <span class="n">device_parameters</span><span class="p">,</span> <span class="n">layers</span><span class="p">,</span> <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">layer_files</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">optical_files</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># make absolute paths</span>
+        <span class="n">layer_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer_files</span><span class="p">]</span>
+        <span class="n">optical_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">optical_files</span><span class="p">]</span>
+        <span class="n">optical_file_basenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">optical_files</span><span class="p">]</span>   
+        <span class="n">traps_int_files</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">traps_bulk_files</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">traps_int_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">traps_int_files</span><span class="p">]</span>
+        <span class="n">traps_bulk_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">traps_bulk_files</span><span class="p">]</span>
+        <span class="n">traps_int_file_basenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">traps_int_files</span><span class="p">]</span>
+        <span class="n">traps_bulk_file_basenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">traps_bulk_files</span><span class="p">]</span>
+
+        <span class="n">ExpJV_file</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">tVGFile</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">tJFile</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">JVFile</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">scParsFile</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">sim_type</span> <span class="o">==</span> <span class="s1">&#39;simss&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;None&#39;</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">ExpJV_file</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ExpJV_file</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">JVFile</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+            <span class="n">scParsFile</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tVGFile</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">tJFile</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+
+        <span class="n">varFile</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="n">logFile</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+
+
+        <span class="c1"># Copy the files to the temporary folder</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">layer_files</span> <span class="o">+</span> <span class="n">optical_files</span> <span class="o">+</span> <span class="n">traps_int_files</span> <span class="o">+</span> <span class="n">traps_bulk_files</span> <span class="o">+</span> <span class="p">[</span><span class="n">ExpJV_file</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">tVGFile</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+                    <span class="n">file_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">tmp_folder</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">tmp_folder</span><span class="p">)</span>
+
+            <span class="c1"># update temp folder files with basename</span>
+            <span class="k">if</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">layer_files</span><span class="p">:</span>
+                <span class="n">make_basename_input_files</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file</span><span class="p">)))</span>       
+
+        <span class="c1"># move files from cmd_pars to the temporary folder and overwrite if necessary</span>
+        <span class="n">input_files</span> <span class="o">=</span> <span class="n">get_inputFile_from_cmd_pars</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+        <span class="n">input_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]))</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">]</span>
+        <span class="n">input_files_basenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">:</span>
+            <span class="c1"># if file already in the tmp_folder, remove it and copy the new one</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file</span><span class="p">))):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file</span><span class="p">)))</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="n">tmp_folder</span><span class="p">)</span>
+
+        <span class="c1"># set basename for device parameters</span>
+        <span class="n">make_basename_input_files</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">device_parameters</span><span class="p">)))</span>
+
+
+        <span class="c1"># check the input files for the new layers</span>
+        <span class="c1"># for layer in newlayers:</span>
+        <span class="c1">#     input_files2 = get_inputFile_from_layer(layer,session_path)</span>
+        <span class="c1">#     for file in input_files2:</span>
+        <span class="c1">#         # if file does not exist in the tmp_folder, copy it. Otherwise, copy it if it is not in the input_files list</span>
+        <span class="c1">#         if not os.path.isfile(os.path.join(tmp_folder, os.path.basename(file))):</span>
+        <span class="c1">#             shutil.copy(os.path.join(session_path, file), tmp_folder)</span>
+        <span class="c1">#         else:</span>
+        <span class="c1">#             if not os.path.basename(file) in input_files_basenames:</span>
+        <span class="c1">#                 shutil.copy(os.path.join(session_path, file), tmp_folder)</span>
+
+        <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+        <span class="c1"># Construct the command to run the executable</span>
+        <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">make_basename_file_cmd_pars</span><span class="p">(</span><span class="n">cmd_pars</span><span class="p">)</span>
+        <span class="n">cmd_line</span> <span class="o">=</span> <span class="n">construct_cmd</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+
+        <span class="c1"># Run the simulation</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">cmd_line</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Check the results of the process using the returncodes and console output</span>
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">95</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="c1"># SIMsalabim raised an error, stop the program and return the error message on the UI.</span>
+            <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">result_decode</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="c1"># A fatal (numerical) error occurred. Return errorcode and a standard error message.</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="n">fatal_error_message</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Simsalabim raised an error. Read the console output for the details / error messaging. </span>
+                <span class="c1"># All linetypes after &#39;Program will be terminated, press enter.&#39; are considered part of the error message</span>
+                <span class="k">for</span> <span class="n">line_console</span> <span class="ow">in</span> <span class="n">result_decode</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">startMessage</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="c1"># The actual error message. Since the error message can be multi-line, append each line.</span>
+                        <span class="n">message</span> <span class="o">=</span> <span class="n">message</span> <span class="o">+</span> <span class="n">line_console</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="k">if</span> <span class="s1">&#39;Program will be terminated.&#39;</span> <span class="ow">in</span> <span class="n">line_console</span><span class="p">:</span>
+                        <span class="c1"># Last &#39;regular&#39; line of the console output. The next line is from the error message.</span>
+                        <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="c1"># Show the message as an error on the screen. Do not continue to the simulation results page.</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Simulation raised an error with Errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">message</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># SIMsalabim simulation succeeded</span>
+            <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+                <span class="c1"># In case of errorcode 95, failures during the simulations were encountered but the simulation did not halt. Show &#39;error&#39; messages on the UI.</span>
+                <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="n">result_decode</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">line_console</span> <span class="ow">in</span> <span class="n">result_decode</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">startMessage</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="c1"># The actual error message. Since the error message can be multi-line, append each line.</span>
+                        <span class="n">message</span> <span class="o">=</span> <span class="n">message</span> <span class="o">+</span> <span class="n">line_console</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="k">if</span> <span class="s1">&#39;Program will be terminated.&#39;</span> <span class="ow">in</span> <span class="n">line_console</span><span class="p">:</span>
+                        <span class="c1"># Last &#39;regular&#39; line of the console output. The next line is from the error message.</span>
+                        <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="c1"># Show the message as a success on the screen</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Simulation completed but raised errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;The simulation finished but at least 1 point did not converge. </span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">message</span>
+            <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="c1"># Special case, should not occur in the web version.</span>
+                <span class="c1"># When the program exits as a success but no simulation has been run, e.g. in the case of the autotidy functionality. </span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Action completed&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Simulation completed as expected.</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Simulation complete. Output can be found in the Simulation results.&#39;</span>
+
+        <span class="c1"># Move output files to the original folder</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">sim_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;simss&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">varFile</span><span class="p">)):</span>
+                <span class="n">varFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">varFile</span><span class="p">))</span>
+                <span class="n">newFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">varFile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">varFile_path</span><span class="p">,</span> <span class="n">newFile_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">logFile</span><span class="p">)):</span>
+                <span class="n">logFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">logFile</span><span class="p">))</span>
+                <span class="n">newLog_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">logFile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">logFile_path</span><span class="p">,</span> <span class="n">newLog_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">JVFile</span><span class="p">)):</span>
+                <span class="n">JVFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">JVFile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">JVFile_path</span><span class="p">,</span> <span class="n">session_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">scParsFile</span><span class="p">)):</span>
+                <span class="n">scParsFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">scParsFile</span><span class="p">))</span>
+                <span class="n">newScPars_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">scParsFile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">scParsFile_path</span><span class="p">,</span> <span class="n">newScPars_path</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">sim_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;zimt&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">varFile</span><span class="p">)):</span>
+                <span class="n">varFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">varFile</span><span class="p">))</span>
+                <span class="n">newFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">varFile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">varFile_path</span><span class="p">,</span> <span class="n">newFile_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">logFile</span><span class="p">)):</span>
+                <span class="n">logFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">logFile</span><span class="p">))</span>
+                <span class="n">newLog_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">logFile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">logFile_path</span><span class="p">,</span> <span class="n">newLog_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">tVGFile</span><span class="p">)):</span>
+                <span class="n">tVGFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">tVGFile</span><span class="p">))</span>
+                <span class="n">newTVG_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tVGFile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tVGFile_path</span><span class="p">,</span> <span class="n">newTVG_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">tJFile</span><span class="p">)):</span>
+                <span class="n">tJFile_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="n">tJFile</span><span class="p">))</span>
+                <span class="n">newTJ_path</span> <span class="o">=</span> <span class="n">convert_to_long_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tJFile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tJFile_path</span><span class="p">,</span> <span class="n">newTJ_path</span><span class="p">)</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+        <span class="c1"># Release semaphore</span>
+        <span class="n">semaphore</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+        <span class="c1"># Print output if verbose</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+
+        <span class="c1"># Notify the queue that the task is done</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span></div>
+
+
+<div class="viewcode-block" id="worker_linux">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.worker_linux">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">worker_linux</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">lock</span><span class="p">,</span><span class="n">semaphore</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Worker function that runs the simulation in a temporary folder and moves the output files to the original folder. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    q : queue</span>
+<span class="sd">        Queue to communicate with the main thread</span>
+<span class="sd">    lock : threading.Lock</span>
+<span class="sd">        Lock to prevent multiple threads from writing to the same file at the same time</span>
+<span class="sd">    semaphore : threading.Semaphore</span>
+<span class="sd">        Semaphore to limit the number of parallel jobs</span>
+<span class="sd">    verbose : bool</span>
+<span class="sd">        If True, print the output of the simulation to the console</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Get task from the queue</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">break</span>
+        
+        <span class="c1"># Unpack task</span>
+        <span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">session_path</span> <span class="o">=</span> <span class="n">task</span>
+
+        <span class="c1"># Acquire semaphore</span>
+        <span class="n">semaphore</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="c1"># Release semaphore</span>
+        <span class="n">semaphore</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+        <span class="c1"># Print output if verbose</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+
+        <span class="c1"># Notify the queue that the task is done</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span></div>
+
+
+<div class="viewcode-block" id="run_simulation_multithreaded_linux">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.run_simulation_multithreaded_linux">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_simulation_multithreaded_linux</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span><span class="n">cmd_pars_list</span><span class="p">,</span><span class="n">session_path</span><span class="p">,</span><span class="n">max_jobs</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs simulations in parallel on max_jobs number of threads.  </span>
+<span class="sd">    This procedure should work on Windows and Linux but it is not as efficient as run_parallel_simu on Linux.</span>
+<span class="sd">    Yet, it is the only way to run simulations in parallel on Windows in a thread safe way and making sure that two thread do not try to write to the same file at the same time.</span>
+<span class="sd">    This is achieved by running the simulation in a temporary folder with a copy of all the necessary input files and then moving the output files to the original folder.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sim_type : string</span>
+<span class="sd">        Which type of simulation to run: simss or zimt</span>
+<span class="sd">    cmd_pars_list : List</span>
+<span class="sd">        List of list with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys. </span>
+<span class="sd">        Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        File path of the simss or zimt executable </span>
+<span class="sd">    max_jobs : int</span>
+<span class="sd">        Maximum number of parallel jobs to run. Default is the number of CPU cores - 1</span>
+<span class="sd">    verbose : bool</span>
+<span class="sd">        If True, print the output of the simulation to the console</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List</span>
+<span class="sd">        List of CompletedProcess objects with returncode and console output of the simulation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+ 
+    <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>    <span class="c1"># Create a lock   </span>
+    <span class="n">semaphore</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="n">max_jobs</span><span class="p">)</span>  <span class="c1"># Create a semaphore</span>
+
+    <span class="c1"># Create a queue to communicate with the worker threads</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># Start worker threads</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cmd_pars_list</span><span class="p">)):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">CustomThread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">worker_linux</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">,</span><span class="n">semaphore</span><span class="o">=</span><span class="n">semaphore</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">))</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># Add tasks to the queue</span>
+    <span class="k">for</span> <span class="n">code_name</span><span class="p">,</span> <span class="n">cmd_pars</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">sim_type</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_pars_list</span><span class="p">),</span> <span class="n">cmd_pars_list</span><span class="p">):</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">code_name</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">session_path</span><span class="p">))</span>
+
+    <span class="c1"># Wait for all tasks to be finished</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="c1"># Stop workers</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cmd_pars_list</span><span class="p">)):</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">result_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+        <span class="n">result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result_list</span><span class="p">)</span>
+    <span class="n">return_code_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">result_list</span><span class="p">]</span>
+    <span class="c1"># message_list = [parallel_error_message(res) for res in return_code_list]</span>
+    <span class="n">message_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">return_code_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="mi">91</span><span class="p">:</span>
+            <span class="c1"># look for the logfile to get more information about the error</span>
+            <span class="k">for</span> <span class="n">cmd_pars</span> <span class="ow">in</span> <span class="n">cmd_pars_list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;logFile&#39;</span><span class="p">:</span>
+                        <span class="n">logFile</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span>
+                        <span class="k">break</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">logFile</span><span class="p">)):</span>
+                <span class="c1"># find line with &#39;Program will be terminated.&#39; and store the next lines as the error message</span>
+                <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">logFile</span><span class="p">),</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">line_console</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">startMessage</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="c1"># The actual error message. Since the error message can be multi-line, append each line.</span>
+                            <span class="n">message</span> <span class="o">=</span> <span class="n">message</span> <span class="o">+</span> <span class="n">line_console</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                        <span class="k">if</span> <span class="s1">&#39;Program will be terminated.&#39;</span> <span class="ow">in</span> <span class="n">line_console</span><span class="p">:</span>
+                            <span class="c1"># Last &#39;regular&#39; line of the console output. The next line is from the error message.</span>
+                            <span class="n">startMessage</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Simulation raised an error with Errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">parallel_error_message</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                <span class="n">message_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">message_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Simulation raised an error with Errorcode: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">parallel_error_message</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parallel_error_message</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span><span class="p">):</span>
+        <span class="c1"># check if only one error code different from 0, 95 or 3</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># if so, return that error code and the corresponding message</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">return_code_list</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">3</span><span class="p">]][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">return_code_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">message_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">result_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">result</span><span class="p">,</span> <span class="n">message</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiple different errors occurred during the parallel simulations: </span><span class="si">{</span><span class="nb">set</span><span class="p">([</span><span class="n">val</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">return_code_list</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]])</span><span class="si">}</span><span class="s2">. Returning error code 666.&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="mi">666</span>
+    <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">95</span>
+    <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">return_code_list</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message_list</span><span class="p">,</span> <span class="n">return_code_list</span></div>
+
+    <span class="c1"># return result_list</span>
+
+<span class="c1"># Custom thread class to return the result of the thread</span>
+<div class="viewcode-block" id="CustomThread">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.CustomThread">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomThread</span><span class="p">(</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">Verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">Thread</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_return</span> <span class="o">=</span> <span class="kc">None</span>
+ 
+<div class="viewcode-block" id="CustomThread.run">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.CustomThread.run">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_return</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span></div>
+
+             
+<div class="viewcode-block" id="CustomThread.join">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.parallel_sim.CustomThread.join">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">Thread</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return</span></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

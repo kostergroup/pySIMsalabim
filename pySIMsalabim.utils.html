@@ -1,0 +1,851 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.utils package &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="pySIMsalabim.tests package" href="pySIMsalabim.tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pySIMsalabim</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pySIMsalabim.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html">pySIMsalabim.aux_funcs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html">pySIMsalabim.experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html">pySIMsalabim.install package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html">pySIMsalabim.plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html">pySIMsalabim.tests package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pySIMsalabim.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.html#module-pySIMsalabim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pySIMsalabim</a></li>
+          <li class="breadcrumb-item"><a href="pySIMsalabim.html">pySIMsalabim package</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/pySIMsalabim.utils.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysimsalabim-utils-package">
+<h1>pySIMsalabim.utils package<a class="headerlink" href="#pysimsalabim-utils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pySIMsalabim.utils.clean_up">
+<span id="pysimsalabim-utils-clean-up-module"></span><h2>pySIMsalabim.utils.clean_up module<a class="headerlink" href="#module-pySIMsalabim.utils.clean_up" title="Link to this heading"></a></h2>
+<p>Cleaning output files</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.clean_up.clean_all_output">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.clean_up.</span></span><span class="sig-name descname"><span class="pre">clean_all_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_starts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['JV',</span> <span class="pre">'Var',</span> <span class="pre">'tj',</span> <span class="pre">'tVG',</span> <span class="pre">'scPars',</span> <span class="pre">'Str4Parallel',</span> <span class="pre">'log']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['.png']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/clean_up.html#clean_all_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.clean_up.clean_all_output" title="Link to this definition"></a></dt>
+<dd><p>Delete all files in the current directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>string</em>) – path to the directory where we clean the output</p></li>
+<li><p><strong>filename_starts</strong> (<em>list</em><em> of </em><em>string</em>) – list of string containing the beginning of the filename to delete, default is [‘JV’,’Var’,’tj’,’tVG’,’scPars’,’Str4Parallel’,’log’]</p></li>
+<li><p><strong>exts</strong> (<em>list</em><em> of </em><em>string</em>) – list of string containing the extension of the files to delete, default is [‘.png’]</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.clean_up.clean_file_type">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.clean_up.</span></span><span class="sig-name descname"><span class="pre">clean_file_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/clean_up.html#clean_file_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.clean_up.clean_file_type" title="Link to this definition"></a></dt>
+<dd><p>Delete files of a given type in the current directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ext</strong> (<em>string</em>) – extension of the files to delete</p></li>
+<li><p><strong>path</strong> (<em>string</em>) – path to the directory where we clean the output</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.clean_up.clean_up_output">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.clean_up.</span></span><span class="sig-name descname"><span class="pre">clean_up_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/clean_up.html#clean_up_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.clean_up.clean_up_output" title="Link to this definition"></a></dt>
+<dd><p>Delete output files from the simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_start</strong> (<em>string</em>) – string containing the beginning of the filename to delete</p></li>
+<li><p><strong>path</strong> (<em>string</em>) – path to the directory where we clean the output</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.clean_up.delete_folders">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.clean_up.</span></span><span class="sig-name descname"><span class="pre">delete_folders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/clean_up.html#delete_folders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.clean_up.delete_folders" title="Link to this definition"></a></dt>
+<dd><p>Delete all folders starting with a given name in the current directory, even if they are not empty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder_name</strong> (<em>string</em>) – name of the folder to delete</p></li>
+<li><p><strong>path</strong> (<em>string</em>) – path to the directory where we delete the folder</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.clean_up.store_output_in_folder">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.clean_up.</span></span><span class="sig-name descname"><span class="pre">store_output_in_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/clean_up.html#store_output_in_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.clean_up.store_output_in_folder" title="Link to this definition"></a></dt>
+<dd><p>Move output files from the simulation into new folder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filenames</strong> (<em>list</em><em> of </em><em>string</em>) – list of string containing the name of the files to move</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em>) – name of the folder where we store the output files</p></li>
+<li><p><strong>path</strong> (<em>string</em>) – directory of the folder_name (creates one if it does not already exist)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.utils.device_parameters">
+<span id="pysimsalabim-utils-device-parameters-module"></span><h2>pySIMsalabim.utils.device_parameters module<a class="headerlink" href="#module-pySIMsalabim.utils.device_parameters" title="Link to this heading"></a></h2>
+<p>Functions for processing the device parameters</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.ReadParameterFile">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">ReadParameterFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path2file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#ReadParameterFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.ReadParameterFile" title="Link to this definition"></a></dt>
+<dd><p>Get all the parameters from the ‘Device_parameters.txt’ file
+for SIMsalabim and ZimT
+:param path2file: Path to the ‘Device_parameters.txt’
+:type path2file: str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Contains the parameters and values from the ‘Device_parameters.txt’</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.devpar_read_from_txt">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">devpar_read_from_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#devpar_read_from_txt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.devpar_read_from_txt" title="Link to this definition"></a></dt>
+<dd><p>Read the opened .txt file line by line and store all in a List.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fp</strong> (<em>TextIOWrapper</em>) – filepointer to the opened .txt file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List with nested lists for all parameters in all sections.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.devpar_write_to_txt">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">devpar_write_to_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_par_object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#devpar_write_to_txt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.devpar_write_to_txt" title="Link to this definition"></a></dt>
+<dd><p>Convert the List object into a single string. Formatted to the device_parameter definition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dev_par_object</strong> (<em>List</em>) – List object with all parameters and comments.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Formatted string for the txt file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.get_inputFile_from_cmd_pars">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">get_inputFile_from_cmd_pars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#get_inputFile_from_cmd_pars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.get_inputFile_from_cmd_pars" title="Link to this definition"></a></dt>
+<dd><p>Get the input file name from the command line parameters except the layer files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which type of simulation to run: simss or zimt</p></li>
+<li><p><strong>cmd_pars</strong> (<em>List</em>) – List with the command line parameters</p></li>
+<li><p><strong>except_layers</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the layer files are excluded from the list, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The name of the input file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.get_inputFile_from_layer">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">get_inputFile_from_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#get_inputFile_from_layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.get_inputFile_from_layer" title="Link to this definition"></a></dt>
+<dd><p>Get the input file name from the layer parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>List</em>) – List with the layer parameters</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Folder path of the current simulation session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The name of the input file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.get_par_from_dev_par">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">get_par_from_dev_par</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_par</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#get_par_from_dev_par"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.get_par_from_dev_par" title="Link to this definition"></a></dt>
+<dd><p>Get the parameter from the device parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dev_par</strong> (<em>List</em>) – List with the device parameters</p></li>
+<li><p><strong>par_name</strong> (<em>string</em>) – Name of the parameter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List with the parameter</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.load_device_parameters">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">load_device_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_par_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SIMsalabim/ZimT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">availLayers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#load_device_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.load_device_parameters" title="Link to this definition"></a></dt>
+<dd><p>Load the device_parameters file and create a List object. Check if a session specific file already exists.
+If True, use this one, else return to the default device_parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – Folder path of the current simulation session</p></li>
+<li><p><strong>dev_par_file_name</strong> (<em>string</em>) – Name of the device parameters file</p></li>
+<li><p><strong>default_path</strong> (<em>string</em>) – Path name where the default/standard device parameters file is located</p></li>
+<li><p><strong>reset</strong> (<em>boolean</em>) – If True, the default device parameters are copied to the session folder</p></li>
+<li><p><strong>availLayers</strong> (<em>List</em>) – List with all the available layer files</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>List</em> – List with nested lists for all parameters in all sections.</p></li>
+<li><p><em>List</em> – List with all the layers</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.make_basename_file_cmd_pars">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">make_basename_file_cmd_pars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">except_output_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#make_basename_file_cmd_pars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.make_basename_file_cmd_pars" title="Link to this definition"></a></dt>
+<dd><p>Update the command line parameters with the basename of the input files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd_pars</strong> (<em>List</em>) – List with the command line parameters</p></li>
+<li><p><strong>except_output_files</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the output files names are not updated, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List with the updated command line parameters</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.make_basename_input_files">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">make_basename_input_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updateFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#make_basename_input_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.make_basename_input_files" title="Link to this definition"></a></dt>
+<dd><p>Update the layer file with the basename of the input files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>string</em>) – path to the layer file</p></li>
+<li><p><strong>updateFile</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True, the layer file is updated with the new file names, else the updated layer file list is returned, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List with the updated layer parameters</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.device_parameters.store_file_names">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.device_parameters.</span></span><span class="sig-name descname"><span class="pre">store_file_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_par</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_par_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/device_parameters.html#store_file_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.device_parameters.store_file_names" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Read the relevant file names from the device parameters and store the file name in a session state.</dt><dd><p>This way the correct and relevant files can be retrieved and used in the results. Make a distinction between simss and zimt.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dev_par</strong> (<em>List</em>) – Nested List object containing all device parameters</p></li>
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which type of simulation to run: simss or zimt</p></li>
+<li><p><strong>dev_par_name</strong> (<em>string</em>) – Name of the device parameter file</p></li>
+<li><p><strong>layers</strong> (<em>List</em>) – List with all the layers in the device</p></li>
+<li><p><strong>run_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – indicate whether the script is in ‘web’ mode (True) or standalone mode (False). Used to control the console output, by default True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.utils.general">
+<span id="pysimsalabim-utils-general-module"></span><h2>pySIMsalabim.utils.general module<a class="headerlink" href="#module-pySIMsalabim.utils.general" title="Link to this heading"></a></h2>
+<p>Functions for general use</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.general.construct_cmd">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.general.</span></span><span class="sig-name descname"><span class="pre">construct_cmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/general.html#construct_cmd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.general.construct_cmd" title="Link to this definition"></a></dt>
+<dd><p>Construct a single string to use as command to run a SIMsalabim executable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which program to run: simss or zimt</p></li>
+<li><p><strong>cmd_pars</strong> (<em>List</em>) – List with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys.
+Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Constructed string to run as cmd</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.general.error_message">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.general.</span></span><span class="sig-name descname"><span class="pre">error_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">errorcode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/general.html#error_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.general.error_message" title="Link to this definition"></a></dt>
+<dd><p>When a ‘standard Pascal’ fatal error occurs, add the standard error message to be used with parallel which does not read the</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>errorcode</strong> (<em>int</em>) – the error code</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.general.fatal_error_message">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.general.</span></span><span class="sig-name descname"><span class="pre">fatal_error_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">errorcode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/general.html#fatal_error_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.general.fatal_error_message" title="Link to this definition"></a></dt>
+<dd><p>When a ‘standard Pascal’ fatal error occurs, add the standard error message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>errorcode</strong> (<em>int</em>) – the error code</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.general.make_thread_safe_file_copy">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.general.</span></span><span class="sig-name descname"><span class="pre">make_thread_safe_file_copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/general.html#make_thread_safe_file_copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.general.make_thread_safe_file_copy" title="Link to this definition"></a></dt>
+<dd><p>Copy a file to a temp folder, and wait until the file is not in use anymore.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>string</em>) – File path of the file to copy</p></li>
+<li><p><strong>destination</strong> (<em>string</em>) – File path of the destination folder</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.general.run_simulation">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.general.</span></span><span class="sig-name descname"><span class="pre">run_simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/general.html#run_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.general.run_simulation" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Run the SIMsalabim simulation executable with the chosen device parameters.</dt><dd><p>Return the complete result object of the process accompanied by a message with information,
+in case of both success and failure.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which type of simulation to run: simss or zimt</p></li>
+<li><p><strong>cmd_pars</strong> (<em>List</em>) – List with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys.
+Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – File path of the simss or zimt executable</p></li>
+<li><p><strong>run_mode</strong> (<em>boolean</em>) – True if function is called as part of The Shell, False when called directly.
+Prevents using streamlit components outside of The Shell.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em>) – True if the console output of the simulation should be printed to the console</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>int</em> – Return code of the simulation process, 0 for success, other values for errors.</p></li>
+<li><p><em>string</em> – Return message to display on the UI, for both success and failed</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.general.run_simulation_filesafe">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.general.</span></span><span class="sig-name descname"><span class="pre">run_simulation_filesafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/general.html#run_simulation_filesafe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.general.run_simulation_filesafe" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Run the SIMsalabim simulation executable with the chosen device parameters.</dt><dd><p>Return the complete result object of the process accompanied by a message with information,
+in case of both success and failure.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which type of simulation to run: simss or zimt</p></li>
+<li><p><strong>cmd_pars</strong> (<em>List</em>) – List with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys.
+Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – File path of the simss or zimt executable</p></li>
+<li><p><strong>run_mode</strong> (<em>boolean</em>) – True if function is called as part of The Shell, False when called directly.
+Prevents using streamlit components outside of The Shell.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em>) – True if the console output of the simulation should be printed to the console</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments, not used in this function but can be used to pass additional parameters to the function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>result</strong> (<em>int</em>) – Return code of the simulation process, 0 for success, other values for errors.</p></li>
+<li><p><em>string</em> – Return message to display on the UI, for both success and failed</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.utils.parallel_sim">
+<span id="pysimsalabim-utils-parallel-sim-module"></span><h2>pySIMsalabim.utils.parallel_sim module<a class="headerlink" href="#module-pySIMsalabim.utils.parallel_sim" title="Link to this heading"></a></h2>
+<p>Functions for general use</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.CustomThread">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.parallel_sim.</span></span><span class="sig-name descname"><span class="pre">CustomThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#CustomThread"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.CustomThread" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.CustomThread.join">
+<span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#CustomThread.join"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.CustomThread.join" title="Link to this definition"></a></dt>
+<dd><p>Wait until the thread terminates.</p>
+<p>This blocks the calling thread until the thread whose join() method is
+called terminates – either normally or through an unhandled exception
+or until the optional timeout occurs.</p>
+<p>When the timeout argument is present and not None, it should be a
+floating-point number specifying a timeout for the operation in seconds
+(or fractions thereof). As join() always returns None, you must call
+is_alive() after join() to decide whether a timeout happened – if the
+thread is still alive, the join() call timed out.</p>
+<p>When the timeout argument is not present or None, the operation will
+block until the thread terminates.</p>
+<p>A thread can be join()ed many times.</p>
+<p>join() raises a RuntimeError if an attempt is made to join the current
+thread as that would cause a deadlock. It is also an error to join() a
+thread before it has been started and attempts to do so raises the same
+exception.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.CustomThread.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#CustomThread.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.CustomThread.run" title="Link to this definition"></a></dt>
+<dd><p>Method representing the thread’s activity.</p>
+<p>You may override this method in a subclass. The standard run() method
+invokes the callable object passed to the object’s constructor as the
+target argument, if any, with sequential and keyword arguments taken
+from the args and kwargs arguments, respectively.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.parallel_error_message">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.parallel_sim.</span></span><span class="sig-name descname"><span class="pre">parallel_error_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">errorcode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#parallel_error_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.parallel_error_message" title="Link to this definition"></a></dt>
+<dd><p>When a ‘standard Pascal’ fatal error occurs, add the standard error message to be used with parallel which does not read the</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>errorcode</strong> (<em>int</em>) – the error code</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.run_simulation_GNU_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.parallel_sim.</span></span><span class="sig-name descname"><span class="pre">run_simulation_GNU_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#run_simulation_GNU_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.run_simulation_GNU_parallel" title="Link to this definition"></a></dt>
+<dd><dl>
+<dt>Run the SIMsalabim simulation executable with the chosen device parameters.</dt><dd><p>The simulation is run in parallel using the GNU Parallel program. (<a class="reference external" href="https://www.gnu.org/software/parallel/">https://www.gnu.org/software/parallel/</a>).
+If this command is used please cite:
+Tange, O. (2021, August 22). GNU Parallel 20210822 (‘Kabul’).
+Zenodo. <a class="reference external" href="https://doi.org/10.5281/zenodo.5233953">https://doi.org/10.5281/zenodo.5233953</a></p>
+<p>To Install GNU Parallel on linux: (not available on Windows)
+sudo apt-get update
+sudo apt-get install parallel</p>
+<p>or try to run the install_GNU_parallel_Linux() function from the install module.
+import pySIMsalabim.install as install
+install.install_GNU_parallel_Linux()</p>
+<p>Return the complete result object of the process accompanied by a message with information,
+in case of both success and failure.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which type of simulation to run: simss or zimt</p></li>
+<li><p><strong>cmd_pars_list</strong> (<em>List</em>) – List of list with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys.
+Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – File path of the simss or zimt executable</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em>) – Maximum number of parallel jobs to run. Default is the number of CPU cores - 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>CompletedProcess</em> – Output object of with returncode and console output of the simulation</p></li>
+<li><p><em>List</em> – Return list of messages for each simulation</p></li>
+<li><p><em>List</em> – Return list of return codes for each simulation</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.run_simulation_multithreaded_linux">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.parallel_sim.</span></span><span class="sig-name descname"><span class="pre">run_simulation_multithreaded_linux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#run_simulation_multithreaded_linux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.run_simulation_multithreaded_linux" title="Link to this definition"></a></dt>
+<dd><p>Runs simulations in parallel on max_jobs number of threads.
+This procedure should work on Windows and Linux but it is not as efficient as run_parallel_simu on Linux.
+Yet, it is the only way to run simulations in parallel on Windows in a thread safe way and making sure that two thread do not try to write to the same file at the same time.
+This is achieved by running the simulation in a temporary folder with a copy of all the necessary input files and then moving the output files to the original folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which type of simulation to run: simss or zimt</p></li>
+<li><p><strong>cmd_pars_list</strong> (<em>List</em>) – List of list with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys.
+Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – File path of the simss or zimt executable</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em>) – Maximum number of parallel jobs to run. Default is the number of CPU cores - 1</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print the output of the simulation to the console</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of CompletedProcess objects with returncode and console output of the simulation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.run_simulation_multithreaded_windows">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.parallel_sim.</span></span><span class="sig-name descname"><span class="pre">run_simulation_multithreaded_windows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#run_simulation_multithreaded_windows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.run_simulation_multithreaded_windows" title="Link to this definition"></a></dt>
+<dd><p>Runs simulations in parallel on max_jobs number of threads.
+This procedure should work on Windows and Linux but it is not as efficient as run_parallel_simu on Linux.
+Yet, it is the only way to run simulations in parallel on Windows in a thread safe way and making sure that two thread do not try to write to the same file at the same time.
+This is achieved by running the simulation in a temporary folder with a copy of all the necessary input files and then moving the output files to the original folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which type of simulation to run: simss or zimt</p></li>
+<li><p><strong>cmd_pars_list</strong> (<em>List</em>) – List of list with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys.
+Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – File path of the simss or zimt executable</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em>) – Maximum number of parallel jobs to run. Default is the number of CPU cores - 1</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print the output of the simulation to the console</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of CompletedProcess objects with returncode and console output of the simulation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.run_simulation_parallel">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.parallel_sim.</span></span><span class="sig-name descname"><span class="pre">run_simulation_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#run_simulation_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.run_simulation_parallel" title="Link to this definition"></a></dt>
+<dd><p>Run the SIMsalabim simulation executable with the chosen device parameters.
+Select the correct function to run the simulation in parallel based on the operating system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<em>string</em>) – Which type of simulation to run: simss or zimt</p></li>
+<li><p><strong>cmd_pars_list</strong> (<em>List</em>) – List of list with parameters to add to the simss/zimt cmd line. Each parameter is a dict with par,val keys.
+Note: when relevant the first entry must be the deviceparameters file with a key: dev_par_file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – File path of the simss or zimt executable</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em>) – Maximum number of parallel jobs to run. Default is the number of CPU cores - 1</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print the output of the simulation to the console</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments to pass to the function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output object of with returncode and console output of the simulation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CompletedProcess</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.worker_linux">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.parallel_sim.</span></span><span class="sig-name descname"><span class="pre">worker_linux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semaphore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#worker_linux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.worker_linux" title="Link to this definition"></a></dt>
+<dd><p>Worker function that runs the simulation in a temporary folder and moves the output files to the original folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q</strong> (<em>queue</em>) – Queue to communicate with the main thread</p></li>
+<li><p><strong>lock</strong> (<em>threading.Lock</em>) – Lock to prevent multiple threads from writing to the same file at the same time</p></li>
+<li><p><strong>semaphore</strong> (<em>threading.Semaphore</em>) – Semaphore to limit the number of parallel jobs</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print the output of the simulation to the console</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.parallel_sim.worker_windows">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.parallel_sim.</span></span><span class="sig-name descname"><span class="pre">worker_windows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semaphore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/parallel_sim.html#worker_windows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.parallel_sim.worker_windows" title="Link to this definition"></a></dt>
+<dd><p>Worker function that runs the simulation in a temporary folder and moves the output files to the original folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q</strong> (<em>queue</em>) – Queue to communicate with the main thread</p></li>
+<li><p><strong>lock</strong> (<em>threading.Lock</em>) – Lock to prevent multiple threads from writing to the same file at the same time</p></li>
+<li><p><strong>tmp_folder</strong> (<em>string</em>) – Temporary folder to run the simulation in</p></li>
+<li><p><strong>semaphore</strong> (<em>threading.Semaphore</em>) – Semaphore to limit the number of parallel jobs</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print the output of the simulation to the console</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.utils.utils">
+<span id="pysimsalabim-utils-utils-module"></span><h2>pySIMsalabim.utils.utils module<a class="headerlink" href="#module-pySIMsalabim.utils.utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.utils.get_integral_bounds">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_integral_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/utils.html#get_integral_bounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.utils.get_integral_bounds" title="Link to this definition"></a></dt>
+<dd><p>Determine integral bounds in the time domain, used to compute the conductance and capacitance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – Minimum frequency</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – Maximum frequency</p></li>
+<li><p><strong>f_steps</strong> (<em>float</em>) – Frequency steps</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of array indices that will be used in the plotting</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.utils.read_tj_file">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.utils.</span></span><span class="sig-name descname"><span class="pre">read_tj_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tj_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tj.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/utils.html#read_tj_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.utils.read_tj_file" title="Link to this definition"></a></dt>
+<dd><p>Read relevant parameters for impedance of the tj file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_path</strong> (<em>string</em>) – Path of the simulation folder for this session</p></li>
+<li><p><strong>data_tj</strong> (<em>dataFrame</em>) – Pandas dataFrame containing the tj output file from ZimT</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.utils.utils.update_cmd_pars">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.utils.utils.</span></span><span class="sig-name descname"><span class="pre">update_cmd_pars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">main_pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_pars</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/utils/utils.html#update_cmd_pars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.utils.utils.update_cmd_pars" title="Link to this definition"></a></dt>
+<dd><p>Merges main parameters with command line parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>main_pars</strong> (<em>list</em><em> of </em><em>dict</em>) – A list containing dictionaries of the main parameters of the application. These parameters
+serve as the default values.</p></li>
+<li><p><strong>cmd_pars</strong> (<em>list</em><em> of </em><em>dict</em>) – A list containing dictionaries of parameters passed through the command line interface.
+These parameters have higher precedence and override the main parameters in case
+of a conflict within any dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dictionaries containing the combined set of parameters, with command line parameters
+overriding main parameters in case of conflicts within any dictionary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If duplicate parameters are found in the command line parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pySIMsalabim.utils" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pySIMsalabim.tests.html" class="btn btn-neutral float-left" title="pySIMsalabim.tests package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

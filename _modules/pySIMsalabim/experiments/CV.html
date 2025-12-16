@@ -1,0 +1,1092 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.experiments.CV &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.experiments.CV</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.experiments.CV</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Perform capacitance simulations&quot;&quot;&quot;</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.integrate</span>
+<span class="c1"># import pySIMsalabim</span>
+<span class="c1">## Import pySIMsalabim, if not successful, add the parent directory to the system path</span>
+<span class="k">try</span> <span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Add the parent directory to the system path</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;../..&#39;</span><span class="p">)))</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">general</span> <span class="k">as</span> <span class="n">utils_gen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_functions</span> <span class="k">as</span> <span class="n">utils_plot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.device_parameters</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+
+<div class="viewcode-block" id="create_tVG_CV">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.create_tVG_CV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tVG_CV</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">V_step</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">timeFactor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a tVG file for capacitance experiment. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V_0 : float</span>
+<span class="sd">        Initial voltage</span>
+<span class="sd">    V_max : float</span>
+<span class="sd">        Maximum voltage</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step that is applied directly after t=0</span>
+<span class="sd">    V_step : float</span>
+<span class="sd">        Voltage difference, determines at which voltages the capacitance is determined</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Fractional light intensity</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Name of the tVG file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+<span class="sd">    freq : float</span>
+<span class="sd">        Frequency at which the capacitance-voltage measurement is performed</span>
+<span class="sd">    ini_timeFactor : float</span>
+<span class="sd">        Constant defining the size of the initial timestep</span>
+<span class="sd">    timeFactor : float</span>
+<span class="sd">        Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        A message to indicate the result of the process</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+
+    <span class="c1"># Starting line of the tVG file: header + datapoints at time=0. Set the correct header</span>
+    <span class="n">tVG_lines</span> <span class="o">=</span> <span class="s1">&#39;t Vext G_frac</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+    <span class="c1"># Loop until V reaches V_max, in other words go from Vmin to Vmax with in V_step steps. Add some extra margin on the Vmax to prevent missing the last voltage point due to numerical accuracy.</span>
+    <span class="k">while</span> <span class="n">V_0</span> <span class="o">&lt;=</span> <span class="n">V_max</span> <span class="o">+</span> <span class="n">V_max</span><span class="o">*</span><span class="mf">1E-5</span><span class="p">:</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">del_t</span> <span class="o">=</span> <span class="n">ini_timeFactor</span><span class="o">/</span><span class="n">freq</span>
+        <span class="n">tVG_lines</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">V_0</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G_frac</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        
+        <span class="c1"># Make the other lines in the tVG file</span>
+        <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="n">freq</span><span class="p">:</span> <span class="c1">#max time: 1/f_min is enough!</span>
+            <span class="n">time</span> <span class="o">+=</span> <span class="n">del_t</span>
+            <span class="n">del_t</span> <span class="o">=</span> <span class="n">del_t</span> <span class="o">*</span> <span class="n">timeFactor</span>
+            <span class="n">tVG_lines</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">V_0</span><span class="o">+</span><span class="n">del_V</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G_frac</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    
+        <span class="n">V_0</span> <span class="o">+=</span> <span class="n">V_step</span>
+
+    <span class="c1"># Write the tVG lines to the tVG file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tVG_lines</span><span class="p">)</span>
+
+    <span class="c1"># tVG file is created, message a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="create_tVG_CV_Rseries">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.create_tVG_CV_Rseries">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tVG_CV_Rseries</span><span class="p">(</span><span class="n">Vint</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">timeFactor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a tVG file for capacitance experiment. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V_int : float</span>
+<span class="sd">        Adjusted internal voltage to correct for series resistance later</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step that is applied directly after t=0</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Fractional light intensity</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Name of the tVG file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+<span class="sd">    freq : float</span>
+<span class="sd">        Frequency at which the capacitance-voltage measurement is performed</span>
+<span class="sd">    ini_timeFactor : float</span>
+<span class="sd">        Constant defining the size of the initial timestep</span>
+<span class="sd">    timeFactor : float</span>
+<span class="sd">        Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        A message to indicate the result of the process</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+
+    <span class="c1"># Starting line of the tVG file: header + datapoints at time=0. Set the correct header</span>
+    <span class="n">tVG_lines</span> <span class="o">=</span> <span class="s1">&#39;t Vext G_frac</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+    <span class="c1"># Loop until V reaches V_max, in other words go from Vmin to Vmax with in V_step steps. Add some extra margin on the Vmax to prevent missing the last voltage point due to numerical accuracy.</span>
+    <span class="k">for</span> <span class="n">V_0</span> <span class="ow">in</span> <span class="n">Vint</span><span class="p">:</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">del_t</span> <span class="o">=</span> <span class="n">ini_timeFactor</span><span class="o">/</span><span class="n">freq</span>
+        <span class="n">tVG_lines</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">V_0</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G_frac</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        
+        <span class="c1"># Make the other lines in the tVG file</span>
+        <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="n">freq</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">+=</span> <span class="n">del_t</span>
+            <span class="n">del_t</span> <span class="o">=</span> <span class="n">del_t</span> <span class="o">*</span> <span class="n">timeFactor</span>
+            <span class="n">tVG_lines</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">V_0</span><span class="o">+</span><span class="n">del_V</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G_frac</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+    <span class="c1"># while V_0 &lt;= V_max + V_max*1E-5:</span>
+    <span class="c1">#     time = 0</span>
+    <span class="c1">#     del_t = ini_timeFactor/freq</span>
+    <span class="c1">#     tVG_lines += f&#39;{time:.3e} {V_0:.3e} {G_frac:.3e}\n&#39;</span>
+        
+    <span class="c1">#     # Make the other lines in the tVG file</span>
+    <span class="c1">#     while time &lt; 1/freq: #max time: 1/f_min is enough!</span>
+    <span class="c1">#         time += del_t</span>
+    <span class="c1">#         del_t = del_t * timeFactor</span>
+    <span class="c1">#         tVG_lines += f&#39;{time:.3e} {V_0+del_V:.3e} {G_frac:.3e}\n&#39;</span>
+    
+    <span class="c1">#     V_0 += V_step</span>
+
+    <span class="c1"># Write the tVG lines to the tVG file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tVG_lines</span><span class="p">)</span>
+
+    <span class="c1"># tVG file is created, message a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="create_tVG_SS_CV">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.create_tVG_SS_CV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tVG_SS_CV</span><span class="p">(</span><span class="n">V_min</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span><span class="n">Vstep</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates the tVG file for the steady state simulation with only t 0 and V_0</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V_min : float </span>
+<span class="sd">        Initial voltage</span>
+<span class="sd">    V_max : float</span>
+<span class="sd">        Maximum voltage</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step that is applied after t=0</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Fractional light intensity</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Name of the tVG file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        A message to indicate the result of the process</span>
+
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="c1"># Starting line of the tVG file: header + datapoints at time=0. Set the correct header</span>
+    <span class="n">tVG_lines</span> <span class="o">=</span> <span class="s1">&#39;t Vext G_frac</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="c1">#+ f&#39;{0} {V_0} {G_frac:.3e}\n&#39;</span>
+    <span class="n">V_0</span> <span class="o">=</span><span class="n">V_min</span>
+    <span class="k">while</span> <span class="n">V_0</span> <span class="o">&lt;=</span> <span class="n">V_max</span> <span class="o">+</span> <span class="n">V_max</span><span class="o">*</span><span class="mf">1E-5</span><span class="p">:</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">tVG_lines</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">V_0</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G_frac</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">V_0</span> <span class="o">+=</span> <span class="n">Vstep</span>
+
+    <span class="c1"># Write the tVG lines to the tVG file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tVG_lines</span><span class="p">)</span>
+
+    <span class="c1"># tVG file is created, message a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="calc_capacitance_forOneVoltage">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.calc_capacitance_forOneVoltage">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_capacitance_forOneVoltage</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">errI</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">VStep</span><span class="p">,</span> <span class="n">freq</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fourier Decomposition formula which computes the capacitance at frequency freq (Hz) and its complex error</span>
+<span class="sd">    Based on S.E. Laux, IEEE Trans. Electron Dev. 32 (10), 2028 (1985), eq. 5b</span>
+<span class="sd">    We integrate from 0 to time[imax] at frequency 1/time[imax]</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    I : np.array</span>
+<span class="sd">        Array of currents</span>
+<span class="sd">    errI : np.array</span>
+<span class="sd">        Numerical error in calculated currents (output of ZimT)</span>
+<span class="sd">    time : np.array</span>
+<span class="sd">        Array with all time positions, from 0 to tmax</span>
+<span class="sd">    VStep : float</span>
+<span class="sd">        Voltage step</span>
+<span class="sd">    imax : integer</span>
+<span class="sd">        Index of the last timestep/first frequency for which the integrals are calculated</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Capacitance at frequency f: C(f)</span>
+<span class="sd">    float</span>
+<span class="sd">        Numerical error in calculated capacitance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">imax</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+    <span class="n">Iinf</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">imax</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># I at infinite time, i.e. the last one we have.</span>
+	
+    <span class="c1">#prepare array for integrants:</span>
+    <span class="n">int2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+    <span class="n">int4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+	
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">imax</span><span class="p">):</span>
+        <span class="n">cosfac</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">int2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cosfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span><span class="p">)</span>	
+        <span class="n">int4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cosfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">errI</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span> <span class="o">-</span> <span class="n">errI</span><span class="p">[</span><span class="n">imax</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>	
+
+    <span class="c1">#Compute the capacitance:</span>
+    <span class="n">cap</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int2</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span><span class="o">/</span><span class="n">VStep</span>
+	
+    <span class="c1">#and again, but now with the error added to the current:	</span>
+    <span class="n">capErr</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int4</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span><span class="o">/</span><span class="n">VStep</span>
+
+    <span class="c1"># error is the difference between cap and capPlusErr:</span>
+    <span class="n">errC</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span> <span class="n">cap</span> <span class="o">-</span> <span class="n">capErr</span> <span class="p">)</span>
+
+    <span class="c1">#now return capacitance, its error and the corresponding frequency:	</span>
+    <span class="k">return</span> <span class="n">cap</span><span class="p">,</span> <span class="n">errC</span></div>
+
+
+<div class="viewcode-block" id="calc_capacitance">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.calc_capacitance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_capacitance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">freq</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculate the capacitance over the time range</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : dataFrame</span>
+<span class="sd">        Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step that is applied directly after t=0</span>
+<span class="sd">    freq : float</span>
+<span class="sd">        Frequency at which the capacitance-voltage measurement is performed</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of the capacitance</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of the capacitance error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+       
+    <span class="n">idx_time_zero</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># Find all indices where time is equal to 0</span>
+    <span class="n">amountOfVoltagePoints</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_time_zero</span><span class="p">)</span>
+    
+    <span class="c1"># Prepare array for capacitance &amp; its error:</span>
+    <span class="n">cap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">amountOfVoltagePoints</span><span class="p">)</span>
+    <span class="n">errC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">amountOfVoltagePoints</span><span class="p">)</span>
+
+    <span class="c1"># Get the capacitance for each voltage step by taking the Fourier Transform over the t &amp; I arrays</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amountOfVoltagePoints</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">start_idx</span> <span class="o">=</span> <span class="n">idx_time_zero</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">end_idx</span> <span class="o">=</span> <span class="n">idx_time_zero</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+                
+        <span class="n">Jext_subarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">end_idx</span><span class="p">,</span> <span class="s1">&#39;Jext&#39;</span><span class="p">]</span> <span class="p">)</span>
+        <span class="n">errJ_subarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">end_idx</span><span class="p">,</span> <span class="s1">&#39;errJ&#39;</span><span class="p">]</span> <span class="p">)</span>
+        <span class="n">time_subarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">end_idx</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="p">)</span>
+        
+        <span class="n">cap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">errC</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_capacitance_forOneVoltage</span><span class="p">(</span><span class="n">Jext_subarray</span><span class="p">,</span> <span class="n">errJ_subarray</span><span class="p">,</span> <span class="n">time_subarray</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+        
+    <span class="c1"># Handle the last index from t=0 to tmax_n</span>
+    <span class="n">Jext_subarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx_time_zero</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:,</span> <span class="s1">&#39;Jext&#39;</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">errJ_subarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx_time_zero</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:,</span> <span class="s1">&#39;errJ&#39;</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">time_subarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx_time_zero</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:,</span> <span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">cap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">errC</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_capacitance_forOneVoltage</span><span class="p">(</span><span class="n">Jext_subarray</span><span class="p">,</span> <span class="n">errJ_subarray</span><span class="p">,</span> <span class="n">time_subarray</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">cap</span><span class="p">,</span> <span class="n">errC</span></div>
+
+
+<div class="viewcode-block" id="calc_impedance_limit_time">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.calc_impedance_limit_time">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_impedance_limit_time</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">errI</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">VStep</span><span class="p">,</span> <span class="n">imax</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fourier Decomposition formula which computes the impedance at frequency freq (Hz) and its complex error</span>
+<span class="sd">    Based on S.E. Laux, IEEE Trans. Electron Dev. 32 (10), 2028 (1985), eq. 5a, 5b</span>
+<span class="sd">    We integrate from 0 to time[imax] at frequency 1/time[imax]</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    I : np.array</span>
+<span class="sd">        Array of currents</span>
+<span class="sd">    errI : np.array</span>
+<span class="sd">        Numerical error in calculated currents (output of ZimT)</span>
+<span class="sd">    time : np.array</span>
+<span class="sd">        Array with all time positions, from 0 to tmax</span>
+<span class="sd">    VStep : float</span>
+<span class="sd">        Voltage step</span>
+<span class="sd">    imax : integer</span>
+<span class="sd">        Index of the last timestep/first frequency for which the integrals are calculated</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Frequency belonging to Z(f)</span>
+<span class="sd">    complex number</span>
+<span class="sd">        Impedance at frequency f: Z(f)</span>
+<span class="sd">    complex number</span>
+<span class="sd">        Numerical error in calculated impedance Z(f)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">freq</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#we obtain the frequency from the time array</span>
+    <span class="n">Iinf</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># I at infinite time, i.e. the last one we have.</span>
+    <span class="n">imax</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+    <span class="c1">#prepare array for integrants:</span>
+    <span class="n">int1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+    <span class="n">int2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+    <span class="n">int3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+    <span class="n">int4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+	
+    <span class="c1">#now we use only part of the time array:</span>
+    <span class="n">timeLim</span> <span class="o">=</span> <span class="n">time</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="p">:</span>
+        <span class="n">sinfac</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">timeLim</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">cosfac</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">timeLim</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">int1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sinfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span><span class="p">)</span>
+        <span class="n">int2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cosfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span><span class="p">)</span>	
+        <span class="n">int3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sinfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">errI</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span> <span class="o">-</span> <span class="n">errI</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">int4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cosfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">errI</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span> <span class="o">-</span> <span class="n">errI</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>	
+
+    <span class="c1">#now compute the conductance and capacitance:</span>
+    <span class="n">cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">Iinf</span> <span class="o">-</span> <span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int1</span><span class="p">,</span> <span class="n">timeLim</span><span class="p">))</span><span class="o">/</span><span class="n">VStep</span>
+    <span class="n">cap</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int2</span><span class="p">,</span> <span class="n">timeLim</span><span class="p">)</span><span class="o">/</span><span class="n">VStep</span>
+    <span class="c1">#convert to impedance:</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">cond</span> <span class="o">+</span> <span class="mi">2</span><span class="n">J</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">cap</span><span class="p">)</span>
+	
+    <span class="c1">#and again, but now with the error added to the current:	</span>
+    <span class="n">condErr</span> <span class="o">=</span> <span class="p">(</span><span class="n">Iinf</span> <span class="o">+</span> <span class="n">errI</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">errI</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int3</span><span class="p">,</span> <span class="n">timeLim</span><span class="p">))</span><span class="o">/</span><span class="n">VStep</span>
+    <span class="n">capErr</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int4</span><span class="p">,</span> <span class="n">timeLim</span><span class="p">)</span><span class="o">/</span><span class="n">VStep</span>
+    <span class="c1">#convert to impedance:</span>
+    <span class="n">Z2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">condErr</span> <span class="o">+</span> <span class="mi">2</span><span class="n">J</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">capErr</span><span class="p">)</span>
+    
+    <span class="c1">#error is the difference between Z and Z2:</span>
+    <span class="n">errZ</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">-</span> <span class="n">Z2</span>
+    
+    <span class="c1">#now return complex impedance, its error and the corresponding frequency:	</span>
+    <span class="k">return</span> <span class="n">freq</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">errZ</span></div>
+
+
+<div class="viewcode-block" id="calc_impedance_CV">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.calc_impedance_CV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_impedance_CV</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">isToPlot</span><span class="p">,</span><span class="n">session_path</span><span class="p">,</span><span class="n">zimt_device_parameters</span><span class="p">,</span><span class="n">Rseries</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Rshunt</span><span class="o">=-</span><span class="mf">1e3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculate the impedance over the frequency range</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : dataFrame</span>
+<span class="sd">        Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step</span>
+<span class="sd">    isToPlot : list</span>
+<span class="sd">        List of array indices that will be used in the plotting</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of frequencies</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of the real component of impedance</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of the imaginary component of impedance</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of complex error</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of capacitance	</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of conductance</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of error in capacitance	</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of error in conductance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># init the arrays for the impedance and its error:</span>
+    <span class="n">numFreqPoints</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">isToPlot</span><span class="p">)</span>
+    <span class="c1"># V = np.empty(numFreqPoints)</span>
+    <span class="n">ReZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">ImZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">J</span><span class="p">]</span> <span class="o">*</span> <span class="n">numFreqPoints</span>
+    <span class="n">errZ</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">J</span><span class="p">]</span> <span class="o">*</span> <span class="n">numFreqPoints</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">errC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">errG</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+
+
+    <span class="c1"># We need to know the series and shunt resistance to calculate the impedance correctly later on</span>
+    <span class="c1"># dev_val,lyrs_dum = load_device_parameters(session_path, zimt_device_parameters)</span>
+    <span class="c1"># for i in dev_val[zimt_device_parameters]:</span>
+    <span class="c1">#     if i[0] == &#39;Contacts&#39;:</span>
+    <span class="c1">#         contacts = i</span>
+    <span class="c1">#         break</span>
+
+    <span class="c1"># for i in contacts[1:]:</span>
+    <span class="c1">#     if i[1] == &#39;R_series&#39;:</span>
+    <span class="c1">#         Rseries = float(i[2])</span>
+    <span class="c1">#     elif i[1] == &#39;R_shunt&#39;:</span>
+    <span class="c1">#         Rshunt = float(i[2])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">):</span>
+        <span class="n">imax</span><span class="o">=</span><span class="n">isToPlot</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">data_dum</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">imax</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data_dum</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">isToPlot</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">imax</span><span class="p">]</span>
+        
+        <span class="n">freq</span><span class="p">,</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">errZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_impedance_limit_time</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_dum</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_dum</span><span class="p">[</span><span class="s1">&#39;errJ&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_dum</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]),</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">imax</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">Rseries</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Rshunt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Correct the impedance for the series resistance</span>
+            <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rseries</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">Rshunt</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">Rseries</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Rshunt</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Correct the impedance for the series resistance</span>
+            <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rseries</span> <span class="o">+</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">Rshunt</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Rseries</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Correct the impedance for the shunt resistance</span>
+            <span class="n">invZ</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">invZ</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">Rshunt</span><span class="p">)</span>
+
+        <span class="n">invZ</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+        <span class="c1"># we are only interested in the absolute value of the real and imag components:</span>
+        <span class="n">ReZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
+        <span class="n">ImZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span>
+        <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="p">)</span><span class="o">*</span><span class="n">invZ</span><span class="o">.</span><span class="n">imag</span>
+        <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">invZ</span><span class="o">.</span><span class="n">real</span>
+
+        <span class="n">errC</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">invZ</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">errZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+        <span class="n">errG</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">invZ</span><span class="o">.</span><span class="n">real</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">errZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">ReZ</span><span class="p">,</span> <span class="n">ImZ</span><span class="p">,</span> <span class="n">errZ</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">errC</span><span class="p">,</span> <span class="n">errG</span></div>
+
+
+<div class="viewcode-block" id="store_capacitance_data">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.store_capacitance_data">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">store_capacitance_data</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">cap</span><span class="p">,</span> <span class="n">errC</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="s1">&#39;CapVol.dat&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Save the capacitance &amp; its error in one file called CapVol.dat</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    V : np.array</span>
+<span class="sd">        Array of frequencies</span>
+<span class="sd">    cap : np.array</span>
+<span class="sd">        Array of the capacitance</span>
+<span class="sd">    errC : np.array</span>
+<span class="sd">        Array of the capacitance error</span>
+<span class="sd">    output_file : string</span>
+<span class="sd">        Filename where the capacitance data is stored</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;V C errC&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)):</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">cap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">errC</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_capacitance">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.get_capacitance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_capacitance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">V_0</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">V_step</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the capacitance from the simulation result</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : DataFrame</span>
+<span class="sd">        DataFrame with the simulation results (tj.dat) file</span>
+<span class="sd">    freq : float</span>
+<span class="sd">        Frequency at which the capacitance-voltage measurement is performed</span>
+<span class="sd">    V_0 : float</span>
+<span class="sd">        Initial voltage</span>
+<span class="sd">    V_max : float</span>
+<span class="sd">        Maximum voltage</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step that is applied directly after t=0</span>
+<span class="sd">    V_step : float</span>
+<span class="sd">        Voltage difference, determines at which voltages the capacitance is determined</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    output_file : string</span>
+<span class="sd">        Filename where the capacitance data is stored</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    integer,string</span>
+<span class="sd">        returns -1 (failed) or 1 (success), including a message</span>
+<span class="sd">    &quot;&quot;&quot;</span>  
+    <span class="c1"># get indexes of the time points where the voltage changes</span>
+    <span class="n">isToPlot</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># do -1 to get the last index</span>
+    <span class="n">isToPlot</span> <span class="o">=</span> <span class="n">isToPlot</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="c1"># remove the first index, because we start at t=0</span>
+    <span class="n">isToPlot</span> <span class="o">=</span> <span class="n">isToPlot</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="c1"># add the last index to the end</span>
+    <span class="n">isToPlot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">isToPlot</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">V_max</span><span class="o">-</span><span class="n">V_0</span><span class="p">)</span><span class="o">/</span><span class="n">V_step</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">ReZ</span><span class="p">,</span> <span class="n">ImZ</span><span class="p">,</span> <span class="n">errZ</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">errC</span><span class="p">,</span> <span class="n">errG</span> <span class="o">=</span> <span class="n">calc_impedance_CV</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">isToPlot</span><span class="p">,</span><span class="n">session_path</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">)</span>
+
+    <span class="c1"># Write the capacitance results to a file</span>
+    <span class="n">store_capacitance_data</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">errC</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+
+    <span class="c1"># If the capacitance is calculated, message a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="cap_plot">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.cap_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cap_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">plot_type</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot the capacitance against voltage</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    output_file : string</span>
+<span class="sd">        Filename where the capacitance data is stored</span>
+<span class="sd">    xscale : string</span>
+<span class="sd">        Scale of the x-axis. E.g linear or log</span>
+<span class="sd">    yscale : string</span>
+<span class="sd">        Scale of the y-axis. E.g linear or log</span>
+<span class="sd">    plot_type : matplotlib.pyplot</span>
+<span class="sd">        Type of plot to display</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read the data from CapVol-file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Define the plot parameters</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span> <span class="p">:</span> <span class="s1">&#39;Capacitance&#39;</span> <span class="p">}</span>
+    <span class="n">par_x</span> <span class="o">=</span> <span class="s1">&#39;V&#39;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Voltage [V]&#39;</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Capacitance [Fm$^{-2}$]&#39;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Capacitance-Voltage&#39;</span>
+    
+    <span class="c1"># Plot with or without errorbars</span>
+    <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">,</span> 
+                                            <span class="p">[],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;errC&#39;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="MottSchottky_plot">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.MottSchottky_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">MottSchottky_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">plot_type</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot the 1/capacitance^2 against voltage</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    output_file : string</span>
+<span class="sd">        Filename where the capacitance data is stored</span>
+<span class="sd">    xscale : string</span>
+<span class="sd">        Scale of the x-axis. E.g linear or log</span>
+<span class="sd">    yscale : string</span>
+<span class="sd">        Scale of the y-axis. E.g linear or log</span>
+<span class="sd">    plot_type : matplotlib.pyplot</span>
+<span class="sd">        Type of plot to display</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read the data from CapVol-file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Define the plot parameters</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;1/C2&#39;</span> <span class="p">:</span> <span class="s1">&#39;Capacitance&#39;</span> <span class="p">}</span>
+    <span class="n">par_x</span> <span class="o">=</span> <span class="s1">&#39;V&#39;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Voltage [V]&#39;</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;1/Capacitance$^2$ [Fm$^{-2}$]$^{-2}$&#39;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Mott-Schottky&#39;</span>
+    
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;1/C2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="c1"># Plot with or without errorbars</span>
+    <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">,</span> 
+                                            <span class="p">[],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;errC&#39;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_capacitance">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.plot_capacitance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_capacitance</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="s1">&#39;CapVol.dat&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a plot of the capacitance against voltage and the Mott-Schottky plot</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cap_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+
+    <span class="n">MottSchottky_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="run_CV_simu">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.CV.run_CV_simu">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_CV_simu</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">V_min</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span> <span class="n">V_step</span><span class="p">,</span> <span class="n">G_frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">del_V</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>  <span class="n">run_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">,</span>  <span class="n">output_file</span> <span class="o">=</span> <span class="s1">&#39;CapVol.dat&#39;</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="s1">&#39;tj.dat&#39;</span><span class="p">,</span> <span class="n">varFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">timeFactor</span><span class="o">=</span><span class="mf">1.02</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a tVG file and run ZimT with capacitance device parameters</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zimt_device_parameters : string</span>
+<span class="sd">        Name of the zimt device parameters file</span>
+<span class="sd">    session_path : string, optional</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    freq : float</span>
+<span class="sd">        Frequency at which the capacitance-voltage measurement is performed</span>
+<span class="sd">    V_min : float</span>
+<span class="sd">        Initial voltage</span>
+<span class="sd">    V_max : float</span>
+<span class="sd">        Maximum voltage</span>
+<span class="sd">    V_step : float</span>
+<span class="sd">        Voltage difference, determines at which voltages the capacitance is determined</span>
+<span class="sd">    G_frac : float, optional</span>
+<span class="sd">        Fractional light intensity, by default 1</span>
+<span class="sd">    del_V : float, optional</span>
+<span class="sd">        Voltage step that is applied directly after t=0, by default 0.01</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        Indicate whether the script is in &#39;web&#39; mode (True) or standalone mode (False). Used to control the console output, by default False  </span>
+<span class="sd">    tVG_name : string, optional</span>
+<span class="sd">        Name of the tVG file, by default tVG.txt</span>
+<span class="sd">    output_file : string, optional</span>
+<span class="sd">        Name of the file where the capacitance data is stored, by default CapVol.dat</span>
+<span class="sd">    tj_name : string, optional</span>
+<span class="sd">        Name of the tj file where the capacitance data is stored, by default tj.dat</span>
+<span class="sd">    varFile : string, optional</span>
+<span class="sd">        Name of the var file, by default &#39;none&#39;</span>
+<span class="sd">    ini_timeFactor : float, optional</span>
+<span class="sd">        Constant defining the size of the initial timestep, by default 1e-3</span>
+<span class="sd">    timeFactor : float, optional</span>
+<span class="sd">        Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1., by default 1.02</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    CompletedProcess</span>
+<span class="sd">        Output object of with returncode and console output of the simulation</span>
+<span class="sd">    string</span>
+<span class="sd">        Return message to display on the UI, for both success and failed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to see the console output</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;UUID&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1"># Check if the user wants to add a UUID to the tj file name</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cmd_pars&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to add additional command line parameters</span>
+    <span class="c1"># Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threadsafe&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threadsafe&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+    
+    <span class="c1"># Update the file names with the UUID</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">UUID</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;turnoff_autoTidy&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to turn off the autoTidy function in SIMsalabim</span>
+    <span class="k">if</span> <span class="n">turnoff_autoTidy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Update the filenames with the UUID</span>
+    <span class="n">tj_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">)</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+    <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">tj_file_name_base</span><span class="p">,</span> <span class="n">tj_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tj_name</span><span class="p">)</span>
+        <span class="n">tj_name</span> <span class="o">=</span> <span class="n">tj_file_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">tj_file_name_ext</span> 
+        <span class="n">tVG_name_base</span><span class="p">,</span> <span class="n">tVG_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">)</span>
+        <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">tVG_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">tVG_name_ext</span>
+        <span class="n">output_file_base</span><span class="p">,</span> <span class="n">output_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">output_file_ext</span>
+        <span class="k">if</span> <span class="n">varFile</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+            <span class="n">var_file_base</span><span class="p">,</span> <span class="n">var_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">varFile</span><span class="p">)</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">var_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">var_file_ext</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">varFile</span><span class="p">)</span>
+    <span class="c1"># varFile = &#39;none&#39; # we don&#39;t use a var file for this simulation</span>
+
+    <span class="c1"># The simulations with Rseries and Rshunt often do not converge, so we first run a steady state simulation to get the internal voltage and then run the impedance simulation with Rseries = 0 and Rshunt = -Rshunt. We will correct the impedance afterwards. This is a workaround to improve the convergence of the impedance simulation that should remain accurate to estimate the impedance.</span>
+    <span class="c1">#default values for Rseries and Rshunt</span>
+    <span class="n">Rseries</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Rshunt</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1e3</span>
+
+    <span class="c1"># Do the steady state simulation to calculate the internal voltage in case of series resistance</span>
+    <span class="c1"># Create tVG</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_SS_CV</span><span class="p">(</span><span class="n">V_min</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span> <span class="n">V_step</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">)</span>
+
+    <span class="c1"># Get the device parameters and Rseries and Rshunt</span>
+    <span class="n">dev_val</span><span class="p">,</span><span class="n">layers_dum</span> <span class="o">=</span> <span class="n">load_device_parameters</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dev_val</span><span class="p">[</span><span class="n">zimt_device_parameters</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Contacts&#39;</span><span class="p">:</span>
+            <span class="n">contacts</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">break</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">contacts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;R_series&#39;</span><span class="p">:</span>
+            <span class="n">Rseries</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;R_shunt&#39;</span><span class="p">:</span>
+            <span class="n">Rshunt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="c1"># Check if R_series and R_shunt are defined in cmd_pars</span>
+    <span class="n">idx_Rseries</span><span class="p">,</span> <span class="n">idx_Rshunt</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cmd_pars</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;R_series&#39;</span><span class="p">:</span>
+                <span class="n">Rseries</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+                <span class="n">idx_Rseries</span> <span class="o">=</span> <span class="n">idx</span>
+            <span class="k">elif</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;R_shunt&#39;</span><span class="p">:</span>
+                <span class="n">Rshunt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+                <span class="n">idx_Rshunt</span> <span class="o">=</span> <span class="n">idx</span>
+
+    <span class="k">if</span> <span class="n">Rseries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Check if tVG file is created</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># In order for zimt to converge, set absolute tolerance of Poisson solver small enough</span>
+            <span class="n">tolPois</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">del_V</span><span class="p">)))</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+
+            <span class="c1"># Define mandatory options for ZimT to run well with impedance:</span>
+            <span class="n">CV_SS_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">zimt_device_parameters</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tVG_name</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tolPois&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">tolPois</span><span class="p">)},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;limitDigits&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;currDiffInt&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tJFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tj_name</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">}</span>
+                                <span class="p">]</span>
+            <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+                <span class="n">CV_SS_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span>
+
+            <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">CV_SS_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">CV_SS_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">CV_SS_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">CV_SS_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="n">tj_name</span><span class="p">)</span>
+
+                <span class="n">Vext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">])</span>
+                <span class="n">Jext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">])</span>
+                <span class="n">Vint</span> <span class="o">=</span> <span class="n">Vext</span> <span class="o">-</span> <span class="n">Jext</span><span class="o">*</span><span class="n">Rseries</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+
+        <span class="c1"># Create tVG</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_CV_Rseries</span><span class="p">(</span><span class="n">Vint</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">timeFactor</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>            
+        <span class="c1"># Create tVG</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_CV</span><span class="p">(</span><span class="n">V_min</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">V_step</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">timeFactor</span><span class="p">)</span>
+
+    <span class="c1"># remove the Rseries and Rshunt from cmd_pars</span>
+    <span class="k">if</span> <span class="n">idx_Rseries</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">idx_Rshunt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">idx_Rseries</span> <span class="o">&lt;</span> <span class="n">idx_Rshunt</span><span class="p">:</span>
+            <span class="n">cmd_pars</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx_Rshunt</span><span class="p">)</span>
+            <span class="n">cmd_pars</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx_Rseries</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmd_pars</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx_Rseries</span><span class="p">)</span>
+            <span class="n">cmd_pars</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx_Rshunt</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">idx_Rseries</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">idx_Rshunt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cmd_pars</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx_Rseries</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">idx_Rshunt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">idx_Rseries</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cmd_pars</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx_Rshunt</span><span class="p">)</span>
+
+    <span class="c1"># Check if tVG file is created</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># In order for zimt to converge, set absolute tolerance of Poisson solver small enough</span>
+        <span class="n">tolPois</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">del_V</span><span class="p">)))</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="c1"># Define mandatory options for ZimT to run well with CV:</span>
+        <span class="n">CV_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">zimt_device_parameters</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tVG_name</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tolPois&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">tolPois</span><span class="p">)},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;limitDigits&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;currDiffInt&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tJFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tj_name</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">},</span>
+                        <span class="c1"># We remove Rseries and Rshunt as the simulation is either to converge that way, we will correct the impedance afterwards</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;R_series&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)},</span>
+                        <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;R_shunt&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">Rshunt</span><span class="p">))}]</span>
+        
+        <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+            <span class="n">CV_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span>
+            
+        <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">CV_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">CV_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">CV_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">CV_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="n">tj_name</span><span class="p">)</span>
+
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">get_capacitance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">V_min</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">V_step</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+        
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span></div>
+
+
+<span class="c1">######### Running the function as a standalone script #############################################</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1">## Manual CV input parameters. These are overwritten by command line arguments if provided</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="mf">1e4</span>
+    <span class="n">V_min</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">V_max</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">del_V</span> <span class="o">=</span> <span class="mf">10e-3</span>
+    <span class="n">V_step</span> <span class="o">=</span> <span class="mf">0.1</span>    
+    <span class="n">G_frac</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Define folder and file paths</span>
+    <span class="n">session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;../../&#39;</span><span class="p">,</span><span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;ZimT&#39;</span><span class="p">)</span>
+
+    <span class="n">zimt_device_parameters</span> <span class="o">=</span> <span class="s1">&#39;simulation_setup.txt&#39;</span>
+
+    <span class="n">tVG_name</span> <span class="o">=</span> <span class="s1">&#39;tVG.txt&#39;</span>
+    <span class="n">tj_name</span> <span class="o">=</span> <span class="s1">&#39;tj.dat&#39;</span>
+    <span class="n">output_name</span> <span class="o">=</span> <span class="s1">&#39;freqZ.dat&#39;</span>
+
+    <span class="c1"># UUID = str(uuid.uuid4()) # Add a UUID to the simulation</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># Not user input</span>
+    <span class="n">ini_timeFactor</span> <span class="o">=</span> <span class="mf">1e-3</span> <span class="c1"># Initial timestep factor, org 1e-3</span>
+    <span class="n">timeFactor</span> <span class="o">=</span> <span class="mf">1.02</span> <span class="c1"># Increase in timestep every step to reduce the amount of datapoints necessary, use value close to 1 as this is best! Org 1.02</span>
+    <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># If False, show verbose output in console</span>
+
+    <span class="c1">############## Command line arguments  ##############</span>
+    <span class="c1">## Notes</span>
+    <span class="c1">## - The command line arguments are optional and can be provided in any order</span>
+    <span class="c1">## - Each command line argument must be provided in the format -par_name value</span>
+    <span class="c1">## - Possible arguments include all SIMsalabim parameters and CV specific parameters as listed before</span>
+    <span class="c1">## - Special arguments</span>
+    <span class="c1">##   - sp : string</span>
+    <span class="c1">##     - The session path, i.e. the working directory for the simulation</span>
+    <span class="c1">##   - simsetup : string</span>
+    <span class="c1">##     - The name of the zimt simulation setup parameters file</span>
+    <span class="c1">##   - UUID : string</span>
+    <span class="c1">##     - An UUID to add to the simulation (output)</span>
+
+    <span class="n">cmd_pars_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Check if any arguments are provided.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="c1"># Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">),</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1"># Check if the key already exists, if not, add it to the cmd_pars_dict</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Duplicate parameter found in the command line parameters: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Check and process specific keys/arguments that are not native SIMsalabim arguments</span>
+    <span class="c1"># Handle the session_path/sp argument separately, as the other parameters depend on this</span>
+    <span class="k">if</span> <span class="s1">&#39;sp&#39;</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+        <span class="n">session_path</span> <span class="o">=</span> <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="s1">&#39;sp&#39;</span><span class="p">]</span>
+        <span class="c1"># remove from cmd_pars</span>
+        <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;sp&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Define mappings for keys and variables</span>
+    <span class="n">key_action_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;simsetup&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;zimt_device_parameters&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;V_min&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;V_min&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;V_max&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;V_max&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;del_V&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;del_V&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;V_step&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;V_step&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;G_frac&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;G_frac&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;tVG_name&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tVG_name&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;tj_name&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tj_name&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;out_name&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;output_name&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;UUID&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;UUID&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>    
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>  <span class="c1"># Use list to avoid modifying the dictionary while iterating</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_action_map</span><span class="p">:</span>
+            <span class="c1"># Apply the corresponding action</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">key_action_map</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">cmd_pars_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Dynamically update global variables</span>
+            <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list</span>
+    <span class="n">cmd_pars</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="c1"># Run Capacitance-Voltage   </span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">run_CV_simu</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">V_min</span><span class="p">,</span> <span class="n">V_max</span><span class="p">,</span> <span class="n">V_step</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span><span class="n">run_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tVG_name</span><span class="o">=</span><span class="n">tVG_name</span><span class="p">,</span> 
+                                    <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_name</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="n">tj_name</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="o">=</span><span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">timeFactor</span><span class="o">=</span><span class="n">timeFactor</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="o">=</span><span class="n">cmd_pars</span><span class="p">,</span> <span class="n">UUID</span><span class="o">=</span><span class="n">UUID</span><span class="p">)</span>
+
+    <span class="c1"># Make the capacitance-voltage plot</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+        <span class="n">plot_capacitance</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_name</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

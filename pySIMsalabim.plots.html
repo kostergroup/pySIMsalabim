@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.plots package &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pySIMsalabim.tests package" href="pySIMsalabim.tests.html" />
+    <link rel="prev" title="pySIMsalabim.install package" href="pySIMsalabim.install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pySIMsalabim</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pySIMsalabim.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html">pySIMsalabim.aux_funcs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html">pySIMsalabim.experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html">pySIMsalabim.install package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pySIMsalabim.plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html">pySIMsalabim.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html">pySIMsalabim.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.html#module-pySIMsalabim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pySIMsalabim</a></li>
+          <li class="breadcrumb-item"><a href="pySIMsalabim.html">pySIMsalabim package</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.plots package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/pySIMsalabim.plots.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysimsalabim-plots-package">
+<h1>pySIMsalabim.plots package<a class="headerlink" href="#pysimsalabim-plots-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pySIMsalabim.plots.band_diagram">
+<span id="pysimsalabim-plots-band-diagram-module"></span><h2>pySIMsalabim.plots.band_diagram module<a class="headerlink" href="#module-pySIMsalabim.plots.band_diagram" title="Link to this heading"></a></h2>
+<p>Draw the energy band diagram</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.plots.band_diagram.create_energy_label">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.plots.band_diagram.</span></span><span class="sig-name descname"><span class="pre">create_energy_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_right</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vert_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'top'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/plots/band_diagram.html#create_energy_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.plots.band_diagram.create_energy_label" title="Link to this definition"></a></dt>
+<dd><p>Create and place the label for an energy level (in eV) of a layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_left</strong> (<em>float</em>) – Left x position of the layer [m]</p></li>
+<li><p><strong>x_right</strong> (<em>float</em>) – right x position of the layer [m]</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Full width of the device [m]</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – Energy of the band [eV]</p></li>
+<li><p><strong>band_type</strong> (<em>string</em>) – Type of band (CB, VB, Electrode)</p></li>
+<li><p><strong>position</strong> (<em>float</em>) – Full length of the device</p></li>
+<li><p><strong>ax</strong> (<em>axes</em>) – Axes object for the plot</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.plots.band_diagram.create_width_label">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.plots.band_diagram.</span></span><span class="sig-name descname"><span class="pre">create_width_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_right</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_corr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/plots/band_diagram.html#create_width_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.plots.band_diagram.create_width_label" title="Link to this definition"></a></dt>
+<dd><p>Create the label to display the width of a layer on the width bar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_left</strong> (<em>float</em>) – Left x position of the layer [m]</p></li>
+<li><p><strong>x_right</strong> (<em>float</em>) – right x position of the layer [m]</p></li>
+<li><p><strong>x_corr</strong> (<em>float</em>) – Correction factor to place the label in the middle of the layer</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Width of the layer [m]</p></li>
+<li><p><strong>y_max</strong> (<em>float</em>) – Lowest energy level of the device [eV]</p></li>
+<li><p><strong>ax</strong> (<em>axes</em>) – Axes object for the plot</p></li>
+<li><p><strong>color</strong> (<em>string</em>) – Color of the label</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.plots.band_diagram.get_param_band_diagram">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.plots.band_diagram.</span></span><span class="sig-name descname"><span class="pre">get_param_band_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_par</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_par_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/plots/band_diagram.html#get_param_band_diagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.plots.band_diagram.get_param_band_diagram" title="Link to this definition"></a></dt>
+<dd><p>Create and display the band diagram on the UI based on the relevant parameters from the dict object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dev_par</strong> (<em>dict</em>) – Dictionary with all data</p></li>
+<li><p><strong>layers</strong> (<em>List</em>) – List with all the layers in the device</p></li>
+<li><p><strong>dev_par_name</strong> (<em>string</em>) – Name of the device parameter file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.plots.band_diagram.plot_band_diagram">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.plots.band_diagram.</span></span><span class="sig-name descname"><span class="pre">plot_band_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_par_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/plots/band_diagram.html#plot_band_diagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.plots.band_diagram.plot_band_diagram" title="Link to this definition"></a></dt>
+<dd><p>Plot the band diagram of the device based on the device parameter file and the session path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dev_par_file_name</strong> (<em>string</em>) – Name of the device parameter file</p></li>
+<li><p><strong>session_path</strong> (<em>string</em>) – Path to the session folder</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.plots.band_diagram.plot_device_widths">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.plots.band_diagram.</span></span><span class="sig-name descname"><span class="pre">plot_device_widths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_original</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/plots/band_diagram.html#plot_device_widths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.plots.band_diagram.plot_device_widths" title="Link to this definition"></a></dt>
+<dd><p>Plot a width bar below the band energy diagram with the thickness of each layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>axes</em>) – Axes object for the plot</p></li>
+<li><p><strong>y_max</strong> (<em>float</em>) – Lowest energy level [eV]</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Full width of the device [m]</p></li>
+<li><p><strong>L_original</strong> (<em>List</em>) – List with the layer widths before scaling</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.plots.plot_def">
+<span id="pysimsalabim-plots-plot-def-module"></span><h2>pySIMsalabim.plots.plot_def module<a class="headerlink" href="#module-pySIMsalabim.plots.plot_def" title="Link to this heading"></a></h2>
+<p>Global settings for plots</p>
+</section>
+<section id="module-pySIMsalabim.plots.plot_functions">
+<span id="pysimsalabim-plots-plot-functions-module"></span><h2>pySIMsalabim.plots.plot_functions module<a class="headerlink" href="#module-pySIMsalabim.plots.plot_functions" title="Link to this heading"></a></h2>
+<p>Functions for plotting</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.plots.plot_functions.plot_result">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.plots.plot_functions.</span></span><span class="sig-name descname"><span class="pre">plot_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_funcs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/plots/plot_functions.html#plot_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.plots.plot_functions.plot_result" title="Link to this definition"></a></dt>
+<dd><p>Make a plot for a (sub)set of parameters from a DataFrame. Note: errorbars only work with single x,y functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>DataFrame</em>) – Data to plot</p></li>
+<li><p><strong>pars</strong> (<em>dict</em>) – Dict with all potential parameters to plot. Keys represent the names in the dataFrama, values are the corresponding labels</p></li>
+<li><p><strong>selected</strong> (<em>list</em>) – List with the names of the selected parameters to plot. Names match the names in the dataFrame. TO use all parameters, set selected to list(pars.keys())</p></li>
+<li><p><strong>x_key</strong> (<em>string</em>) – Key in the dataframe for the ‘x’ axis data</p></li>
+<li><p><strong>xlabel</strong> (<em>string</em>) – Label for the x-axis. Format: parameter [unit]</p></li>
+<li><p><strong>ylabel</strong> (<em>string</em>) – Label for the y-axis. Format: parameter [unit]</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale</strong> (<em>string</em>) – Scale of the y-axis. E.g linear or log</p></li>
+<li><p><strong>title</strong> (<em>string</em>) – Title of the plot</p></li>
+<li><p><strong>ax</strong> (<em>axes</em>) – Axes object for the plot</p></li>
+<li><p><strong>plot_funcs</strong> (<em>Any</em>) – Type of plot, e.g. standard plot or scatter</p></li>
+<li><p><strong>x_error</strong> (<em>List</em><em>, </em><em>optional</em>) – List with error on the x parameter, by default []</p></li>
+<li><p><strong>y_error</strong> (<em>List</em><em>, </em><em>optional</em>) – List with the error on the y parameter, by default []</p></li>
+<li><p><strong>legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Toggle between showing the legend in the plot, by default True</p></li>
+<li><p><strong>error_fmt</strong> (<em>str</em><em>, </em><em>optional</em>) – Format of the errorbars, by default ‘-’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated Axes object for the plot</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>axes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.plots.plot_functions.plot_result_colorbar_single">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.plots.plot_functions.</span></span><span class="sig-name descname"><span class="pre">plot_result_colorbar_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/plots/plot_functions.html#plot_result_colorbar_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.plots.plot_functions.plot_result_colorbar_single" title="Link to this definition"></a></dt>
+<dd><p>Show a x,y plot but use a colorbar to indicate a third parameter, similar to adding a weight to each point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em>) – Array with the x-data to plot</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – Array with the y data to plot</p></li>
+<li><p><strong>weight</strong> (<em>array</em>) – Array with the weights for the colorbar</p></li>
+<li><p><strong>ax</strong> (<em>axes</em>) – Axes object for the plot</p></li>
+<li><p><strong>fig</strong> (<em>figure</em>) – Figure object for the plot</p></li>
+<li><p><strong>xlabel</strong> (<em>string</em>) – label for the x-axis</p></li>
+<li><p><strong>ylabel</strong> (<em>string</em>) – label for the y-axis</p></li>
+<li><p><strong>weight_label</strong> (<em>string</em>) – label for the weights/colorbar</p></li>
+<li><p><strong>weight_norm</strong> (<em>string</em>) – the scale for the colorbar, ‘linear’ or ‘log’</p></li>
+<li><p><strong>title</strong> (<em>string</em>) – Title of the plot</p></li>
+<li><p><strong>xscale</strong> (<em>str</em><em>, </em><em>optional</em>) – set the scale of the x-axis, by default ‘linear’</p></li>
+<li><p><strong>yscale</strong> (<em>str</em><em>, </em><em>optional</em>) – set the scale of the y-axis, by default ‘linear’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>return the axes,figure objects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ax,fig</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.plots.plot_functions.plot_result_twinx">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.plots.plot_functions.</span></span><span class="sig-name descname"><span class="pre">plot_result_twinx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_funcs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_error_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_error_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/plots/plot_functions.html#plot_result_twinx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.plots.plot_functions.plot_result_twinx" title="Link to this definition"></a></dt>
+<dd><p>Plot data on two y axis with a shared x axis. DIfferentiate between regular and errorbar plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>DataFrame</em>) – Data to plot</p></li>
+<li><p><strong>pars</strong> (<em>dict</em>) – Dict with all potential parameters to plot. Keys represent the names in the dataFrama, values are the corresponding labels</p></li>
+<li><p><strong>selected_1</strong> (<em>List</em>) – List with the names of the selected parameters to plot on the left y axis.
+Names match the names in the dataFrame. TO use all parameters, set selected to list(pars.keys())</p></li>
+<li><p><strong>selected_2</strong> (<em>List</em>) – List with the names of the selected parameters to plot on the right y axis.
+Names match the names in the dataFrame. TO use all parameters, set selected to list(pars.keys())    x_key : _type_
+_description_</p></li>
+<li><p><strong>xlabel</strong> (<em>string</em>) – Label for the x-axis. Format: parameter [unit]</p></li>
+<li><p><strong>ylabel_1</strong> (<em>string</em>) – Label for the left y-axis. Format: parameter [unit]</p></li>
+<li><p><strong>ylabel_2</strong> (<em>_type_</em>) – Label for the right y-axis. Format: parameter [unit]</p></li>
+<li><p><strong>xscale</strong> (<em>string</em>) – Scale of the x-axis. E.g linear or log</p></li>
+<li><p><strong>yscale_1</strong> (<em>string</em>) – Scale of the left y-axis. E.g linear or log</p></li>
+<li><p><strong>yscale_2</strong> (<em>string</em>) – Scale of the right y-axis. E.g linear or log</p></li>
+<li><p><strong>title</strong> (<em>string</em>) – Title of the plot</p></li>
+<li><p><strong>ax1</strong> (<em>axes</em>) – Axes object for the plot</p></li>
+<li><p><strong>ax2</strong> (<em>axes</em>) – Axes object for the plot (right y axis)</p></li>
+<li><p><strong>plot_funcs</strong> (<em>any</em>) – Type of plot, e.g. standard plot or scatter</p></li>
+<li><p><strong>x_error</strong> (<em>list</em><em>, </em><em>optional</em>) – _description_, by default []</p></li>
+<li><p><strong>y_error_1</strong> (<em>list</em><em>, </em><em>optional</em>) – List with error on the x parameter, by default []</p></li>
+<li><p><strong>y_error_2</strong> (<em>list</em><em>, </em><em>optional</em>) – List with error on the x parameter, by default []</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.plots">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pySIMsalabim.plots" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pySIMsalabim.install.html" class="btn btn-neutral float-left" title="pySIMsalabim.install package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pySIMsalabim.tests.html" class="btn btn-neutral float-right" title="pySIMsalabim.tests package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

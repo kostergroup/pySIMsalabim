@@ -1,0 +1,1071 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.experiments.hysteresis &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.experiments.hysteresis</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.experiments.hysteresis</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Perform JV hysteresis simulations&quot;&quot;&quot;</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">trapezoid</span>
+<span class="c1"># import pySIMsalabim</span>
+<span class="c1">## Import pySIMsalabim, if not successful, add the parent directory to the system path</span>
+<span class="k">try</span> <span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Add the parent directory to the system path</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;../..&#39;</span><span class="p">)))</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">general</span> <span class="k">as</span> <span class="n">utils_gen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_functions</span> <span class="k">as</span> <span class="n">utils_plot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">update_cmd_pars</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+
+<div class="viewcode-block" id="build_tVG_arrays">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.build_tVG_arrays">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_tVG_arrays</span><span class="p">(</span><span class="n">Vmin</span><span class="p">,</span><span class="n">Vmax</span><span class="p">,</span><span class="n">scan_speed</span><span class="p">,</span><span class="n">direction</span><span class="p">,</span><span class="n">steps</span><span class="p">,</span><span class="n">G_frac</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the Arrays for time, voltage and Generation rate for a hysteresis experiment.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vmin : float </span>
+<span class="sd">        minimum voltage</span>
+<span class="sd">    Vmax : float</span>
+<span class="sd">        maximum voltage</span>
+<span class="sd">    scan_speed : float</span>
+<span class="sd">        Voltage scan speed [V/s]</span>
+<span class="sd">    direction : integer</span>
+<span class="sd">        Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</span>
+<span class="sd">    steps : integer</span>
+<span class="sd">        Number of time steps</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Device Parameter | Fractional Generation rate</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of time points</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of voltages</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of generation rates</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># Determine max time point</span>
+    <span class="n">tmax</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">Vmax</span> <span class="o">-</span> <span class="n">Vmin</span><span class="p">)</span><span class="o">/</span><span class="n">scan_speed</span><span class="p">)</span>
+    <span class="n">V</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">Vmin_</span> <span class="o">=</span> <span class="n">Vmin</span>
+    <span class="n">Vmax_</span> <span class="o">=</span> <span class="n">Vmax</span>
+
+    <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">Vmin</span> <span class="o">=</span> <span class="n">Vmax_</span>
+        <span class="n">Vmax</span> <span class="o">=</span> <span class="n">Vmin_</span>
+
+    <span class="n">t_min_to_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">t_max_to_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tmax</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">tmax</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">t_max_to_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">t_max_to_min</span><span class="p">,[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># remove double entry</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_min_to_max</span><span class="p">,</span><span class="n">t_max_to_min</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tmax</span><span class="p">:</span>
+            <span class="c1"># First  voltage sweep</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">direction</span><span class="o">*</span><span class="n">scan_speed</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">Vmin</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="c1"># Second voltage sweep</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">direction</span><span class="o">*</span><span class="n">scan_speed</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">tmax</span><span class="p">)</span> <span class="o">+</span> <span class="n">Vmax</span><span class="p">)</span>
+        <span class="c1"># Append the generation rate</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G_frac</span><span class="p">)</span>
+    <span class="c1"># convert to numpy arrays</span>
+    <span class="n">V</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">G</span></div>
+
+
+<div class="viewcode-block" id="build_tVG_arrays_log">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.build_tVG_arrays_log">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_tVG_arrays_log</span><span class="p">(</span><span class="n">Vmin</span><span class="p">,</span><span class="n">Vmax</span><span class="p">,</span><span class="n">Vacc</span><span class="p">,</span><span class="n">scan_speed</span><span class="p">,</span><span class="n">direction</span><span class="p">,</span><span class="n">steps</span><span class="p">,</span><span class="n">G_frac</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the Arrays for time, voltage and Generation rate for a hysteresis experiment with an exponential voltage sweep.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vmin : float </span>
+<span class="sd">        minimum voltage</span>
+<span class="sd">    Vmax : float</span>
+<span class="sd">        maximum voltage</span>
+<span class="sd">    scan_speed : float</span>
+<span class="sd">        Voltage scan speed [V/s]</span>
+<span class="sd">    direction : integer</span>
+<span class="sd">        Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</span>
+<span class="sd">    steps : integer</span>
+<span class="sd">        Number of time steps</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Device Parameter | Fractional Generation rate</span>
+<span class="sd">    Vminexpo : float</span>
+<span class="sd">        Voltage at which the exponential voltage steps start if Vmin or Vmax is 0</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of time points</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of voltages</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of generation rates</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+    <span class="k">if</span> <span class="n">Vacc</span> <span class="o">&gt;=</span> <span class="n">Vmin</span> <span class="ow">and</span> <span class="n">Vacc</span> <span class="o">&lt;=</span> <span class="n">Vmax</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Vacc must not be between Vmin and Vmax&#39;</span><span class="p">)</span>
+    
+    <span class="n">d</span> <span class="o">=</span> <span class="n">Vacc</span><span class="o">-</span><span class="n">Vmax</span>
+    <span class="n">V_min_to_max</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Vacc</span> <span class="o">-</span> <span class="n">d</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">Vacc</span> <span class="o">-</span> <span class="n">Vmin</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="p">]</span>
+    <span class="n">V_min_to_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">V_min_to_max</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Vmin</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># find idx of the min of Vmin_to_max and set it to 0</span>
+        <span class="n">min_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">V_min_to_max</span><span class="p">)</span>
+        <span class="n">V_min_to_max</span><span class="p">[</span><span class="n">min_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">Vmax</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># find idx of the max of Vmin_to_max and set it to 0</span>
+        <span class="n">max_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">V_min_to_max</span><span class="p">)</span>
+        <span class="n">V_min_to_max</span><span class="p">[</span><span class="n">max_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">V_max_to_min</span> <span class="o">=</span> <span class="n">V_min_to_max</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># forward -&gt; backward</span>
+        <span class="n">V_max_to_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">V_max_to_min</span><span class="p">,[</span><span class="mi">0</span><span class="p">])</span><span class="c1"># remove double entry</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">V_min_to_max</span><span class="p">,</span><span class="n">V_max_to_min</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># backward -&gt; forward</span>
+        <span class="n">V_min_to_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">V_min_to_max</span><span class="p">,[</span><span class="mi">0</span><span class="p">])</span><span class="c1"># remove double entry</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">V_max_to_min</span><span class="p">,</span><span class="n">V_min_to_max</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G_frac</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">))</span>
+    <span class="c1"># calculate the time array based on the voltage array and the scan speed</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)):</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">((</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">scan_speed</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">G</span></div>
+
+
+<div class="viewcode-block" id="create_tVG_hysteresis">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.create_tVG_hysteresis">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tVG_hysteresis</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">Vmin</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">,</span> <span class="n">scan_speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">Vacc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Vdist</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a tVG file for hysteresis experiments. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    Vmin : float </span>
+<span class="sd">        Left voltage boundary</span>
+<span class="sd">    Vmax : float</span>
+<span class="sd">        Right voltage boundary</span>
+<span class="sd">    scan_speed : float</span>
+<span class="sd">        Voltage scan speed [V/s]</span>
+<span class="sd">    direction : integer</span>
+<span class="sd">        Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</span>
+<span class="sd">    steps : integer</span>
+<span class="sd">        Number of time steps</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Device Parameter | Fractional Generation rate</span>
+<span class="sd">    Vacc : float, optional</span>
+<span class="sd">        Point of accumulation of row of V&#39;s, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin, only needed if Vdist=2, else ignored, default is None</span>
+<span class="sd">    Vdist : integer, optional</span>
+<span class="sd">        Voltage distribution type (1: linear, 2: exponential), default is 1</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Device Parameter | Name of the tVG file</span>
+<span class="sd">    **kwargs : dict</span>
+<span class="sd">        Additional keyword arguments</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    integer</span>
+<span class="sd">        Value to indicate the result of the process</span>
+<span class="sd">    string</span>
+<span class="sd">        A message to indicate the result of the process</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># kwargs</span>
+    
+    <span class="n">expo_mode</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">Vdist</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="kc">False</span>
+    <span class="c1"># Vminexpo = kwargs.get(&#39;Vminexpo&#39;, 1e-2) # Voltage at which the exponential voltage steps start if Vmin or Vmax is 0</span>
+    <span class="c1"># # check that Vminexpo is positive</span>
+    <span class="c1"># if Vminexpo &lt;= 0:</span>
+    <span class="c1">#     msg = &#39;Vminexpo must be strictly positive&#39;</span>
+    <span class="c1">#     retval = 1</span>
+    <span class="c1">#     return retval, msg</span>
+    <span class="k">if</span> <span class="n">expo_mode</span> <span class="ow">and</span> <span class="n">Vacc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;When expo_mode is True, Vacc must be provided&#39;</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span>
+    
+    <span class="c1"># check that direction is either 1 or -1</span>
+    <span class="k">if</span> <span class="n">direction</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">direction</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Incorrect scan direction, choose either 1 for a forward - backward scan or -1 for a backward - forward scan&#39;</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span>
+
+    <span class="c1"># check that Vmin &lt; Vmax</span>
+    <span class="k">if</span> <span class="n">Vmin</span> <span class="o">&gt;=</span> <span class="n">Vmax</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Vmin must be smaller than Vmax&#39;</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span>    
+
+    <span class="c1"># Create two arrays for both time sweeps</span>
+    <span class="k">if</span> <span class="n">expo_mode</span><span class="p">:</span>
+        <span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="n">build_tVG_arrays_log</span><span class="p">(</span><span class="n">Vmin</span><span class="p">,</span><span class="n">Vmax</span><span class="p">,</span><span class="n">Vacc</span><span class="p">,</span><span class="n">scan_speed</span><span class="p">,</span><span class="n">direction</span><span class="p">,</span><span class="n">steps</span><span class="p">,</span><span class="n">G_frac</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="n">build_tVG_arrays</span><span class="p">(</span><span class="n">Vmin</span><span class="p">,</span><span class="n">Vmax</span><span class="p">,</span><span class="n">scan_speed</span><span class="p">,</span><span class="n">direction</span><span class="p">,</span><span class="n">steps</span><span class="p">,</span><span class="n">G_frac</span><span class="p">)</span>
+        
+    <span class="c1"># Set the correct header for the tVG file</span>
+    <span class="n">tVG_header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;G_frac&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Combine t,V,G arrays into a DataFrame</span>
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">tVG_header</span><span class="p">)</span>
+
+    <span class="c1"># Create tVG file</span>
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.5e</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># tVG file is created, msg a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="plot_hysteresis_JV">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.plot_hysteresis_JV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_hysteresis_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">path2file</span> <span class="o">=</span> <span class="s1">&#39;tj.dat&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the hysteresis JV curve</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    path2file : string</span>
+<span class="sd">        Path to the tj file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Axes</span>
+<span class="sd">        Axes object for the plot</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read the data from tj-file</span>
+    <span class="n">data_tj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">path2file</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Jext&#39;</span> <span class="p">:</span> <span class="s1">&#39;Simulation&#39;</span><span class="p">}</span> <span class="c1">#&#39;$J_{ext}$&#39;}</span>
+    <span class="n">par_x</span> <span class="o">=</span> <span class="s1">&#39;Vext&#39;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;$V_</span><span class="si">{ext}</span><span class="s1">$ [V]&#39;</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Current density [Am$^{-2}$]&#39;</span>
+    <span class="n">xscale</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span>
+    <span class="n">yscale</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;JV curve&#39;</span>
+    <span class="n">plot_type</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">data_tj</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span> <span class="c1"># make it fit in the window</span>
+    
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+<div class="viewcode-block" id="tVG_exp">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.tVG_exp">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tVG_exp</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">,</span> <span class="n">scan_speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a tVG file for hysteresis experiments where Vext is the same as the voltages in the experimental JV file</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    expJV_Vmin_Vmax : string</span>
+<span class="sd">        Name of the file of the Vmin-Vmax JV scan</span>
+<span class="sd">    expJV_Vmax_Vmin : string</span>
+<span class="sd">        Name of the file of the Vmax-Vmin JV scan</span>
+<span class="sd">    scan_speed : float</span>
+<span class="sd">        Voltage scan speed [V/s]</span>
+<span class="sd">    direction : integer</span>
+<span class="sd">        Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Fractional Generation rate</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Name of the tVG file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    integer</span>
+<span class="sd">        Value to indicate the result of the process</span>
+<span class="sd">    string</span>
+<span class="sd">        A message to indicate the result of the process</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">JV_forward</span><span class="p">,</span> <span class="n">JV_backward</span> <span class="o">=</span> <span class="n">read_Exp_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">JV_backward</span><span class="p">,</span> <span class="n">JV_forward</span> <span class="o">=</span> <span class="n">read_Exp_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Illegal value for direction given</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Incorrect scan direction, choose either 1 for Vmin-Vmax-Vmin scan or -1 for a Vmax-Vmin-Vmax scan&#39;</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span>
+
+    <span class="n">V_forward</span> <span class="o">=</span> <span class="n">JV_forward</span><span class="o">.</span><span class="n">Vext</span>
+    <span class="n">V_backward</span> <span class="o">=</span> <span class="n">JV_backward</span><span class="o">.</span><span class="n">Vext</span>
+
+    <span class="c1"># Create the time array</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V_forward</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">V_backward</span><span class="p">))</span>
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+
+    <span class="c1"># First half</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">V_forward</span><span class="p">)):</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">((</span><span class="n">V_forward</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">V_forward</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">scan_speed</span><span class="p">)</span>
+
+    <span class="c1"># Turning point</span>
+    <span class="n">t</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">V_forward</span><span class="p">)]</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">V_forward</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">((</span><span class="n">V_backward</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">V_forward</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">scan_speed</span><span class="p">)</span>
+
+    <span class="c1"># Second half</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V_forward</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">V_forward</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">V_backward</span><span class="p">)):</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">((</span><span class="n">V_backward</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">V_forward</span><span class="p">)]</span><span class="o">-</span><span class="n">V_backward</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">V_forward</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">scan_speed</span><span class="p">)</span>
+
+    <span class="c1"># Voltage array</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">V_forward</span><span class="p">,</span> <span class="n">V_backward</span><span class="p">])</span>
+
+    <span class="c1"># Set the correct header for the tVG file</span>
+    <span class="n">tVG_header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;G_frac&#39;</span><span class="p">]</span>
+
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G_frac</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+    <span class="c1"># Combine t,V,G arrays into a DataFrama</span>
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">G</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">tVG_header</span><span class="p">)</span>
+
+    <span class="c1"># Create tVG file</span>
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># tVG file is created, msg a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="read_Exp_JV">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.read_Exp_JV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_Exp_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read experimental forward and backward JV files</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    expJV_Vmin_Vmax : string</span>
+<span class="sd">        Name of the file of the forward JV scan</span>
+<span class="sd">    expJV_Vmax_Vmin : string</span>
+<span class="sd">        Name of the file of the backward JV scan</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of current and voltage of experimental JV from Vmin to Vmax</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of current and voltage of experimental JV from Vmax to Vmin</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">expJV_min_max</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">)</span>
+    <span class="n">expJV_max_min</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">)</span>
+    
+    <span class="c1"># Determine time corresponding to each voltage V_i</span>
+    <span class="n">JV_min_max</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">expJV_min_max</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+    <span class="n">JV_max_min</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">expJV_max_min</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">JV_min_max</span><span class="p">,</span> <span class="n">JV_max_min</span></div>
+
+
+<div class="viewcode-block" id="concatJVs">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.concatJVs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">concatJVs</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Put the experimental forward and backward JV arrays together</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    expJV_Vmin_Vmax : string</span>
+<span class="sd">        Name of the file of the forward JV scan</span>
+<span class="sd">    expJV_Vmax_Vmin : string</span>
+<span class="sd">        Name of the file of the backward JV scan</span>
+<span class="sd">    direction : integer</span>
+<span class="sd">        Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of current and voltage of experimental JV</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">JV_forward</span><span class="p">,</span> <span class="n">JV_backward</span> <span class="o">=</span> <span class="n">read_Exp_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">JV_backward</span><span class="p">,</span> <span class="n">JV_forward</span> <span class="o">=</span> <span class="n">read_Exp_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Illegal value for direction given</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Incorrect scan direction, choose either 1 for Vmin-Vmax-Vmin scan or -1 for a Vmax-Vmin-Vmax scan&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    
+    <span class="n">expJV</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">JV_forward</span><span class="p">,</span> <span class="n">JV_backward</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   
+    <span class="k">return</span> <span class="n">expJV</span></div>
+
+
+<div class="viewcode-block" id="read_tj_file">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.read_tj_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="s1">&#39;tj.dat&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Read relevant parameters for admittance of the tj file</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+<span class="sd">    data_tj : dataFrame</span>
+<span class="sd">        Pandas dataFrame containing the tj output file from ZimT</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    DataFrame</span>
+<span class="sd">        Pandas dataFrame of the tj_file containing the time, current density, numerical error in the current density and the photogenerated current density</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tj_file_name</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Compare_Exp_Sim_JV">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.Compare_Exp_Sim_JV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Compare_Exp_Sim_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">,</span> <span class="n">rms_mode</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="s1">&#39;tj.dat&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculate the root-mean-square (rms) error of the simulated data compared to the experimental data. The used formulas are</span>
+<span class="sd">    described in the Manual (see the variable rms_mode in the section &#39;Description of simulated device parameters&#39;).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+<span class="sd">    expJV_Vmin_Vmax : string</span>
+<span class="sd">        Name of the file of the forward JV scan</span>
+<span class="sd">    expJV_Vmax_Vmin : string</span>
+<span class="sd">        Name of the file of the backward JV scan</span>
+<span class="sd">    rms_mode : string</span>
+<span class="sd">        Indicates how the normalised rms error should be calculated: either in linear or logarithmic form</span>
+<span class="sd">    direction : integer</span>
+<span class="sd">        Perform a Vmin-Vmax-Vmin (1) or Vmax-Vmin-Vmax scan (-1)</span>
+<span class="sd">    tj_file_name : dataFrame</span>
+<span class="sd">        Pandas dataFrame containing the tj output file from ZimT</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Float</span>
+<span class="sd">        Calculated rms-error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+        
+    <span class="n">JVExp</span> <span class="o">=</span> <span class="n">concatJVs</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+    <span class="n">JVSim</span> <span class="o">=</span> <span class="n">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="p">)[[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;Vext&#39;</span><span class="p">,</span> <span class="s1">&#39;Jext&#39;</span><span class="p">]]</span>
+    
+    <span class="c1"># Make an array of voltages that did not converge in simulation</span>
+    <span class="n">V_array_not_in_JVSim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">JVExp</span><span class="o">.</span><span class="n">Vext</span><span class="p">,</span> <span class="n">JVSim</span><span class="o">.</span><span class="n">Vext</span><span class="p">)</span>
+    
+    <span class="c1"># Remove voltages of experimental data that did not converge in the simulation</span>
+    <span class="c1"># As the rms-value cannot be calculated, when the voltages of the simulation and experimental data do not overlap</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">V_array_not_in_JVSim</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">disgardedPoints</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V_array_not_in_JVSim</span><span class="p">)):</span>
+            <span class="c1"># Find indices where voltages do not overlap for every V_i</span>
+            <span class="n">index_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">JVExp</span><span class="o">.</span><span class="n">Vext</span> <span class="o">==</span> <span class="n">V_array_not_in_JVSim</span><span class="p">[</span><span class="n">i</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+            
+            <span class="c1"># Add the to-slice-indices to a list</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">index_array</span><span class="p">)):</span>
+                <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index_array</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        
+        <span class="c1"># Delete the indices and convert JVExp from a numpy array in a DataFrame again</span>
+        <span class="n">JVExp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">JVExp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">indices</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">JVExp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JVExp</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span> <span class="s1">&#39;Jext&#39;</span><span class="p">])</span>
+    
+    <span class="n">rms</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">disgardedPoints</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="c1"># Look for the interval [Jmin,Jmax] in both the simulated and experiment data</span>
+    <span class="n">Jmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">JVExp</span><span class="o">.</span><span class="n">Jext</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">JVSim</span><span class="o">.</span><span class="n">Jext</span><span class="p">))</span>
+    <span class="n">Jmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">JVExp</span><span class="o">.</span><span class="n">Jext</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">JVSim</span><span class="o">.</span><span class="n">Jext</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">rms_mode</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span> <span class="ow">or</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+        <span class="c1"># Calculate the sum of squared residuals</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">JVExp</span><span class="p">)):</span>
+            <span class="n">rms</span> <span class="o">=</span> <span class="n">rms</span> <span class="o">+</span> <span class="p">(</span><span class="n">JVExp</span><span class="o">.</span><span class="n">Jext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">JVSim</span><span class="o">.</span><span class="n">Jext</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1"># Calculate the root mean square error and normalise with respect to the interval [Jmin,Jmax]</span>
+        <span class="n">rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rms</span><span class="o">/</span><span class="n">count</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Jmax</span><span class="o">-</span><span class="n">Jmin</span><span class="p">)</span>
+        
+    <span class="k">elif</span> <span class="n">rms_mode</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="s1">&#39;logarithmic&#39;</span><span class="p">:</span>
+        <span class="c1"># Calculate the sum of squared residuals</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">JVExp</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">JVExp</span><span class="o">.</span><span class="n">Jext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">JVSim</span><span class="o">.</span><span class="n">Jext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">:</span> <span class="c1"># We can only calc rms if both are &lt;&gt; 0 and they have the same sign</span>
+                <span class="n">rms</span> <span class="o">=</span> <span class="n">rms</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">JVExp</span><span class="o">.</span><span class="n">Jext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">JVSim</span><span class="o">.</span><span class="n">Jext</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">disgardedPoints</span> <span class="o">=</span> <span class="kc">True</span>
+            
+        <span class="c1"># Calculate the root mean square error and normalise with respect to the interval [Jmin,Jmax]</span>
+        <span class="n">rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rms</span><span class="o">/</span><span class="n">count</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Jmax</span><span class="o">/</span><span class="n">Jmin</span><span class="p">)))</span> <span class="c1"># Note: Jmax &gt; Jmin, of course, but ABS(Jmin) can be larger than ABS(Jmax) so we need to use ABS(LN(...)) to get a positive rms</span>
+
+    <span class="k">if</span> <span class="n">disgardedPoints</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not all JV points were used in computing the rms-error.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delete voltages are: &#39;</span><span class="p">,</span> <span class="n">V_array_not_in_JVSim</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">rms</span></div>
+
+
+<div class="viewcode-block" id="calc_hysteresis_index">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.calc_hysteresis_index">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_hysteresis_index</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span> <span class="o">=</span> <span class="s1">&#39;tj.dat&#39;</span><span class="p">,</span> <span class="n">tVG_file_ame</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">,</span> <span class="n">plot_hyst_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the hysteresis index from the simulated JV curve using the difference area between the forward and backward scan</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    tj_file_name : string</span>
+<span class="sd">        Name of the tj file</span>
+<span class="sd">    tVG_file_ame : string</span>
+<span class="sd">        Name of the tVG file</span>
+<span class="sd">    plot_hyst_index : bool</span>
+<span class="sd">        If True, plot the JV curves with the normalisation and difference area</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Hysteresis index</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sign_dum</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># dummy value for sign change in voltage array</span>
+
+    <span class="c1"># Read data from files. tj file for the JV curve and tVG file to get all possible voltage steps. </span>
+    <span class="c1"># This is needed as not all voltages might be present in the tj file.</span>
+    <span class="n">data_tj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tj_file_name</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+    <span class="n">data_tVG</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_file_ame</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Store Vinput, Vext and Jext in arrays</span>
+    <span class="n">Vinput</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_tVG</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">])</span>
+    <span class="n">Vext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_tj</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">])</span>
+    <span class="n">Jext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_tj</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Find the min and max values of Vext and Jext to span the normalisation area </span>
+    <span class="n">Jmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Jext</span><span class="p">)</span>
+    <span class="n">Jmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Jext</span><span class="p">)</span>
+    <span class="n">Vmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Vext</span><span class="p">)</span>
+    <span class="n">Vmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Vext</span><span class="p">)</span>
+
+    <span class="c1"># As the forward and backward scan are in the same array, </span>
+    <span class="c1"># we need to find the point where the JV curve changes direction, i.e. the turning point and split into two seperate arrays</span>
+    <span class="c1"># Vext,Jext array</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Vext</span><span class="p">)</span>
+    <span class="n">sign_change</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">diff</span><span class="p">)))</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hysteresis index could not be calculated. No sign change in the voltage array&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Check if they are consecutive. If so, we might just be missing the &#39;flip&#39;&#39; point, as it could have not converged, so we need to correct for this.</span>
+        <span class="k">if</span> <span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">idx_change</span> <span class="o">=</span> <span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span>
+            <span class="n">sign_dum</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hysteresis index could not be calculated. Multiple sign changes in the voltage array&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hysteresis index could not be calculated. Multiple sign changes in the voltage array&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Need to correct for the index change between Vinput and the sign_change array</span>
+        <span class="n">idx_change</span> <span class="o">=</span> <span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span>
+
+    <span class="c1"># split the Vext and Jext arrays into two arrays</span>
+    <span class="n">Vext_1</span> <span class="o">=</span> <span class="n">Vext</span><span class="p">[:</span><span class="n">idx_change</span><span class="p">]</span>
+    <span class="n">Jext_1</span> <span class="o">=</span> <span class="n">Jext</span><span class="p">[:</span><span class="n">idx_change</span><span class="p">]</span>
+    <span class="n">Vext_2</span> <span class="o">=</span> <span class="n">Vext</span><span class="p">[</span><span class="n">idx_change</span><span class="p">:]</span>
+    <span class="n">Jext_2</span> <span class="o">=</span> <span class="n">Jext</span><span class="p">[</span><span class="n">idx_change</span><span class="p">:]</span>
+
+    <span class="k">if</span> <span class="n">sign_dum</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># append the last value of the first array to the first position of the second array to be able to include the turning point</span>
+        <span class="n">Vext_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Vext_2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">Vext_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">Jext_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Jext_2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">Jext_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Vinput array</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Vinput</span><span class="p">)</span>
+    <span class="n">sign_change</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">diff</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hysteresis index could not be calculated. No sign change in the voltage array&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hysteresis index could not be calculated.. Multiple sign changes in the voltage array&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Need to correct for the index change between Vinput and the sign_change array</span>
+        <span class="n">sign_change_Vinput</span> <span class="o">=</span> <span class="n">sign_change</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span>
+
+    <span class="c1"># We only need one of the arrays, as we will only use this as a reference</span>
+    <span class="n">Vinput_1</span> <span class="o">=</span> <span class="n">Vinput</span><span class="p">[:</span><span class="n">sign_change_Vinput</span><span class="p">]</span>
+
+
+    <span class="c1"># To calculate the difference area between the two curves, we need to reverse the order of the second arrays to match the order of the applied voltage</span>
+    <span class="c1"># reverse the second array</span>
+    <span class="n">Vext_2</span> <span class="o">=</span> <span class="n">Vext_2</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">Jext_2</span> <span class="o">=</span> <span class="n">Jext_2</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Create empty arrays to store the final V,J values</span>
+    <span class="n">Vfinal</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Jfinal_1</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Jfinal_2</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Loop over Vinput and check if the voltage exist in both V arrays</span>
+    <span class="c1"># If it does, add the current to the corresponding J array, else we cannot use it so we discard it</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Vinput_1</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Vinput_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">Vext_1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Vinput_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">Vext_2</span><span class="p">):</span>
+            <span class="c1"># Get the index of the voltage in the corresponding V arrays</span>
+            <span class="n">idx1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Vext_1</span> <span class="o">==</span> <span class="n">Vinput_1</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">idx2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Vext_2</span> <span class="o">==</span> <span class="n">Vinput_1</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+
+            <span class="c1"># Append the values to the final arrays</span>
+            <span class="n">Vfinal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Vext_1</span><span class="p">[</span><span class="n">idx1</span><span class="p">])</span>
+            <span class="n">Jfinal_1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Jext_1</span><span class="p">[</span><span class="n">idx1</span><span class="p">])</span>
+            <span class="n">Jfinal_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Jext_2</span><span class="p">[</span><span class="n">idx2</span><span class="p">])</span>
+
+    <span class="c1"># Calculate the hysteresis index</span>
+    <span class="n">hysteresis_index_num</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Jfinal_1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Jfinal_2</span><span class="p">)),</span><span class="n">Vfinal</span><span class="p">))</span> <span class="c1"># Use abs around trapezoid to avoid negative values when Vfinal is flipped</span>
+    <span class="n">hysteresis_index_denom</span> <span class="o">=</span> <span class="p">(</span><span class="n">Jmax</span> <span class="o">-</span> <span class="n">Jmin</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Vmax</span> <span class="o">-</span> <span class="n">Vmin</span><span class="p">)</span>
+    <span class="n">hysteresis_index</span> <span class="o">=</span> <span class="n">hysteresis_index_num</span> <span class="o">/</span> <span class="n">hysteresis_index_denom</span>
+
+    <span class="k">if</span> <span class="n">plot_hyst_index</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+
+        <span class="c1"># Plot JV traces together with normalisation and difference area</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+        <span class="c1"># Normalisation area</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Vmin</span><span class="p">,</span><span class="n">ymin</span> <span class="o">=</span>  <span class="n">Jmin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">Jmax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#919191&#39;</span><span class="p">,</span><span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normalisation area&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Vmax</span><span class="p">,</span><span class="n">ymin</span> <span class="o">=</span>  <span class="n">Jmin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">Jmax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#919191&#39;</span><span class="p">,</span><span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">Jmin</span><span class="p">,</span><span class="n">xmin</span> <span class="o">=</span>  <span class="n">Vmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">Vmax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#919191&#39;</span><span class="p">,</span><span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">Jmax</span><span class="p">,</span><span class="n">xmin</span> <span class="o">=</span>  <span class="n">Vmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">Vmax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#919191&#39;</span><span class="p">,</span><span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Difference area</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">Vfinal</span><span class="p">,</span><span class="n">Jfinal_1</span><span class="p">,</span><span class="n">Jfinal_2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b1f997&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Difference area&#39;</span><span class="p">)</span>
+    
+        <span class="c1"># JV traces</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Vfinal</span><span class="p">,</span><span class="n">Jfinal_2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Vfinal</span><span class="p">,</span><span class="n">Jfinal_1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$V_</span><span class="si">{ext}</span><span class="s1">$ [V]&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$J_</span><span class="si">{ext}</span><span class="s1">$ [Am$^{-2}$]&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Reverse the legend order. Curves should be listed first, then norm/diff area. </span>
+        <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">labels</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">framealpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">hysteresis_index</span></div>
+
+
+<div class="viewcode-block" id="Hysteresis_JV">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.hysteresis.Hysteresis_JV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Hysteresis_JV</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">UseExpData</span><span class="p">,</span> <span class="n">scan_speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="s1">&#39;tj.dat&#39;</span><span class="p">,</span><span class="n">varFile</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                  <span class="n">run_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Vmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Vmax</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">rms_mode</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a tVG file and perform a JV hysteresis experiment.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zimt_device_parameters : string</span>
+<span class="sd">        name of the zimt device parameters file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    UseExpData : integer</span>
+<span class="sd">        If 1, use experimental JV curves. If 0, Use Vmin, Vmax as boundaries</span>
+<span class="sd">    scan_speed : float</span>
+<span class="sd">        Voltage scan speed [V/s]</span>
+<span class="sd">    direction : integer</span>
+<span class="sd">        Perform a forward-backward (1) or backward-forward scan (-1).</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Device Parameter | Fractional generation rate</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        Indicate whether the script is in &#39;web&#39; mode (True) or standalone mode (False). Used to control the console output, by default False  </span>
+<span class="sd">    tVG_name : string, optional</span>
+<span class="sd">        Device Parameter | Name of the tVG file, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    tj_name : string, optional</span>
+<span class="sd">        Name of the tj file, by default &#39;tj.dat&#39;</span>
+<span class="sd">    varFile : string, optional</span>
+<span class="sd">        Name of the var file, by default &#39;none&#39;</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        indicate whether the script is in &#39;web&#39; mode (True) or standalone mode (False). Used to control the console output, by default False</span>
+<span class="sd">    Vmin : float, optional</span>
+<span class="sd">        Left voltage boundary, by default 0.0</span>
+<span class="sd">    Vmax : float, optional</span>
+<span class="sd">        Right voltage boundary, by default 0.0</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        Number of time steps, by default 0</span>
+<span class="sd">    expJV_Vmin_Vmax : str, optional</span>
+<span class="sd">        file name of the first expJV curve, by default &#39;&#39;</span>
+<span class="sd">    expJV_Vmax_Vmin : str, optional</span>
+<span class="sd">        file name of the second expJV curve, by default &#39;&#39;</span>
+<span class="sd">    rms_mode : str, optional</span>
+<span class="sd">        Either &#39;lin&#39; or &#39;log&#39; to specify how the rms error is calculated</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    CompletedProcess</span>
+<span class="sd">        Output object of with returncode and console output of the simulation</span>
+<span class="sd">    string</span>
+<span class="sd">        Return message to display on the UI, for both success and failed</span>
+<span class="sd">    dict</span>
+<span class="sd">        Dictionary containing the special output values of the simulation. In this case, the rms error (&#39;rms&#39;) and the hysteresis index (&#39;hyst_index&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to see the console output</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;UUID&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1"># Check if the user wants to add a UUID to the tj file name</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cmd_pars&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to add additional command line parameters</span>
+    <span class="n">Vdist</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Vdist&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># Voltage distribution type (1: linear, 2: exponential)</span>
+    <span class="n">Vacc</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Vacc&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Point of accumulation of row of V&#39;s, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin, only needed if Vdist=2, else ignored</span>
+
+    <span class="c1"># Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>  
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threadsafe&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threadsafe&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+
+    <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;turnoff_autoTidy&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to turn off the autoTidy function in SIMsalabim</span>
+    <span class="k">if</span> <span class="n">turnoff_autoTidy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># tVG file generation additional parameters</span>
+    <span class="c1"># expo_mode = kwargs.get(&#39;expo_mode&#39;, False) # whether to use exponential time steps</span>
+    <span class="c1"># Vminexpo = kwargs.get(&#39;Vminexpo&#39;, 1e-2) # minimum voltage after 0 to start the log steps</span>
+
+    <span class="c1"># Update the JV file name with the UUID</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">UUID</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># Update the filenames with the UUID</span>
+    <span class="n">tj_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">)</span>
+    <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">tj_file_name_base</span><span class="p">,</span> <span class="n">tj_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tj_name</span><span class="p">)</span>
+        <span class="n">tj_name</span> <span class="o">=</span> <span class="n">tj_file_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">tj_file_name_ext</span> 
+        <span class="n">tVG_name_base</span><span class="p">,</span> <span class="n">tVG_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">)</span>
+        <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">tVG_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">tVG_name_ext</span>
+        <span class="k">if</span> <span class="n">varFile</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+            <span class="n">var_file_base</span><span class="p">,</span> <span class="n">var_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">varFile</span><span class="p">)</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">var_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">var_file_ext</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">varFile</span><span class="p">)</span>
+    <span class="c1"># varFile = &#39;none&#39; # we don&#39;t use a var file for the hysteresis JV simulation</span>
+
+    <span class="c1"># Init output_vals rms &amp; hyst_index</span>
+    <span class="n">rms</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">hyst_index</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">if</span> <span class="n">UseExpData</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># When fitting to experimental data, create a tVG file where Vext is the same as the voltages in the experimental JV file</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">))</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">)):</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">tVG_exp</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">,</span> <span class="n">scan_speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Experimental JV files not found&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_hysteresis</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">Vmin</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">,</span> <span class="n">scan_speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">Vacc</span><span class="o">=</span><span class="n">Vacc</span><span class="p">,</span> <span class="n">Vdist</span><span class="o">=</span><span class="n">Vdist</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># tVG file created</span>
+        <span class="n">Hysteresis_JV_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">zimt_device_parameters</span><span class="p">},</span>
+                              <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tVG_name</span><span class="p">},</span>
+                              <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tJFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tj_name</span><span class="p">},</span>
+                              <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                              <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">}</span>
+                              <span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+            <span class="n">Hysteresis_JV_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span>
+
+        <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">Hysteresis_JV_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">Hysteresis_JV_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">Hysteresis_JV_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">Hysteresis_JV_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">UseExpData</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">rms</span> <span class="o">=</span> <span class="n">Compare_Exp_Sim_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">,</span> <span class="n">rms_mode</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">)</span>
+            <span class="n">hyst_index</span> <span class="o">=</span> <span class="n">calc_hysteresis_index</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span>
+
+        <span class="c1"># Put all the output values in a dictionary to be returned. </span>
+        <span class="c1"># By putting it in a dictionary we can add any number of values without breaking return arguments</span>
+        <span class="n">output_vals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;rms&#39;</span><span class="p">:</span> <span class="n">rms</span><span class="p">,</span> <span class="s1">&#39;hyst_index&#39;</span><span class="p">:</span> <span class="n">hyst_index</span><span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">output_vals</span></div>
+
+
+<span class="c1">## Running the function as a standalone script</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1">## Manual Hysteresis input parameters. These are overwritten by command line arguments if provided</span>
+    <span class="n">scan_speed</span> <span class="o">=</span> <span class="mf">1e1</span> <span class="c1"># V/s</span>
+    <span class="n">direction</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Scan direction: 1 for Vmin-Vmax-Vmin, -1 for Vmax-Vmin-Vmax</span>
+    <span class="n">G_frac</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># amount of suns</span>
+    <span class="n">UseExpData</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># integer, if 1 read experimental data</span>
+    <span class="n">Vmin</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># lower voltage boundary</span>
+    <span class="n">Vmax</span> <span class="o">=</span> <span class="mf">1.15</span> <span class="c1"># upper voltage boundary</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">200</span> <span class="c1"># Number of voltage steps</span>
+    <span class="n">expJV_Vmin_Vmax</span> <span class="o">=</span> <span class="s1">&#39;od05_f.txt&#39;</span> <span class="c1"># Forward (direction=1)/Backward (direction=-1) JV scan file</span>
+    <span class="n">expJV_Vmax_Vmin</span> <span class="o">=</span> <span class="s1">&#39;od05_b.txt&#39;</span> <span class="c1"># Backward (direction=1)/Forward (direction=-1) JV scan file</span>
+
+    <span class="c1"># Define folder and file paths</span>
+    <span class="n">session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;../../&#39;</span><span class="p">,</span><span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;ZimT&#39;</span><span class="p">)</span>
+
+    <span class="n">zimt_device_parameters</span> <span class="o">=</span> <span class="s1">&#39;simulation_setup.txt&#39;</span>
+
+    <span class="n">tVGFile</span> <span class="o">=</span> <span class="s1">&#39;tVG.txt&#39;</span>
+    <span class="n">tJFile</span> <span class="o">=</span> <span class="s1">&#39;tj.dat&#39;</span>
+    <span class="n">varFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+
+    <span class="c1"># UUID = str(uuid.uuid4()) # Add a UUID to the simulation</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># Not user input</span>
+    <span class="n">rms_mode</span> <span class="o">=</span> <span class="s1">&#39;log&#39;</span> <span class="c1"># lin or log</span>
+
+    <span class="c1">############## Command line arguments  ##############</span>
+    <span class="c1">## Notes</span>
+    <span class="c1">## - The command line arguments are optional and can be provided in any order</span>
+    <span class="c1">## - Each command line argument must be provided in the format -par_name value</span>
+    <span class="c1">## - Possible arguments include all SIMsalabim parameters and Hysteresis JV specific parameters as listed before</span>
+    <span class="c1">## - Special arguments</span>
+    <span class="c1">##   - sp : string</span>
+    <span class="c1">##     - The session path, i.e. the working directory for the simulation</span>
+    <span class="c1">##   - simsetup : string</span>
+    <span class="c1">##     - The name of the zimt simulation setup parameters file</span>
+    <span class="c1">##   - UUID : string</span>
+    <span class="c1">##     - An UUID to add to the simulation (output)</span>
+
+    <span class="n">cmd_pars_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Check if any arguments are provided.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="c1"># Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">),</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1"># Check if the key already exists, if not, add it to the cmd_pars_dict</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Duplicate parameter found in the command line parameters: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Check and process specific keys/arguments that are not native SIMsalabim arguments</span>
+    <span class="c1"># Handle the session_path/sp argument separately, as the other parameters depend on this</span>
+    <span class="k">if</span> <span class="s1">&#39;sp&#39;</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+        <span class="n">session_path</span> <span class="o">=</span> <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="s1">&#39;sp&#39;</span><span class="p">]</span>
+        <span class="c1"># remove from cmd_pars</span>
+        <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;sp&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Define mappings for keys and variables</span>
+    <span class="n">key_action_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;zimt_device_parameters&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;zimt_device_parameters&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;scan_speed&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;scan_speed&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;G_frac&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;G_frac&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;UseExpData&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;UseExpData&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;Vmin&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Vmin&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;Vmax&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Vmax&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;expJV_Vmin_Vmax&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;expJV_Vmin_Vmax&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;expJV_Vmax_Vmin&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;expJV_Vmax_Vmin&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;tVGFile&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">:</span>  <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;tJFile&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tJFile&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;varFile&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;varFile&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;UUID&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;UUID&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>  <span class="c1"># Use list to avoid modifying the dictionary while iterating</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_action_map</span><span class="p">:</span>
+            <span class="c1"># Apply the corresponding action</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">key_action_map</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">cmd_pars_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Dynamically update global variables</span>
+            <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list</span>
+    <span class="n">cmd_pars</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    
+    <span class="k">if</span> <span class="n">UseExpData</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">output_vals</span> <span class="o">=</span> <span class="n">Hysteresis_JV</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">UseExpData</span><span class="p">,</span> <span class="n">scan_speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">tVGFile</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="n">tJFile</span><span class="p">,</span>
+                                             <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span> <span class="o">=</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span> <span class="o">=</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">,</span> <span class="n">rms_mode</span> <span class="o">=</span> <span class="n">rms_mode</span><span class="p">,</span> <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">UUID</span><span class="o">=</span><span class="n">UUID</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">output_vals</span> <span class="o">=</span> <span class="n">Hysteresis_JV</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">UseExpData</span><span class="p">,</span> <span class="n">scan_speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">tVGFile</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="n">tJFile</span><span class="p">,</span> 
+                                              <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">Vmin</span><span class="o">=</span><span class="n">Vmin</span><span class="p">,</span> <span class="n">Vmax</span><span class="o">=</span><span class="n">Vmax</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span><span class="n">steps</span><span class="p">,</span> <span class="n">rms_mode</span> <span class="o">=</span> <span class="n">rms_mode</span><span class="p">,</span> <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">UUID</span><span class="o">=</span><span class="n">UUID</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">UseExpData</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rms-value: &#39;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">output_vals</span><span class="p">[</span><span class="s1">&#39;rms&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">)))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;hyst-index: </span><span class="si">{</span><span class="n">output_vals</span><span class="p">[</span><span class="s2">&quot;hyst_index&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_hysteresis_JV</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tJFile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">UseExpData</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">JVExp</span> <span class="o">=</span> <span class="n">concatJVs</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">expJV_Vmin_Vmax</span><span class="p">,</span> <span class="n">expJV_Vmax_Vmin</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">JVExp</span><span class="o">.</span><span class="n">Vext</span><span class="p">,</span> <span class="n">JVExp</span><span class="o">.</span><span class="n">Jext</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Experimental&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="c1">#&#39;Convergence issues, no plot is printed&#39;)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

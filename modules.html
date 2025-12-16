@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pySIMsalabim package" href="pySIMsalabim.html" />
+    <link rel="prev" title="Notebooks gallery" href="Notebook_Gallery.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pySIMsalabim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pySIMsalabim</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/modules.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysimsalabim">
+<h1>pySIMsalabim<a class="headerlink" href="#pysimsalabim" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pySIMsalabim.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.aux_funcs.html">pySIMsalabim.aux_funcs package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html#module-pySIMsalabim.aux_funcs.PathChecksWin">pySIMsalabim.aux_funcs.PathChecksWin module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html#module-pySIMsalabim.aux_funcs.SCLC_funcs">pySIMsalabim.aux_funcs.SCLC_funcs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html#module-pySIMsalabim.aux_funcs.addons">pySIMsalabim.aux_funcs.addons module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.aux_funcs.html#module-pySIMsalabim.aux_funcs">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.experiments.html">pySIMsalabim.experiments package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#module-pySIMsalabim.experiments.CV">pySIMsalabim.experiments.CV module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#module-pySIMsalabim.experiments.EQE">pySIMsalabim.experiments.EQE module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#module-pySIMsalabim.experiments.JV_steady_state">pySIMsalabim.experiments.JV_steady_state module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#module-pySIMsalabim.experiments.JV_sweep">pySIMsalabim.experiments.JV_sweep module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#module-pySIMsalabim.experiments.hysteresis">pySIMsalabim.experiments.hysteresis module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#module-pySIMsalabim.experiments.impedance">pySIMsalabim.experiments.impedance module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#module-pySIMsalabim.experiments.imps">pySIMsalabim.experiments.imps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html#module-pySIMsalabim.experiments">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.install.html">pySIMsalabim.install package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html#module-pySIMsalabim.install.compile_simsalabim">pySIMsalabim.install.compile_simsalabim module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html#module-pySIMsalabim.install.get_SIMsalabim">pySIMsalabim.install.get_SIMsalabim module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html#module-pySIMsalabim.install.get_gnu_parallel">pySIMsalabim.install.get_gnu_parallel module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html#module-pySIMsalabim.install">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.plots.html">pySIMsalabim.plots package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html#module-pySIMsalabim.plots.band_diagram">pySIMsalabim.plots.band_diagram module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html#module-pySIMsalabim.plots.plot_def">pySIMsalabim.plots.plot_def module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html#module-pySIMsalabim.plots.plot_functions">pySIMsalabim.plots.plot_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html#module-pySIMsalabim.plots">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.tests.html">pySIMsalabim.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#module-pySIMsalabim.tests.test_CV">pySIMsalabim.tests.test_CV module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#module-pySIMsalabim.tests.test_EQE">pySIMsalabim.tests.test_EQE module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#module-pySIMsalabim.tests.test_IMPS">pySIMsalabim.tests.test_IMPS module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#module-pySIMsalabim.tests.test_JV">pySIMsalabim.tests.test_JV module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#module-pySIMsalabim.tests.test_JV_sweep">pySIMsalabim.tests.test_JV_sweep module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#module-pySIMsalabim.tests.test_hyst">pySIMsalabim.tests.test_hyst module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#module-pySIMsalabim.tests.test_impedance">pySIMsalabim.tests.test_impedance module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html#module-pySIMsalabim.tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.utils.html">pySIMsalabim.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html#module-pySIMsalabim.utils.clean_up">pySIMsalabim.utils.clean_up module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html#module-pySIMsalabim.utils.device_parameters">pySIMsalabim.utils.device_parameters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html#module-pySIMsalabim.utils.general">pySIMsalabim.utils.general module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html#module-pySIMsalabim.utils.parallel_sim">pySIMsalabim.utils.parallel_sim module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html#module-pySIMsalabim.utils.utils">pySIMsalabim.utils.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html#module-pySIMsalabim.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pySIMsalabim.html#module-pySIMsalabim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Notebook_Gallery.html" class="btn btn-neutral float-left" title="Notebooks gallery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pySIMsalabim.html" class="btn btn-neutral float-right" title="pySIMsalabim package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

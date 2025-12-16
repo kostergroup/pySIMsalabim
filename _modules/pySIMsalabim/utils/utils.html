@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.utils.utils &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.utils.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.utils.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<div class="viewcode-block" id="read_tj_file">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.utils.read_tj_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="s1">&#39;tj.dat&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Read relevant parameters for impedance of the tj file</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+<span class="sd">    data_tj : dataFrame</span>
+<span class="sd">        Pandas dataFrame containing the tj output file from ZimT</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    DataFrame</span>
+<span class="sd">        Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tj_file_name</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="get_integral_bounds">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.utils.get_integral_bounds">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_integral_bounds</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f_min</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">f_max</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span> <span class="n">f_steps</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Determine integral bounds in the time domain, used to compute the conductance and capacitance</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : dataFrame</span>
+<span class="sd">        Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</span>
+<span class="sd">    f_min : float</span>
+<span class="sd">        Minimum frequency</span>
+<span class="sd">    f_max : float</span>
+<span class="sd">        Maximum frequency</span>
+<span class="sd">    f_steps : float</span>
+<span class="sd">        Frequency steps</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        List of array indices that will be used in the plotting</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Total number of time points</span>
+    <span class="n">numTimePoints</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Check which time index corresponds to 1/fmax. We call this istart:</span>
+    <span class="n">istart</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTimePoints</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="o">/</span><span class="n">f_max</span><span class="p">,</span> <span class="n">rel_tol</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">f_steps</span><span class="p">):</span> <span class="c1">#note: don&#39;t use == to compare 2 floating points!</span>
+            <span class="n">istart</span> <span class="o">=</span> <span class="n">i</span>
+
+    <span class="c1"># Starting time point could not be found.</span>
+    <span class="k">if</span> <span class="n">istart</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Could not find a time that corresponds to the highest frequency.&#39;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">msg</span>
+    
+    <span class="c1"># print(&#39;Found istart: &#39;, istart)</span>
+
+    <span class="c1"># ifin: last index we should plot, corresponds to time = 1/f_min:</span>
+    <span class="n">ifin</span> <span class="o">=</span> <span class="n">numTimePoints</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># isToPlot starts with istart:</span>
+    <span class="n">isToPlot</span> <span class="o">=</span> <span class="p">[</span><span class="n">istart</span><span class="p">]</span>
+
+    <span class="n">PlotRatio</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span> <span class="p">(</span><span class="n">ifin</span><span class="o">-</span><span class="n">istart</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">f_max</span><span class="o">/</span><span class="n">f_min</span><span class="p">)</span> <span class="o">*</span> <span class="n">f_steps</span><span class="p">)))</span>
+
+    <span class="c1"># Incorrect plot ratio</span>
+    <span class="k">if</span> <span class="n">PlotRatio</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;PlotRatio smaller than 1. It should at least be 1&#39;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">msg</span>
+
+    <span class="c1"># Then add the other indices:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">istart</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ifin</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">istart</span><span class="p">)</span> <span class="o">%</span> <span class="n">PlotRatio</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># note: % is python&#39;s modulo operator.</span>
+            <span class="n">isToPlot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c1"># add the index to our array</span>
+
+    <span class="c1"># Also include the last index:</span>
+    <span class="n">isToPlot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ifin</span><span class="p">)</span>
+
+    <span class="c1"># Integral bounds have been determined, return the array with indices and a success message</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="k">return</span> <span class="n">isToPlot</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="update_cmd_pars">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.utils.update_cmd_pars">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_cmd_pars</span><span class="p">(</span><span class="n">main_pars</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Merges main parameters with command line parameters.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    main_pars : list of dict</span>
+<span class="sd">        A list containing dictionaries of the main parameters of the application. These parameters</span>
+<span class="sd">        serve as the default values.</span>
+<span class="sd">    cmd_pars : list of dict</span>
+<span class="sd">        A list containing dictionaries of parameters passed through the command line interface.</span>
+<span class="sd">        These parameters have higher precedence and override the main parameters in case</span>
+<span class="sd">        of a conflict within any dictionary.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list of dict</span>
+<span class="sd">        A list of dictionaries containing the combined set of parameters, with command line parameters</span>
+<span class="sd">        overriding main parameters in case of conflicts within any dictionary.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If duplicate parameters are found in the command line parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># check for duplicate in cmd_pars</span>
+    <span class="n">new_pars_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+        <span class="n">new_pars_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">])</span>
+    <span class="c1"># if duplicates are found raise an error</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_pars_names</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">new_pars_names</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Duplicate parameters found in the command line parameters&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Update the main parameters with the command line parameters</span>
+    <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">main</span> <span class="ow">in</span> <span class="n">main_pars</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">main</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]:</span>
+                <span class="n">main</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span> <span class="c1"># convert to string</span>
+                <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+            <span class="n">main_pars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="p">)</span>          
+    
+    <span class="k">return</span> <span class="n">main_pars</span></div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

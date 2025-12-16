@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.aux_funcs package &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pySIMsalabim.experiments package" href="pySIMsalabim.experiments.html" />
+    <link rel="prev" title="pySIMsalabim package" href="pySIMsalabim.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pySIMsalabim</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pySIMsalabim.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pySIMsalabim.aux_funcs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.experiments.html">pySIMsalabim.experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.install.html">pySIMsalabim.install package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.plots.html">pySIMsalabim.plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.tests.html">pySIMsalabim.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pySIMsalabim.utils.html">pySIMsalabim.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pySIMsalabim.html#module-pySIMsalabim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pySIMsalabim</a></li>
+          <li class="breadcrumb-item"><a href="pySIMsalabim.html">pySIMsalabim package</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.aux_funcs package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/pySIMsalabim.aux_funcs.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysimsalabim-aux-funcs-package">
+<h1>pySIMsalabim.aux_funcs package<a class="headerlink" href="#pysimsalabim-aux-funcs-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pySIMsalabim.aux_funcs.PathChecksWin">
+<span id="pysimsalabim-aux-funcs-pathcheckswin-module"></span><h2>pySIMsalabim.aux_funcs.PathChecksWin module<a class="headerlink" href="#module-pySIMsalabim.aux_funcs.PathChecksWin" title="Link to this heading"></a></h2>
+<p>Check and convert Windows paths to long path format if necessary.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.PathChecksWin.convert_to_long_path">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.PathChecksWin.</span></span><span class="sig-name descname"><span class="pre">convert_to_long_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tempPath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/PathChecksWin.html#convert_to_long_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.PathChecksWin.convert_to_long_path" title="Link to this definition"></a></dt>
+<dd><p>Convert a path to a Windows long path by adding the \?prefix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tempPath</strong> (<em>string</em>) – Path to be converted</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Converted Path object with long path prefix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.aux_funcs.SCLC_funcs">
+<span id="pysimsalabim-aux-funcs-sclc-funcs-module"></span><h2>pySIMsalabim.aux_funcs.SCLC_funcs module<a class="headerlink" href="#module-pySIMsalabim.aux_funcs.SCLC_funcs" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.Make_SCLC_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">Make_SCLC_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ax,</span> <span class="pre">data_JV,</span> <span class="pre">x='Vext',</span> <span class="pre">y=['Jext'],</span> <span class="pre">show_tangent=[1,</span> <span class="pre">2,</span> <span class="pre">3],</span> <span class="pre">xlimits=[],</span> <span class="pre">ylimits=[],</span> <span class="pre">plot_type=0,</span> <span class="pre">labels='',</span> <span class="pre">colors='b',</span> <span class="pre">line_type=['-'],</span> <span class="pre">mark='',</span> <span class="pre">legend=True,</span> <span class="pre">plot_jvexp=False,</span> <span class="pre">data_JVexp=Empty</span> <span class="pre">DataFrame</span> <span class="pre">Columns:</span> <span class="pre">[]</span> <span class="pre">Index:</span> <span class="pre">[],</span> <span class="pre">save_yes=False,</span> <span class="pre">pic_save_name='JV.jpg'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#Make_SCLC_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.Make_SCLC_plot" title="Link to this definition"></a></dt>
+<dd><p>Make typical plot for SCLC measurement analysis for SIMsalabim</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_fig</strong> (<em>int</em>) – number of the fig to plot JV</p></li>
+<li><p><strong>data_JV</strong> (<em>DataFrame</em>) – Panda DataFrame containing JV_file</p></li>
+<li><p><strong>x</strong> (<em>str</em><em>, </em><em>optional</em>) – xaxis data  (default = ‘Vext’), by default ‘Vext’</p></li>
+<li><p><strong>y</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – yaxis data can be multiple like [‘Jext’,’Jbimo’]  (default = [‘Jext’]), by default [‘Jext’]</p></li>
+<li><p><strong>show_tangent</strong> (<em>list</em><em> of </em><em>int</em><em>, </em><em>optional</em>) – show tangent line at V1,Vinf,V2  (default = [1,2,3]), by default [1,2,3]</p></li>
+<li><p><strong>xlimits</strong> (<em>list</em><em>, </em><em>optional</em>) – x axis limits if = [] it lets python chose limits, by default []</p></li>
+<li><p><strong>ylimits</strong> (<em>list</em><em>, </em><em>optional</em>) – y axis limits if = [] it lets python chose limits, by default []</p></li>
+<li><p><strong>plot_type</strong> (<em>int</em><em>, </em><em>optional</em>) – type of plot 1 = logx, 2 = logy, 3 = loglog else linlin (default = linlin), by default 0</p></li>
+<li><p><strong>labels</strong> (<em>str</em><em>, </em><em>optional</em>) – label of the JV, by default ‘’</p></li>
+<li><p><strong>colors</strong> (<em>str</em><em>, </em><em>optional</em>) – color for the JV line, by default ‘b’</p></li>
+<li><p><strong>line_type</strong> (<em>list</em><em>, </em><em>optional</em>) – type of line for simulated data plot
+size line_type need to be = size(y), by default [‘-‘]</p></li>
+<li><p><strong>mark</strong> (<em>str</em><em>, </em><em>optional</em>) – type of Marker for the JV, by default ‘’</p></li>
+<li><p><strong>legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Display legend or not, by default True</p></li>
+<li><p><strong>plot_jvexp</strong> (<em>bool</em><em>, </em><em>optional</em>) – plot an experimental JV or not, by default False</p></li>
+<li><p><strong>data_JVexp</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) – Panda DataFrame containing experimental JV_file with ‘V’ the voltage and ‘J’ the current, by default pd.DataFrame()</p></li>
+<li><p><strong>save_yes</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, save JV as an image with the  file name defined by “pic_save_name”, by default False</p></li>
+<li><p><strong>pic_save_name</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the file where the figure is saved, by default ‘JV.jpg’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Vslopef</strong> (<em>list</em>) – list of of the Voltage values after filtering</p></li>
+<li><p><strong>Jslopef</strong> (<em>list</em>) – list of of the current values after filtering</p></li>
+<li><p><strong>slopesf</strong> (<em>list</em>) – list of logarithmic slopes of the JV after filtering</p></li>
+<li><p><strong>get_tangentf</strong> (<em>bool</em>) – True if tangents are calculated i.e. if max(slopef) &gt; 2, False if not</p></li>
+<li><p><strong>idx_maxf</strong> (<em>int</em>) – index of the max slope of the JV after filtering</p></li>
+<li><p><strong>max_slopesf</strong> (<em>float</em>) – max slope of the JV after filtering</p></li>
+<li><p><strong>tang_val_V1f</strong> (<em>list</em>) – list of the tangent values of the JV after filtering for the first tangent point. Typically crossing between the ohmic and Trap filled limited regime.</p></li>
+<li><p><strong>tang_val_V2f</strong> (<em>list</em>) – list of the tangent values of the JV after filtering for the second tangent point (here the inflexion point)</p></li>
+<li><p><strong>tang_val_V3f</strong> (<em>list</em>) – list of the tangent values of the JV after filtering for the third tangent point. Typically crossing between the Trap filled limited regime and the Mott-Gurney regime.</p></li>
+<li><p><strong>V1f</strong> (<em>float</em>) – Voltage value of the first crossing point</p></li>
+<li><p><strong>J1f</strong> (<em>float</em>) – current value of the first crossing point</p></li>
+<li><p><strong>V2f</strong> (<em>float</em>) – Voltage value of the second crossing point</p></li>
+<li><p><strong>J2f</strong> (<em>float</em>) – current value of the second crossing point</p></li>
+<li><p><strong>Vinf</strong> (<em>float</em>) – Voltage value of the inflexion point</p></li>
+<li><p><strong>Jinf</strong> (<em>float</em>) – current value of the inflexion point</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.MottGurney">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">MottGurney</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vbi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#MottGurney"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.MottGurney" title="Link to this definition"></a></dt>
+<dd><p>Mott-Gurney equation typically used to fit single carrier devices JVs to get the mobility.</p>
+<p>J = (9/8)*eps_0*eps_r*mu*((V-Vbi)**2)/(L**3)</p>
+<p>Refs:
+Mott N F and Gurney R W 1940 Electronic Processes in Ionic Crystals (Oxford: Oxford University Press)
+Nice paper to read on MG ==&gt; J. Phys.: Condens. Matter 30 (2018) 105901</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages (V)</p></li>
+<li><p><strong>mu</strong> (<em>float</em>) – Mobility (m^2/(Vs))</p></li>
+<li><p><strong>eps_r</strong> (<em>float</em>) – Relative dielectric constant</p></li>
+<li><p><strong>Vbi</strong> (<em>float</em>) – Built-in voltage (V)</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Thickness (m)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array containing the current-density (A m^-2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.SCLC_get_data_plot">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">SCLC_get_data_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#SCLC_get_data_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.SCLC_get_data_plot" title="Link to this definition"></a></dt>
+<dd><p>Get the data for the SCLC plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>volt</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Voltage data</p></li>
+<li><p><strong>curr</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Current data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>V_slopef</strong> (<em>1-D sequence of floats</em>) – Voltage data after filtering</p></li>
+<li><p><strong>J_slopef</strong> (<em>1-D sequence of floats</em>) – Current data after filtering</p></li>
+<li><p><strong>slopesf</strong> (<em>1-D sequence of floats</em>) – logarithmic slopes of the JV after filtering</p></li>
+<li><p><strong>get_tangentf</strong> (<em>bool</em>) – True if tangents are calculated i.e. if max(slopef) &gt; 2, False if not</p></li>
+<li><p><strong>idx_maxf</strong> (<em>int</em>) – index of the max slope of the JV after filtering</p></li>
+<li><p><strong>max_slopesf</strong> (<em>float</em>) – max slope of the JV after filtering</p></li>
+<li><p><strong>tang_val_V1f</strong> (<em>1-D sequence of floats</em>) – tangent values of the JV after filtering for the first tangent point. Typically crossing between the ohmic and Trap filled limited regime.</p></li>
+<li><p><strong>tang_val_V2f</strong> (<em>1-D sequence of floats</em>) – tangent values of the JV after filtering for the second tangent point (here the inflexion point)</p></li>
+<li><p><strong>tang_val_V3f</strong> (<em>1-D sequence of floats</em>) – tangent values of the JV after filtering for the third tangent point. Typically crossing between the Trap filled limited regime and the Mott-Gurney regime.</p></li>
+<li><p><strong>V1f</strong> (<em>float</em>) – Voltage value of the first crossing point</p></li>
+<li><p><strong>J1f</strong> (<em>float</em>) – current value of the first crossing point</p></li>
+<li><p><strong>V2f</strong> (<em>float</em>) – Voltage value of the second crossing point</p></li>
+<li><p><strong>J2f</strong> (<em>float</em>) – current value of the second crossing point</p></li>
+<li><p><strong>Vinf</strong> (<em>float</em>) – Voltage value of the inflexion point</p></li>
+<li><p><strong>Jinf</strong> (<em>float</em>) – current value of the inflexion point</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vnet_with_ions">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">calc_Vnet_with_ions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#calc_Vnet_with_ions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vnet_with_ions" title="Link to this definition"></a></dt>
+<dd><p>Calculate Vnet for SCLC measurement in the presence of Ions
+as defined in equation (4) in ACS Energy Lett. 2021, 6, 3, 1087–1094
+<a class="reference external" href="https://doi.org/10.1021/acsenergylett.0c02599">https://doi.org/10.1021/acsenergylett.0c02599</a></p>
+<p>Vnet = q * n_net * L**2 /( 2 * eps_0 * eps_r) = q * (traps-ions) * L**2 /( 2 * eps_0 * eps_r)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ions</strong> (<em>float</em>) – Ion density (m^-3)</p></li>
+<li><p><strong>traps</strong> (<em>float</em>) – Trap density (m^-3)</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Thickness (m)</p></li>
+<li><p><strong>eps_r</strong> (<em>float</em>) – Relative dielectric constant</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns vnet as defined in</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vsat">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">calc_Vsat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#calc_Vsat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vsat" title="Link to this definition"></a></dt>
+<dd><p>Calculate Vsat for SCLC measurement
+as defined in equation (15) in <a class="reference external" href="https://doi.org/10.1021/acsenergylett.0c02599">https://doi.org/10.1021/acsenergylett.0c02599</a></p>
+<p>Vsat = (8/9) * ((q*Nc*L**2)/(eps_0*eps_r))*exp(-q*phi/k*T)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>float</em>) – Thickness (m)</p></li>
+<li><p><strong>Nc</strong> (<em>float</em>) – Effective density of states (m^-3)</p></li>
+<li><p><strong>phi</strong> (<em>float</em>) – Injection barrier (V)</p></li>
+<li><p><strong>eps_r</strong> (<em>float</em>) – Relative dielectric constant</p></li>
+<li><p><strong>T</strong> (<em>float</em>) – Temperature (K)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns Vsat as defined in</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vtfl">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">calc_Vtfl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#calc_Vtfl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.calc_Vtfl" title="Link to this definition"></a></dt>
+<dd><p>Calculate VTFL for SCLC measurement
+as defined in equation (2) in ACS Energy Lett. 2021, 6, 3, 1087–1094
+<a class="reference external" href="https://doi.org/10.1021/acsenergylett.0c02599">https://doi.org/10.1021/acsenergylett.0c02599</a></p>
+<p>Vnet = q * n_traps * L**2 /( 2 * eps_0 * eps_r)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>traps</strong> (<em>float</em>) – Trap density (m^-3)</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Thickness (m)</p></li>
+<li><p><strong>eps_r</strong> (<em>float</em>) – Relative dielectric constant</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns vnet as defined in</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.calc_net_charge">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">calc_net_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vnet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#calc_net_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.calc_net_charge" title="Link to this definition"></a></dt>
+<dd><p>Calculate the net charge for SCLC measurement
+as defined in equation (4) in ACS Energy Lett. 2021, 6, 3, 1087–1094
+<a class="reference external" href="https://doi.org/10.1021/acsenergylett.0c02599">https://doi.org/10.1021/acsenergylett.0c02599</a></p>
+<p>Vnet = q * n_net * L**2 /( 2 * eps_0 * eps_r)</p>
+<p>Note that if there are not ions or dopant n_net = traps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vnet</strong> (<em>float</em>) – Vnet see ref</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Thickness (m)</p></li>
+<li><p><strong>eps_r</strong> (<em>float</em>) – Relative dielectric constant</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>net-charge in the bulk</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.calc_nt_min">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">calc_nt_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#calc_nt_min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.calc_nt_min" title="Link to this definition"></a></dt>
+<dd><p>Calculate the minimum appearant trap density for SCLC measurement
+as defined in equation (3) in ACS Energy Lett. 2021, 6, 3, 1087–1094
+<a class="reference external" href="https://doi.org/10.1021/acsenergylett.0c02599">https://doi.org/10.1021/acsenergylett.0c02599</a></p>
+<p>Ntmin = 4*np.Pi()**2*((k*T)/(q**2))*((eps_0*eps_r)/(L**2))</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>float</em>) – Thickness (m)</p></li>
+<li><p><strong>eps_r</strong> (<em>float</em>) – Relative dielectric constant</p></li>
+<li><p><strong>T</strong> (<em>float</em>) – Temperature (K)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>minimum appearant trap density</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.calc_trap_charge">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">calc_trap_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vnet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#calc_trap_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.calc_trap_charge" title="Link to this definition"></a></dt>
+<dd><p>Calculate the trap charges for SCLC measurement
+as defined in equation (2) in ACS Energy Lett. 2021, 6, 3, 1087–1094
+<a class="reference external" href="https://doi.org/10.1021/acsenergylett.0c02599">https://doi.org/10.1021/acsenergylett.0c02599</a></p>
+<p>Vnet = q * n_trap * L**2 /( 2 * eps_0 * eps_r)</p>
+<p>Note that if there are not ions or dopant n_net = traps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vtfl</strong> (<em>float</em>) – Vtfl see ref</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Thickness (m)</p></li>
+<li><p><strong>eps_r</strong> (<em>float</em>) – Relative dielectric constant</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>trapped charges in the bulk</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.deriv">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">deriv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#deriv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.deriv" title="Link to this definition"></a></dt>
+<dd><p>Get the derivative of input data dy/dx</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – x-axis data</p></li>
+<li><p><strong>y</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – y-axis data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dy/dx</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.fit_MottGurney">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">fit_MottGurney</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vbi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var2fit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['mu']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#fit_MottGurney"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.fit_MottGurney" title="Link to this definition"></a></dt>
+<dd><p>Fit the Mott-Gurney equation to the data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages (V)</p></li>
+<li><p><strong>J</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the current-density (A m^-2)</p></li>
+<li><p><strong>mu</strong> (<em>float</em>) – Mobility (m^2/(Vs))</p></li>
+<li><p><strong>eps_r</strong> (<em>float</em>) – Relative dielectric constant</p></li>
+<li><p><strong>Vbi</strong> (<em>float</em>) – Built-in voltage (V)</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Thickness (m)</p></li>
+<li><p><strong>var2fit</strong> (<em>list</em><em>, </em><em>optional</em>) – Chose variable to fit (can be multiple), by default [‘mu’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of the fitted values in the same order than var2fit</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.SCLC_funcs.log_slope">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.SCLC_funcs.</span></span><span class="sig-name descname"><span class="pre">log_slope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/SCLC_funcs.html#log_slope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.SCLC_funcs.log_slope" title="Link to this definition"></a></dt>
+<dd><p>Get the slope of the logarithmic data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – x-axis data</p></li>
+<li><p><strong>y</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – y-axis data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>slope of the logarithmic data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.aux_funcs.addons">
+<span id="pysimsalabim-aux-funcs-addons-module"></span><h2>pySIMsalabim.aux_funcs.addons module<a class="headerlink" href="#module-pySIMsalabim.aux_funcs.addons" title="Link to this heading"></a></h2>
+<p>Useful helper functions for pySIMsalabim</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.addons.get_FF">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.addons.</span></span><span class="sig-name descname"><span class="pre">get_FF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Volt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Curr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/addons.html#get_FF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.addons.get_FF" title="Link to this definition"></a></dt>
+<dd><p>Get the fill factor (FF) from solar cell JV-curve by calculating the maximum power point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Volt</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>Curr</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the current-densities.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FF</strong> – Fill factor value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.addons.get_Jsc">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.addons.</span></span><span class="sig-name descname"><span class="pre">get_Jsc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Volt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Curr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/addons.html#get_Jsc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.addons.get_Jsc" title="Link to this definition"></a></dt>
+<dd><p>Get the short-circuit current (Jsc) from solar cell JV-curve by interpolating the current at 0 V</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Volt</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>Curr</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the current-densities.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Jsc</strong> – Short-circuit current value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.addons.get_PCE">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.addons.</span></span><span class="sig-name descname"><span class="pre">get_PCE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Volt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Curr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/addons.html#get_PCE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.addons.get_PCE" title="Link to this definition"></a></dt>
+<dd><p>Get the power conversion efficiency (PCE) from solar cell JV-curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Volt</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>Curr</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the current-densities.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>PCE</strong> – Power conversion efficiency value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.addons.get_Voc">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.addons.</span></span><span class="sig-name descname"><span class="pre">get_Voc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Volt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Curr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/addons.html#get_Voc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.addons.get_Voc" title="Link to this definition"></a></dt>
+<dd><p>Get the Open-circuit voltage (Voc) from solar cell JV-curve by interpolating the Voltage when the current is 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Volt</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>Curr</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the current-densities.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Voc</strong> – Open-circuit voltage value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.addons.get_ideality_factor">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.addons.</span></span><span class="sig-name descname"><span class="pre">get_ideality_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vocs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">295</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/addons.html#get_ideality_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.addons.get_ideality_factor" title="Link to this definition"></a></dt>
+<dd><p>Returns ideality factor from suns-Voc data linear fit of Voc = (nIF/Vt)*log(suns) + intercept</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>suns</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the intensity in sun.</p></li>
+<li><p><strong>Vocs</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the open-circuit voltages.</p></li>
+<li><p><strong>T</strong> (<em>float optional</em>) – Temperature in Kelvin (Default = 295 K).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>nIF</strong> (<em>float</em>) – Ideality factor value.</p></li>
+<li><p><strong>intercept</strong> (<em>float</em>) – Intercept of the regression line.</p></li>
+<li><p><strong>rvalue</strong> (<em>float</em>) – Correlation coefficient.</p></li>
+<li><p><strong>pvalue</strong> (<em>float</em>) – Two-sided p-value for a hypothesis test whose null hypothesis is
+that the slope is zero, using Wald Test with t-distribution of
+the test statistic.</p></li>
+<li><p><strong>stderr</strong> (<em>float</em>) – Standard error of the estimated gradient.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pySIMsalabim.aux_funcs.addons.sci_notation">
+<span class="sig-prename descclassname"><span class="pre">pySIMsalabim.aux_funcs.addons.</span></span><span class="sig-name descname"><span class="pre">sci_notation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pySIMsalabim/aux_funcs/addons.html#sci_notation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pySIMsalabim.aux_funcs.addons.sci_notation" title="Link to this definition"></a></dt>
+<dd><p>Make proper scientific notation for graphs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number</strong> (<em>float</em>) – Number to put in scientific notation.</p></li>
+<li><p><strong>sig_fig</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of significant digits (Defaults = 2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>output</strong> – String containing the number in scientific notation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pySIMsalabim.aux_funcs">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pySIMsalabim.aux_funcs" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pySIMsalabim.html" class="btn btn-neutral float-left" title="pySIMsalabim package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pySIMsalabim.experiments.html" class="btn btn-neutral float-right" title="pySIMsalabim.experiments package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

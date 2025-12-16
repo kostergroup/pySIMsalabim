@@ -1,0 +1,1126 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.experiments.impedance &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.experiments.impedance</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.experiments.impedance</h1><div class="highlight"><pre>
+<span></span>
+<span class="sd">&quot;&quot;&quot;Perform impedance simulations&quot;&quot;&quot;</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.integrate</span>
+<span class="c1"># import pySIMsalabim</span>
+<span class="c1">## Import pySIMsalabim, if not successful, add the parent directory to the system path</span>
+<span class="k">try</span> <span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Add the parent directory to the system path</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;../..&#39;</span><span class="p">)))</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">general</span> <span class="k">as</span> <span class="n">utils_gen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_functions</span> <span class="k">as</span> <span class="n">utils_plot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.device_parameters</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">######### Functions #################################################################################</span>
+
+<div class="viewcode-block" id="create_tVG_impedance">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.create_tVG_impedance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tVG_impedance</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">timeFactor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a tVG file for impedance experiments. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V_0 : float </span>
+<span class="sd">        Voltage at t=0</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step that is applied after t=0</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Fractional light intensity</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Name of the tVG file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+<span class="sd">    f_min : float</span>
+<span class="sd">        Minimum frequency</span>
+<span class="sd">    f_max : float</span>
+<span class="sd">        Maximum frequency</span>
+<span class="sd">    ini_timeFactor : float</span>
+<span class="sd">        Constant defining the size of the initial timestep</span>
+<span class="sd">    timeFactor : float</span>
+<span class="sd">        Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        A message to indicate the result of the process</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">del_t</span> <span class="o">=</span> <span class="n">ini_timeFactor</span><span class="o">/</span><span class="n">f_max</span>
+
+    <span class="c1"># Starting line of the tVG file: header + datapoints at time=0. Set the correct header</span>
+    <span class="n">tVG_lines</span> <span class="o">=</span> <span class="s1">&#39;t Vext G_frac</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">V_0</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G_frac</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+
+    <span class="c1"># Make the other lines in the tVG file</span>
+    <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="n">f_min</span><span class="p">:</span> <span class="c1">#max time: 1/f_min is enough!</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">+</span><span class="n">del_t</span>
+        <span class="n">tVG_lines</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">V_0</span><span class="o">+</span><span class="n">del_V</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G_frac</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">del_t</span> <span class="o">=</span> <span class="n">del_t</span> <span class="o">*</span> <span class="n">timeFactor</span> <span class="c1"># At first, we keep delt constant to its minimum values</span>
+
+    <span class="c1"># Write the tVG lines to the tVG file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tVG_lines</span><span class="p">)</span>
+
+    <span class="c1"># tVG file is created, message a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="create_tVG_SS">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.create_tVG_SS">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tVG_SS</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates the tVG file for the steady state simulation with only t 0 and V_0</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V_0 : float </span>
+<span class="sd">        Voltage at t=0</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step that is applied after t=0</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Fractional light intensity</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Name of the tVG file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        A message to indicate the result of the process</span>
+
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="c1"># Starting line of the tVG file: header + datapoints at time=0. Set the correct header</span>
+    <span class="n">tVG_lines</span> <span class="o">=</span> <span class="s1">&#39;t Vext G_frac</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">0</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">V_0</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G_frac</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+   
+    <span class="c1"># Write the tVG lines to the tVG file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tVG_lines</span><span class="p">)</span>
+
+    <span class="c1"># tVG file is created, message a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="create_tVG_tolDens">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.create_tVG_tolDens">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tVG_tolDens</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates the tVG file for the steady state simulation with only t 0 and V_0</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V_0 : float </span>
+<span class="sd">        Voltage at t=0</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step that is applied after t=0</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Fractional light intensity</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Name of the tVG file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Path of the simulation folder for this session</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        A message to indicate the result of the process</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">del_t</span> <span class="o">=</span> <span class="n">ini_timeFactor</span><span class="o">/</span><span class="n">f_max</span> <span class="c1"># t_1 = 0 s + del_t</span>
+
+    <span class="n">tVG_lines</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;t</span><span class="se">\t</span><span class="s1">Vext</span><span class="se">\t</span><span class="s1">G_frac</span><span class="se">\n</span><span class="s1">&#39;</span>
+                 <span class="sa">f</span><span class="s1">&#39;0</span><span class="se">\t</span><span class="si">{</span><span class="n">V_0</span><span class="o">+</span><span class="n">del_V</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">G</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                 <span class="sa">f</span><span class="s1">&#39;0</span><span class="se">\t</span><span class="si">{</span><span class="n">V_0</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">G</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                 <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">del_t</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">V_0</span><span class="o">+</span><span class="n">del_V</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">G</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Write the tVG lines to the tVG file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tVG_lines</span><span class="p">)</span>
+
+    <span class="c1"># tVG file is created, message a success</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="calc_impedance_limit_time">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.calc_impedance_limit_time">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_impedance_limit_time</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">errI</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">VStep</span><span class="p">,</span> <span class="n">imax</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fourier Decomposition formula which computes the impedance at frequency freq (Hz) and its complex error</span>
+<span class="sd">    Based on S.E. Laux, IEEE Trans. Electron Dev. 32 (10), 2028 (1985), eq. 5a, 5b</span>
+<span class="sd">    We integrate from 0 to time[imax] at frequency 1/time[imax]</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    I : np.array</span>
+<span class="sd">        Array of currents</span>
+<span class="sd">    errI : np.array</span>
+<span class="sd">        Numerical error in calculated currents (output of ZimT)</span>
+<span class="sd">    time : np.array</span>
+<span class="sd">        Array with all time positions, from 0 to tmax</span>
+<span class="sd">    VStep : float</span>
+<span class="sd">        Voltage step</span>
+<span class="sd">    imax : integer</span>
+<span class="sd">        Index of the last timestep/first frequency for which the integrals are calculated</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Frequency belonging to Z(f)</span>
+<span class="sd">    complex number</span>
+<span class="sd">        Impedance at frequency f: Z(f)</span>
+<span class="sd">    complex number</span>
+<span class="sd">        Numerical error in calculated impedance Z(f)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">freq</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">time</span><span class="p">[</span><span class="n">imax</span><span class="p">]</span> <span class="c1">#we obtain the frequency from the time array</span>
+    <span class="n">Iinf</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">imax</span><span class="p">]</span> <span class="c1"># I at infinite time, i.e. the last one we have.</span>
+	
+    <span class="c1">#prepare array for integrants:</span>
+    <span class="n">int1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+    <span class="n">int2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+    <span class="n">int3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+    <span class="n">int4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span>
+	
+    <span class="c1">#now we use only part of the time array:</span>
+    <span class="n">timeLim</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">imax</span><span class="p">]</span>
+	
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">imax</span><span class="p">)</span> <span class="p">:</span>
+        <span class="n">sinfac</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">timeLim</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">cosfac</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">timeLim</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">int1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sinfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span><span class="p">)</span>
+        <span class="n">int2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cosfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span><span class="p">)</span>	
+        <span class="n">int3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sinfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">errI</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span> <span class="o">-</span> <span class="n">errI</span><span class="p">[</span><span class="n">imax</span><span class="p">])</span>
+        <span class="n">int4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cosfac</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">errI</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Iinf</span> <span class="o">-</span> <span class="n">errI</span><span class="p">[</span><span class="n">imax</span><span class="p">])</span>	
+
+    <span class="c1">#now compute the conductance and capacitance:</span>
+    <span class="n">cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">Iinf</span> <span class="o">-</span> <span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int1</span><span class="p">,</span> <span class="n">timeLim</span><span class="p">))</span><span class="o">/</span><span class="n">VStep</span>
+    <span class="n">cap</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int2</span><span class="p">,</span> <span class="n">timeLim</span><span class="p">)</span><span class="o">/</span><span class="n">VStep</span>
+    <span class="c1">#convert to impedance:</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">cond</span> <span class="o">+</span> <span class="mi">2</span><span class="n">J</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">cap</span><span class="p">)</span>
+	
+    <span class="c1">#and again, but now with the error added to the current:	</span>
+    <span class="n">condErr</span> <span class="o">=</span> <span class="p">(</span><span class="n">Iinf</span> <span class="o">+</span> <span class="n">errI</span><span class="p">[</span><span class="n">imax</span><span class="p">]</span> <span class="o">-</span> <span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">errI</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int3</span><span class="p">,</span> <span class="n">timeLim</span><span class="p">))</span><span class="o">/</span><span class="n">VStep</span>
+    <span class="n">capErr</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">int4</span><span class="p">,</span> <span class="n">timeLim</span><span class="p">)</span><span class="o">/</span><span class="n">VStep</span>
+    <span class="c1">#convert to impedance:</span>
+    <span class="n">Z2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">condErr</span> <span class="o">+</span> <span class="mi">2</span><span class="n">J</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">capErr</span><span class="p">)</span>
+    
+    <span class="c1">#error is the difference between Z and Z2:</span>
+    <span class="n">errZ</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">-</span> <span class="n">Z2</span>
+    
+    <span class="c1">#now return complex impedance, its error and the corresponding frequency:	</span>
+    <span class="k">return</span> <span class="n">freq</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">errZ</span></div>
+
+
+<div class="viewcode-block" id="calc_impedance">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.calc_impedance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_impedance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">isToPlot</span><span class="p">,</span><span class="n">session_path</span><span class="p">,</span><span class="n">zimt_device_parameters</span><span class="p">,</span><span class="n">Rseries</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Rshunt</span><span class="o">=-</span><span class="mf">1e3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculate the impedance over the frequency range</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : dataFrame</span>
+<span class="sd">        Pandas dataFrame containing the time, voltage, current density and numerical error in the current density of the tj_file</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step</span>
+<span class="sd">    isToPlot : list</span>
+<span class="sd">        List of array indices that will be used in the plotting</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of frequencies</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of the real component of impedance</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of the imaginary component of impedance</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of complex error</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of capacitance	</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of conductance</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of error in capacitance	</span>
+<span class="sd">    np.array</span>
+<span class="sd">        Array of error in conductance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># init the arrays for the impedance and its error:</span>
+    <span class="n">numFreqPoints</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">isToPlot</span><span class="p">)</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">ReZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">ImZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">J</span><span class="p">]</span> <span class="o">*</span> <span class="n">numFreqPoints</span>
+    <span class="n">errZ</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">J</span><span class="p">]</span> <span class="o">*</span> <span class="n">numFreqPoints</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">errC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+    <span class="n">errG</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numFreqPoints</span><span class="p">):</span>
+        <span class="n">imax</span><span class="o">=</span><span class="n">isToPlot</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">freq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">errZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_impedance_limit_time</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;errJ&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">imax</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Rseries</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Rshunt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Correct the impedance for the series resistance</span>
+            <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rseries</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">Rshunt</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">Rseries</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Rshunt</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Correct the impedance for the series resistance</span>
+            <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rseries</span> <span class="o">+</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">Rshunt</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Rseries</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Correct the impedance for the shunt resistance</span>
+            <span class="n">invZ</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">invZ</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">Rshunt</span><span class="p">)</span>
+
+        <span class="n">invZ</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+        <span class="c1"># we are only interested in the absolute value of the real and imag components:</span>
+        <span class="n">ReZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
+        <span class="n">ImZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span>
+        <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="n">invZ</span><span class="o">.</span><span class="n">imag</span>
+        <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">invZ</span><span class="o">.</span><span class="n">real</span>
+
+        <span class="n">errC</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">invZ</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">errZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+        <span class="n">errG</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">invZ</span><span class="o">.</span><span class="n">real</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">errZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ReZ</span><span class="p">,</span> <span class="n">ImZ</span><span class="p">,</span> <span class="n">errZ</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">errC</span><span class="p">,</span> <span class="n">errG</span></div>
+
+
+<div class="viewcode-block" id="store_impedance_data">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.store_impedance_data">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">store_impedance_data</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ReZ</span><span class="p">,</span> <span class="n">ImZ</span><span class="p">,</span> <span class="n">errZ</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">errC</span><span class="p">,</span> <span class="n">errG</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Save the frequency, real &amp; imaginary part of the impedance &amp; impedance error in one file called freqZ.dat</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    freq : np.array</span>
+<span class="sd">        Array of frequencies</span>
+<span class="sd">    ReZ : np.array</span>
+<span class="sd">        Array of the real component of impedance</span>
+<span class="sd">    ImZ : np.array</span>
+<span class="sd">        Array of the imaginary component of impedance</span>
+<span class="sd">    errZ : np.array</span>
+<span class="sd">        Array of complex error</span>
+<span class="sd">    C : np.array</span>
+<span class="sd">        Array of capacitance	</span>
+<span class="sd">    G : np.array</span>
+<span class="sd">        Array of conductance</span>
+<span class="sd">    errC : np.array</span>
+<span class="sd">        Array of error in capacitance	</span>
+<span class="sd">    errG : np.array</span>
+<span class="sd">        Array of error in conductance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;freq ReZ ImZ ReErrZ ImErrZ C G errC errG&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">)):</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">freq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">ReZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">ImZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">errZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">errZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">errC</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">errG</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># print(&#39;The data of the Impedance Spectroscopy graphs is written to &#39; + output_file)</span>
+
+<div class="viewcode-block" id="get_impedance">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.get_impedance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_impedance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">f_steps</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span><span class="n">zimt_device_parameters</span><span class="p">,</span><span class="n">Rseries</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Rshunt</span><span class="o">=-</span><span class="mf">1e3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the impedance from the simulation result</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : DataFrame</span>
+<span class="sd">        DataFrame with the simulation results (tj.dat) file</span>
+<span class="sd">    f_min : float</span>
+<span class="sd">        Minimum frequency</span>
+<span class="sd">    f_max : float</span>
+<span class="sd">        Maximum frequency</span>
+<span class="sd">    f_steps : float</span>
+<span class="sd">        Frequency step</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    output_file : string</span>
+<span class="sd">        name of the file where the impedance data is stored</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    integer,string</span>
+<span class="sd">        returns -1 (failed) or 1 (success), including a message</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">isToPlot</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">get_integral_bounds</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">f_steps</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">isToPlot</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># Integral bounds have been determined, continue to calculate the impedance</span>
+        <span class="n">freq</span><span class="p">,</span> <span class="n">ReZ</span><span class="p">,</span> <span class="n">ImZ</span><span class="p">,</span> <span class="n">errZ</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">errC</span><span class="p">,</span> <span class="n">errG</span> <span class="o">=</span> <span class="n">calc_impedance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">isToPlot</span><span class="p">,</span><span class="n">session_path</span><span class="p">,</span><span class="n">zimt_device_parameters</span><span class="p">,</span><span class="n">Rseries</span><span class="p">,</span><span class="n">Rshunt</span><span class="p">)</span>
+
+        <span class="c1"># Write impedance results to a file</span>
+        <span class="n">store_impedance_data</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ReZ</span><span class="p">,</span> <span class="n">ImZ</span><span class="p">,</span> <span class="n">errZ</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">errC</span><span class="p">,</span> <span class="n">errG</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Failed to determine integral bounds, exit with the error message</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="Bode_plot">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.Bode_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Bode_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">yscale_1</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">yscale_2</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">plot_type</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot the real and imaginary part of the impedance against frequency</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    xscale : string</span>
+<span class="sd">        Scale of the x-axis. E.g linear or log</span>
+<span class="sd">    yscale_ax1 : string</span>
+<span class="sd">        Scale of the left y-axis. E.g linear or log</span>
+<span class="sd">    yscale_ax2 : string</span>
+<span class="sd">        Scale of the right y-axis. E.g linear or log</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read the data from freqZ-file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Flip the ImZ data to the first quadrant</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;ImZ&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;ImZ&quot;</span><span class="p">]</span><span class="o">*-</span><span class="mi">1</span>
+
+    <span class="c1"># Define the plot parameters, two y axis</span>
+    <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ReZ&#39;</span> <span class="p">:</span> <span class="s1">&#39;Re Z [Ohm m$^2$]&#39;</span><span class="p">,</span> <span class="s1">&#39;ImZ&#39;</span> <span class="p">:</span> <span class="s1">&#39;-Im Z [Ohm m$^2$]&#39;</span> <span class="p">}</span>
+    <span class="n">selected_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ReZ&#39;</span><span class="p">]</span>
+    <span class="n">selected_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ImZ&#39;</span><span class="p">]</span>
+    <span class="n">par_x</span> <span class="o">=</span> <span class="s1">&#39;freq&#39;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;frequency [Hz]&#39;</span>
+    <span class="n">ylabel_1</span> <span class="o">=</span> <span class="s1">&#39;Re Z [Ohm m$^2$]&#39;</span>
+    <span class="n">ylabel_2</span> <span class="o">=</span> <span class="s1">&#39;-Im Z [Ohm m$^2$]&#39;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Bode plot&#39;</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+    <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result_twinx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">selected_1</span><span class="p">,</span> <span class="n">selected_2</span><span class="p">,</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel_1</span><span class="p">,</span> <span class="n">ylabel_2</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale_1</span><span class="p">,</span> <span class="n">yscale_2</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">,</span> 
+                                        <span class="n">plot_type</span><span class="p">,</span> <span class="n">y_error_1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ReErrZ&#39;</span><span class="p">],</span> <span class="n">y_error_2</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ImErrZ&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Nyquist_plot">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.Nyquist_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Nyquist_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">plot_type</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot the real and imaginary part of the impedance against each other</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    xscale : string</span>
+<span class="sd">        Scale of the x-axis. E.g linear or log</span>
+<span class="sd">    yscale : string</span>
+<span class="sd">        Scale of the y-axis. E.g linear or log</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read the data from freqZ-file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Flip the ImZ data to the first quadrant</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;ImZ&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;ImZ&quot;</span><span class="p">]</span><span class="o">*-</span><span class="mi">1</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ImZ&#39;</span> <span class="p">:</span> <span class="s1">&#39;-Im Z [Ohm m$^2$]&#39;</span><span class="p">}</span>
+    <span class="n">par_x</span> <span class="o">=</span> <span class="s1">&#39;ReZ&#39;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Re Z [Ohm m$^2$]&#39;</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;-Im Z [Ohm m$^2$]&#39;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Nyquist plot&#39;</span>
+
+    <span class="c1"># Plot the nyquist plot with or without errorbars</span>
+    <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">,</span> 
+                                            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ReErrZ&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ImErrZ&#39;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Capacitance_plot">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.Capacitance_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Capacitance_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot the capacitance against frequency</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    xscale : string</span>
+<span class="sd">        Scale of the x-axis. E.g linear or log</span>
+<span class="sd">    yscale : string</span>
+<span class="sd">        Scale of the y-axis. E.g linear or log</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read the data from freqZ-file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Flip the ImZ data to the first quadrant</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span> <span class="p">:</span> <span class="s1">&#39;C [F m$^{-2}$]&#39;</span><span class="p">}</span>
+    <span class="n">par_x</span> <span class="o">=</span> <span class="s1">&#39;freq&#39;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;frequency [Hz]&#39;</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;C [F m$^{-2}$]&#39;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Capacitance plot&#39;</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">utils_plot</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">par_x</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">,</span> <span class="n">y_error</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;errC&#39;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_impedance">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.plot_impedance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_impedance</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="s1">&#39;freqZ.dat&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a Bode and Nyquist plot of the impedance</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        working directory for zimt</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Bode plot</span>
+    <span class="n">Bode_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">)</span>
+
+    <span class="c1">#Nyquist plot</span>
+    <span class="n">Nyquist_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">)</span>
+
+    <span class="c1"># Capacitance plot</span>
+    <span class="n">Capacitance_plot</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_tolDens">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.get_tolDens">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_tolDens</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">V_0</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">,</span> <span class="n">varFile</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">dum_str</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the tolerance of the density solver, to ensure a reliable impedance spectrum</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zimt_device_parameters : string</span>
+<span class="sd">        Name of the zimt device parameters file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Working directory for zimt</span>
+<span class="sd">    f_min : float</span>
+<span class="sd">        Minimum frequency</span>
+<span class="sd">    f_max : float</span>
+<span class="sd">        Maximum frequency</span>
+<span class="sd">    V_0 : float</span>
+<span class="sd">        Voltage at t=0</span>
+<span class="sd">    G_frac : float</span>
+<span class="sd">        Fractional light intensity</span>
+<span class="sd">    del_V : float</span>
+<span class="sd">        Voltage step</span>
+<span class="sd">    run_mode : bool</span>
+<span class="sd">        Indicate whether the script is in &#39;web&#39; mode (True) or standalone mode (False). Used to control the console output</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        Name of the tVG file</span>
+<span class="sd">    tj_name : string</span>
+<span class="sd">        Name of the tj file</span>
+<span class="sd">    varFile : string</span>
+<span class="sd">        Name of the var file</span>
+<span class="sd">    ini_timeFactor : float</span>
+<span class="sd">        Constant defining the size of the initial timestep</span>
+<span class="sd">    dum_str : string</span>
+<span class="sd">        dummy string with UUID string to append to the file names</span>
+<span class="sd">    cmd_pars : list</span>
+<span class="sd">        List of dictionaries with the command line parameters</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    integer</span>
+<span class="sd">        Return code of the simulation, 0 if successful, -1 if one of the steps failed else the return code of the simulation</span>
+<span class="sd">    string</span>
+<span class="sd">        Return message to display on the UI in case of failure</span>
+<span class="sd">    float</span>
+<span class="sd">        Tolerance of the density solver. If failed, returns None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Determine J(t=0), J(t=∞), and J_dis to get the maximum allowed tolerance of the density solver to retrieve a</span>
+    <span class="c1"># reliable impedance spectrum, where tolDens = J(t=∞) - J(t=0) / J_displacement</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_tolDens</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># In order for zimt to converge, set absolute tolerance of Poisson solver small enough</span>
+        <span class="n">tolPois</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">del_V</span><span class="p">)))</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+        
+        <span class="n">tolDens_test</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">)</span>
+        <span class="c1"># Define mandatory options for ZimT to run well with impedance:</span>
+        <span class="n">tolDens_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">zimt_device_parameters</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tVG_name</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tolPois&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">tolPois</span><span class="p">)},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tolDens&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tolDens_test</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;limitDigits&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;currDiffInt&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tJFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tj_name</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">}]</span>
+        
+        <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tolDens_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">tolDens_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+        
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">tolDens_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="n">tj_name</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">J_0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">J_inf</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">J_dis</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">J_0</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">key</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;J_inf does not exist in the tolDens tJ-file&quot;</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;J_0 does not exist in the tolDens tJ-file&quot;</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;J_spike does not exist in the tolDens tJ-file&quot;</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="kc">None</span>
+            
+            <span class="c1"># tolDens cannot be larger than 1E-6</span>
+            <span class="n">tolDens</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">J_inf</span> <span class="o">-</span> <span class="n">J_0</span><span class="p">)</span> <span class="o">/</span> <span class="n">J_dis</span> <span class="o">*</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">)</span>
+
+            <span class="c1"># tolDens cannot be smaller than 1E-12</span>
+            <span class="n">tolDens</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">tolDens</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="kc">None</span>
+        
+        <span class="c1"># Remove the tVG and tJ files as they are not needed anymore</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">))</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tj_name</span><span class="p">))</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Computing tolDens was unsuccesful&quot;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">tolDens</span></div>
+
+
+<div class="viewcode-block" id="run_impedance_simu">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.impedance.run_impedance_simu">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_impedance_simu</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">f_steps</span><span class="p">,</span> <span class="n">V_0</span><span class="p">,</span> <span class="n">G_frac</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">del_V</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">,</span> <span class="n">output_file</span> <span class="o">=</span> <span class="s1">&#39;freqZ.dat&#39;</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="s1">&#39;tj.dat&#39;</span><span class="p">,</span> <span class="n">varFile</span> <span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">timeFactor</span><span class="o">=</span><span class="mf">1.02</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a tVG file and run ZimT with impedance device parameters</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zimt_device_parameters : string</span>
+<span class="sd">        Name of the zimt device parameters file</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Working directory for zimt</span>
+<span class="sd">    f_min : float</span>
+<span class="sd">        Minimum frequency</span>
+<span class="sd">    f_max : float</span>
+<span class="sd">        Maximum frequency</span>
+<span class="sd">    f_steps : float</span>
+<span class="sd">        Frequency step</span>
+<span class="sd">    V_0 : float </span>
+<span class="sd">        Voltage at t=0</span>
+<span class="sd">    G_frac : float, optional</span>
+<span class="sd">        Fractional light intensity, by default 1</span>
+<span class="sd">    del_V : float, optional</span>
+<span class="sd">        Voltage step, by default 0.01</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        Indicate whether the script is in &#39;web&#39; mode (True) or standalone mode (False). Used to control the console output, by default False  </span>
+<span class="sd">    tVG_name : string, optional</span>
+<span class="sd">        Name of the tVG file, by default tVG.txt</span>
+<span class="sd">    output_file : string, optional</span>
+<span class="sd">        Name of the file where the impedance data is stored, by default freqZ.dat</span>
+<span class="sd">    tj_name : string, optional</span>
+<span class="sd">        Name of the tj file where the impedance data is stored, by default tj.dat</span>
+<span class="sd">    varFile : string, optional</span>
+<span class="sd">        Name of the var file, by default &#39;none&#39;</span>
+<span class="sd">    ini_timeFactor : float, optional</span>
+<span class="sd">        Constant defining the size of the initial timestep, by default 1e-3</span>
+<span class="sd">    timeFactor : float, optional</span>
+<span class="sd">        Exponential increase of the timestep, to reduce the amount of timepoints necessary. Use values close to 1., by default 1.02</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    CompletedProcess</span>
+<span class="sd">        Output object of with returncode and console output of the simulation</span>
+<span class="sd">    string</span>
+<span class="sd">        Return message to display on the UI, for both success and failed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to see the console output</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;UUID&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1"># Check if the user wants to add a UUID to the tj file name</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cmd_pars&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to add additional command line parameters</span>
+    <span class="c1"># Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threadsafe&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threadsafe&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+    
+    <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;turnoff_autoTidy&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to turn off the autoTidy function in SIMsalabim</span>
+    <span class="k">if</span> <span class="n">turnoff_autoTidy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Update the file names with the UUID</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">UUID</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># Update the filenames with the UUID</span>
+    <span class="n">tj_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">)</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+    <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">tj_file_name_base</span><span class="p">,</span> <span class="n">tj_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tj_name</span><span class="p">)</span>
+        <span class="n">tj_name</span> <span class="o">=</span> <span class="n">tj_file_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">tj_file_name_ext</span> 
+        <span class="n">tVG_name_base</span><span class="p">,</span> <span class="n">tVG_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">)</span>
+        <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">tVG_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">tVG_name_ext</span>
+        <span class="n">output_file_base</span><span class="p">,</span> <span class="n">output_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">output_file_ext</span>
+        <span class="k">if</span> <span class="n">varFile</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+            <span class="n">var_file_base</span><span class="p">,</span> <span class="n">var_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">varFile</span><span class="p">)</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">var_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">var_file_ext</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">varFile</span><span class="p">)</span>
+    <span class="c1"># varFile = &#39;none&#39; # we don&#39;t use a var file for the hysteresis JV simulation</span>
+
+    <span class="c1">##############################################################################</span>
+    <span class="c1"># If the voltage is set to Voc, firstly compute its value</span>
+    <span class="k">if</span> <span class="n">V_0</span> <span class="o">==</span> <span class="s1">&#39;oc&#39;</span><span class="p">:</span>
+        <span class="c1"># Create tVG</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_SS</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">)</span>
+        
+        <span class="c1"># Check if tVG file is created</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># In order for zimt to converge, set absolute tolerance of Poisson solver small enough</span>
+            <span class="n">tolPois</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">del_V</span><span class="p">)))</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+
+            <span class="c1"># Define mandatory options for ZimT to run well with impedance:</span>
+            <span class="n">Impedance_SS_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">zimt_device_parameters</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tVG_name</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tolPois&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">tolPois</span><span class="p">)},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;limitDigits&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;currDiffInt&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tJFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tj_name</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">}</span>
+                                <span class="p">]</span>
+            
+            <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+                <span class="n">Impedance_SS_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span>
+
+            <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">Impedance_SS_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">Impedance_SS_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">Impedance_SS_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">Impedance_SS_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="n">tj_name</span><span class="p">)</span>
+                
+                <span class="n">V_0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Computing the value of Voc led to the following error: &quot;</span> <span class="o">+</span> <span class="n">message</span>
+                <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">V_0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">V_0</span><span class="p">)</span>
+
+    <span class="c1">##############################################################################</span>
+    <span class="c1"># The simulations with Rseries and Rshunt often do not converge, so we first run a steady state simulation to get the internal voltage and then run the impedance simulation with Rseries = 0 and Rshunt = -Rshunt. We will correct the impedance afterwards. This is a workaround to improve the convergence of the impedance simulation that should remain accurate to estimate the impedance.</span>
+    <span class="c1"># Default values for Rseries and Rshunt</span>
+    <span class="n">Rseries</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Rshunt</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="c1"># Negative values are used for Rshunt in SIMsalabim to indicate infinite Rshunt</span>
+
+    <span class="c1"># Do the steady state simulation to calculate the internal voltage in case of series resistance</span>
+    <span class="c1"># Create tVG</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_SS</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">)</span>
+
+    <span class="c1"># Get the device parameters and Rseries and Rshunt</span>
+    <span class="n">dev_val</span><span class="p">,</span><span class="n">layers_dum</span> <span class="o">=</span> <span class="n">load_device_parameters</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dev_val</span><span class="p">[</span><span class="n">zimt_device_parameters</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Contacts&#39;</span><span class="p">:</span>
+            <span class="n">contacts</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">break</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">contacts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;R_series&#39;</span><span class="p">:</span>
+            <span class="n">Rseries</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;R_shunt&#39;</span><span class="p">:</span>
+            <span class="n">Rshunt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="c1"># Check if R_series and R_shunt are defined in cmd_pars</span>
+    <span class="n">idx_Rseries</span><span class="p">,</span> <span class="n">idx_Rshunt</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cmd_pars</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;R_series&#39;</span><span class="p">:</span>
+                <span class="n">Rseries</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+                <span class="n">idx_Rseries</span> <span class="o">=</span> <span class="n">idx</span>
+            <span class="k">elif</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;R_shunt&#39;</span><span class="p">:</span>
+                <span class="n">Rshunt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+                <span class="n">idx_Rshunt</span> <span class="o">=</span> <span class="n">idx</span>
+     
+    <span class="k">if</span> <span class="n">Rseries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Check if tVG file is created</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># In order for zimt to converge, set absolute tolerance of Poisson solver small enough</span>
+            <span class="n">tolPois</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">del_V</span><span class="p">)))</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+
+            <span class="c1"># Define mandatory options for ZimT to run well with impedance:</span>
+            <span class="n">Impedance_SS_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">zimt_device_parameters</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tVG_name</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tolPois&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">tolPois</span><span class="p">)},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;limitDigits&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;currDiffInt&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tJFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tj_name</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                                <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">}</span>
+                                <span class="p">]</span>
+            
+            <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+                <span class="n">Impedance_SS_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span>
+
+            <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">Impedance_SS_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">Impedance_SS_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">Impedance_SS_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">Impedance_SS_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="n">tj_name</span><span class="p">)</span>
+
+                <span class="n">Vext</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">Jext</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="n">Vint</span> <span class="o">=</span> <span class="n">Vext</span> <span class="o">-</span> <span class="n">Jext</span><span class="o">*</span><span class="n">Rseries</span>
+                <span class="n">V_0</span> <span class="o">=</span> <span class="n">Vint</span> <span class="c1"># we need to shift the voltage to the internal voltage to account for the series resistance</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+
+    <span class="c1"># remove the Rseries and Rshunt from cmd_pars</span>
+    <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cmd_pars</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span> <span class="k">for</span> <span class="n">dictionary</span> <span class="ow">in</span> <span class="n">cmd_pars</span> <span class="k">if</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;R_series&#39;</span><span class="p">,</span> <span class="s1">&#39;R_shunt&#39;</span><span class="p">)]</span>
+
+    <span class="c1"># Calculate the tolerance of the density solver</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">tolDens</span> <span class="o">=</span> <span class="n">get_tolDens</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">V_0</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">,</span> <span class="n">varFile</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">dum_str</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Failed to calculate the tolerance of the density solver, return the error message</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+
+    <span class="c1"># Do the impedance simulation</span>
+    <span class="c1"># Create tVG</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_impedance</span><span class="p">(</span><span class="n">V_0</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">timeFactor</span><span class="p">)</span>
+
+    <span class="c1"># Check if tVG file is created</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># In order for zimt to converge, set absolute tolerance of Poisson solver small enough</span>
+        <span class="n">tolPois</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">del_V</span><span class="p">)))</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="c1"># Define mandatory options for ZimT to run well with impedance:</span>
+        <span class="n">Impedance_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;dev_par_file&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">zimt_device_parameters</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tVG_name</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tolPois&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">tolPois</span><span class="p">)},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tolDens&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">tolDens</span><span class="p">)},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;limitDigits&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;currDiffInt&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;tJFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">tj_name</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;varFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;logFile&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;log&#39;</span><span class="o">+</span><span class="n">dum_str</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">},</span>
+                             <span class="c1"># We remove Rseries and Rshunt as the simulation is either to converge that way, we will correct the impedance afterwards</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;R_series&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)},</span>
+                             <span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;R_shunt&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)}]</span>
+        
+        <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+            <span class="n">Impedance_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="s1">&#39;autoTidy&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">})</span>
+            
+        <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">Impedance_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">Impedance_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">Impedance_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">&#39;zimt&#39;</span><span class="p">,</span> <span class="n">Impedance_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">read_tj_file</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_file_name</span><span class="o">=</span><span class="n">tj_name</span><span class="p">)</span> 
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">get_impedance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">f_steps</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">Rseries</span><span class="p">,</span> <span class="n">Rshunt</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span></div>
+
+
+<span class="c1">## Running the function as a standalone script</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1">## Manual Impedance input parameters. These are overwritten by command line arguments if provided</span>
+    <span class="n">f_min</span> <span class="o">=</span> <span class="mf">1e-2</span> <span class="c1"># org 1e-2</span>
+    <span class="n">f_max</span> <span class="o">=</span> <span class="mf">1e6</span> <span class="c1"># org 1e6</span>
+    <span class="n">f_steps</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># org 20</span>
+    <span class="n">V_0</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="c1"># Float or &#39;oc&#39; for the open-circuit voltage</span>
+    <span class="n">del_V</span> <span class="o">=</span> <span class="mf">1e-2</span> <span class="c1"># org 1e-2</span>
+    <span class="n">G_frac</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Define folder and file paths</span>
+    <span class="n">session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;../../&#39;</span><span class="p">,</span><span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;ZimT&#39;</span><span class="p">)</span>
+
+    <span class="n">zimt_device_parameters</span> <span class="o">=</span> <span class="s1">&#39;simulation_setup.txt&#39;</span>
+
+    <span class="n">tVGFile</span> <span class="o">=</span> <span class="s1">&#39;tVG.txt&#39;</span>
+    <span class="n">tJFile</span> <span class="o">=</span> <span class="s1">&#39;tj.dat&#39;</span>
+    <span class="n">output_name</span> <span class="o">=</span> <span class="s1">&#39;freqZ.dat&#39;</span>
+    <span class="n">varFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    
+    <span class="c1"># UUID = str(uuid.uuid4()) # Add a UUID to the simulation</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># Not user input</span>
+    <span class="n">ini_timeFactor</span> <span class="o">=</span> <span class="mf">1e-3</span> <span class="c1"># Initial timestep factor, org 1e-3</span>
+    <span class="n">timeFactor</span> <span class="o">=</span> <span class="mf">1.02</span> <span class="c1"># Increase in timestep every step to reduce the amount of datapoints necessary, use value close to 1 as this is best! Org 1.02</span>
+    <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Show verbose output in console</span>
+
+    <span class="c1">############## Command line arguments  ##############</span>
+    <span class="c1">## Notes</span>
+    <span class="c1">## - The command line arguments are optional and can be provided in any order</span>
+    <span class="c1">## - Each command line argument must be provided in the format -par_name value</span>
+    <span class="c1">## - Possible arguments include all SIMsalabim parameters and Impedance specific parameters as listed before</span>
+    <span class="c1">## - Special arguments</span>
+    <span class="c1">##   - sp : string</span>
+    <span class="c1">##     - The session path, i.e. the working directory for the simulation</span>
+    <span class="c1">##   - zimt_device_parameters : string</span>
+    <span class="c1">##     - The name of the zimt simulation setup parameters file</span>
+    <span class="c1">##   - UUID : string</span>
+    <span class="c1">##     - An UUID to add to the simulation (output)</span>
+    
+    <span class="n">cmd_pars_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Check if any arguments are provided.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="c1"># Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">),</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1"># Check if the key already exists, if not, add it to the cmd_pars_dict</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Duplicate parameter found in the command line parameters: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Check and process specific keys/arguments that are not native SIMsalabim arguments</span>
+    <span class="c1"># Handle the session_path/sp argument separately, as the other parameters depend on this</span>
+    <span class="k">if</span> <span class="s1">&#39;sp&#39;</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+        <span class="n">session_path</span> <span class="o">=</span> <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="s1">&#39;sp&#39;</span><span class="p">]</span>
+        <span class="c1"># remove from cmd_pars</span>
+        <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;sp&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Convert the session_path to an actual path type</span>
+    <span class="n">session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">session_path</span><span class="p">)</span>
+
+    <span class="c1"># Define mappings for keys and variables</span>
+    <span class="n">key_action_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;zimt_device_parameters&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;zimt_device_parameters&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;f_min&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;f_min&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;f_max&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;f_max&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;f_steps&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;f_steps&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;V_0&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;V_0&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;del_V&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;del_V&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;G_frac&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;G_frac&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">&#39;tVGFile&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tVGFile&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;tJFile&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tJFile&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;varFile&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;varFile&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>        
+        <span class="s1">&#39;output_name&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;output_name&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">&#39;UUID&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;UUID&#39;</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+    <span class="p">}</span> 
+
+    <span class="c1"># Use exactly the same names as in SIMsalabim and as the Manual input parameters, </span>
+    <span class="c1"># if not than the tVG file name is not updated if putting e.g. &quot;-tVGFile tVG_1.txt&quot; in the command line in the terminal. </span>
+    <span class="c1"># Instead two tVG files names are defined one from the manual input parameters and one from the command line wherefore </span>
+    <span class="c1"># SIMsalabim gives the error &quot;invalid input&quot;</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>  <span class="c1"># Use list to avoid modifying the dictionary while iterating</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_action_map</span><span class="p">:</span>
+            <span class="c1"># Apply the corresponding action</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">key_action_map</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">cmd_pars_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Dynamically update global variables</span>
+            <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list</span>
+    <span class="n">cmd_pars</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span><span class="s1">&#39;par&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="c1">## Run impedance spectroscopy</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">run_impedance_simu</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">f_steps</span><span class="p">,</span> <span class="n">V_0</span><span class="p">,</span> <span class="n">G_frac</span><span class="p">,</span> <span class="n">del_V</span><span class="p">,</span> <span class="n">run_mode</span><span class="o">=</span><span class="n">run_mode</span><span class="p">,</span> <span class="n">tVG_name</span><span class="o">=</span><span class="n">tVGFile</span><span class="p">,</span>
+                                         <span class="n">output_file</span><span class="o">=</span><span class="n">output_name</span><span class="p">,</span> <span class="n">tj_name</span><span class="o">=</span><span class="n">tJFile</span><span class="p">,</span> <span class="n">varFile</span><span class="o">=</span><span class="n">varFile</span><span class="p">,</span> <span class="n">ini_timeFactor</span><span class="o">=</span><span class="n">ini_timeFactor</span><span class="p">,</span> <span class="n">timeFactor</span><span class="o">=</span><span class="n">timeFactor</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="o">=</span><span class="n">cmd_pars</span><span class="p">,</span> <span class="n">UUID</span><span class="o">=</span><span class="n">UUID</span><span class="p">)</span>
+
+    <span class="c1"># Make the impedance plots</span>
+    <span class="n">calc_Voc_output_string</span> <span class="o">=</span> <span class="s1">&#39;Computing the value of Voc led to the following error:&#39;</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">95</span> <span class="ow">and</span> <span class="n">calc_Voc_output_string</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">message</span><span class="p">):</span>
+        <span class="n">plot_impedance</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_name</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

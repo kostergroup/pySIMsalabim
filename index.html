@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim documentation &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=266c65b7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/rtd_search_config.js"></script>
+      <script src="_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#">
+            
+              <img src="_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pySIMsalabim documentation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a class="reference internal image-reference" href="_images/pySIMsalabim_logo.png"><img alt="pySIMsalabim logo" class="align-left" src="_images/pySIMsalabim_logo.png" style="width: 200px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<section id="pysimsalabim-documentation">
+<h1>pySIMsalabim documentation<a class="headerlink" href="#pysimsalabim-documentation" title="Link to this heading"></a></h1>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p><strong>pySIMsalabim</strong> is a Python package used to interface drift-diffusion simulator <a class="reference external" href="https://github.com/kostergroup/SIMsalabim">SIMsalabim</a> with Python. It provides many useful tools to set up and run simulations, as well as to analyze and visualize the results.</p>
+</section>
+<section id="authors">
+<h1>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/VMLC-PV">Vincent M. Le Corre</a></p></li>
+<li><p><a class="reference external" href="https://github.com/sheester">Sander Heester</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Fransien-Elhorst">Fransien Elhorst</a></p></li>
+<li><p><a class="reference external" href="https://github.com/kostergroup">L. Jan Anton Koster</a></p></li>
+</ul>
+</section>
+<section id="institutions">
+<h1>Institutions<a class="headerlink" href="#institutions" title="Link to this heading"></a></h1>
+<figure class="align-left">
+<a class="reference internal image-reference" href="_images/rug_logo.png"><img alt="RuG logo" src="_images/rug_logo.png" style="width: 100px;" />
+</a>
+</figure>
+<p>Zernike Institute for Advanced Materials, University of Groningen, The Netherlands</p>
+<figure class="align-left">
+<a class="reference internal image-reference" href="_images/sdu_logo.png"><img alt="SDU logo" src="_images/sdu_logo.png" style="width: 100px;" />
+</a>
+</figure>
+<p>CAPE - Centre for Advanced Photovoltaics and Thin-film Energy Devices, University of Southern Denmark, Denmark</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#with-pip">With pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#with-conda">With conda</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#simsalabim">SIMsalabim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#free-pascal-compiler">Free Pascal Compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#parallel-simulations">Parallel simulations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#v1-04-2025-12-16-vmlc-pv-sh">v1.04 - 2025-12-16 - VMLC-PV, SH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#v1-03-2025-09-24-vmlc-pv">v1.03 - 2025-09-24 - VMLC-PV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#v1-02-2025-04-28-vmlc-pv-sh-fe">v1.02 - 2025-04-28 - VMLC-PV, SH, FE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#v1-01-18-02-2025-sh">v1.01 - 18-02-2025 - SH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#v1-2024-10-16-vmlc-pv">v1 - 2024-10-16 - VMLC-PV</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/light_dep_JVs.html#Setup-the-simulation">Setup the simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/light_dep_JVs.html#Plot-results">Plot results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/light_dep_JVs.html#Plot-energy-diagram-from-the-input-parameters">Plot energy diagram from the input parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/hysteresis.html#Setup-the-simulation">Setup the simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/hysteresis.html#Plot-results">Plot results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/JV_sweep.html">JV sweep simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/JV_sweep.html#Setup-the-simulation">Setup the simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/JV_sweep.html#Plot-results">Plot results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/EQE.html#Setup-the-simulation">Setup the simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/EQE.html#Plot-results">Plot results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/impedance.html#Setup-the-simulation">Setup the simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/impedance.html#Plot-results">Plot results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/CV.html#Setup-the-simulation">Setup the simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/CV.html#Plot-results">Plot results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/IMPS.html#Setup-the-simulation">Setup the simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/IMPS.html#Plot-results">Plot results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_Gallery.html">Notebooks gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">pySIMsalabim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pySIMsalabim.html">pySIMsalabim package</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

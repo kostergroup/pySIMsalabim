@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.aux_funcs.addons &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.aux_funcs.addons</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.aux_funcs.addons</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Useful helper functions for pySIMsalabim&quot;&quot;&quot;</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span><span class="p">,</span><span class="n">constants</span>
+
+<span class="c1">## Physics constants</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;elementary charge&#39;</span><span class="p">)</span>
+<span class="n">eps_0</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;electric constant&#39;</span><span class="p">)</span>
+<span class="n">kb</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Boltzmann constant in eV/K&#39;</span><span class="p">)</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+
+<div class="viewcode-block" id="sci_notation">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.addons.sci_notation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sci_notation</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">sig_fig</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make proper scientific notation for graphs</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    number : float</span>
+<span class="sd">        Number to put in scientific notation.</span>
+
+<span class="sd">    sig_fig : int, optional</span>
+<span class="sd">        Number of significant digits (Defaults = 2).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    output : str</span>
+<span class="sd">        String containing the number in scientific notation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">sig_fig</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ret_string</span> <span class="o">=</span> <span class="s2">&quot;{0:.</span><span class="si">{1:d}</span><span class="s2">e}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">sig_fig</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">ret_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#removed leading &quot;+&quot; and strips leading zeros too.</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\u207B</span><span class="s2">&quot;</span> <span class="c1"># superscript minus sign</span>
+            <span class="n">SUP</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;0123456789&quot;</span><span class="p">,</span> <span class="s2">&quot;⁰¹²³⁴⁵⁶⁷⁸⁹&quot;</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">SUP</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span><span class="n">a</span> <span class="o">+</span> <span class="s1">&#39; x 10&#39;</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">ret_string</span> <span class="o">=</span> <span class="s2">&quot;{0:.</span><span class="si">{1:d}</span><span class="s2">e}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">ret_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#removed leading &quot;+&quot; and strips leading zeros too.</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#removed leading &quot;+&quot; and strips leading zeros too.</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\u207B</span><span class="s2">&quot;</span> <span class="c1"># superscript minus sign</span>
+            <span class="n">SUP</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;0123456789&quot;</span><span class="p">,</span> <span class="s2">&quot;⁰¹²³⁴⁵⁶⁷⁸⁹&quot;</span><span class="p">)</span>
+            <span class="c1">#SUB = str.maketrans(&quot;0123456789&quot;, &quot;₀₁₂₃₄₅₆₇₈₉&quot;)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">SUP</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;10&#39;</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">b</span>    
+    <span class="k">return</span> <span class="n">output</span></div>
+
+
+<div class="viewcode-block" id="get_Jsc">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.addons.get_Jsc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the short-circuit current (Jsc) from solar cell JV-curve by interpolating the current at 0 V</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Jsc : float</span>
+<span class="sd">        Short-circuit current value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Jsc_dumb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Jsc_dumb</span></div>
+
+
+<div class="viewcode-block" id="get_Voc">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.addons.get_Voc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the Open-circuit voltage (Voc) from solar cell JV-curve by interpolating the Voltage when the current is 0</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Voc : float</span>
+<span class="sd">        Open-circuit voltage value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Voc_dumb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Curr</span><span class="p">,</span> <span class="n">Volt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Voc_dumb</span></div>
+
+
+<div class="viewcode-block" id="get_FF">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.addons.get_FF">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_FF</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the fill factor (FF) from solar cell JV-curve by calculating the maximum power point</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FF : float</span>
+<span class="sd">        Fill factor value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Volt_oc</span> <span class="o">=</span> <span class="n">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="n">Curr_sc</span> <span class="o">=</span> <span class="n">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">Volt_oc</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">Curr_sc</span><span class="p">):</span>
+            <span class="n">power</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">power_max</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+    <span class="n">FF_dumb</span> <span class="o">=</span> <span class="n">power_max</span><span class="o">/</span><span class="p">(</span><span class="n">Volt_oc</span><span class="o">*</span><span class="n">Curr_sc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">FF_dumb</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_PCE">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.addons.get_PCE">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_PCE</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">,</span><span class="n">suns</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the power conversion efficiency (PCE) from solar cell JV-curve</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    PCE : float</span>
+<span class="sd">        Power conversion efficiency value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Voc_dumb</span> <span class="o">=</span> <span class="n">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="n">Jsc_dumb</span> <span class="o">=</span> <span class="n">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="n">FF_dumb</span> <span class="o">=</span> <span class="n">get_FF</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="n">PCE_dumb</span> <span class="o">=</span> <span class="n">Voc_dumb</span><span class="o">*</span><span class="n">Jsc_dumb</span><span class="o">*</span><span class="n">FF_dumb</span><span class="o">/</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">suns</span><span class="p">)</span> <span class="c1"># to get it in % when Jsc is in A/m2 and Voc in V</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">PCE_dumb</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_ideality_factor">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.addons.get_ideality_factor">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_ideality_factor</span><span class="p">(</span><span class="n">suns</span><span class="p">,</span><span class="n">Vocs</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">295</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns ideality factor from suns-Voc data linear fit of Voc = (nIF/Vt)*log(suns) + intercept</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    suns : 1-D sequence of floats</span>
+<span class="sd">        Array containing the intensity in sun.</span>
+
+<span class="sd">    Vocs : 1-D sequence of floats</span>
+<span class="sd">        Array containing the open-circuit voltages.</span>
+<span class="sd">    </span>
+<span class="sd">    T : float optional</span>
+<span class="sd">        Temperature in Kelvin (Default = 295 K).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nIF : float</span>
+<span class="sd">        Ideality factor value.</span>
+
+<span class="sd">    intercept : float</span>
+<span class="sd">        Intercept of the regression line.</span>
+
+<span class="sd">    rvalue : float</span>
+<span class="sd">        Correlation coefficient.</span>
+
+<span class="sd">    pvalue : float</span>
+<span class="sd">        Two-sided p-value for a hypothesis test whose null hypothesis is</span>
+<span class="sd">        that the slope is zero, using Wald Test with t-distribution of</span>
+<span class="sd">        the test statistic.</span>
+
+<span class="sd">    stderr : float</span>
+<span class="sd">        Standard error of the estimated gradient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Vt</span> <span class="o">=</span> <span class="n">kb</span><span class="o">*</span><span class="n">T</span>
+    <span class="n">suns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">suns</span><span class="p">)</span>
+    <span class="n">slope_d</span><span class="p">,</span> <span class="n">intercept_d</span><span class="p">,</span> <span class="n">r_value_d</span><span class="p">,</span> <span class="n">p_value_d</span><span class="p">,</span> <span class="n">std_err_d</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">suns</span><span class="p">,</span><span class="n">Vocs</span><span class="p">)</span>
+    <span class="n">nIF</span> <span class="o">=</span> <span class="n">slope_d</span><span class="o">/</span><span class="n">Vt</span>
+    <span class="k">return</span> <span class="n">nIF</span><span class="p">,</span><span class="n">intercept_d</span><span class="p">,</span> <span class="n">r_value_d</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">p_value_d</span><span class="p">,</span> <span class="n">std_err_d</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,884 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.utils.device_parameters &mdash; pySIMsalabim 1.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=266c65b7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.utils.device_parameters</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.utils.device_parameters</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functions for processing the device parameters&quot;&quot;&quot;</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">shutil</span><span class="o">,</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+
+<div class="viewcode-block" id="load_device_parameters">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.load_device_parameters">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_device_parameters</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">dev_par_file_name</span><span class="p">,</span> <span class="n">default_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span> <span class="s1">&#39;ZimT&#39;</span><span class="p">),</span> <span class="n">reset</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">availLayers</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the device_parameters file and create a List object. Check if a session specific file already exists. </span>
+<span class="sd">    If True, use this one, else return to the default device_parameters</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Folder path of the current simulation session</span>
+<span class="sd">    dev_par_file_name : string</span>
+<span class="sd">        Name of the device parameters file</span>
+<span class="sd">    default_path : string</span>
+<span class="sd">        Path name where the default/standard device parameters file is located</span>
+<span class="sd">    reset : boolean</span>
+<span class="sd">        If True, the default device parameters are copied to the session folder</span>
+<span class="sd">    availLayers : List</span>
+<span class="sd">        List with all the available layer files</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        indicate whether the script is in &#39;web&#39; mode (True) or standalone mode (False). Used to control the console output, by default True</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List</span>
+<span class="sd">        List with nested lists for all parameters in all sections.</span>
+<span class="sd">    List</span>
+<span class="sd">        List with all the layers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dev_par</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">run_mode</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Check if the session specific device parameter file exists. If not, copy the default file to the session folder.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">dev_par_file_name</span><span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="n">reset</span> <span class="o">==</span> <span class="kc">True</span><span class="p">):</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">default_path</span><span class="p">,</span> <span class="n">dev_par_file_name</span><span class="p">),</span> <span class="n">session_path</span><span class="p">)</span> <span class="c1"># The simulation_setup_file</span>
+            <span class="n">file_list</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">default_path</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_parameters.txt&#39;</span><span class="p">)):</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">default_path</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="n">session_path</span><span class="p">)</span> <span class="c1"># The layer files</span>
+
+    <span class="c1"># Read the simulation_setup file and store all lines in a list</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">dev_par_file_name</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="c1"># First check how many layers are defined.</span>
+        <span class="n">layersSection</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;par&#39;</span><span class="p">,</span> <span class="s1">&#39;setup&#39;</span><span class="p">,</span><span class="n">dev_par_file_name</span><span class="p">,</span><span class="n">dev_par_file_name</span><span class="p">]]</span> <span class="c1"># Initialize the simulation setup file. This is identified by key &#39;setup&#39;</span>
+
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="c1"># Read all lines from the file</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;**&#39;</span><span class="p">):</span>
+            <span class="c1"># Left adjusted comment</span>
+                <span class="n">comm_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;Layers&#39;</span> <span class="ow">in</span> <span class="n">comm_line</span><span class="p">):</span>  <span class="c1"># Found section with the layer files</span>
+                    <span class="n">layersSection</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">layersSection</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Line is either a parameter or leftover comment.</span>
+                <span class="n">par_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;=&#39;</span> <span class="ow">in</span> <span class="n">par_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>  <span class="c1"># Line contains a parameter</span>
+                    <span class="n">par_split</span> <span class="o">=</span> <span class="n">par_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+                    <span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">,</span> <span class="n">par_split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">par_split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="n">par_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="c1"># The element with index 2 contains the actual file name!</span>
+                    <span class="k">if</span> <span class="n">layersSection</span><span class="p">:</span> <span class="c1"># If the line is in the layer section, it contains the name of a layer file, thus add it to the Layers list</span>
+                        <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="p">)</span> <span class="c1"># Add sublist to the layers list </span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Read each layer file and append it as a sublist in the main dev_par list</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">dev_par</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">devpar_read_from_txt</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">run_mode</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Now load the layer files that are not in the simulation_setup but have been defined or created before</span>
+        <span class="n">devLayerList</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="p">:</span>
+            <span class="n">devLayerList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">extraLayers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">availLayers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">layer</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">devLayerList</span><span class="p">:</span>
+                <span class="n">extraLayers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+
+        <span class="c1"># Read each extra layer file and append it as a sublist in the main dev_par list</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">extraLayers</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">layer</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">dev_par</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">layer</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">devpar_read_from_txt</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">dev_par</span><span class="p">,</span> <span class="n">layers</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">devpar_read_from_txt</span><span class="p">(</span><span class="n">fp</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read the opened .txt file line by line and store all in a List.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fp : TextIOWrapper</span>
+<span class="sd">        filepointer to the opened .txt file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List</span>
+<span class="sd">        List with nested lists for all parameters in all sections.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Reserve the first element of the list for the top/header description</span>
+    <span class="n">dev_par_object</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Description&#39;</span><span class="p">]]</span>
+
+    <span class="c1"># All possible section headers</span>
+    <span class="n">section_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;General&#39;</span><span class="p">,</span> <span class="s1">&#39;Layers&#39;</span><span class="p">,</span> <span class="s1">&#39;Contacts&#39;</span><span class="p">,</span> <span class="s1">&#39;Optics&#39;</span><span class="p">,</span> <span class="s1">&#39;Numerical Parameters&#39;</span><span class="p">,</span> <span class="s1">&#39;Voltage range of simulation&#39;</span><span class="p">,</span> <span class="s1">&#39;User interface&#39;</span><span class="p">,</span><span class="s1">&#39;Mobilities&#39;</span><span class="p">,</span> <span class="s1">&#39;Interface-layer-to-right&#39;</span><span class="p">,</span> <span class="s1">&#39;Ions&#39;</span><span class="p">,</span> <span class="s1">&#39;Generation and recombination&#39;</span><span class="p">,</span> <span class="s1">&#39;Bulk trapping&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="c1"># Read all lines from the file</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;**&#39;</span><span class="p">):</span>
+        <span class="c1"># Left adjusted comment</span>
+            <span class="n">comm_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">comm_line</span> <span class="ow">in</span> <span class="n">section_list</span><span class="p">):</span>  <span class="c1"># Does the line match a section name</span>
+                <span class="c1"># New section, add element to the main list</span>
+                <span class="n">dev_par_object</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">comm_line</span><span class="p">])</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># A left-adjusted comment, add with &#39;comm&#39; flag to current element</span>
+                <span class="n">dev_par_object</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;comm&#39;</span><span class="p">,</span> <span class="n">comm_line</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="c1"># Empty line, ignore and do not add to dev_par_object</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Line is either a parameter or leftover comment.</span>
+            <span class="n">par_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;=&#39;</span> <span class="ow">in</span> <span class="n">par_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>  <span class="c1"># Line contains a parameter</span>
+                <span class="n">par_split</span> <span class="o">=</span> <span class="n">par_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+                <span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">,</span> <span class="n">par_split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">par_split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="n">par_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+                <span class="n">dev_par_object</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># leftover (*) comment. Add to the description of the last added parameter</span>
+                <span class="n">dev_par_object</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">dev_par_object</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> \
+                    <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="n">par_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">dev_par_object</span>
+
+<div class="viewcode-block" id="store_file_names">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.store_file_names">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">store_file_names</span><span class="p">(</span><span class="n">dev_par</span><span class="p">,</span> <span class="n">sim_type</span><span class="p">,</span> <span class="n">dev_par_name</span><span class="p">,</span> <span class="n">layers</span><span class="p">,</span> <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span> <span class="c1">#</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read the relevant file names from the device parameters and store the file name in a session state. </span>
+<span class="sd">        This way the correct and relevant files can be retrieved and used in the results. Make a distinction between simss and zimt.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dev_par : List</span>
+<span class="sd">        Nested List object containing all device parameters</span>
+<span class="sd">    sim_type : string</span>
+<span class="sd">        Which type of simulation to run: simss or zimt</span>
+<span class="sd">    dev_par_name : string</span>
+<span class="sd">        Name of the device parameter file</span>
+<span class="sd">    layers : List</span>
+<span class="sd">        List with all the layers in the device</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        indicate whether the script is in &#39;web&#39; mode (True) or standalone mode (False). Used to control the console output, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># make sure sim_type is simss or zimt</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">sim_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">sim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;simss&#39;</span><span class="p">,</span> <span class="s1">&#39;zimt&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;sim_type must be either simss or zimt&#39;</span><span class="p">)</span>
+
+    <span class="c1"># st.session_state[&#39;LayersFiles&#39;] = []</span>
+    <span class="n">LayersFiles</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">genProfile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="n">expjv_id</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">varFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="n">logFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="n">expJV</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="n">JVFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="n">scParsFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="n">tVGFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="n">tJFile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="n">opticsFiles</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Get the relevant file names from the device parameters</span>
+    <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">dev_par</span><span class="p">[</span><span class="n">dev_par_name</span><span class="p">][</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="c1"># Generation profile</span>
+        <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Optics&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;genProfile&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span> <span class="ow">and</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;calc&#39;</span><span class="p">:</span>
+                        <span class="n">genProfile</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                        <span class="c1"># st.session_state[&#39;genProfile&#39;] = param[2]</span>
+                    <span class="k">elif</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;calc&#39;</span><span class="p">:</span>
+                        <span class="n">genProfile</span> <span class="o">=</span> <span class="s1">&#39;calc&#39;</span>
+                        <span class="c1"># st.session_state[&#39;genProfile&#39;] = &#39;calc&#39;</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">genProfile</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+                        <span class="c1"># st.session_state[&#39;genProfile&#39;] = &#39;none&#39;</span>
+        
+        <span class="c1"># Files in USer Interface section</span>
+        <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;User interface&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;varFile&#39;</span><span class="p">:</span>
+                    <span class="n">varFile</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="c1"># st.session_state[&#39;varFile&#39;] = param[2]</span>
+                <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;logFile&#39;</span><span class="p">:</span>
+                    <span class="n">logFile</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="c1"># st.session_state[&#39;logFile&#39;] = param[2]</span>
+                <span class="k">if</span> <span class="n">sim</span> <span class="o">==</span> <span class="s1">&#39;simss&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;useExpData&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+                            <span class="n">expjv_id</span> <span class="o">=</span> <span class="kc">False</span>
+                            <span class="n">expJV</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+                            <span class="c1"># st.session_state[&#39;expJV&#39;] = &#39;none&#39;</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">expjv_id</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;expJV&#39;</span> <span class="ow">and</span> <span class="n">expjv_id</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">expJV</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                        <span class="c1"># st.session_state[&#39;expJV&#39;] = param[2]</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;JVFile&#39;</span><span class="p">:</span>
+                        <span class="n">JVFile</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                        <span class="c1"># st.session_state[&#39;JVFile&#39;] = param[2]</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;scParsFile&#39;</span><span class="p">:</span>
+                        <span class="n">scParsFile</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                        <span class="c1"># st.session_state[&#39;scParsFile&#39;] = param[2]</span>
+                <span class="k">if</span> <span class="n">sim</span> <span class="o">==</span> <span class="s1">&#39;zimt&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tVGFile&#39;</span><span class="p">:</span>
+                        <span class="n">tVGFile</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                        <span class="c1"># st.session_state[&#39;tVGFile&#39;] = param[2]</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tJFile&#39;</span><span class="p">:</span>
+                        <span class="n">tJFile</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                        <span class="c1"># st.session_state[&#39;tJFile&#39;] = param[2]</span>
+                        
+        <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Layers&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">LayersFiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="c1"># st.session_state[&#39;LayersFiles&#39;].append(param[2])</span>
+
+    <span class="c1"># When the generation profile has been calculated, store the names of the nk and spectrum files. QQQ process for each layer!</span>
+    <span class="c1"># if st.session_state[&#39;genProfile&#39;] == &#39;calc&#39;:</span>
+    <span class="k">if</span> <span class="n">genProfile</span> <span class="o">==</span> <span class="s1">&#39;calc&#39;</span><span class="p">:</span>
+        <span class="n">opticsFiles</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># st.session_state[&#39;opticsFiles&#39;] = []</span>
+        <span class="n">specfile</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1"># Get the spectrum and nk files from the simulation setup</span>
+        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">dev_par</span><span class="p">[</span><span class="n">dev_par_name</span><span class="p">][</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Optics&#39;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;nk&#39;</span><span class="p">):</span>
+                        <span class="n">opticsFiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                        <span class="c1"># st.session_state[&#39;opticsFiles&#39;].append(param[2])</span>
+                    <span class="k">elif</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;spectrum&#39;</span><span class="p">:</span>
+                        <span class="n">specfile</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+
+    <span class="c1"># Go over the layer files for trap files and nk files</span>
+    <span class="c1"># st.session_state[&#39;traps_int&#39;] = []</span>
+    <span class="c1"># st.session_state[&#39;traps_bulk&#39;] = []</span>
+    <span class="n">traps_int</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">traps_bulk</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">usedFiles</span><span class="o">=</span> <span class="p">[]</span> 
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">usedFiles</span><span class="p">:</span> <span class="c1"># We only want to check the layer parameter files that have been used in the simulation</span>
+            <span class="n">usedFiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="c1"># Get the nk file for each layer</span>
+    <span class="k">for</span> <span class="n">usedFile</span> <span class="ow">in</span> <span class="n">usedFiles</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">dev_par</span><span class="p">[</span><span class="n">usedFile</span><span class="p">][</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="c1"># if st.session_state[&#39;genProfile&#39;] == &#39;calc&#39;:</span>
+            <span class="k">if</span> <span class="n">genProfile</span> <span class="o">==</span> <span class="s1">&#39;calc&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Generation and recombination&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;nk&#39;</span><span class="p">):</span>
+                            <span class="n">opticsFiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                            <span class="c1"># st.session_state[&#39;opticsFiles&#39;].append(param[2])</span>
+                
+            
+    <span class="c1"># We need to check every layer files whether files for the trap distribution have been used for interface and/or bulk traps.</span>
+    <span class="c1"># If present, add file name to list, if not add &#39;none&#39; to the list. We will process this when preparing the download of the files.</span>
+            <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Interface-layer-to-right&#39;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;intTrapFile&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                            <span class="n">traps_int</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                            <span class="c1"># st.session_state[&#39;traps_int&#39;].append(param[2])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">traps_int</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+                            <span class="c1"># st.session_state[&#39;traps_int&#39;].append(&#39;none&#39;)</span>
+
+            <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Bulk trapping&#39;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;bulkTrapFile&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                            <span class="n">traps_bulk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                            <span class="c1"># st.session_state[&#39;traps_bulk&#39;].append(param[2])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">traps_bulk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+                            <span class="c1"># st.session_state[&#39;traps_bulk&#39;].append(&#39;none&#39;)</span>
+
+    <span class="c1"># Add the name of the spectrum file to the end of the array</span>
+    <span class="c1"># if st.session_state[&#39;genProfile&#39;] == &#39;calc&#39;:</span>
+    <span class="k">if</span> <span class="n">genProfile</span> <span class="o">==</span> <span class="s1">&#39;calc&#39;</span><span class="p">:</span>
+        <span class="n">opticsFiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">specfile</span><span class="p">)</span>
+        <span class="c1"># st.session_state[&#39;opticsFiles&#39;].append(specfile)</span>
+
+    <span class="k">if</span> <span class="n">run_mode</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">LayersFiles</span><span class="p">,</span> <span class="n">opticsFiles</span><span class="p">,</span> <span class="n">genProfile</span><span class="p">,</span> <span class="n">traps_int</span><span class="p">,</span> <span class="n">traps_bulk</span><span class="p">,</span> <span class="n">expJV</span><span class="p">,</span> <span class="n">varFile</span><span class="p">,</span> <span class="n">logFile</span><span class="p">,</span> <span class="n">JVFile</span><span class="p">,</span> <span class="n">scParsFile</span><span class="p">,</span> <span class="n">tVGFile</span><span class="p">,</span> <span class="n">tJFile</span>      
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">sim</span> <span class="o">==</span> <span class="s1">&#39;simss&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LayersFiles</span><span class="p">,</span> <span class="n">opticsFiles</span><span class="p">,</span> <span class="n">traps_int</span><span class="p">,</span> <span class="n">traps_bulk</span><span class="p">,</span> <span class="n">expJV</span><span class="p">,</span> <span class="n">varFile</span><span class="p">,</span> <span class="n">logFile</span><span class="p">,</span> <span class="n">JVFile</span><span class="p">,</span> <span class="n">scParsFile</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LayersFiles</span><span class="p">,</span> <span class="n">opticsFiles</span><span class="p">,</span> <span class="n">traps_int</span><span class="p">,</span> <span class="n">traps_bulk</span><span class="p">,</span> <span class="n">tVGFile</span><span class="p">,</span> <span class="n">varFile</span><span class="p">,</span> <span class="n">logFile</span><span class="p">,</span> <span class="n">tJFile</span></div>
+
+
+
+<div class="viewcode-block" id="devpar_read_from_txt">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.devpar_read_from_txt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">devpar_read_from_txt</span><span class="p">(</span><span class="n">fp</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read the opened .txt file line by line and store all in a List.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fp : TextIOWrapper</span>
+<span class="sd">        filepointer to the opened .txt file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List</span>
+<span class="sd">        List with nested lists for all parameters in all sections.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Reserve the first element of the list for the top/header description</span>
+    <span class="n">dev_par_object</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Description&#39;</span><span class="p">]]</span>
+
+    <span class="c1"># All possible section headers</span>
+    <span class="n">section_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;General&#39;</span><span class="p">,</span> <span class="s1">&#39;Layers&#39;</span><span class="p">,</span> <span class="s1">&#39;Contacts&#39;</span><span class="p">,</span> <span class="s1">&#39;Optics&#39;</span><span class="p">,</span> <span class="s1">&#39;Numerical Parameters&#39;</span><span class="p">,</span> <span class="s1">&#39;Voltage range of simulation&#39;</span><span class="p">,</span> <span class="s1">&#39;User interface&#39;</span><span class="p">,</span><span class="s1">&#39;Mobilities&#39;</span><span class="p">,</span> <span class="s1">&#39;Interface-layer-to-right&#39;</span><span class="p">,</span> <span class="s1">&#39;Ions&#39;</span><span class="p">,</span> <span class="s1">&#39;Generation and recombination&#39;</span><span class="p">,</span> <span class="s1">&#39;Bulk trapping&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="c1"># Read all lines from the file</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;**&#39;</span><span class="p">):</span>
+        <span class="c1"># Left adjusted comment</span>
+            <span class="n">comm_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">comm_line</span> <span class="ow">in</span> <span class="n">section_list</span><span class="p">):</span>  <span class="c1"># Does the line match a section name</span>
+                <span class="c1"># New section, add element to the main list</span>
+                <span class="n">dev_par_object</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">comm_line</span><span class="p">])</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># A left-adjusted comment, add with &#39;comm&#39; flag to current element</span>
+                <span class="n">dev_par_object</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;comm&#39;</span><span class="p">,</span> <span class="n">comm_line</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="c1"># Empty line, ignore and do not add to dev_par_object</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Line is either a parameter or leftover comment.</span>
+            <span class="n">par_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;=&#39;</span> <span class="ow">in</span> <span class="n">par_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>  <span class="c1"># Line contains a parameter</span>
+                <span class="n">par_split</span> <span class="o">=</span> <span class="n">par_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+                <span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">,</span> <span class="n">par_split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">par_split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="n">par_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+                <span class="n">dev_par_object</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># leftover (*) comment. Add to the description of the last added parameter</span>
+                <span class="n">dev_par_object</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">dev_par_object</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> \
+                    <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="n">par_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">dev_par_object</span></div>
+
+
+<div class="viewcode-block" id="devpar_write_to_txt">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.devpar_write_to_txt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">devpar_write_to_txt</span><span class="p">(</span><span class="n">dev_par_object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert the List object into a single string. Formatted to the device_parameter definition</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dev_par_object : List</span>
+<span class="sd">        List object with all parameters and comments.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        Formatted string for the txt file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">par_file</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Initialize List to hold all lines</span>
+    <span class="n">lmax</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Max width of &#39;parameter = value&#39; section, initialise with 0</span>
+    <span class="n">section_length_max</span> <span class="o">=</span> <span class="mi">84</span> <span class="c1"># Number of characters in the section title</span>
+
+    <span class="c1"># Description and Version</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">dev_par_object</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="c1"># First element of the main object contains the top description lines. Skip very first element (Title).</span>
+        <span class="n">desc_line</span> <span class="o">=</span> <span class="s2">&quot;** &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">par_file</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">desc_line</span><span class="p">)</span>
+
+    <span class="c1"># Determine max width of the &#39;parameter = value&#39; section of the txt file to align properly.</span>
+    <span class="k">for</span> <span class="n">sect_item</span> <span class="ow">in</span> <span class="n">dev_par_object</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="c1"># Loop over all sections</span>
+        <span class="k">for</span> <span class="n">par_item</span> <span class="ow">in</span> <span class="n">sect_item</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="c1"># Loop over all parameters</span>
+            <span class="k">if</span> <span class="n">par_item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;par&#39;</span><span class="p">:</span>
+                <span class="c1"># Only real parameter entries need to be considered, characterised by the first list element being &#39;par&#39;</span>
+                <span class="n">temp_string</span> <span class="o">=</span> <span class="n">par_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="n">par_item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp_string</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">lmax</span><span class="p">:</span>
+                    <span class="c1"># Update maxlength if length of &#39;par = val&#39; combination exceeds it.</span>
+                    <span class="n">lmax</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp_string</span><span class="p">)</span>
+    <span class="c1"># Add 1 to max length to allow for a empty space between &#39;par=val&#39; and description.</span>
+    <span class="n">lmax</span> <span class="o">=</span> <span class="n">lmax</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c1"># Read every entry of the Parameter List object and create a formatted line (string) for it. Append to string List par_file.</span>
+    <span class="k">for</span> <span class="n">sect_element</span> <span class="ow">in</span> <span class="n">dev_par_object</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="c1"># Loop over all sections. Exclude the first (Description Title) element.</span>
+
+        <span class="c1">## Section</span>
+        <span class="c1"># Start with a new line before each section name. Section title must be of format **title************...</span>
+        <span class="n">par_file</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">sec_title</span> <span class="o">=</span> <span class="s2">&quot;**&quot;</span> <span class="o">+</span> <span class="n">sect_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sec_title_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sec_title</span><span class="p">)</span>
+        <span class="n">sec_title</span> <span class="o">=</span> <span class="n">sec_title</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">*</span> \
+            <span class="p">(</span><span class="n">section_length_max</span><span class="o">-</span><span class="n">sec_title_length</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">par_file</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sec_title</span><span class="p">)</span>
+
+        <span class="c1">## Parameters</span>
+        <span class="k">for</span> <span class="n">par_element</span> <span class="ow">in</span> <span class="n">sect_element</span><span class="p">:</span>
+            <span class="c1">#  Loop over all elements in the section list, both parameters (&#39;par&#39;) and comments (&#39;comm&#39;)</span>
+            <span class="k">if</span> <span class="n">par_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;comm&#39;</span><span class="p">:</span>
+                <span class="c1"># Create string for a left-justified comment and append to string List.</span>
+                <span class="n">par_line</span> <span class="o">=</span> <span class="s1">&#39;** &#39;</span> <span class="o">+</span> <span class="n">par_element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">par_file</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par_line</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">par_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;par&#39;</span><span class="p">:</span>
+                <span class="c1"># Create string for a parameter. Format is par = val</span>
+                <span class="n">par_line</span> <span class="o">=</span> <span class="n">par_element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="n">par_element</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">par_line_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">par_line</span><span class="p">)</span>
+                <span class="c1"># The string is filled with blank spaces until the max length is reached</span>
+                <span class="n">par_line</span> <span class="o">=</span> <span class="n">par_line</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">*</span><span class="p">(</span><span class="n">lmax</span> <span class="o">-</span> <span class="n">par_line_length</span><span class="p">)</span>
+                <span class="c1"># The description can be a multi-line description. The multiple lines are seperated by a &#39;*&#39;</span>
+                <span class="k">if</span> <span class="s1">&#39;*&#39;</span> <span class="ow">in</span> <span class="n">par_element</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                    <span class="c1"># MultiLine description. Split it and first append the par=val line as normal</span>
+                    <span class="n">temp_desc</span> <span class="o">=</span> <span class="n">par_element</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+                    <span class="n">par_line</span> <span class="o">=</span> <span class="n">par_line</span> <span class="o">+</span> <span class="s1">&#39;* &#39;</span> <span class="o">+</span> <span class="n">temp_desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="n">par_file</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par_line</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">temp_desc_element</span> <span class="ow">in</span> <span class="n">temp_desc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                        <span class="c1">#  For every extra comment line, fill left part of the line with empty characters and add comment/description as normal.</span>
+                        <span class="n">par_line</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">*</span><span class="n">lmax</span> <span class="o">+</span> <span class="s1">&#39;* &#39;</span> <span class="o">+</span> <span class="n">temp_desc_element</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                        <span class="n">par_file</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par_line</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Single Line description. Add &#39;par=val&#39; and comment/description together, seperated by a &#39;*&#39;</span>
+                    <span class="n">par_line</span> <span class="o">=</span> <span class="n">par_line</span> <span class="o">+</span> <span class="s1">&#39;* &#39;</span> <span class="o">+</span> <span class="n">par_element</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="n">par_file</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par_line</span><span class="p">)</span>
+
+    <span class="c1"># Join all individual strings/lines together</span>
+    <span class="n">par_file</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">par_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">par_file</span></div>
+
+
+<div class="viewcode-block" id="get_inputFile_from_cmd_pars">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.get_inputFile_from_cmd_pars">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_inputFile_from_cmd_pars</span><span class="p">(</span><span class="n">sim_type</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the input file name from the command line parameters except the layer files</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sim_type : string</span>
+<span class="sd">        Which type of simulation to run: simss or zimt</span>
+<span class="sd">    cmd_pars : List</span>
+<span class="sd">        List with the command line parameters</span>
+<span class="sd">    except_layers : bool, optional</span>
+<span class="sd">        If True, the layer files are excluded from the list, by default True</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        The name of the input file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">input_files</span><span class="p">,</span> <span class="n">newlayers</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="c1"># make sure sim_type is simss or zimt</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">sim_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">sim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;simss&#39;</span><span class="p">,</span> <span class="s1">&#39;zimt&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;sim_type must be either simss or zimt&#39;</span><span class="p">)</span>
+
+    <span class="n">ignore_output_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;JVFile&#39;</span><span class="p">,</span> <span class="s1">&#39;scParsFile&#39;</span><span class="p">,</span> <span class="s1">&#39;tJFile&#39;</span><span class="p">,</span> <span class="s1">&#39;varFile&#39;</span><span class="p">,</span> <span class="s1">&#39;logFile&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Get the input file name from the command line parameters</span>
+    <span class="k">if</span> <span class="n">sim</span> <span class="o">==</span> <span class="s1">&#39;simss&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">cmd_par</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+
+            <span class="c1"># if not except_layers:</span>
+            <span class="c1"># if cmd_par[&#39;par&#39;].startswith(&#39;l&#39;) and cmd_par[&#39;par&#39;][1:].isdigit(): # layerfile</span>
+            <span class="c1">#     # input_files.append(cmd_par)</span>
+            <span class="c1">#     print(&#39;1&#39;)</span>
+            <span class="c1">#     newlayers.append(cmd_par)</span>
+
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;File&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">ignore_output_files</span><span class="p">:</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;expJV&#39;</span> <span class="ow">and</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;genProfile&#39;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;calc&#39;</span> <span class="ow">and</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">):</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+
+            <span class="c1"># for layer parameters split the cmd_pars[par] after .</span>
+            <span class="n">dum_par</span> <span class="o">=</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">dum_par</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;nk&#39;</span><span class="p">)</span> <span class="p">:</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span><span class="s1">&#39;spectrum&#39;</span><span class="p">:</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">cmd_par</span> <span class="ow">in</span> <span class="n">cmd_pars</span><span class="p">:</span>
+            <span class="c1"># if cmd_par[&#39;par&#39;].endswith(&#39;File&#39;) and not cmd_par[&#39;par&#39;] in ignore_output_files:</span>
+            <span class="c1">#     # input_files.append(cmd_par)</span>
+            <span class="c1">#     newlayers.append(cmd_par)</span>
+
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;File&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">ignore_output_files</span><span class="p">:</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;genProfile&#39;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;calc&#39;</span> <span class="ow">or</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">):</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+
+            <span class="c1"># for layer parameters split the cmd_pars[par] after .</span>
+            <span class="n">dum_par</span> <span class="o">=</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">dum_par</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;nk&#39;</span><span class="p">)</span> <span class="p">:</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span><span class="s1">&#39;spectrum&#39;</span><span class="p">:</span>
+                <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">)</span>
+
+
+    <span class="k">return</span> <span class="n">input_files</span> <span class="c1">#, newlayers</span></div>
+
+
+<div class="viewcode-block" id="get_inputFile_from_layer">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.get_inputFile_from_layer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_inputFile_from_layer</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">session_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the input file name from the layer parameters</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    layer : List</span>
+<span class="sd">        List with the layer parameters</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        Folder path of the current simulation session</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        The name of the input file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># read the layer file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">layer_par</span> <span class="o">=</span> <span class="n">devpar_read_from_txt</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">section2update</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Layers&#39;</span><span class="p">,</span> <span class="s1">&#39;Optics&#39;</span><span class="p">,</span> <span class="s1">&#39;Generation and recombination&#39;</span><span class="p">,</span> <span class="s1">&#39;Interface-layer-to-right&#39;</span><span class="p">,</span> <span class="s1">&#39;Bulk trapping&#39;</span><span class="p">]</span>
+    <span class="n">ignore_output_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;JVFile&#39;</span><span class="p">,</span> <span class="s1">&#39;scParsFile&#39;</span><span class="p">,</span> <span class="s1">&#39;tJFile&#39;</span><span class="p">,</span> <span class="s1">&#39;varFile&#39;</span><span class="p">,</span> <span class="s1">&#39;logFile&#39;</span><span class="p">]</span>
+    <span class="n">input_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">layer_par</span><span class="p">[</span><span class="n">layer</span><span class="p">[</span><span class="mi">2</span><span class="p">]][</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">section2update</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;par&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;File&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">ignore_output_files</span><span class="p">:</span>
+                        <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;expJV&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                            <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;genProfile&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;calc&#39;</span> <span class="ow">and</span> <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                            <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;nk&#39;</span><span class="p">):</span>
+                        <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;spectrum&#39;</span><span class="p">:</span>
+                        <span class="n">input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+                               
+    <span class="k">return</span> <span class="n">input_files</span></div>
+
+
+<div class="viewcode-block" id="make_basename_file_cmd_pars">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.make_basename_file_cmd_pars">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_basename_file_cmd_pars</span><span class="p">(</span><span class="n">cmd_pars</span><span class="p">,</span><span class="n">except_output_files</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Update the command line parameters with the basename of the input files</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cmd_pars : List</span>
+<span class="sd">        List with the command line parameters</span>
+<span class="sd">    except_output_files : bool, optional</span>
+<span class="sd">        If True, the output files names are not updated, by default True</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List</span>
+<span class="sd">        List with the updated command line parameters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ignore_output_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;JVFile&#39;</span><span class="p">,</span> <span class="s1">&#39;scParsFile&#39;</span><span class="p">,</span> <span class="s1">&#39;tJFile&#39;</span><span class="p">,</span> <span class="s1">&#39;varFile&#39;</span><span class="p">,</span> <span class="s1">&#39;logFile&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">cmd_par</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cmd_pars</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;dev_par_file&#39;</span><span class="p">:</span>
+            <span class="n">cmd_pars</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;genProfile&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;calc&#39;</span> <span class="ow">and</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                <span class="n">cmd_pars</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;expJV&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                <span class="n">cmd_pars</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+        
+        <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;File&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">except_output_files</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">ignore_output_files</span><span class="p">:</span>
+                    <span class="n">cmd_pars</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cmd_pars</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+    
+        <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="n">cmd_pars</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;nk&#39;</span><span class="p">):</span>
+            <span class="n">cmd_pars</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;spectrum&#39;</span><span class="p">:</span>
+            <span class="n">cmd_pars</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_par</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">cmd_pars</span></div>
+
+
+<div class="viewcode-block" id="make_basename_input_files">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.make_basename_input_files">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_basename_input_files</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">updateFile</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the layer file with the basename of the input files</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : string</span>
+<span class="sd">        path to the layer file</span>
+<span class="sd">    updateFile : bool, optional</span>
+<span class="sd">        if True, the layer file is updated with the new file names, else the updated layer file list is returned, by default True</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List</span>
+<span class="sd">        List with the updated layer parameters</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># read the layer file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">layer_par</span> <span class="o">=</span> <span class="n">devpar_read_from_txt</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="n">section2update</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Layers&#39;</span><span class="p">,</span> <span class="s1">&#39;Optics&#39;</span><span class="p">,</span> <span class="s1">&#39;Generation and recombination&#39;</span><span class="p">,</span> <span class="s1">&#39;Interface-layer-to-right&#39;</span><span class="p">,</span> <span class="s1">&#39;Bulk trapping&#39;</span><span class="p">]</span>
+    <span class="n">ignore_output_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;JVFile&#39;</span><span class="p">,</span> <span class="s1">&#39;scParsFile&#39;</span><span class="p">,</span> <span class="s1">&#39;tJFile&#39;</span><span class="p">,</span> <span class="s1">&#39;varFile&#39;</span><span class="p">,</span> <span class="s1">&#39;logFile&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">layer_par</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">section2update</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;par&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;File&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">ignore_output_files</span><span class="p">:</span>
+                        <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;nk&#39;</span><span class="p">):</span>
+                        <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;spectrum&#39;</span><span class="p">:</span>
+                        <span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="c1"># Write the updated layer file</span>
+    <span class="k">if</span> <span class="n">updateFile</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">devpar_write_to_txt</span><span class="p">(</span><span class="n">layer_par</span><span class="p">))</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">layer_par</span></div>
+
+
+
+<div class="viewcode-block" id="get_par_from_dev_par">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.get_par_from_dev_par">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_par_from_dev_par</span><span class="p">(</span><span class="n">dev_par</span><span class="p">,</span> <span class="n">par_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the parameter from the device parameters</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dev_par : List</span>
+<span class="sd">        List with the device parameters</span>
+<span class="sd">    par_name : string</span>
+<span class="sd">        Name of the parameter</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List</span>
+<span class="sd">        List with the parameter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">dev_par</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">section</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">par_name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">param</span> </div>
+
+
+<div class="viewcode-block" id="ReadParameterFile">
+<a class="viewcode-back" href="../../../pySIMsalabim.utils.html#pySIMsalabim.utils.device_parameters.ReadParameterFile">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ReadParameterFile</span><span class="p">(</span><span class="n">path2file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all the parameters from the &#39;Device_parameters.txt&#39; file</span>
+<span class="sd">    for SIMsalabim and ZimT</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path2file : str</span>
+<span class="sd">        Path to the &#39;Device_parameters.txt&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Contains the parameters and values from the &#39;Device_parameters.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ParFileDic</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path2file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;*&#39;</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">isspace</span><span class="p">()):</span>
+            <span class="n">equal_idx</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+            <span class="n">star_idx</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+            <span class="c1"># print(line[0:equal_idx] , line[equal_idx+1:star_idx])</span>
+            <span class="n">ParFileDic</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">equal_idx</span><span class="p">]</span> <span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">equal_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">star_idx</span><span class="p">]</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># print(f&#39;line {count}: {line}&#39;)   </span>
+    <span class="k">return</span> <span class="n">ParFileDic</span></div>
+
+
+<span class="c1"># def update_dev_par(sim_type, cmd_pars, dev_par, layers):</span>
+<span class="c1">#     &quot;&quot;&quot;Update the device parameters with the command line parameters</span>
+
+<span class="c1">#     Parameters</span>
+<span class="c1">#     ----------</span>
+<span class="c1">#     sim_type : string</span>
+<span class="c1">#         Which type of simulation to run: simss or zimt</span>
+<span class="c1">#     cmd_pars : List</span>
+<span class="c1">#         List with the command line parameters</span>
+<span class="c1">#     dev_par : List</span>
+<span class="c1">#         List with the device parameters</span>
+
+<span class="c1">#     Returns</span>
+<span class="c1">#     -------</span>
+<span class="c1">#     List</span>
+<span class="c1">#         List with the updated device parameters</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     # make sure sim_type is simss or zimt</span>
+<span class="c1">#     sim = sim_type.lower()</span>
+<span class="c1">#     if sim not in [&#39;simss&#39;, &#39;zimt&#39;]:</span>
+<span class="c1">#         raise ValueError(&#39;sim_type must be either simss or zimt&#39;)</span>
+
+<span class="c1">#     # Get the input file name from the command line parameters</span>
+<span class="c1">#     # input_files, newlayers = get_inputFile_from_cmd_pars(sim_type, cmd_pars)</span>
+
+<span class="c1">#     # Update the device parameters with the command line parameters</span>
+<span class="c1">#     for </span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 2024, Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
