@@ -2,9 +2,10 @@ Change Log
 ==========
 All notable changes to this project will be documented in this file.
 
-v1.04 - 2025-12-10 - VMLC-PV
+v1.04 - 2025-12-16 - VMLC-PV, SH
 ------------------------------------
 - Removing the limitation for the numpy version in setup.py to allow for more flexibility in the numpy version used. Previously the version was constrained to be >=1.2 and <=2.0.0.
+- Fixed bug in utils.py/update_cmd_pars: When a parameter was provided both in the main parameters, as well as in the command line parameters, the found parameter was not set to True, leading to duplicate parameters in the cmd line.
 
 v1.03 - 2025-09-24 - VMLC-PV
 ------------------------------------
