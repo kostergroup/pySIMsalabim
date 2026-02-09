@@ -20,6 +20,7 @@ from pySIMsalabim.utils import general as utils_gen
 from pySIMsalabim.plots import plot_functions as utils_plot
 from pySIMsalabim.utils.utils import *
 from pySIMsalabim.utils.device_parameters import *
+import pySIMsalabim.aux_funcs.DRT as drt
 
 ######### Functions #################################################################################
 
@@ -936,9 +937,40 @@ if __name__ == "__main__":
             globals().update(result)  # Dynamically update global variables
             cmd_pars_dict.pop(key)
 
+    # Define the default DRT filepath
+    tj_file_name_base, tj_file_name_ext = os.path.splitext(tJFile)
+    dum_str = "" if UUID == "" else f"_{UUID}"
+    tj_name = tj_file_name_base + dum_str + tj_file_name_ext 
+    defaultDataFile = session_path + "/" + tj_name 
+ 
+    DRT_commands_args = {
+        'dataFile' : defaultDataFile,
+        'DRTDirectory' : session_path + "/" + 'DRT_Saves',
+        'timeCol' : 't',
+        'funcCol' : 'Jext',
+        'iters' : '50',
+        'saveFormat' : 'txt'
+    }
+
+    # Check if findDRT is true
+    findDRT = False
+    if 'findDRT' in cmd_pars_dict.keys():
+        findDRT = bool(cmd_pars_dict['findDRT'])
+        cmd_pars_dict.pop('findDRT')
+
+    # If findDRT is true, update the default values in the default arguments list
+    if findDRT:
+        for key in list(cmd_pars_dict.keys()):
+            if key in DRT_commands_args:
+                DRT_commands_args[key] = cmd_pars_dict[key]
+                # Remove from cmd_pars_dict
+                cmd_pars_dict.pop(key)
+
+    # Set UUID in DRT_commands_and_args 
+    DRT_commands_args['UUID'] = UUID
+
     # Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list
     cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
-
     ## Run impedance spectroscopy
     result, message = run_impedance_simu(zimt_device_parameters, session_path, f_min, f_max, f_steps, V_0, G_frac, del_V, run_mode=run_mode, tVG_name=tVGFile,
                                          output_file=output_name, tj_name=tJFile, varFile=varFile, ini_timeFactor=ini_timeFactor, timeFactor=timeFactor, cmd_pars=cmd_pars, UUID=UUID)
@@ -946,7 +978,14 @@ if __name__ == "__main__":
     # Make the impedance plots
     calc_Voc_output_string = 'Computing the value of Voc led to the following error:'
     if result == 0 or (result == 95 and calc_Voc_output_string not in message):
+        # Format the output filename to account for the passed UUID
+        output_name_base, output_file_ext = os.path.splitext(output_name)
+        output_name = output_name_base + dum_str + output_file_ext
         plot_impedance(session_path, os.path.basename(output_name))
+        # Call the DRT main script function
+        if findDRT:
+            DRT_result = drt.main(argv=DRT_commands_args)
+            sys.exit(DRT_result)
     else:
         print(message)
         sys.exit(1)

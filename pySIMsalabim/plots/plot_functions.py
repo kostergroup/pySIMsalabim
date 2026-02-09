@@ -75,6 +75,76 @@ def plot_result(data, pars, selected, x_key, xlabel, ylabel, xscale, yscale, tit
     ax.set_title(title)
     return ax
 
+def plot_2x_2y(x1, y1, xaxis_label, yaxis_label, title, y1_plot_label="", y1_color=None, x2=None, y2=None, y2_plot_label="", y2_color=None, xscale="linear", yscale="linear", xlim=None, ylim=None, order=("y1", "y2"),legend=False):
+    """
+    Plots up to two curves on a standard plot and returns the axis
+    
+    Parameters
+    ----------
+    x1 : list
+        x data for the first curve
+    y1 : list
+        y(x) for the first curve
+    xaxis_label : string
+        Label for the x-axis. Format: parameter [unit]
+    yaxis_label : string
+        Label for the y-axis. Format: parameter [unit]
+    title : string
+        Title of the plot
+    y1_plot_label : string (optional)
+        Legend label for the curve y1. Default ""
+    y1_color : string (optional)
+        Color of the y1 line on the plot
+    x2 : list (optional)
+        x data for the second curve
+    y2 : list (optional)
+        y(x) for the second curve
+    y2_plot_label : string (optional)
+        Legend label for the curve y2. Default ""
+    y2_color : string (optional)
+        Color of the y2 line on the plot
+    xscale : string (optional)
+        Scale of the x-axis. E.g linear or log. Default 'linear'
+    yscale : string (optional)
+        Scale of the y-axis. E.g linear or log. Default 'linear'
+    xlim : tuple, shape (2,) (optional)
+        Sets the limits of the x axis as (lb, ub)
+    ylim : tuple, shape (2,) (optional)
+        Sets the limits of the y axis as (lb, ub)
+    legend : bool, optional
+        Toggle between showing the legend in the plot, by default False
+ 
+    Returns
+    -------
+    ax : matplotlib.axes.Axes
+    """
+    fig, ax = plt.subplots()
+
+    if x2 is None and y2 is not None:
+        x2 = x1 
+    
+    # Switch round plotting order if specified
+    if order == ("y1", "y2"):
+        ax.plot(x1, y1, label=y1_plot_label, color=y1_color)
+        if y2 is not None:
+            ax.plot(x2, y2, label=y2_plot_label, color=y2_color)
+    elif order == ("y2", "y1"):
+        if y2 is not None:
+            ax.plot(x2, y2, label=y2_plot_label, color=y2_color)
+        ax.plot(x1, y1, label=y1_plot_label, color=y1_color)
+
+    ax.set_xlabel(xaxis_label)
+    ax.set_ylabel(yaxis_label)
+    ax.set_xscale(xscale)
+    ax.set_yscale(yscale)
+    ax.set_xlim(xlim)
+    ax.set_ylim(ylim)
+    ax.set_title(title)
+    if legend is True:
+        ax.legend()
+    
+    return ax
+
 def plot_result_colorbar_single(x,y,weight, ax,fig, xlabel, ylabel, weight_label, weight_norm, title, xscale='linear', yscale='linear'):
     """Show a x,y plot but use a colorbar to indicate a third parameter, similar to adding a weight to each point.
 
