@@ -794,7 +794,7 @@ def save_models_to_txt(path, fits, float_format='%.5e'):
     for i in range(len(fits)):
         DRT_data[f'U_iter_{i+1}'] = fits[i].U
     DRT_data = pd.DataFrame(DRT_data)
-    pd.DataFrame(DRT_data).to_csv(path, sep=' ', float_format=float_format, index=False, )
+    pd.DataFrame(DRT_data).to_csv(path, sep=' ', float_format=float_format, index=False)
 
 
 def save_model_predictions_to_txt(path, fits, float_format='%.5e'):
