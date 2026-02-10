@@ -22,7 +22,7 @@ except ImportError: # add parent directory to sys.path if pySIMsalabim is not in
 from pySIMsalabim.plots import plot_functions
 
 
-DRT_VERSION = "0.9"
+DRT_VERSION = "0.10"
 
 
 ######### References ##############################################################################
@@ -34,6 +34,10 @@ DRT_VERSION = "0.9"
 # [2] B. Stellato, G. Banjac, P. Goulart, A. Bemporad, and S. Boyd, ‘OSQP: an operator splitting solver 
 # for quadratic programs’, Math. Prog. Comp., vol. 12, no. 4, pp. 637–672, Dec. 2020, 
 # doi: 10.1007/s12532-020-00179-2.
+
+# [3] T. H. Wan, M. Saccoccio, C. Chen, and F. Ciucci, ‘Influence of the Discretization Methods on the 
+# Distribution of Relaxation Times Deconvolution: Implementing Radial Basis Functions with DRTtools’, 
+# Electrochimica Acta, vol. 184, pp. 483–499, Dec. 2015, doi: 10.1016/j.electacta.2015.09.097.
 
 
 ######### Class Definitions #######################################################################
@@ -333,7 +337,7 @@ def linear_fit(time, y_data, tau='Auto', y_inf='Auto', bounds=None, scaling=True
 
     Converts the linear fit problem to a convex quadratic program and minimises using 
     the Operator Splitting Quadratic Program (OSQP) package solver [2]. Using a QP solver 
-    was inspired by ADD REFERENCE
+    was inspired by the pyDRTtools package [3].
     
     Parameters
     ----------
@@ -774,6 +778,7 @@ def plot_R_2(error_array, ylim=(0, 1.1), xaxis_label='Iteration', yaxis_label='$
 def save_models_to_txt(path, fits, float_format='%.5e'):
     """
     Save the tau and U values from a collection of DRT_Fit_Result objects to a txt file.
+    Stores y_inf as a # comment in the first line of the file.
 
     Parameters
     ----------
@@ -794,7 +799,9 @@ def save_models_to_txt(path, fits, float_format='%.5e'):
     for i in range(len(fits)):
         DRT_data[f'U_iter_{i+1}'] = fits[i].U
     DRT_data = pd.DataFrame(DRT_data)
-    pd.DataFrame(DRT_data).to_csv(path, sep=' ', float_format=float_format, index=False)
+    with open(path, 'w') as file:
+        file.write(f"# y_inf: {y_inf}\n")
+        pd.DataFrame(DRT_data).to_csv(file, sep=' ', float_format=float_format, index=False)
 
 
 def save_model_predictions_to_txt(path, fits, float_format='%.5e'):
