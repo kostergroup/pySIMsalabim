@@ -13,6 +13,7 @@ import pandas as pd
 import numpy as np
 import osqp
 from scipy.sparse import csc_matrix
+from sklearn.metrics import mean_squared_error, r2_score
 try:
     import pySIMsalabim as sim
 except ImportError: # add parent directory to sys.path if pySIMsalabim is not installed
@@ -321,44 +322,6 @@ def calculate_tau(time):
     return tau_values
 
 
-def R_2_error(y_data, y_model):
-    """
-    Calculates the R^2 error between data (y) and model (y_model)
-
-    Parameters
-    ----------
-    y_data : arraylike (n,)
-        Data used in fit
-    y_model : arraylike (n,)
-        Model predicted values
-    
-    Returns
-    -------
-    R^2 : float 
-    """
-    SSres = np.mean((y_data - y_model)**2)
-    SStot = np.mean((y_data - np.mean(y_data))**2)
-    return 1 - SSres/SStot
-
-
-def mean_square_error(y_data, y_model):
-    """
-    Calculates the mean square error (MSE) between data (y) and model (y_model)
-
-    Parameters
-    ----------
-    y_data : arraylike (n,)
-        Data used in fit
-    y_model : arraylike (n,)
-        Model predicted values
-
-    Returns
-    -------
-    MSE : float
-    """
-    return np.mean((y_data-y_model)**2)
-
-
 # Fitting Functions #####################################
 
 
@@ -445,8 +408,8 @@ def linear_fit(time, y_data, tau='Auto', y_inf='Auto', bounds=None, scaling=True
     y_data = y_data*scale_factor + y_inf
 
     # Step 6: Calculate errors
-    MSE = mean_square_error(y_data, y_model)
-    R_2 = R_2_error(y_data, y_model)
+    MSE = mean_squared_error(y_data, y_model)
+    R_2 = r2_score(y_data, y_model)
 
     # Step 7: Package results in DRT_Fit_result
     fit = DRT_Fit_Result(time, tau, U, y_inf, MSE=MSE, R_2=R_2)
@@ -554,8 +517,8 @@ def checkerboard_fit(time, y_data, tau='Auto', y_inf='Auto', checkerboard_iters=
         # Rescale and package results
         U_values = scale_factor*U_values
         y_model = predict_y_model(time, U_values, tau, y_inf=y_inf)
-        MSE = mean_square_error(y_data, y_model)
-        R_2 = R_2_error(y_data, y_model)
+        MSE = mean_squared_error(y_data, y_model)
+        R_2 = r2_score(y_data, y_model)
 
         fit = DRT_Fit_Result(time, tau, U_values, y_inf, MSE=MSE, R_2=R_2)
         fit.y_model = y_model
