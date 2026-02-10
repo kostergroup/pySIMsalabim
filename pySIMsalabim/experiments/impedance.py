@@ -941,15 +941,17 @@ if __name__ == "__main__":
     tj_file_name_base, tj_file_name_ext = os.path.splitext(tJFile)
     dum_str = "" if UUID == "" else f"_{UUID}"
     tj_name = tj_file_name_base + dum_str + tj_file_name_ext 
-    defaultDataFile = session_path + "/" + tj_name 
+    defaultDataFile = os.path.join(session_path, tj_name)
  
     DRT_commands_args = {
         'dataFile' : defaultDataFile,
-        'DRTDirectory' : session_path + "/" + 'DRT_Saves',
+        'DRTDirectory' : os.path.join(session_path, 'DRT_Saves'),
         'timeCol' : 't',
         'funcCol' : 'Jext',
         'iters' : '50',
-        'saveFormat' : 'txt'
+        'saveFormat' : 'txt',
+        'startIndex' : None, 
+        'startTime' : None
     }
 
     # Check if findDRT is true
@@ -961,13 +963,25 @@ if __name__ == "__main__":
     # If findDRT is true, update the default values in the default arguments list
     if findDRT:
         for key in list(cmd_pars_dict.keys()):
-            if key in DRT_commands_args:
+            if key in DRT_commands_args.keys():
                 DRT_commands_args[key] = cmd_pars_dict[key]
                 # Remove from cmd_pars_dict
                 cmd_pars_dict.pop(key)
 
     # Set UUID in DRT_commands_and_args 
     DRT_commands_args['UUID'] = UUID
+
+    # Remove any unset optional keys to make the argument dictionary suitable for argparser in DRT.py
+    commands = list(DRT_commands_args.keys())
+    for command in commands:
+        if DRT_commands_args[command] is None:
+            DRT_commands_args.pop(command)
+    
+    # If neither startIndex or startTime is set, set the startIndex to 1
+    # This makes sure DRT analysis happens after the Heavyside Voltage step at index 0 
+    set_start = ('startIndex' in DRT_commands_args.keys()) or ('startTime' in DRT_commands_args.keys())
+    if set_start is False:
+        DRT_commands_args['startIndex'] = '1'
 
     # Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list
     cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
