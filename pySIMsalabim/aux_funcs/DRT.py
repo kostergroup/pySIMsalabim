@@ -882,60 +882,6 @@ def save_to_txt(directory_path, fits, float_format='%.5e'):
     save_model_errors_to_txt(output_errors_filename, fits, float_format=float_format)
 
 
-def read_from_txt(path):
-    """
-    Reads data stored in a space seperated text file
-
-    Parameters
-    ----------
-    path : str
-        Path of file
-
-    Returns
-    -------
-    None
-    """
-    return pd.read_csv(path, sep=r"\s+")
-
-
-def save_to_pickle(path, fits):
-    """
-    Saves an array of DRT_Fit_Results to a .pkl file
-
-    Parameters
-    ----------
-    path : str
-        Path of file
-    fits : arraylike(DRT_Fit_Result)
-        Array like object of fit results 
-
-    Returns
-    -------
-    None
-    """
-    with open(path, 'wb') as file:
-        pickle.dump(fits, file)
-
-
-def read_from_pickle(path):
-    """
-    Loads an array of DRT_Fit_Results from a .pkl file
-
-    Parameters
-    ----------
-    path : str
-        Path of file
-
-    Returns
-    -------
-    fits : arraylike(DRT_Fit_Result)
-        Array of DRT_Fit_Result objects read from the .pkl save file
-    """
-    with open(path, 'rb') as file:
-        fits = pickle.load(file)
-    return fits
-
-
 ######### Scripting Functionality ####################################################################
 
 def parse_arguments(argv=None):
