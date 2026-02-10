@@ -8,7 +8,7 @@ import argparse
 import sys
 import os
 import traceback
-import pickle
+import json
 import pandas as pd
 import numpy as np
 import osqp
@@ -22,7 +22,7 @@ except ImportError: # add parent directory to sys.path if pySIMsalabim is not in
 from pySIMsalabim.plots import plot_functions
 
 
-DRT_VERSION = "0.8"
+DRT_VERSION = "0.9"
 
 
 ######### References ##############################################################################
@@ -882,6 +882,51 @@ def save_to_txt(directory_path, fits, float_format='%.5e'):
     save_model_errors_to_txt(output_errors_filename, fits, float_format=float_format)
 
 
+def save_to_json(directory_path, fits):
+    """
+    Saves array of models to .json file in the passed directory
+    
+    Parameters
+    ----------
+    directory_path : String 
+        Directory path for save data
+    fits : array-like[DRT_Fit_Result]
+
+    Returns
+    -------
+    None
+    """
+    # Check the directory exists and make it if not
+    try: 
+        os.makedirs(directory_path)
+    except FileExistsError:
+        pass
+
+    # Create dictionary for model storage
+    models = {}
+
+    # Convert DRT_Fit_Result objects to dictionaries, making sure any np.array's are turned to lists
+    # so they can be saved in a .json file
+    try:
+        for index in range(len(fits)):
+            model = fits[index].__dict__
+
+            for key in model.keys():
+                if isinstance(model[key], np.ndarray):
+                    model[key] = model[key].tolist()
+            
+            models[f'iteration_{index+1}'] = model
+    except TypeError:
+        raise TypeError("Error saving models to json file. Make sure 'fits' is an iterable containing Fit_DRT_Result objects.")
+
+    filepath = os.path.join(directory_path, 'models.json')
+
+    # Define a function to convert np.array objects to lists within the save_dict
+    print(models)
+    with open(filepath, 'w') as file:
+        json.dump(models, file)
+
+
 ######### Scripting Functionality ####################################################################
 
 def parse_arguments(argv=None):
@@ -922,7 +967,7 @@ def parse_arguments(argv=None):
                         help="heading of the function column in dataFile (default: 'Jext')")
     parser.add_argument("-iters", type=int, default=50, 
                         help="number of iterations in checkerboard fit (default: 50)")
-    parser.add_argument("-saveFormat", default="txt", choices=["txt", "pkl"],
+    parser.add_argument("-saveFormat", default="txt", choices=["txt", "json"],
                         help="saved data file format (default: txt)")
     parser.add_argument("-UUID", default="", 
                         help="Identifier tag added to save directory name i.e. DRTDirectory -> DRTDirectory_UUID ")
@@ -1039,8 +1084,8 @@ def main(argv=None):
         # Save DRT data to file
         if args.saveFormat == "txt":
             save_to_txt(DRT_directory, fits)
-        elif args.saveFormat == "pkl":
-            save_to_pickle(DRT_directory + "/models.pkl", fits)
+        elif args.saveFormat == "json":
+            save_to_json(DRT_directory, fits)
         return EXIT_SUCCESS
 
     except Exception as error:
