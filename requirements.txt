@@ -10,3 +10,4 @@ ipympl
 seaborn
 gitpython
 openpyxl
+osqp

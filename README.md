@@ -9,6 +9,7 @@
 * [Vincent M. Le Corre](https://github.com/VMLC-PV)
 * [Sander Heester](https://github.com/sheester)
 * [Fransien Elhorst](https://github.com/Fransien-Elhorst)
+* [Joshua Luke Edmundson](https://github.com/joshedmundson)
 * [L. Jan Anton Koster](https://github.com/kostergroup)
 
 ## Institutions
