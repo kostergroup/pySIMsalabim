@@ -70,7 +70,8 @@ def test_DRT_main():
     'funcCol': 'Jext',
     'iters': '50',
     'saveFormat': 'txt',
-    'UUID': 'tag'
+    'UUID': '',
+    'startIndex': '0',
     }   
 
     EXIT_CODE = drt.main(argv = DRT_commands_and_args_dict)
