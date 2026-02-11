@@ -2,6 +2,14 @@ Change Log
 ==========
 All notable changes to this project will be documented in this file.
 
+v1.05 - 2026-02-10 - JLE
+------------------------------------
+- aux_funcs/DRT.py: add a script that allows users to analyse lifetimes in transfer functions (such as an impedance experiment output current) using a time-domain approach rather than frequency domain by fitting a distribution of relaxation times to the signal. 
+- plots/plots_functions.py: add plot_2x_2y to allow the user to plot a simple plot with between 1-2 curves (used in the DRT.py plotting functions)
+- Notebooks/DRT.py: showcase the DRT.py script in a notebook for examples of use
+- experiments/impedance.py: add code that allows a user running an IS experiment to automatically conduct DRT analysis on the resulting curve
+- tests/test_DRT.py: add a pytest for the DRT module that tests all key code through the DRT.main() funciton. This allows for CLI testing.
+
 v1.04 - 2025-12-16 - VMLC-PV, SH
 ------------------------------------
 - Removing the limitation for the numpy version in setup.py to allow for more flexibility in the numpy version used. Previously the version was constrained to be >=1.2 and <=2.0.0.
