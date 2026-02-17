@@ -11,3 +11,4 @@ seaborn
 gitpython
 openpyxl
 osqp
+scikit-learn

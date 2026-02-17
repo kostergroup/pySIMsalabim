@@ -9,61 +9,61 @@ pySIMsalabim.experiments.CV module
 
 .. automodule:: pySIMsalabim.experiments.CV
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pySIMsalabim.experiments.EQE module
 -----------------------------------
 
 .. automodule:: pySIMsalabim.experiments.EQE
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pySIMsalabim.experiments.JV\_steady\_state module
 -------------------------------------------------
 
 .. automodule:: pySIMsalabim.experiments.JV_steady_state
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pySIMsalabim.experiments.JV\_sweep module
 -----------------------------------------
 
 .. automodule:: pySIMsalabim.experiments.JV_sweep
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pySIMsalabim.experiments.hysteresis module
 ------------------------------------------
 
 .. automodule:: pySIMsalabim.experiments.hysteresis
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pySIMsalabim.experiments.impedance module
 -----------------------------------------
 
 .. automodule:: pySIMsalabim.experiments.impedance
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pySIMsalabim.experiments.imps module
 ------------------------------------
 
 .. automodule:: pySIMsalabim.experiments.imps
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: pySIMsalabim.experiments
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

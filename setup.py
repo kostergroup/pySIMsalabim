@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="pySIMsalabim", # Replace with your own username
     version="v1.04",
-    author="Vincent M. Le Corre, Sander Heester, L. Jan Anton Koster",
+    author="Vincent M. Le Corre, Sander Heester, Fransien Elhorst, Joshua Luke Edmundson, L. Jan Anton Koster",
     author_email="",
     description="",
     long_description=long_description,

@@ -57,23 +57,17 @@ class DRT_Fit_Result:
     m : int
         Number of lifetimes/coefficients used in predict_y_model, given by the length of U/tau
     y_model : {None, numpy.ndarray}
-        Model given by
+        Model given by  
+
             y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf
+
     U_norm : {None, numpy.ndarray with shape (m,)}
         Fitted coefficients normalised by np.sum(self.U)
     MSE : float 
         Mean square error between the model (self.y) and the fitted signal
     R_2 : float 
         R^2 error between the model (self.y) and the fitted signal
-
         
-    Methods
-    -------
-    predict_y_model(t)
-        Calculates predict_y_model(t) using the object's attributes (self.U, self.tau, self.y_inf)
-        and sets self.predict_y_model equal to the result 
-    set_U_norm()
-        Sets self.U_norm to U/np.sum(U)
     """
     def __init__(self, time, tau, U, y_inf, y=None, MSE=None, R_2=None):
         self.time = time
@@ -332,7 +326,9 @@ def calculate_tau(time):
 def linear_fit(time, y_data, tau='Auto', y_inf='Auto', bounds=None, scaling=True):
     """
     Performs a linear fit of 
+
         y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf
+
     to the data (y_data)
 
     Converts the linear fit problem to a convex quadratic program and minimises using 
@@ -347,13 +343,14 @@ def linear_fit(time, y_data, tau='Auto', y_inf='Auto', bounds=None, scaling=True
         Data for model fitting
     tau: {'Auto', (tau_min, tau_max, m), array_like of shape (m,)} (optional)
         The tau values used in the model 
+
             y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf
+
         'Auto' will use the 'calculate_tau' method to determine lifetimes for fitting. 
         Passing a tuple in the form (tau_min, tau_max, m) will generate a logarithmic array of m values between 
         tau_min and tau_max. 
         Any passed array_like that isn't a tuple of length 3 will be used for all tau values. 
         Default 'Auto'.
-    y_inf : REMOVE THIS
     bounds : {None, (lower, upper)} (optional)
         Sets the bounds for the fitted coeffs. U. Use np.inf for unbounded limit. Default None.
     scaling : bool (optional)
@@ -424,26 +421,29 @@ def linear_fit(time, y_data, tau='Auto', y_inf='Auto', bounds=None, scaling=True
 
 
 def checkerboard_fit(time, y_data, tau='Auto', y_inf='Auto', checkerboard_iters=50, fit_scaling=True):
-    """
-    Performs a 'checkerboard' DRT fit by iteratively fitting capacitive and inductive effects in supplied data (y)
-    
-    time : numpy.ndarray, shape (n,)
-        Time values over which the simulated experiment took place
-    y_data : numpy.ndarray, shape (n,)
+    """Performs a 'checkerboard' DRT fit by iteratively fitting capacitive and inductive effects in supplied data (y)
+
+    Parameters
+    ----------
+    time : arraylike, shape (n,)
+            Time values over which the simulated experiment took place
+    y_data : arraylike, shape (n,)
         Data for model fitting
-    tau: {'Auto', tuple(tau_min, tau_max, m), array_like of shape (m,)} (optional)
+    tau : {'Auto', tuple(tau_min, tau_max, m), array_like of shape (m,)} (optional)
         The tau values used in the model 
+
             y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf
+
         'Auto' will use the 'calculate_tau' method to determine lifetimes for fitting. 
         Passing a tuple in the form (tau_min, tau_max, m) will generate a logarithmic array of m values between 
         tau_min and tau_max. 
         Any passed array_like that isn't a tuple of length 3 will be used for all tau values. 
         Default 'Auto'.
-    y_inf:  {'Auto', float} (optional)
+    y_inf : {'Auto', float} (optional)
         Amplitude of steady state signal, assumed to be at y(infinity) when set to 'Auto'. (Default 'Auto')
-    checkerboard_iters : int (optional)
-        The number of iterations to perform using the checkerboard fitting method
-    fit_scaling : bool
+    checkerboard_iters : int, optional
+        The number of iterations to perform using the checkerboard fitting method. (Default 50)
+    fit_scaling : bool, optional
         Determines whether minmax scaling is used during each call of the 'linear_fit' method. 
         Can impact the smoothness of the MSE and R^2 over many iterations. Default True.
 
@@ -451,7 +451,18 @@ def checkerboard_fit(time, y_data, tau='Auto', y_inf='Auto', checkerboard_iters=
     -------
     fits : arraylike(DRT_Fit_Results), shape (checkerboard_iters,)
         An array of fit objects corresponding to each iteration of the checkerboard procedure.
-    """
+
+
+    Raises
+    ------
+    FitError
+        Invalid input: input time and input data (y_data) have mismatch lengths
+    FitError
+        Invalid input: 'tau' must be either 'Auto', a tuple of length 3, or an array-like of length n
+    FitError
+        Invalid input: 'y_inf' must be either 'Auto' or a float
+    """    
+    
 
     # Determine tau
     if isinstance(tau, str):
@@ -591,7 +602,9 @@ def plot_U(tau_model, U_model, tau_analytic=None, U_analytic=None, xaxis_label='
         The tau values used in the model
     U_model : numpy.ndarray shape (m,)
         The coeffs from the DRT fit, given by U in 
+
             y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf
+
     tau_analytic : {None, numpy.ndarray shape (l,)} (optional)
         Array of tau values use to generate the analytic curve, if known. This is mostly for 
         comparision if fitting to a known DRT for testing purposes. Default None.
@@ -641,7 +654,9 @@ def plot_cumulative_U(tau_model, U_model, tau_analytic=None, U_analytic=None, xa
         The tau values used in the model
     U_model : numpy.ndarray shape (m,)
         The coeffs from the DRT fit, given by U in 
+
             y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf
+            
     tau_analytic : {None, numpy.ndarray shape (l,)} (optional)
         Array of tau values use to generate the analytic curve, if known. This is mostly for 
         comparision if fitting to a known DRT for testing purposes. Default None.

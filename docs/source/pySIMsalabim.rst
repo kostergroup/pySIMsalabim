@@ -19,5 +19,5 @@ Module contents
 
 .. automodule:: pySIMsalabim
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
