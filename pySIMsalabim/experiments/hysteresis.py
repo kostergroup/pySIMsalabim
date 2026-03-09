@@ -297,17 +297,9 @@ def tVG_exp(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, scan_speed, directio
     # Create the time array
     t=np.empty(len(V_forward) + len(V_backward))
     t[0]=0
-
-    # First half
-    for i in range(1,len(V_forward)):
-        t[i]= t[i-1] + abs((V_forward[i]-V_forward[i-1])/scan_speed)
-
-    # Turning point
-    t[len(V_forward)]=t[len(V_forward)-1] + abs((V_backward[0]-V_forward.iloc[-1])/scan_speed)
-
-    # Second half
-    for i in range(len(V_forward)+1,len(V_forward) + len(V_backward)):
-        t[i]= t[i-1] + abs((V_backward[i-len(V_forward)]-V_backward[i-len(V_forward)-1])/scan_speed)
+    t_step = abs((V_forward[0]-V_forward[len(V_forward)-1])/scan_speed / (len(V_forward)-1) )
+    for i in range(1,len(V_forward)+len(V_backward)):
+        t[i]= t[i-1] + t_step
 
     # Voltage array
     V = np.concatenate([V_forward, V_backward])
@@ -437,62 +429,65 @@ def Compare_Exp_Sim_JV(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, rms_mode,
     JVExp = concatJVs(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, direction)
     JVSim = read_tj_file(session_path, tj_file_name)[['t', 'Vext', 'Jext']]
     
-    # Make an array of voltages that did not converge in simulation
-    V_array_not_in_JVSim = np.setdiff1d(JVExp.Vext, JVSim.Vext)
-    
-    # Remove voltages of experimental data that did not converge in the simulation
-    # As the rms-value cannot be calculated, when the voltages of the simulation and experimental data do not overlap
-    if len(V_array_not_in_JVSim) > 0:
-        disgardedPoints = True
-        indices = []
+    if len(JVSim) > 0:
+        # Make an array of voltages that did not converge in simulation
+        V_array_not_in_JVSim = np.setdiff1d(JVExp.Vext, JVSim.Vext)
         
-        for i in range(len(V_array_not_in_JVSim)):
-            # Find indices where voltages do not overlap for every V_i
-            index_array = np.where((JVExp.Vext == V_array_not_in_JVSim[i]))[0]
+        # Remove voltages of experimental data that did not converge in the simulation
+        # As the rms-value cannot be calculated, when the voltages of the simulation and experimental data do not overlap
+        if len(V_array_not_in_JVSim) > 0:
+            disgardedPoints = True
+            indices = []
             
-            # Add the to-slice-indices to a list
-            for j in range(len(index_array)):
-                indices.append(index_array[j])
-        
-        # Delete the indices and convert JVExp from a numpy array in a DataFrame again
-        JVExp = np.delete(JVExp, np.sort(indices), axis=0)
-        JVExp = pd.DataFrame(JVExp, columns=['Vext', 'Jext'])
-    
-    rms = 0
-    count = 0
-    disgardedPoints = False
-    
-    # Look for the interval [Jmin,Jmax] in both the simulated and experiment data
-    Jmin = min(min(JVExp.Jext), min(JVSim.Jext))
-    Jmax = max(max(JVExp.Jext), max(JVSim.Jext))
-    
-    if rms_mode == 'lin' or 'linear':
-        # Calculate the sum of squared residuals
-        for i in range(len(JVExp)):
-            rms = rms + (JVExp.Jext[i] - JVSim.Jext[i])**2
-            count += 1
-        
-        # Calculate the root mean square error and normalise with respect to the interval [Jmin,Jmax]
-        rms = np.sqrt(rms/count)/(Jmax-Jmin)
-        
-    elif rms_mode == 'log' or 'logarithmic':
-        # Calculate the sum of squared residuals
-        for i in range(len(JVExp)):
-            if JVExp.Jext[i]*JVSim.Jext[i]>=0: # We can only calc rms if both are <> 0 and they have the same sign
-                rms = rms + np.log(JVExp.Jext[i]/JVSim.Jext[i])**2
-            else:
-                disgardedPoints = True
+            for i in range(len(V_array_not_in_JVSim)):
+                # Find indices where voltages do not overlap for every V_i
+                index_array = np.where((JVExp.Vext == V_array_not_in_JVSim[i]))[0]
+                
+                # Add the to-slice-indices to a list
+                for j in range(len(index_array)):
+                    indices.append(index_array[j])
             
-        # Calculate the root mean square error and normalise with respect to the interval [Jmin,Jmax]
-        rms = np.sqrt(rms/count)/abs(np.log(abs(Jmax/Jmin))) # Note: Jmax > Jmin, of course, but ABS(Jmin) can be larger than ABS(Jmax) so we need to use ABS(LN(...)) to get a positive rms
-
-    if disgardedPoints:
-        print('Not all JV points were used in computing the rms-error.')
-        print('Delete voltages are: ', V_array_not_in_JVSim)
+            # Delete the indices and convert JVExp from a numpy array in a DataFrame again
+            JVExp = np.delete(JVExp, np.sort(indices), axis=0)
+            JVExp = pd.DataFrame(JVExp, columns=['Vext', 'Jext']) # Gfrac
+        
+        rms = 0
+        count = 0
+        disgardedPoints = False
+        
+        # Look for the interval [Jmin,Jmax] in both the simulated and experiment data
+        Jmin = min(min(JVExp.Jext), min(JVSim.Jext))
+        Jmax = max(max(JVExp.Jext), max(JVSim.Jext))
+        
+        if rms_mode == 'lin' or 'linear':
+            # Calculate the sum of squared residuals
+            for i in range(len(JVExp)):
+                rms = rms + (JVExp.Jext[i] - JVSim.Jext[i])**2
+                count += 1
+            
+            # Calculate the root mean square error and normalise with respect to the interval [Jmin,Jmax]
+            rms = np.sqrt(rms/count)/(Jmax-Jmin)
+            
+        elif rms_mode == 'log' or 'logarithmic':
+            # Calculate the sum of squared residuals
+            for i in range(len(JVExp)):
+                if JVExp.Jext[i]*JVSim.Jext[i]>=0: # We can only calc rms if both are <> 0 and they have the same sign
+                    rms = rms + np.log(JVExp.Jext[i]/JVSim.Jext[i])**2
+                else:
+                    disgardedPoints = True
+                
+            # Calculate the root mean square error and normalise with respect to the interval [Jmin,Jmax]
+            rms = np.sqrt(rms/count)/abs(np.log(abs(Jmax/Jmin))) # Note: Jmax > Jmin, of course, but ABS(Jmin) can be larger than ABS(Jmax) so we need to use ABS(LN(...)) to get a positive rms
+    
+        if disgardedPoints:
+            print('Not all JV points were used in computing the rms-error.')
+            print('Delete voltages are: ', V_array_not_in_JVSim)
+    else:
+        rms = np.nan
     
     return rms
 
-def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='tVG.txt', plot_hyst_index = False):
+def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_name='tVG.txt', plot_hyst_index = False):
     """
     Calculate the hysteresis index from the simulated JV curve using the difference area between the forward and backward scan
     
@@ -502,7 +497,7 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
         working directory for zimt
     tj_file_name : string
         Name of the tj file
-    tVG_file_ame : string
+    tVG_file_name : string
         Name of the tVG file
     plot_hyst_index : bool
         If True, plot the JV curves with the normalisation and difference area
@@ -518,7 +513,7 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
     # Read data from files. tj file for the JV curve and tVG file to get all possible voltage steps. 
     # This is needed as not all voltages might be present in the tj file.
     data_tj = pd.read_csv(os.path.join(session_path,tj_file_name), sep=r'\s+')
-    data_tVG = pd.read_csv(os.path.join(session_path,tVG_file_ame), sep=r'\s+')
+    data_tVG = pd.read_csv(os.path.join(session_path,tVG_file_name), sep=r'\s+')
 
     # Store Vinput, Vext and Jext in arrays
     Vinput = np.array(data_tVG['Vext'])
@@ -540,7 +535,7 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
     if len(sign_change[0]) == 0:
         print('Hysteresis index could not be calculated. No sign change in the voltage array')
         return 0
-    elif len(sign_change[0]) ==2:
+    elif len(sign_change[0]) == 2:
         # Check if they are consecutive. If so, we might just be missing the 'flip'' point, as it could have not converged, so we need to correct for this.
         if sign_change[0][1] - sign_change[0][0] == 1:
             idx_change = sign_change[0][0] + 2
@@ -573,8 +568,15 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
     if len(sign_change[0]) == 0:
         print('Hysteresis index could not be calculated. No sign change in the voltage array')
         return 0
-    elif len(sign_change[0]) > 1:
-        print('Hysteresis index could not be calculated.. Multiple sign changes in the voltage array')
+    elif len(sign_change[0]) == 2:
+        # Check if they are consecutive. If so, we might just be missing the 'flip'' point, as it could have not converged, so we need to correct for this.
+        if sign_change[0][1] - sign_change[0][0] == 1:
+            sign_change_Vinput = sign_change[0][0] + 2
+        else:
+            print('Hysteresis index could not be calculated. Multiple sign changes in the voltage array')
+            return 0
+    elif len(sign_change[0]) > 2:
+        print('Hysteresis index could not be calculated. Multiple sign changes in the voltage array')
         return 0
     else:
         # Need to correct for the index change between Vinput and the sign_change array
@@ -582,7 +584,6 @@ def calc_hysteresis_index(session_path, tj_file_name = 'tj.dat', tVG_file_ame='t
 
     # We only need one of the arrays, as we will only use this as a reference
     Vinput_1 = Vinput[:sign_change_Vinput]
-
 
     # To calculate the difference area between the two curves, we need to reverse the order of the second arrays to match the order of the applied voltage
     # reverse the second array
