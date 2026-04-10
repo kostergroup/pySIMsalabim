@@ -2,6 +2,9 @@ Change Log
 ==========
 All notable changes to this project will be documented in this file.
 
+v1.05 - 2026-04-10 - VMLC-PV
+---------------------------------------
+- JV_funcs.py: Removed raise in the error handling of the SIMsalabim-like performance parameter calculation functions to avoid crashing. Instead, we now return calc = False and 0 as values and an error for the performance parameter that fails.
 v1.04 - 2026-02-17 - VMLC-PV, SH, JLE
 ---------------------------------------
 - Removing the limitation for the numpy version in setup.py to allow for more flexibility in the numpy version used. Previously the version was constrained to be >=1.2 and <=2.0.0.

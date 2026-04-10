@@ -233,8 +233,8 @@ def Neville(x0, x, y, n=None):
     float
         Estimated error of the interpolation.
     """    
-    x = np.asarray(x, dtype=float)
-    y = np.asarray(y, dtype=float)
+    x = np.asarray(x)
+    y = np.asarray(y)
 
     if len(x) != len(y):
         raise ValueError("x and y must have the same length.")
@@ -304,11 +304,13 @@ def InterExtraPolation(x, y, x0, order, extra_index=0):
     y = np.asarray(y)
 
     N = len(x) - 1  # max index
-
+    
     if order >= N:
-        raise ValueError("Not enough points for interpolation order.")
+        return False, 0.0, 0.0
+        # raise ValueError("Not enough points for interpolation order.")
     if order < 1:
-        raise ValueError("Order must be at least 1.")
+        return False, 0.0, 0.0
+        # raise ValueError("Order must be at least 1.")
 
     y_estimate = 0.0
     err_estimate = 0.0
@@ -320,7 +322,10 @@ def InterExtraPolation(x, y, x0, order, extra_index=0):
         return False, y_estimate, err_estimate
 
     # locate index
-    i1 = Locate(x, x0, 0, N)
+    try:
+        i1 = Locate(x, x0, 0, N)
+    except ValueError:
+        return False, y_estimate, err_estimate
 
     # map back to valid interval
     i1 = max(0, min(N, i1))
@@ -330,15 +335,18 @@ def InterExtraPolation(x, y, x0, order, extra_index=0):
     ifin = order + istart
 
     if ifin > N:
-        ifin = N
+        ifin = N-1
         istart = ifin - order
 
     # select points
-    x_selected = x[istart:ifin + 1]
-    y_selected = y[istart:ifin + 1]
+    x_selected = x[istart:ifin+1]
+    y_selected = y[istart:ifin+1]
 
     # Neville interpolation
-    y_estimate, err_estimate = Neville(x0, x_selected, y_selected)
+    try:
+        y_estimate, err_estimate = Neville(x0, x_selected, y_selected, n=order + 1)
+    except ValueError:
+        return False, y_estimate, err_estimate
 
     # extrapolation control
     delx = min(abs(x_selected[0] - x0),
