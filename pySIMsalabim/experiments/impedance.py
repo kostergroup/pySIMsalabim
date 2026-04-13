@@ -981,7 +981,7 @@ if __name__ == "__main__":
     # This makes sure DRT analysis happens after the Heavyside Voltage step at index 0 
     set_start = ('startIndex' in DRT_commands_args.keys()) or ('startTime' in DRT_commands_args.keys())
     if set_start is False:
-        DRT_commands_args['startIndex'] = '1'
+        DRT_commands_args['startIndex'] = '2'
 
     # Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list
     cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
