@@ -1,0 +1,1035 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.aux_funcs.JV_funcs &mdash; pySIMsalabim 1.05 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8214e1ae"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.aux_funcs.JV_funcs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.aux_funcs.JV_funcs</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Useful helper functions for pySIMsalabim&quot;&quot;&quot;</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span><span class="p">,</span><span class="n">constants</span>
+
+<span class="c1">## Physics constants</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;elementary charge&#39;</span><span class="p">)</span>
+<span class="n">eps_0</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;electric constant&#39;</span><span class="p">)</span>
+<span class="n">kb</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Boltzmann constant in eV/K&#39;</span><span class="p">)</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+<div class="viewcode-block" id="get_Jsc">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_Jsc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the short-circuit current (Jsc) from solar cell JV-curve by interpolating the current at 0 V</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Jsc : float</span>
+<span class="sd">        Short-circuit current value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Jsc_dumb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Jsc_dumb</span></div>
+
+
+<div class="viewcode-block" id="get_Voc">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_Voc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the Open-circuit voltage (Voc) from solar cell JV-curve by interpolating the Voltage when the current is 0</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Voc : float</span>
+<span class="sd">        Open-circuit voltage value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Voc_dumb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Curr</span><span class="p">,</span> <span class="n">Volt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Voc_dumb</span></div>
+
+
+<div class="viewcode-block" id="get_FF">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_FF">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_FF</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the fill factor (FF) from solar cell JV-curve by calculating the maximum power point</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FF : float</span>
+<span class="sd">        Fill factor value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Volt_oc</span> <span class="o">=</span> <span class="n">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="n">Curr_sc</span> <span class="o">=</span> <span class="n">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">Volt_oc</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">Curr_sc</span><span class="p">):</span>
+            <span class="n">power</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">power_max</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+    <span class="n">FF_dumb</span> <span class="o">=</span> <span class="n">power_max</span><span class="o">/</span><span class="p">(</span><span class="n">Volt_oc</span><span class="o">*</span><span class="n">Curr_sc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">FF_dumb</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_PCE">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_PCE">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_PCE</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">,</span><span class="n">suns</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the power conversion efficiency (PCE) from solar cell JV-curve</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    PCE : float</span>
+<span class="sd">        Power conversion efficiency value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Voc_dumb</span> <span class="o">=</span> <span class="n">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="n">Jsc_dumb</span> <span class="o">=</span> <span class="n">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="n">FF_dumb</span> <span class="o">=</span> <span class="n">get_FF</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="n">PCE_dumb</span> <span class="o">=</span> <span class="n">Voc_dumb</span><span class="o">*</span><span class="n">Jsc_dumb</span><span class="o">*</span><span class="n">FF_dumb</span><span class="o">/</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">suns</span><span class="p">)</span> <span class="c1"># to get it in % when Jsc is in A/m2 and Voc in V</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">PCE_dumb</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_ideality_factor">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_ideality_factor">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_ideality_factor</span><span class="p">(</span><span class="n">suns</span><span class="p">,</span><span class="n">Vocs</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">295</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns ideality factor from suns-Voc data linear fit of Voc = (nIF/Vt)*log(suns) + intercept</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    suns : 1-D sequence of floats</span>
+<span class="sd">        Array containing the intensity in sun.</span>
+
+<span class="sd">    Vocs : 1-D sequence of floats</span>
+<span class="sd">        Array containing the open-circuit voltages.</span>
+<span class="sd">    </span>
+<span class="sd">    T : float optional</span>
+<span class="sd">        Temperature in Kelvin (Default = 295 K).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nIF : float</span>
+<span class="sd">        Ideality factor value.</span>
+
+<span class="sd">    intercept : float</span>
+<span class="sd">        Intercept of the regression line.</span>
+
+<span class="sd">    rvalue : float</span>
+<span class="sd">        Correlation coefficient.</span>
+
+<span class="sd">    pvalue : float</span>
+<span class="sd">        Two-sided p-value for a hypothesis test whose null hypothesis is</span>
+<span class="sd">        that the slope is zero, using Wald Test with t-distribution of</span>
+<span class="sd">        the test statistic.</span>
+
+<span class="sd">    stderr : float</span>
+<span class="sd">        Standard error of the estimated gradient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Vt</span> <span class="o">=</span> <span class="n">kb</span><span class="o">*</span><span class="n">T</span>
+    <span class="n">suns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">suns</span><span class="p">)</span>
+    <span class="n">slope_d</span><span class="p">,</span> <span class="n">intercept_d</span><span class="p">,</span> <span class="n">r_value_d</span><span class="p">,</span> <span class="n">p_value_d</span><span class="p">,</span> <span class="n">std_err_d</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">suns</span><span class="p">,</span><span class="n">Vocs</span><span class="p">)</span>
+    <span class="n">nIF</span> <span class="o">=</span> <span class="n">slope_d</span><span class="o">/</span><span class="n">Vt</span>
+    <span class="k">return</span> <span class="n">nIF</span><span class="p">,</span><span class="n">intercept_d</span><span class="p">,</span> <span class="n">r_value_d</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">p_value_d</span><span class="p">,</span> <span class="n">std_err_d</span></div>
+
+
+<span class="c1"># SIMsalabim inspired functions</span>
+<div class="viewcode-block" id="Fit_Parabola">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.Fit_Parabola">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Fit_Parabola</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">):</span>   
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fits a parabola through [(x1, y1), (x2, y2), (x3,y3)], y = ax^2 + bx + c</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x1, x2, x3 : float</span>
+<span class="sd">        X-coordinates of the three points.</span>
+<span class="sd">    y1, y2, y3 : float</span>
+<span class="sd">        Y-coordinates of the three points.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    a : float</span>
+<span class="sd">        Quadratic coefficient.</span>
+<span class="sd">    b : float</span>
+<span class="sd">        Linear coefficient.</span>
+<span class="sd">    c : float</span>
+<span class="sd">        Constant term.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">b</span> <span class="o">=</span> <span class="p">((</span><span class="n">x3</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span>
+         <span class="o">-</span> <span class="p">(</span><span class="n">x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y3</span> <span class="o">-</span> <span class="n">y1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x3</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="o">-</span> <span class="p">(</span><span class="n">x3</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">y3</span> <span class="o">-</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">x3</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">x3</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x1</span>
+
+    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span></div>
+
+
+<div class="viewcode-block" id="Locate">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.Locate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Locate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">imin</span><span class="p">,</span> <span class="n">imax</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Simple, slow, (hopefully) robust routine to an index within </span>
+<span class="sd">	row x (from imin to imax). x0 is some target we&#39;re looking for.</span>
+<span class="sd">	The resulting index is such that x0 sits between x[i] and x[i+1]</span>
+<span class="sd">	if x0 is outside the interval determined by x[imin], x[imax] then it </span>
+<span class="sd">	returns imin-1 or imax+1.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : 1D numpy array</span>
+<span class="sd">        Array of x values (ascending or descending).</span>
+<span class="sd">    x0 : float</span>
+<span class="sd">        Target value to locate within x.</span>
+<span class="sd">    imin : int</span>
+<span class="sd">        Minimum index to consider.</span>
+<span class="sd">    imax : int</span>
+<span class="sd">        Maximum index to consider.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Index i such that x0 sits between x[i] and x[i+1], or imin-1 or imax+1 if x0 is outside the interval.      </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># check if x is descending or ascending:</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">imax</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">imin</span><span class="p">])</span>  <span class="c1"># so r=1 if ascending, r=-1 if descending</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Error in locate: x array is constant?&quot;</span><span class="p">)</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="n">imin</span> <span class="c1"># first init i!</span>
+    <span class="c1"># Check if x0 sits beyond the interval, either left or right:</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">x0</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">imax</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">imax</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">x0</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">imin</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">imin</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">imax</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">imax</span>
+
+    <span class="c1"># Search inside interval</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">imin</span><span class="p">:</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">i</span></div>
+
+
+
+<div class="viewcode-block" id="Neville">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.Neville">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Neville</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Neville interpolation. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x0 : float</span>
+<span class="sd">        x0: x of desired point</span>
+<span class="sd">    x : 1D numpy array</span>
+<span class="sd">        Array of x values (ascending or descending).</span>
+<span class="sd">    y : 1D numpy array</span>
+<span class="sd">        Array of y values corresponding to x.</span>
+<span class="sd">    n : int, optional</span>
+<span class="sd">        Number of points to use (Defaults to len(x)).</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Interpolated y value at x0.</span>
+<span class="sd">    float</span>
+<span class="sd">        Estimated error of the interpolation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x and y must have the same length.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n cannot exceed length of x and y.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Use only first n points</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Ensure x values are distinct</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x values must be distinct.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Neville triangular scheme</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span><span class="p">):</span>
+            <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">x0</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">m</span><span class="p">])</span> <span class="o">*</span> <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
+                    <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">*</span> <span class="n">Q</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">m</span><span class="p">])</span>
+
+        <span class="c1"># The last correction term gives error estimate</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">err_estimate</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">Q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">Q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">abs</span><span class="p">(</span><span class="n">err_estimate</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span></div>
+
+
+
+<div class="viewcode-block" id="InterExtraPolation">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.InterExtraPolation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">InterExtraPolation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Interpolation / extrapolation routine. This is a wrapper for Neville&#39;s algorithm.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : 1D numpy array</span>
+<span class="sd">        Array of x values (ascending or descending).</span>
+<span class="sd">    y : 1D numpy array</span>
+<span class="sd">        Array of y values corresponding to x.</span>
+<span class="sd">    x0 : float</span>
+<span class="sd">        Target value to interpolate or extrapolate.</span>
+<span class="sd">    order : int</span>
+<span class="sd">        Order of the interpolation polynomial.</span>
+<span class="sd">    extra_index : int, optional</span>
+<span class="sd">        Extrapolation control:  </span>
+
+<span class="sd">            0 -&gt; no extrapolation allowed  </span>
+<span class="sd">            1 -&gt; limited extrapolation  </span>
+<span class="sd">            2 -&gt; full extrapolation  </span>
+
+<span class="sd">        ,by default 0</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        success (bool), y_estimate (float), err_estimate (float)</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the interpolation order is invalid.</span>
+<span class="sd"> </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># max index</span>
+    
+    <span class="k">if</span> <span class="n">order</span> <span class="o">&gt;=</span> <span class="n">N</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+        <span class="c1"># raise ValueError(&quot;Not enough points for interpolation order.&quot;)</span>
+    <span class="k">if</span> <span class="n">order</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+        <span class="c1"># raise ValueError(&quot;Order must be at least 1.&quot;)</span>
+
+    <span class="n">y_estimate</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">err_estimate</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># check bracketing</span>
+    <span class="n">x0_bracketed</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">extra_index</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x0_bracketed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">y_estimate</span><span class="p">,</span> <span class="n">err_estimate</span>
+
+    <span class="c1"># locate index</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">i1</span> <span class="o">=</span> <span class="n">Locate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">y_estimate</span><span class="p">,</span> <span class="n">err_estimate</span>
+
+    <span class="c1"># map back to valid interval</span>
+    <span class="n">i1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">i1</span><span class="p">))</span>
+
+    <span class="c1"># choose stencil</span>
+    <span class="n">istart</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">i1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">order</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">ifin</span> <span class="o">=</span> <span class="n">order</span> <span class="o">+</span> <span class="n">istart</span>
+
+    <span class="k">if</span> <span class="n">ifin</span> <span class="o">&gt;</span> <span class="n">N</span><span class="p">:</span>
+        <span class="n">ifin</span> <span class="o">=</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">istart</span> <span class="o">=</span> <span class="n">ifin</span> <span class="o">-</span> <span class="n">order</span>
+
+    <span class="c1"># select points</span>
+    <span class="n">x_selected</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">istart</span><span class="p">:</span><span class="n">ifin</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_selected</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">istart</span><span class="p">:</span><span class="n">ifin</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Neville interpolation</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">y_estimate</span><span class="p">,</span> <span class="n">err_estimate</span> <span class="o">=</span> <span class="n">Neville</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x_selected</span><span class="p">,</span> <span class="n">y_selected</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">y_estimate</span><span class="p">,</span> <span class="n">err_estimate</span>
+
+    <span class="c1"># extrapolation control</span>
+    <span class="n">delx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_selected</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">),</span>
+               <span class="nb">abs</span><span class="p">(</span><span class="n">x_selected</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">))</span>
+
+    <span class="n">avg_spacing</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_selected</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_selected</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">order</span>
+
+    <span class="n">success</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">extra_index</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span>
+        <span class="n">x0_bracketed</span> <span class="ow">or</span>
+        <span class="n">delx</span> <span class="o">&lt;=</span> <span class="n">avg_spacing</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">success</span><span class="p">,</span> <span class="n">y_estimate</span><span class="p">,</span> <span class="n">err_estimate</span></div>
+
+
+
+<div class="viewcode-block" id="Find_Solar_Cell_Parameters">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.Find_Solar_Cell_Parameters">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Find_Solar_Cell_Parameters</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">,</span> <span class="n">max_interpolation_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">threshold_err</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Finds Jsc, Voc, MPP (and thus FF) by interpolating the V-J data points</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1D numpy array</span>
+<span class="sd">        Array of voltage values.</span>
+<span class="sd">    Curr : 1D numpy array</span>
+<span class="sd">        Array of current values corresponding to Volt.</span>
+<span class="sd">    max_interpolation_order : int, optional</span>
+<span class="sd">        Maximum order of the interpolation polynomial, by default 3</span>
+<span class="sd">    threshold_err : float, optional</span>
+<span class="sd">        Maximum allowable error for interpolation, by default 0.05</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Dictionary containing the extracted solar cell parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">Volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Volt</span><span class="p">)</span>
+    <span class="n">Curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Curr</span><span class="p">)</span>
+
+    <span class="c1"># ---- initialize output structure ----</span>
+    <span class="n">SCPar</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">Jsc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">Vmpp</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">MPP</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">FF</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">Voc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">ErrJsc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">ErrVmpp</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">ErrMPP</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">ErrFF</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">ErrVoc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">calcSC</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">calcMPP</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">calcFF</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">calcOC</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">x_dat</span> <span class="o">=</span> <span class="n">Volt</span>
+    <span class="n">y_dat</span> <span class="o">=</span> <span class="n">Curr</span>
+    <span class="n">Nusable</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Nusable</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SCPar</span>
+
+    <span class="n">interpolation_order</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_interpolation_order</span><span class="p">,</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># ======================================</span>
+    <span class="c1"># 1 Short-circuit current (Jsc at V=0)</span>
+    <span class="c1"># ======================================</span>
+    <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+        <span class="n">x_dat</span><span class="p">,</span> <span class="n">y_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">interpolation_order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+
+    <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Jsc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrJsc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span>
+    <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcSC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="c1"># ======================================</span>
+    <span class="c1"># 2 Open-circuit voltage (Voc at J=0)</span>
+    <span class="c1"># ======================================</span>
+    <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+        <span class="n">y_dat</span><span class="p">,</span> <span class="n">x_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">interpolation_order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+
+    <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrVoc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span>
+    <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcOC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="c1"># fallback to linear interpolation if needed</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcOC&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">interpolation_order</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+            <span class="n">y_dat</span><span class="p">,</span> <span class="n">x_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrVoc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span>
+        <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcOC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="c1"># ======================================</span>
+    <span class="c1"># 3 Maximum Power Point (MPP)</span>
+    <span class="c1"># ======================================</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="o">-</span><span class="n">x_dat</span> <span class="o">*</span> <span class="n">y_dat</span>  <span class="c1"># standard PV sign convention</span>
+
+    <span class="n">i_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+
+    <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcMPP&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcFF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Need at least one point on each side</span>
+    <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">i_start</span> <span class="o">&lt;=</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>
+
+        <span class="c1"># Fit parabola around maximum</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+        <span class="n">x3</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">y1</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">y2</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+        <span class="n">y3</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Fit_Parabola</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+
+        <span class="c1"># Vmpp (extremum of parabola)</span>
+        <span class="n">Vmpp</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Vmpp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vmpp</span>
+        <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrVmpp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x3</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span>
+
+        <span class="c1"># MPP value</span>
+        <span class="n">MPP</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">Vmpp</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">Vmpp</span> <span class="o">+</span> <span class="n">c</span>
+        <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;MPP&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MPP</span>
+        <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrMPP&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="nb">abs</span><span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span><span class="p">])</span> <span class="o">+</span>
+            <span class="nb">abs</span><span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span> <span class="o">-</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="p">)</span>
+
+        <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcMPP&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcOC&quot;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcSC&quot;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="ow">and</span> <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Jsc&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="p">):</span>
+            <span class="n">FF</span> <span class="o">=</span> <span class="o">-</span><span class="n">MPP</span> <span class="o">/</span> <span class="p">(</span><span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Jsc&quot;</span><span class="p">])</span>
+            <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;FF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FF</span>
+
+            <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;calcFF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">FF</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># Error propagation</span>
+            <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrFF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrMPP&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Jsc&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Voc&quot;</span><span class="p">]))</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="o">+</span> <span class="p">(</span><span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrJsc&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">FF</span> <span class="o">/</span> <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Jsc&quot;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="o">+</span> <span class="p">(</span><span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;ErrVoc&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">FF</span> <span class="o">/</span> <span class="n">SCPar</span><span class="p">[</span><span class="s2">&quot;Voc&quot;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">SCPar</span></div>
+
+
+
+
+<div class="viewcode-block" id="get_Voc_SIMsalabim">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_Voc_SIMsalabim">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_Voc_SIMsalabim</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">,</span> <span class="n">max_interpolation_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">threshold_err</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SIMsalabim-style Voc extraction (standalone).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1D numpy array</span>
+<span class="sd">        Array of voltage values.</span>
+<span class="sd">    Curr : 1D numpy array</span>
+<span class="sd">        Array of current values corresponding to Volt.</span>
+<span class="sd">    max_interpolation_order : int, optional</span>
+<span class="sd">        Maximum order of the interpolation polynomial, by default 3</span>
+<span class="sd">    threshold_err : float, optional</span>
+<span class="sd">        Maximum allowable error for interpolation, by default 0.05</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Extracted open-circuit voltage (Voc) value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">Volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Volt</span><span class="p">)</span>
+    <span class="n">Curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Curr</span><span class="p">)</span>
+
+    <span class="n">x_dat</span> <span class="o">=</span> <span class="n">Volt</span>
+    <span class="n">y_dat</span> <span class="o">=</span> <span class="n">Curr</span>
+    <span class="n">Nusable</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Nusable</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">interpolation_order</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_interpolation_order</span><span class="p">,</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+        <span class="n">y_dat</span><span class="p">,</span> <span class="n">x_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">interpolation_order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+
+    <span class="n">Voc</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">calcOC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">calcOC</span> <span class="ow">and</span> <span class="n">interpolation_order</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+            <span class="n">y_dat</span><span class="p">,</span> <span class="n">x_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">Voc</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">calcOC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">Voc</span> <span class="k">if</span> <span class="n">calcOC</span> <span class="k">else</span> <span class="n">Voc</span></div>
+
+
+
+<div class="viewcode-block" id="get_Jsc_SIMsalabim">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_Jsc_SIMsalabim">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_Jsc_SIMsalabim</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">,</span> <span class="n">max_interpolation_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">threshold_err</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SIMsalabim-style Jsc extraction (standalone).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1D numpy array</span>
+<span class="sd">        Array of voltage values.</span>
+<span class="sd">    Curr : 1D numpy array</span>
+<span class="sd">        Array of current values corresponding to Volt.</span>
+<span class="sd">    max_interpolation_order : int, optional</span>
+<span class="sd">        Maximum order of the interpolation polynomial, by default 3</span>
+<span class="sd">    threshold_err : float, optional</span>
+<span class="sd">        Maximum allowable error for interpolation, by default 0.05</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Extracted short-circuit current (Jsc) value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+     
+    <span class="n">Volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Volt</span><span class="p">)</span>
+    <span class="n">Curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Curr</span><span class="p">)</span>
+
+    <span class="n">x_dat</span> <span class="o">=</span> <span class="n">Volt</span>
+    <span class="n">y_dat</span> <span class="o">=</span> <span class="n">Curr</span>
+    <span class="n">Nusable</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Nusable</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">interpolation_order</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_interpolation_order</span><span class="p">,</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+        <span class="n">x_dat</span><span class="p">,</span> <span class="n">y_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">interpolation_order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+
+    <span class="n">Jsc</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">calcSC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">Jsc</span> <span class="k">if</span> <span class="n">calcSC</span> <span class="k">else</span> <span class="n">Jsc</span></div>
+
+
+
+<div class="viewcode-block" id="get_Vmpp_SIMsalabim">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_Vmpp_SIMsalabim">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_Vmpp_SIMsalabim</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SIMsalabim-style Vmpp extraction (standalone).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1D numpy array</span>
+<span class="sd">        Array of voltage values.</span>
+<span class="sd">    Curr : 1D numpy array</span>
+<span class="sd">        Array of current values corresponding to Volt.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Extracted voltage at maximum power point (Vmpp) value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+      
+    <span class="n">Volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Volt</span><span class="p">)</span>
+    <span class="n">Curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Curr</span><span class="p">)</span>
+
+    <span class="n">x_dat</span> <span class="o">=</span> <span class="n">Volt</span>
+    <span class="n">y_dat</span> <span class="o">=</span> <span class="n">Curr</span>
+    <span class="n">Nusable</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Nusable</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">power</span> <span class="o">=</span> <span class="o">-</span><span class="n">x_dat</span> <span class="o">*</span> <span class="n">y_dat</span>
+    <span class="n">i_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">i_start</span> <span class="o">&lt;=</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+    <span class="n">x3</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+    <span class="n">y3</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Fit_Parabola</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+    <span class="n">Vmpp</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Vmpp</span></div>
+
+
+
+<div class="viewcode-block" id="get_mpp_SIMsalabim">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_mpp_SIMsalabim">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_mpp_SIMsalabim</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SIMsalabim-style MPP extraction (standalone).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1D numpy array</span>
+<span class="sd">        Array of voltage values.</span>
+<span class="sd">    Curr : 1D numpy array</span>
+<span class="sd">        Array of current values corresponding to Volt.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Extracted maximum power point (MPP) value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+       
+    <span class="n">Volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Volt</span><span class="p">)</span>
+    <span class="n">Curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Curr</span><span class="p">)</span>
+
+    <span class="n">x_dat</span> <span class="o">=</span> <span class="n">Volt</span>
+    <span class="n">y_dat</span> <span class="o">=</span> <span class="n">Curr</span>
+    <span class="n">Nusable</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Nusable</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">power</span> <span class="o">=</span> <span class="o">-</span><span class="n">x_dat</span> <span class="o">*</span> <span class="n">y_dat</span>
+    <span class="n">i_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">i_start</span> <span class="o">&lt;=</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+    <span class="n">x3</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+    <span class="n">y3</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Fit_Parabola</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+    <span class="n">Vmpp</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">MPP</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">Vmpp</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">Vmpp</span> <span class="o">+</span> <span class="n">c</span>
+
+    <span class="k">return</span> <span class="n">MPP</span></div>
+
+
+
+<div class="viewcode-block" id="get_FF_SIMsalabim">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_FF_SIMsalabim">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_FF_SIMsalabim</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">,</span> <span class="n">max_interpolation_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">threshold_err</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SIMsalabim-style FF extraction (standalone).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1D numpy array</span>
+<span class="sd">        Array of voltage values.</span>
+<span class="sd">    Curr : 1D numpy array</span>
+<span class="sd">        Array of current values corresponding to Volt.</span>
+<span class="sd">    max_interpolation_order : int, optional</span>
+<span class="sd">        Maximum order of the interpolation polynomial, by default 3</span>
+<span class="sd">    threshold_err : float, optional</span>
+<span class="sd">        Maximum allowable error for interpolation, by default 0.05</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Extracted fill factor (FF) value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+ 
+    <span class="n">Volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Volt</span><span class="p">)</span>
+    <span class="n">Curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Curr</span><span class="p">)</span>
+
+    <span class="n">x_dat</span> <span class="o">=</span> <span class="n">Volt</span>
+    <span class="n">y_dat</span> <span class="o">=</span> <span class="n">Curr</span>
+    <span class="n">Nusable</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Nusable</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">interpolation_order</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_interpolation_order</span><span class="p">,</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Jsc</span>
+    <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+        <span class="n">x_dat</span><span class="p">,</span> <span class="n">y_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">interpolation_order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">Jsc</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">calcSC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="c1"># Voc</span>
+    <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+        <span class="n">y_dat</span><span class="p">,</span> <span class="n">x_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">interpolation_order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">Voc</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">calcOC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">calcOC</span> <span class="ow">and</span> <span class="n">interpolation_order</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+            <span class="n">y_dat</span><span class="p">,</span> <span class="n">x_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">Voc</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">calcOC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="c1"># MPP</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="o">-</span><span class="n">x_dat</span> <span class="o">*</span> <span class="n">y_dat</span>
+    <span class="n">i_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">i_start</span> <span class="o">&lt;=</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+    <span class="n">x3</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+    <span class="n">y3</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Fit_Parabola</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+    <span class="n">Vmpp</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">MPP</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">Vmpp</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">Vmpp</span> <span class="o">+</span> <span class="n">c</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">calcOC</span> <span class="ow">and</span> <span class="n">calcSC</span> <span class="ow">and</span> <span class="n">Voc</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Jsc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">FF</span> <span class="o">=</span> <span class="o">-</span><span class="n">MPP</span> <span class="o">/</span> <span class="p">(</span><span class="n">Voc</span> <span class="o">*</span> <span class="n">Jsc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">FF</span></div>
+
+
+
+<div class="viewcode-block" id="get_PCE_SIMsalabim">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.JV_funcs.get_PCE_SIMsalabim">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_PCE_SIMsalabim</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">,</span> <span class="n">suns</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_interpolation_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">threshold_err</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SIMsalabim-style PCE extraction (standalone).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1D numpy array</span>
+<span class="sd">        Array of voltage values.</span>
+<span class="sd">    Curr : 1D numpy array</span>
+<span class="sd">        Array of current values corresponding to Volt.</span>
+<span class="sd">    suns : int, optional</span>
+<span class="sd">        Number of suns for illumination, by default 1</span>
+<span class="sd">    max_interpolation_order : int, optional</span>
+<span class="sd">        Maximum order of the interpolation polynomial, by default 3</span>
+<span class="sd">    threshold_err : float, optional</span>
+<span class="sd">        Maximum allowable error for interpolation, by default 0.05</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Extracted power conversion efficiency (PCE) value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">Volt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Volt</span><span class="p">)</span>
+    <span class="n">Curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Curr</span><span class="p">)</span>
+
+    <span class="n">x_dat</span> <span class="o">=</span> <span class="n">Volt</span>
+    <span class="n">y_dat</span> <span class="o">=</span> <span class="n">Curr</span>
+    <span class="n">Nusable</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Nusable</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">interpolation_order</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_interpolation_order</span><span class="p">,</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Jsc</span>
+    <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+        <span class="n">x_dat</span><span class="p">,</span> <span class="n">y_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">interpolation_order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">Jsc</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">calcSC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="c1"># Voc</span>
+    <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+        <span class="n">y_dat</span><span class="p">,</span> <span class="n">x_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">interpolation_order</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">Voc</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">calcOC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">calcOC</span> <span class="ow">and</span> <span class="n">interpolation_order</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">success</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">InterExtraPolation</span><span class="p">(</span>
+            <span class="n">y_dat</span><span class="p">,</span> <span class="n">x_dat</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">extra_index</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">Voc</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">calcOC</span> <span class="o">=</span> <span class="n">success</span> <span class="ow">and</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="n">threshold_err</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="c1"># MPP</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="o">-</span><span class="n">x_dat</span> <span class="o">*</span> <span class="n">y_dat</span>
+    <span class="n">i_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">i_start</span> <span class="o">&lt;=</span> <span class="n">Nusable</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+    <span class="n">x3</span> <span class="o">=</span> <span class="n">x_dat</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span><span class="p">]</span>
+    <span class="n">y3</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">i_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Fit_Parabola</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+    <span class="n">Vmpp</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">MPP</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">Vmpp</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">Vmpp</span> <span class="o">+</span> <span class="n">c</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">calcOC</span> <span class="ow">and</span> <span class="n">calcSC</span> <span class="ow">and</span> <span class="n">Voc</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Jsc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="n">FF</span> <span class="o">=</span> <span class="o">-</span><span class="n">MPP</span> <span class="o">/</span> <span class="p">(</span><span class="n">Voc</span> <span class="o">*</span> <span class="n">Jsc</span><span class="p">)</span>
+    <span class="n">PCE</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Voc</span> <span class="o">*</span> <span class="n">Jsc</span> <span class="o">*</span> <span class="n">FF</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">suns</span><span class="p">))</span> <span class="c1"># to get it in % when Jsc is in A/m2 and Voc in V</span>
+
+    <span class="k">return</span> <span class="n">PCE</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, 2025, 2024, Vincent M. Le Corre, Sander Heester, Fransien Elhorst, Joshua Luke Edmundson, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

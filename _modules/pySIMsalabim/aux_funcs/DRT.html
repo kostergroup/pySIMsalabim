@@ -1,0 +1,1323 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.aux_funcs.DRT &mdash; pySIMsalabim 1.05 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8214e1ae"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.aux_funcs.DRT</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.aux_funcs.DRT</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Find System Lifetimes using Distribution of Relaxation Times (DRT) Fitting in the Time Domain&quot;&quot;&quot;</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.axes</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes</span>
+<span class="c1"># from pySIMsalabim.utils import device_parameters as utils_dev</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">osqp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">csc_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="c1"># add parent directory to sys.path if pySIMsalabim is not installed</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;../..&#39;</span><span class="p">)))</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_functions</span>
+
+
+<span class="n">DRT_VERSION</span> <span class="o">=</span> <span class="s2">&quot;0.10&quot;</span>
+
+
+<span class="c1">######### References ##############################################################################</span>
+
+<span class="c1"># [1] M. Schönleber, D. Klotz, and E. Ivers-Tiffée, ‘A Method for Improving the Robustness of linear </span>
+<span class="c1"># Kramers-Kronig Validity Tests’, Electrochimica Acta, vol. 131, pp. 20–27, June 2014, </span>
+<span class="c1"># doi: 10.1016/j.electacta.2014.01.034.</span>
+
+<span class="c1"># [2] B. Stellato, G. Banjac, P. Goulart, A. Bemporad, and S. Boyd, ‘OSQP: an operator splitting solver </span>
+<span class="c1"># for quadratic programs’, Math. Prog. Comp., vol. 12, no. 4, pp. 637–672, Dec. 2020, </span>
+<span class="c1"># doi: 10.1007/s12532-020-00179-2.</span>
+
+<span class="c1"># [3] T. H. Wan, M. Saccoccio, C. Chen, and F. Ciucci, ‘Influence of the Discretization Methods on the </span>
+<span class="c1"># Distribution of Relaxation Times Deconvolution: Implementing Radial Basis Functions with DRTtools’, </span>
+<span class="c1"># Electrochimica Acta, vol. 184, pp. 483–499, Dec. 2015, doi: 10.1016/j.electacta.2015.09.097.</span>
+
+
+<span class="c1">######### Class Definitions #######################################################################</span>
+
+
+<div class="viewcode-block" id="DRT_Fit_Result">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.DRT_Fit_Result">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DRT_Fit_Result</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A class that bundles together all results from fitting a predict_y_model curve to data</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    U : numpy.ndarray, shape (m,)</span>
+<span class="sd">        Fitted coefficients [U_1, U_2, ..., U_m]</span>
+<span class="sd">    tau : numpy.ndarray, shape (m,)</span>
+<span class="sd">        Fitted lifetimes [tau_1, tau_2, ..., tau_m]</span>
+<span class="sd">    y_inf : float</span>
+<span class="sd">        y_inf of the steady state of the fitted signal from 0</span>
+<span class="sd">    m : int</span>
+<span class="sd">        Number of lifetimes/coefficients used in predict_y_model, given by the length of U/tau</span>
+<span class="sd">    y_model : {None, numpy.ndarray}</span>
+<span class="sd">        Model given by  </span>
+
+<span class="sd">            y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf</span>
+
+<span class="sd">    U_norm : {None, numpy.ndarray with shape (m,)}</span>
+<span class="sd">        Fitted coefficients normalised by np.sum(self.U)</span>
+<span class="sd">    MSE : float </span>
+<span class="sd">        Mean square error between the model (self.y) and the fitted signal</span>
+<span class="sd">    R_2 : float </span>
+<span class="sd">        R^2 error between the model (self.y) and the fitted signal</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">y_inf</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">MSE</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">R_2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">U</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="n">tau</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_inf</span> <span class="o">=</span> <span class="n">y_inf</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_model</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MSE</span> <span class="o">=</span> <span class="n">MSE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">R_2</span> <span class="o">=</span> <span class="n">R_2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">U_norm</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="DRT_Fit_Result.set_y_model">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.DRT_Fit_Result.set_y_model">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_y_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Sets self.predict_y_model = predict_y_model(t) using the objects attributes</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : float or list/numpy.ndarray, shape (n,)</span>
+<span class="sd">            Time values to calculate the predict_y_model curve</span>
+<span class="sd">        backend : {&#39;numpy&#39;, &#39;torch&#39;} (optional)</span>
+<span class="sd">            Determines whether matrix operations are done with numpy or pytorch. Default numpy. </span>
+<span class="sd">        device : torch.device (optional)</span>
+<span class="sd">            Determines what device is used for matrix ops if backend=&#39;torch&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_model</span> <span class="o">=</span> <span class="n">predict_y_model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_inf</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DRT_Fit_Result.set_U_norm">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.DRT_Fit_Result.set_U_norm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_U_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set self.U_norm equal to self.U/np.sum(self.U)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">U_norm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">U</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DRT_Fit_Result.plot_U">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.DRT_Fit_Result.plot_U">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_U</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">normalised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">tau$ [s]&#39;</span><span class="p">,</span> 
+           <span class="n">yaxis_label</span><span class="o">=</span><span class="s1">&#39;Auto&#39;</span><span class="p">,</span> <span class="n">U_model_label</span><span class="o">=</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">U_label</span><span class="o">=</span><span class="s1">&#39;Analytic&#39;</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;DRT&#39;</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the fitted DRT against an optional analytic DRT</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        normalised : bool (optional)</span>
+<span class="sd">            Determines whether self.U (False) or self.U_norm (Ture) is plotted. Default (False)</span>
+<span class="sd">        tau_analytic : {None, numpy.ndarray shape (l,)} (optional)</span>
+<span class="sd">            Array of tau values use to generate the analytic curve, if known. This is mostly for </span>
+<span class="sd">            comparision if fitting to a known DRT for testing purposes. Default None.</span>
+<span class="sd">        U_analytic : {None, numpy.ndarray shape (l,)} (optional)</span>
+<span class="sd">            Array of U values used in the analytic curve, if known. This is mostly for </span>
+<span class="sd">            comparision if fitting to a known DRT for testing purposes. Default None.</span>
+<span class="sd">        xaxis_label : str (optional)</span>
+<span class="sd">            Label for the x axis of the output plot. &#39;$\\tau$ [s]&#39; by default.</span>
+<span class="sd">        yaxis_label : str (optional)</span>
+<span class="sd">            Label for the y axis of the output plot. &#39;U&#39; by default.</span>
+<span class="sd">        U_model_label : str (optional)</span>
+<span class="sd">            Label for the curve U_model in the output plot legend. &#39;Model&#39; by default.</span>
+<span class="sd">        U_label : str (optional)</span>
+<span class="sd">            Label for the U_analytic curve in the output plot legend. &#39;Analytic&#39; by default.</span>
+<span class="sd">        plot_title : str (optional)</span>
+<span class="sd">            Title of the output plot. &#39;DRT&#39; by default.</span>
+<span class="sd">        return_ax : bool (optional)</span>
+<span class="sd">            Determines whether the matplotlib.axes.Axes object is returned (True) or plotted (False). </span>
+<span class="sd">            Default False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ax : matplotlib.axes.Axes (optional)</span>
+<span class="sd">            Returned axes object if return_ax is True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">U</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">U_norm</span> <span class="k">if</span> <span class="n">normalised</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span>
+
+        <span class="k">if</span> <span class="n">yaxis_label</span> <span class="o">==</span> <span class="s1">&#39;Auto&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">normalised</span><span class="p">:</span>
+                <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;$U_{</span><span class="se">\\</span><span class="s1">text</span><span class="si">{norm}</span><span class="s1">}$&#39;</span>
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;$U$&#39;</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">yaxis_label</span> <span class="o">=</span> <span class="n">yaxis_label</span>
+
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_U</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="n">tau_analytic</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">U_analytic</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="n">xaxis_label</span><span class="p">,</span> 
+                <span class="n">yaxis_label</span><span class="o">=</span><span class="n">yaxis_label</span><span class="p">,</span> <span class="n">U_model_label</span><span class="o">=</span><span class="n">U_model_label</span><span class="p">,</span> <span class="n">U_label</span><span class="o">=</span><span class="n">U_label</span><span class="p">,</span> 
+                <span class="n">plot_title</span><span class="o">=</span><span class="n">plot_title</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="n">return_ax</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">Axes</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ax</span></div>
+
+        
+
+<div class="viewcode-block" id="DRT_Fit_Result.plot_cumulative_U">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.DRT_Fit_Result.plot_cumulative_U">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_cumulative_U</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">normalised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">tau$ [s]&#39;</span><span class="p">,</span> 
+                      <span class="n">yaxis_label</span><span class="o">=</span><span class="s1">&#39;Auto&#39;</span><span class="p">,</span> <span class="n">U_model_label</span><span class="o">=</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">U_label</span><span class="o">=</span><span class="s1">&#39;Analytic&#39;</span><span class="p">,</span> 
+                      <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;Cumulative DRT&#39;</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the cumulative sum of self.U or self.U_norm, optionally against a known analytical form.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        normalised : bool (optional)</span>
+<span class="sd">            Determines whether self.U (False) or self.U_norm (Ture) is plotted. Default (False)</span>
+<span class="sd">        tau_analytic : {None, numpy.ndarray shape (l,)} (optional)</span>
+<span class="sd">            Array of tau values use to generate the analytic curve, if known. This is mostly for </span>
+<span class="sd">            comparision if fitting to a known DRT for testing purposes. Default None.</span>
+<span class="sd">        U_analytic : {None, numpy.ndarray shape (l,)} (optional)</span>
+<span class="sd">            Array of U values used in the analytic curve, if known. This is mostly for </span>
+<span class="sd">            comparision if fitting to a known DRT for testing purposes. Default None.</span>
+<span class="sd">        xaxis_label : str (optional)</span>
+<span class="sd">            Label for the x axis of the output plot. &#39;$\\tau$ [s]&#39; by default.</span>
+<span class="sd">        yaxis_label : str (optional)</span>
+<span class="sd">            Label for the y axis of the output plot. &#39;Cumulative U&#39; by default.</span>
+<span class="sd">        U_model_label : str (optional)</span>
+<span class="sd">            Label for the curve U_model in the output plot legend. &#39;Model&#39; by default.</span>
+<span class="sd">        U_label : str (optional)</span>
+<span class="sd">            Label for the U_analytic curve in the output plot legend. &#39;Analytic&#39; by default.</span>
+<span class="sd">        plot_title : str (optional)</span>
+<span class="sd">            Title of the output plot. &#39;Cumulative DRT&#39; by default.</span>
+<span class="sd">        return_ax : bool (optional)</span>
+<span class="sd">            Determines whether the matplotlib.axes.Axes object is returned (True) or plotted (False). </span>
+<span class="sd">            Default False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ax : matplotlib.axes.Axes (optional)</span>
+<span class="sd">            Returned axes object if return_ax is True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">U</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">U_norm</span> <span class="k">if</span> <span class="n">normalised</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span> 
+
+        <span class="k">if</span> <span class="n">yaxis_label</span> <span class="o">==</span> <span class="s1">&#39;Auto&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">normalised</span><span class="p">:</span>
+                <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">text</span><span class="si">{Cumulative}</span><span class="s1"> </span><span class="se">\\</span><span class="s1">,</span><span class="se">\\</span><span class="s1">, U_{</span><span class="se">\\</span><span class="s1">text</span><span class="si">{norm}</span><span class="s1">}$&#39;</span>
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">text</span><span class="si">{Cumulative}</span><span class="s1"> </span><span class="se">\\</span><span class="s1">,</span><span class="se">\\</span><span class="s1">, U$&#39;</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">yaxis_label</span> <span class="o">=</span> <span class="n">yaxis_label</span>
+
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_cumulative_U</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="n">tau_analytic</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">U_analytic</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="n">xaxis_label</span><span class="p">,</span> 
+                          <span class="n">yaxis_label</span><span class="o">=</span><span class="n">yaxis_label</span><span class="p">,</span> <span class="n">U_model_label</span><span class="o">=</span><span class="n">U_model_label</span><span class="p">,</span> <span class="n">U_label</span><span class="o">=</span><span class="n">U_label</span><span class="p">,</span> 
+                          <span class="n">plot_title</span><span class="o">=</span><span class="n">plot_title</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="n">return_ax</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">Axes</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ax</span></div>
+
+    
+
+<div class="viewcode-block" id="DRT_Fit_Result.plot_y_model">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.DRT_Fit_Result.plot_y_model">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_y_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">y_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="o">=</span><span class="s1">&#39;y(t)&#39;</span><span class="p">,</span> 
+           <span class="n">y_data_plot_label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="n">y_model_plot_label</span><span class="o">=</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;DRT Fit&#39;</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the fitted model agains the data</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        time : numpy.ndarray, shape (n,)</span>
+<span class="sd">            The time values over which the simulated experiment took place</span>
+<span class="sd">        y_data : {None, numpy.ndarray shape (n,)} (optional)</span>
+<span class="sd">            The data the model was fitted to. Either y_model or y must not be None. y is None by default.</span>
+<span class="sd">        xaxis_label : str (optional)</span>
+<span class="sd">            Label for the x axis of the output plot. &#39;Time [s]&#39; by default.</span>
+<span class="sd">        yaxis_label : str (optional)</span>
+<span class="sd">            Label for the y axis of the output plot. &#39;y(t)&#39; by default.</span>
+<span class="sd">        y_data_plot_label : str (optional)</span>
+<span class="sd">            Label for the curve y in the output plot legend. &#39;Data&#39; by default.</span>
+<span class="sd">        y_model_plot_label : str (optional)</span>
+<span class="sd">            Label for the y_model curve in the output plot legend. &#39;Model&#39; by default.</span>
+<span class="sd">        plot_title : str (optional)</span>
+<span class="sd">            Title of the output plot. &#39;DRT Fit&#39; by default.</span>
+<span class="sd">        return_ax : bool (optional)</span>
+<span class="sd">            Determines whether the matplotlib.axes.Axes object is returned (True) or plotted (False). </span>
+<span class="sd">            Default False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ax : matplotlib.axes.Axes (optional)</span>
+<span class="sd">            Returned axes object if return_ax is True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_y</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_model</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="p">,</span> <span class="n">y_data_plot_label</span><span class="p">,</span> 
+               <span class="n">y_model_plot_label</span><span class="p">,</span> <span class="n">plot_title</span><span class="p">,</span> <span class="n">return_ax</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">Axes</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ax</span>   </div>
+</div>
+
+
+
+<div class="viewcode-block" id="FitError">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.FitError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FitError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom fit error&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+
+
+<span class="c1"># Utility Functions #####################################</span>
+
+
+<div class="viewcode-block" id="predict_y_model">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.predict_y_model">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">predict_y_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">y_inf</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the function </span>
+<span class="sd">        predict_y_model(t) = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2) + ... + U_m*exp(-t/tau_m) + y_inf</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time : numpy.ndarray, shape (n,)</span>
+<span class="sd">        The time values over which the simulated impedance-adjacent experiment takes place</span>
+<span class="sd">    U : numpy.ndarray with shape (m,)</span>
+<span class="sd">        Coefficients for the exponential decay functions such that U[i] is the coefficient of </span>
+<span class="sd">        exp(-t/tau[i])</span>
+<span class="sd">    tau : numpy.ndarray with shape (m,)</span>
+<span class="sd">        The relaxation times used in the model as above.</span>
+<span class="sd">    y_inf : float (optional)</span>
+<span class="sd">        The amplitude of the steady state signal in y_data i.e. y(infinity)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns </span>
+<span class="sd">    -------</span>
+<span class="sd">    y_model : numpy.ndarray with shape (n,)</span>
+<span class="sd">        predict y_model at all time values in t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate predict_y_model(t) for all values in t</span>
+    <span class="n">y_model</span> <span class="o">=</span> <span class="p">(</span><span class="n">U</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tau</span><span class="p">,</span> <span class="n">time</span><span class="p">)))</span> <span class="o">+</span> <span class="n">y_inf</span>
+
+    <span class="k">return</span> <span class="n">y_model</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_tau">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.calculate_tau">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_tau</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a range of tau values for DRT fitting based off an observation window</span>
+<span class="sd">    over time values &#39;time&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time : arraylike, shape (n,)</span>
+<span class="sd">        Time values data is observed over</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tau_values : arraylike, shape (m,)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the smallest time interval in the array</span>
+    <span class="n">d_time</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">d_time_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">d_time</span><span class="p">)</span>
+    <span class="n">d_T</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Set max and min tau</span>
+    <span class="n">tau_min</span> <span class="o">=</span> <span class="n">d_time_min</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="n">tau_max</span> <span class="o">=</span> <span class="n">d_T</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+    <span class="c1"># If the number of points in the time array is less than 150,</span>
+    <span class="c1"># set m = n, else set M = 150</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">150</span> <span class="k">else</span> <span class="mi">150</span>
+
+    <span class="n">tau_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tau_min</span><span class="p">,</span> <span class="n">tau_max</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">tau_values</span></div>
+
+
+
+<span class="c1"># Fitting Functions #####################################</span>
+
+
+<div class="viewcode-block" id="linear_fit">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.linear_fit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">linear_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="s1">&#39;Auto&#39;</span><span class="p">,</span> <span class="n">y_inf</span><span class="o">=</span><span class="s1">&#39;Auto&#39;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs a linear fit of </span>
+
+<span class="sd">        y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf</span>
+
+<span class="sd">    to the data (y_data)</span>
+
+<span class="sd">    Converts the linear fit problem to a convex quadratic program and minimises using </span>
+<span class="sd">    the Operator Splitting Quadratic Program (OSQP) package solver [2]. Using a QP solver </span>
+<span class="sd">    was inspired by the pyDRTtools package [3].</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time : numpy.ndarray, shape (n,)</span>
+<span class="sd">        Time values over which the simulated experiment took place</span>
+<span class="sd">    y_data : numpy.ndarray, shape (n,)</span>
+<span class="sd">        Data for model fitting</span>
+<span class="sd">    tau: {&#39;Auto&#39;, (tau_min, tau_max, m), array_like of shape (m,)} (optional)</span>
+<span class="sd">        The tau values used in the model </span>
+
+<span class="sd">            y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf</span>
+
+<span class="sd">        &#39;Auto&#39; will use the &#39;calculate_tau&#39; method to determine lifetimes for fitting. </span>
+<span class="sd">        Passing a tuple in the form (tau_min, tau_max, m) will generate a logarithmic array of m values between </span>
+<span class="sd">        tau_min and tau_max. </span>
+<span class="sd">        Any passed array_like that isn&#39;t a tuple of length 3 will be used for all tau values. </span>
+<span class="sd">        Default &#39;Auto&#39;.</span>
+<span class="sd">    bounds : {None, (lower, upper)} (optional)</span>
+<span class="sd">        Sets the bounds for the fitted coeffs. U. Use np.inf for unbounded limit. Default None.</span>
+<span class="sd">    scaling : bool (optional)</span>
+<span class="sd">        Determines whether minmax scaling is applied to the data before fitting </span>
+<span class="sd">        (the data is scaled back post fit). Would recomend leaving at default value. </span>
+<span class="sd">        Default True.</span>
+
+<span class="sd">    Results</span>
+<span class="sd">    -------</span>
+<span class="sd">    fit : DRT_Fit_Result</span>
+<span class="sd">        Fit object containing fit data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Record y_inf from y=0</span>
+    <span class="n">y_inf</span> <span class="o">=</span> <span class="n">y_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">y_inf</span> <span class="o">==</span> <span class="s1">&#39;Auto&#39;</span> <span class="k">else</span> <span class="n">y_inf</span>
+
+    <span class="c1"># Determine tau </span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="c1"># Check if tau is set to &#39;Auto&#39; by verifying it&#39;s a string</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">calculate_tau</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tau</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tau</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">tau</span>
+
+    <span class="c1"># Step 0: Scale the signal and remove scaled y_inf</span>
+    <span class="n">scale_factor</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">scaling</span><span class="p">:</span>
+        <span class="n">y_data_max</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">y_data_min</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">y_data_max</span><span class="o">-</span><span class="n">y_data_min</span>
+        <span class="n">y_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_data</span> <span class="o">-</span> <span class="n">y_data_min</span><span class="p">)</span><span class="o">/</span><span class="n">scale_factor</span>
+        <span class="n">y_data</span> <span class="o">=</span> <span class="n">y_data</span> <span class="o">-</span> <span class="n">y_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Step 1: Convert the DRT function form into the form Y = R@U</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tau</span><span class="p">,</span> <span class="n">time</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> 
+    
+    <span class="c1"># Step 2: Convert the least squares problem into a quadratic program</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="nd">@R</span> 
+    <span class="n">P</span> <span class="o">=</span> <span class="n">csc_matrix</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">P</span><span class="p">))</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="nd">@y_data</span>
+    
+    <span class="c1"># Step 3: Set the constraints matrices</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">csc_matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+    <span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">ones</span> <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="o">*</span><span class="n">ones</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">ones</span> <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="o">*</span><span class="n">ones</span>
+    
+    <span class="c1"># Step 4: Solve </span>
+    <span class="n">osqp_model</span> <span class="o">=</span> <span class="n">osqp</span><span class="o">.</span><span class="n">OSQP</span><span class="p">()</span>
+    <span class="n">osqp_model</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">osqp_result</span> <span class="o">=</span> <span class="n">osqp_model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    
+    <span class="c1"># Step 5: Rescale results</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">scale_factor</span><span class="o">*</span><span class="n">osqp_result</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">y_model</span> <span class="o">=</span> <span class="n">R</span><span class="nd">@U</span> <span class="o">+</span> <span class="n">y_inf</span>
+    <span class="n">y_data</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">*</span><span class="n">scale_factor</span> <span class="o">+</span> <span class="n">y_inf</span>
+
+    <span class="c1"># Step 6: Calculate errors</span>
+    <span class="n">MSE</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_data</span><span class="p">,</span> <span class="n">y_model</span><span class="p">)</span>
+    <span class="n">R_2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_data</span><span class="p">,</span> <span class="n">y_model</span><span class="p">)</span>
+
+    <span class="c1"># Step 7: Package results in DRT_Fit_result</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">DRT_Fit_Result</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">y_inf</span><span class="p">,</span> <span class="n">MSE</span><span class="o">=</span><span class="n">MSE</span><span class="p">,</span> <span class="n">R_2</span><span class="o">=</span><span class="n">R_2</span><span class="p">)</span>
+    <span class="n">fit</span><span class="o">.</span><span class="n">y_model</span> <span class="o">=</span> <span class="n">y_model</span>
+    <span class="n">fit</span><span class="o">.</span><span class="n">set_U_norm</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">fit</span></div>
+
+
+
+<div class="viewcode-block" id="checkerboard_fit">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.checkerboard_fit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">checkerboard_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="s1">&#39;Auto&#39;</span><span class="p">,</span> <span class="n">y_inf</span><span class="o">=</span><span class="s1">&#39;Auto&#39;</span><span class="p">,</span> <span class="n">checkerboard_iters</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">fit_scaling</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs a &#39;checkerboard&#39; DRT fit by iteratively fitting capacitive and inductive effects in supplied data (y)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time : arraylike, shape (n,)</span>
+<span class="sd">            Time values over which the simulated experiment took place</span>
+<span class="sd">    y_data : arraylike, shape (n,)</span>
+<span class="sd">        Data for model fitting</span>
+<span class="sd">    tau : {&#39;Auto&#39;, tuple(tau_min, tau_max, m), array_like of shape (m,)} (optional)</span>
+<span class="sd">        The tau values used in the model </span>
+
+<span class="sd">            y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf</span>
+
+<span class="sd">        &#39;Auto&#39; will use the &#39;calculate_tau&#39; method to determine lifetimes for fitting. </span>
+<span class="sd">        Passing a tuple in the form (tau_min, tau_max, m) will generate a logarithmic array of m values between </span>
+<span class="sd">        tau_min and tau_max. </span>
+<span class="sd">        Any passed array_like that isn&#39;t a tuple of length 3 will be used for all tau values. </span>
+<span class="sd">        Default &#39;Auto&#39;.</span>
+<span class="sd">    y_inf : {&#39;Auto&#39;, float} (optional)</span>
+<span class="sd">        Amplitude of steady state signal, assumed to be at y(infinity) when set to &#39;Auto&#39;. (Default &#39;Auto&#39;)</span>
+<span class="sd">    checkerboard_iters : int, optional</span>
+<span class="sd">        The number of iterations to perform using the checkerboard fitting method. (Default 50)</span>
+<span class="sd">    fit_scaling : bool, optional</span>
+<span class="sd">        Determines whether minmax scaling is used during each call of the &#39;linear_fit&#39; method. </span>
+<span class="sd">        Can impact the smoothness of the MSE and R^2 over many iterations. Default True.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fits : arraylike(DRT_Fit_Results), shape (checkerboard_iters,)</span>
+<span class="sd">        An array of fit objects corresponding to each iteration of the checkerboard procedure.</span>
+
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    FitError</span>
+<span class="sd">        Invalid input: input time and input data (y_data) have mismatch lengths</span>
+<span class="sd">    FitError</span>
+<span class="sd">        Invalid input: &#39;tau&#39; must be either &#39;Auto&#39;, a tuple of length 3, or an array-like of length n</span>
+<span class="sd">    FitError</span>
+<span class="sd">        Invalid input: &#39;y_inf&#39; must be either &#39;Auto&#39; or a float</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+
+    <span class="c1"># Determine tau</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">calculate_tau</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tau</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tau</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">tau</span>
+
+    <span class="c1"># Validate input data </span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_data</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">FitError</span><span class="p">(</span><span class="s2">&quot;Invalid input: input time and input data (y_data) have mismatch lengths&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tau</span> <span class="o">!=</span> <span class="s1">&#39;Auto&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">FitError</span><span class="p">(</span><span class="s2">&quot;Invalid input: &#39;tau&#39; must be either &#39;Auto&#39;, a tuple of length 3, or an array-like of length n&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">y_inf</span> <span class="o">!=</span> <span class="s1">&#39;Auto&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">FitError</span><span class="p">(</span><span class="s2">&quot;Invalid input: &#39;y_inf&#39; must be either &#39;Auto&#39; or a float&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Step 1: Prep the signal for fitting by removing y_inf and scaling</span>
+    <span class="n">y_inf</span> <span class="o">=</span> <span class="n">y_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">y_inf</span> <span class="o">==</span> <span class="s1">&#39;Auto&#39;</span> <span class="k">else</span> <span class="n">y_inf</span>
+    <span class="n">y_data_max</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">y_data_min</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">y_data_max</span><span class="o">-</span><span class="n">y_data_min</span>
+    <span class="n">y_data_scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_data</span> <span class="o">-</span> <span class="n">y_data_min</span><span class="p">)</span><span class="o">/</span><span class="n">scale_factor</span>
+    <span class="n">y_data_scaled</span> <span class="o">=</span> <span class="n">y_data_scaled</span> <span class="o">-</span> <span class="n">y_data_scaled</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Step 2: Set initial values</span>
+    <span class="n">U_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span>
+    
+    <span class="n">y_model_cap</span> <span class="o">=</span> <span class="n">y_data_scaled</span>
+
+    <span class="n">cap_U_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span>
+    <span class="n">ind_U_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span>
+
+    <span class="n">cap_y_inf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ind_y_inf</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">fits</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># NOTE: we probably want to set the y_inf and scale factor guesses ourselves</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">checkerboard_iters</span><span class="p">):</span>
+        
+        <span class="c1"># Set scale params for capacitive effects and fit</span>
+        <span class="n">cap_fit</span> <span class="o">=</span> <span class="n">linear_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_model_cap</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="n">tau</span><span class="p">,</span> <span class="n">y_inf</span><span class="o">=</span><span class="n">cap_y_inf</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="n">fit_scaling</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
+        
+        <span class="c1"># Add the fit to U_values</span>
+        <span class="n">cap_U_values</span> <span class="o">=</span> <span class="n">cap_fit</span><span class="o">.</span><span class="n">U</span>
+        
+        <span class="c1"># Remove the capacitive effects from y</span>
+        <span class="n">y_model_ind</span> <span class="o">=</span> <span class="n">y_data_scaled</span> <span class="o">-</span> <span class="n">cap_fit</span><span class="o">.</span><span class="n">y_model</span>
+        <span class="n">ind_y_inf</span> <span class="o">=</span> <span class="n">y_model_ind</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="c1"># Set the inductive scale params and fit by doing a capacitive fit on an inverted function</span>
+        <span class="n">ind_fit</span> <span class="o">=</span> <span class="n">linear_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">-</span><span class="n">y_model_ind</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="n">tau</span><span class="p">,</span> <span class="n">y_inf</span><span class="o">=</span><span class="n">ind_y_inf</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="n">fit_scaling</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
+        
+        <span class="c1"># Add the fit to U_values </span>
+        <span class="n">ind_U_values</span> <span class="o">=</span> <span class="o">-</span><span class="n">ind_fit</span><span class="o">.</span><span class="n">U</span>
+
+        <span class="c1"># Remove the inductive effects from the curve for the next iteration</span>
+        <span class="n">y_model_cap</span> <span class="o">=</span> <span class="n">y_data_scaled</span> <span class="o">+</span> <span class="n">ind_fit</span><span class="o">.</span><span class="n">y_model</span>
+        <span class="n">cap_y_inf</span> <span class="o">=</span> <span class="n">y_model_cap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="c1"># Once the fit is done, return a fit object with the results and a dummy cost of 0</span>
+        <span class="n">U_values</span> <span class="o">=</span> <span class="n">cap_U_values</span> <span class="o">+</span> <span class="n">ind_U_values</span>
+
+        <span class="c1"># Rescale and package results</span>
+        <span class="n">U_values</span> <span class="o">=</span> <span class="n">scale_factor</span><span class="o">*</span><span class="n">U_values</span>
+        <span class="n">y_model</span> <span class="o">=</span> <span class="n">predict_y_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">U_values</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">y_inf</span><span class="o">=</span><span class="n">y_inf</span><span class="p">)</span>
+        <span class="n">MSE</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_data</span><span class="p">,</span> <span class="n">y_model</span><span class="p">)</span>
+        <span class="n">R_2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_data</span><span class="p">,</span> <span class="n">y_model</span><span class="p">)</span>
+
+        <span class="n">fit</span> <span class="o">=</span> <span class="n">DRT_Fit_Result</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">U_values</span><span class="p">,</span> <span class="n">y_inf</span><span class="p">,</span> <span class="n">MSE</span><span class="o">=</span><span class="n">MSE</span><span class="p">,</span> <span class="n">R_2</span><span class="o">=</span><span class="n">R_2</span><span class="p">)</span>
+        <span class="n">fit</span><span class="o">.</span><span class="n">y_model</span> <span class="o">=</span> <span class="n">y_model</span>
+        <span class="n">fit</span><span class="o">.</span><span class="n">set_U_norm</span><span class="p">()</span>
+        <span class="n">fits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">fits</span></div>
+
+
+
+<span class="c1">######### Plotting Functions #######################################################################</span>
+
+
+<div class="viewcode-block" id="plot_y">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.plot_y">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_y</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="o">=</span><span class="s1">&#39;y(t)&#39;</span><span class="p">,</span> 
+           <span class="n">y_data_plot_label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="n">y_model_plot_label</span><span class="o">=</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;DRT Fit&#39;</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot the fitted model agains the data</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time : numpy.ndarray, shape (n,)</span>
+<span class="sd">        The time values over which the simulated experiment took place</span>
+<span class="sd">    y_model : {None, numpy.ndarray shape (n,)} (optional)</span>
+<span class="sd">        The model predicted curve. Either y_model or y must not be None. y_model is None by default.</span>
+<span class="sd">    y_data : {None, numpy.ndarray shape (n,)} (optional)</span>
+<span class="sd">        The data the model was fitted to. Either y_model or y must not be None. y is None by default.</span>
+<span class="sd">    xaxis_label : str (optional)</span>
+<span class="sd">        Label for the x axis of the output plot. &#39;Time [s]&#39; by default.</span>
+<span class="sd">    yaxis_label : str (optional)</span>
+<span class="sd">        Label for the y axis of the output plot. &#39;y(t)&#39; by default.</span>
+<span class="sd">    y_plot_label : str (optional)</span>
+<span class="sd">        Label for the curve y in the output plot legend. &#39;Data&#39; by default.</span>
+<span class="sd">    y_model_plot_label : str (optional)</span>
+<span class="sd">        Label for the y_model curve in the output plot legend. &#39;Model&#39; by default.</span>
+<span class="sd">    plot_title : str (optional)</span>
+<span class="sd">        Title of the output plot. &#39;DRT Fit&#39; by default.</span>
+<span class="sd">    return_ax : bool (optional)</span>
+<span class="sd">        Determines whether the matplotlib.axes.Axes object is returned (True) or plotted (False). </span>
+<span class="sd">        Default False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ax : matplotlib.axes.Axes (optional)</span>
+<span class="sd">        Returned axes object if return_ax is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_functions</span><span class="o">.</span><span class="n">plot_2x_2y</span><span class="p">(</span>
+        <span class="n">time</span><span class="p">,</span> <span class="n">y_model</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="p">,</span> <span class="n">plot_title</span><span class="p">,</span> 
+        <span class="n">y1_plot_label</span><span class="o">=</span><span class="n">y_model_plot_label</span><span class="p">,</span> <span class="n">y2</span><span class="o">=</span><span class="n">y_data</span><span class="p">,</span> 
+        <span class="n">y2_plot_label</span><span class="o">=</span><span class="n">y_data_plot_label</span><span class="p">,</span><span class="n">xscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> 
+        <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y2&quot;</span><span class="p">,</span><span class="s2">&quot;y1&quot;</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">return_ax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ax</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_U">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.plot_U">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_U</span><span class="p">(</span><span class="n">tau_model</span><span class="p">,</span> <span class="n">U_model</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">tau$ [s]&#39;</span><span class="p">,</span> 
+           <span class="n">yaxis_label</span><span class="o">=</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="n">U_model_label</span><span class="o">=</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">U_label</span><span class="o">=</span><span class="s1">&#39;Analytic&#39;</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;DRT&#39;</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot the fitted DRT against an optional analytic DRT</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tau_model : numpy.ndarray, shape (m,)</span>
+<span class="sd">        The tau values used in the model</span>
+<span class="sd">    U_model : numpy.ndarray shape (m,)</span>
+<span class="sd">        The coeffs from the DRT fit, given by U in </span>
+
+<span class="sd">            y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf</span>
+
+<span class="sd">    tau_analytic : {None, numpy.ndarray shape (l,)} (optional)</span>
+<span class="sd">        Array of tau values use to generate the analytic curve, if known. This is mostly for </span>
+<span class="sd">        comparision if fitting to a known DRT for testing purposes. Default None.</span>
+<span class="sd">    U_analytic : {None, numpy.ndarray shape (l,)} (optional)</span>
+<span class="sd">        Array of U values used in the analytic curve, if known. This is mostly for </span>
+<span class="sd">        comparision if fitting to a known DRT for testing purposes. Default None.</span>
+<span class="sd">    xaxis_label : str (optional)</span>
+<span class="sd">        Label for the x axis of the output plot. &#39;$\\tau$ [s]&#39; by default.</span>
+<span class="sd">    yaxis_label : str (optional)</span>
+<span class="sd">        Label for the y axis of the output plot. &#39;U&#39; by default.</span>
+<span class="sd">    U_model_label : str (optional)</span>
+<span class="sd">        Label for the curve U_model in the output plot legend. &#39;Model&#39; by default.</span>
+<span class="sd">    U_label : str (optional)</span>
+<span class="sd">        Label for the U_analytic curve in the output plot legend. &#39;Analytic&#39; by default.</span>
+<span class="sd">    plot_title : str (optional)</span>
+<span class="sd">        Title of the output plot. &#39;DRT&#39; by default.</span>
+<span class="sd">    return_ax : bool (optional)</span>
+<span class="sd">        Determines whether the matplotlib.axes.Axes object is returned (True) or plotted (False). </span>
+<span class="sd">        Default False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ax : matplotlib.axes.Axes (optional)</span>
+<span class="sd">        Returned axes object if return_ax is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_functions</span><span class="o">.</span><span class="n">plot_2x_2y</span><span class="p">(</span>
+        <span class="n">tau_model</span><span class="p">,</span> <span class="n">U_model</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="p">,</span> <span class="n">plot_title</span><span class="p">,</span> <span class="n">y1_plot_label</span><span class="o">=</span><span class="n">U_model_label</span><span class="p">,</span>
+        <span class="n">x2</span><span class="o">=</span><span class="n">tau_analytic</span><span class="p">,</span> <span class="n">y2</span><span class="o">=</span><span class="n">U_analytic</span><span class="p">,</span> <span class="n">y2_plot_label</span><span class="o">=</span><span class="n">U_label</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y2&quot;</span><span class="p">,</span> <span class="s2">&quot;y1&quot;</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Return axis if called for, otherwise show the figure</span>
+    <span class="k">if</span> <span class="n">return_ax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ax</span> 
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_cumulative_U">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.plot_cumulative_U">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_cumulative_U</span><span class="p">(</span><span class="n">tau_model</span><span class="p">,</span> <span class="n">U_model</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">tau$ [s]&#39;</span><span class="p">,</span> 
+                      <span class="n">yaxis_label</span><span class="o">=</span><span class="s1">&#39;Cumulative U&#39;</span><span class="p">,</span> <span class="n">U_model_label</span><span class="o">=</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">U_label</span><span class="o">=</span><span class="s1">&#39;Analytic&#39;</span><span class="p">,</span> 
+                      <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;Cumulative DRT&#39;</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot the fitted DRT against an optional analytic DRT</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tau_model : numpy.ndarray, shape (m,)</span>
+<span class="sd">        The tau values used in the model</span>
+<span class="sd">    U_model : numpy.ndarray shape (m,)</span>
+<span class="sd">        The coeffs from the DRT fit, given by U in </span>
+
+<span class="sd">            y_model = U_1*exp(-t/tau_1) + U_2*exp(-t/tau_2)... + U_m*exp(-t/tau_m) + y_inf</span>
+<span class="sd">            </span>
+<span class="sd">    tau_analytic : {None, numpy.ndarray shape (l,)} (optional)</span>
+<span class="sd">        Array of tau values use to generate the analytic curve, if known. This is mostly for </span>
+<span class="sd">        comparision if fitting to a known DRT for testing purposes. Default None.</span>
+<span class="sd">    U_analytic : {None, numpy.ndarray shape (l,)} (optional)</span>
+<span class="sd">        Array of U values used in the analytic curve, if known. This is mostly for </span>
+<span class="sd">        comparision if fitting to a known DRT for testing purposes. Default None.</span>
+<span class="sd">    xaxis_label : str (optional)</span>
+<span class="sd">        Label for the x axis of the output plot. &#39;$\\tau$ [s]&#39; by default.</span>
+<span class="sd">    yaxis_label : str (optional)</span>
+<span class="sd">        Label for the y axis of the output plot. &#39;Cumulative U&#39; by default.</span>
+<span class="sd">    U_model_label : str (optional)</span>
+<span class="sd">        Label for the curve U_model in the output plot legend. &#39;Model&#39; by default.</span>
+<span class="sd">    U_label : str (optional)</span>
+<span class="sd">        Label for the U_analytic curve in the output plot legend. &#39;Analytic&#39; by default.</span>
+<span class="sd">    plot_title : str (optional)</span>
+<span class="sd">        Title of the output plot. &#39;Cumulative DRT&#39; by default.</span>
+<span class="sd">    return_ax : bool (optional)</span>
+<span class="sd">        Determines whether the matplotlib.axes.Axes object is returned (True) or plotted (False). </span>
+<span class="sd">        Default False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ax : matplotlib.axes.Axes (optional)</span>
+<span class="sd">        Returned axes object if return_ax is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Calculate the cumulative U values</span>
+    <span class="n">cumulative_U_model</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">U_model</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">U_model</span><span class="p">))]</span>
+    <span class="k">if</span> <span class="n">tau_analytic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">U_analytic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cumulative_U_analytic</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">U_analytic</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">U_analytic</span><span class="p">))]</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">cumulative_U_analytic</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_functions</span><span class="o">.</span><span class="n">plot_2x_2y</span><span class="p">(</span>
+        <span class="n">tau_model</span><span class="p">,</span> <span class="n">cumulative_U_model</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="p">,</span> <span class="n">plot_title</span><span class="p">,</span> <span class="n">U_model_label</span><span class="p">,</span> 
+        <span class="n">x2</span><span class="o">=</span><span class="n">tau_analytic</span><span class="p">,</span> <span class="n">y2</span><span class="o">=</span><span class="n">cumulative_U_analytic</span><span class="p">,</span> <span class="n">y2_plot_label</span><span class="o">=</span><span class="n">U_label</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> 
+        <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y2&quot;</span><span class="p">,</span> <span class="s2">&quot;y1&quot;</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Return axis if called for, otherwise show the figure</span>
+    <span class="k">if</span> <span class="n">return_ax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ax</span> 
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_MSE">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.plot_MSE">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_MSE</span><span class="p">(</span><span class="n">error_array</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="s1">&#39;Iteration&#39;</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="o">=</span><span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;MSE per Fit Iteration&#39;</span><span class="p">,</span> 
+             <span class="n">return_ax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the mean square error. Useful for checking how the MSE varies with iteration </span>
+<span class="sd">    during checkerboard fit.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    error_array : {array_like(DRT_Fit_Result) of shape (i,), arraylike(float)}</span>
+<span class="sd">        An iterable conatining EITHER DRT_Fit_Result objects from which the MSE values are taken </span>
+<span class="sd">        OR float values which are considered to be the MSE values</span>
+<span class="sd">    xaxis_label : str (optional)</span>
+<span class="sd">        Label for the x axis of the output plot. &#39;Iteration&#39; by default.</span>
+<span class="sd">    yaxis_label : str (optional)</span>
+<span class="sd">        Label for the y axis of the ouput plot. &#39;MSE&#39; by default.</span>
+<span class="sd">    plot_title : str (optional)</span>
+<span class="sd">        Title for the output plot. &#39;MSE per Fit Iteration&#39; by default.</span>
+<span class="sd">    return_ax : bool (optional)</span>
+<span class="sd">        Determines whether the matplotlib.axes.Axes object is returned (True) or plotted (False). </span>
+<span class="sd">        Default False.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ax : matplotlib.axes.Axes (optional)</span>
+<span class="sd">        Returned axes object if return_ax is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DRT_Fit_Result</span><span class="p">):</span>
+        <span class="n">MSE_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">fit</span><span class="o">.</span><span class="n">MSE</span> <span class="k">for</span> <span class="n">fit</span> <span class="ow">in</span> <span class="n">error_array</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">MSE_values</span> <span class="o">=</span> <span class="n">error_array</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_functions</span><span class="o">.</span><span class="n">plot_2x_2y</span><span class="p">(</span>
+        <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">MSE_values</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">MSE_values</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="p">,</span> <span class="n">plot_title</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">return_ax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ax</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_R_2">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.plot_R_2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_R_2</span><span class="p">(</span><span class="n">error_array</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span> <span class="n">xaxis_label</span><span class="o">=</span><span class="s1">&#39;Iteration&#39;</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="o">=</span><span class="s1">&#39;$R^2$&#39;</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;$R^2$ per fit Iteration&#39;</span><span class="p">,</span> 
+             <span class="n">return_ax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the R^2 error. Useful for checking how R^2 varies with iteration </span>
+<span class="sd">    during checkerboard fit.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fit_array : array_like(DRT_Fit_Result), shape (i,)</span>
+<span class="sd">        An iterable conatining DRT_Fit_Result objects from which the R^2 values are taken</span>
+<span class="sd">    ylim : tuple, (2,) (optional)</span>
+<span class="sd">        Set the ylimits of the plot. ylim[0] gives the lower bound, y[1] the upper. Default (0, 1.1)</span>
+<span class="sd">    xaxis_label : str (optional)</span>
+<span class="sd">        Label for the x axis of the output plot. &#39;Iteration&#39; by default.</span>
+<span class="sd">    yaxis_label : str (optional)</span>
+<span class="sd">        Label for the y axis of the ouput plot. &#39;$R^2$&#39; by default.</span>
+<span class="sd">    plot_title : str (optional)</span>
+<span class="sd">        Title for the output plot. &#39;$R^2$ per fit Iteration&#39;.</span>
+<span class="sd">    return_ax : bool (optional)</span>
+<span class="sd">        Determines whether the matplotlib.axes.Axes object is returned (True) or plotted (False). </span>
+<span class="sd">        Default False.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ax : matplotlib.axes.Axes (optional)</span>
+<span class="sd">        Returned axes object if return_ax is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DRT_Fit_Result</span><span class="p">):</span>
+        <span class="n">R_2_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">fit</span><span class="o">.</span><span class="n">R_2</span> <span class="k">for</span> <span class="n">fit</span> <span class="ow">in</span> <span class="n">error_array</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">R_2_values</span> <span class="o">=</span> <span class="n">error_array</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_functions</span><span class="o">.</span><span class="n">plot_2x_2y</span><span class="p">(</span>
+        <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">R_2_values</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">R_2_values</span><span class="p">,</span> <span class="n">xaxis_label</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="p">,</span> <span class="n">plot_title</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">return_ax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ax</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<span class="c1">######### Data Saving and Reading ####################################################################</span>
+
+
+<div class="viewcode-block" id="save_models_to_txt">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.save_models_to_txt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_models_to_txt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fits</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.5e</span><span class="s1">&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save the tau and U values from a collection of DRT_Fit_Result objects to a txt file.</span>
+<span class="sd">    Stores y_inf as a # comment in the first line of the file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : str</span>
+<span class="sd">        File path of save file</span>
+<span class="sd">    fits : arraylike(DRT_Fit_Result)</span>
+<span class="sd">        Array like object of fit results </span>
+<span class="sd">    float_format: str (optional)</span>
+<span class="sd">        Controls how float values are save to file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">fits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tau</span> <span class="c1"># All iterations in a checkerboard fit will have the same tau</span>
+    <span class="n">y_inf</span> <span class="o">=</span> <span class="n">fits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">y_inf</span> <span class="c1"># All iterations in a checkerboard fit will have the same y_inf</span>
+    <span class="n">DRT_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tau&#39;</span> <span class="p">:</span> <span class="n">tau</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fits</span><span class="p">)):</span>
+        <span class="n">DRT_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;U_iter_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">U</span>
+    <span class="n">DRT_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">DRT_data</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# y_inf: </span><span class="si">{</span><span class="n">y_inf</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">DRT_data</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="n">float_format</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="save_model_predictions_to_txt">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.save_model_predictions_to_txt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_model_predictions_to_txt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fits</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.5e</span><span class="s1">&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save the y_model values from a collection of DRT_Fit_Result objects to a txt file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : str</span>
+<span class="sd">        File path of save file</span>
+<span class="sd">    fits : arraylike(DRT_Fit_Result)</span>
+<span class="sd">        Array like object of fit results </span>
+<span class="sd">    time : numpy.ndarray</span>
+<span class="sd">        Time values over which each fit was made</span>
+<span class="sd">    float_format: str (optional)</span>
+<span class="sd">        Controls how float values are save to file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model_predictions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;t&#39;</span> <span class="p">:</span> <span class="n">fits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">time</span><span class="p">}</span> <span class="c1">###FIX THIS </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fits</span><span class="p">)):</span>
+        <span class="n">model_predictions</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;y_model_iter_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">y_model</span>
+    <span class="n">model_predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model_predictions</span><span class="p">)</span>
+    <span class="n">model_predictions</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="n">float_format</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="save_model_errors_to_txt">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.save_model_errors_to_txt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_model_errors_to_txt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fits</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.5e</span><span class="s1">&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save the MSE and R_2 values from a collection of DRT_Fit_Result objects to a txt file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : str</span>
+<span class="sd">        File path of save file</span>
+<span class="sd">    fits : arraylike(DRT_Fit_Result)</span>
+<span class="sd">        Array like object of fit results </span>
+<span class="sd">    float_format: str (optional)</span>
+<span class="sd">        Controls how float values are save to file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">MSE</span> <span class="o">=</span> <span class="p">[</span><span class="n">fit</span><span class="o">.</span><span class="n">MSE</span> <span class="k">for</span> <span class="n">fit</span> <span class="ow">in</span> <span class="n">fits</span><span class="p">]</span>
+    <span class="n">R_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">fit</span><span class="o">.</span><span class="n">R_2</span> <span class="k">for</span> <span class="n">fit</span> <span class="ow">in</span> <span class="n">fits</span><span class="p">]</span>
+    <span class="n">model_errors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;MSE&#39;</span> <span class="p">:</span> <span class="n">MSE</span><span class="p">,</span> <span class="s2">&quot;R_2&quot;</span> <span class="p">:</span> <span class="n">R_2</span><span class="p">})</span>
+    <span class="n">model_errors</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="n">float_format</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="save_to_txt">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.save_to_txt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_to_txt</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="n">fits</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.5e</span><span class="s1">&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save tau, U, y, MSE, and R_2 values from a collection of fit objects to text files.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    directory_path : str</span>
+<span class="sd">        All save files are saved to this directory</span>
+<span class="sd">    fits : arraylike(DRT_Fit_Result)</span>
+<span class="sd">        Array like object of fit results </span>
+<span class="sd">    time : numpy.ndarray</span>
+<span class="sd">        Time values over which each fit was made</span>
+<span class="sd">    float_format: str (optional)</span>
+<span class="sd">        Controls how float values are save to file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check the directory exists and make it if not</span>
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory_path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+    <span class="c1"># Define file names</span>
+    <span class="n">models_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="s2">&quot;DRTModels.txt&quot;</span><span class="p">)</span>
+    <span class="n">model_predictions_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="s2">&quot;modelOutputs.txt&quot;</span><span class="p">)</span>
+    <span class="n">output_errors_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="s2">&quot;outputErrors.txt&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Save data</span>
+    <span class="n">save_models_to_txt</span><span class="p">(</span><span class="n">models_filename</span><span class="p">,</span> <span class="n">fits</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="n">float_format</span><span class="p">)</span>
+    <span class="n">save_model_predictions_to_txt</span><span class="p">(</span><span class="n">model_predictions_filename</span><span class="p">,</span> <span class="n">fits</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="n">float_format</span><span class="p">)</span>
+    <span class="n">save_model_errors_to_txt</span><span class="p">(</span><span class="n">output_errors_filename</span><span class="p">,</span> <span class="n">fits</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="n">float_format</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="save_to_json">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.save_to_json">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_to_json</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="n">fits</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Saves array of models to .json file in the passed directory</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    directory_path : String </span>
+<span class="sd">        Directory path for save data</span>
+<span class="sd">    fits : array-like[DRT_Fit_Result]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check the directory exists and make it if not</span>
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory_path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># Create dictionary for model storage</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Convert DRT_Fit_Result objects to dictionaries, making sure any np.array&#39;s are turned to lists</span>
+    <span class="c1"># so they can be saved in a .json file</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fits</span><span class="p">)):</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">fits</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="vm">__dict__</span>
+
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                    <span class="n">model</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            
+            <span class="n">models</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;iteration_</span><span class="si">{</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Error saving models to json file. Make sure &#39;fits&#39; is an iterable containing Fit_DRT_Result objects.&quot;</span><span class="p">)</span>
+
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="s1">&#39;models.json&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Define a function to convert np.array objects to lists within the save_dict</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span></div>
+
+
+
+<span class="c1">######### Scripting Functionality ####################################################################</span>
+
+<div class="viewcode-block" id="parse_arguments">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.parse_arguments">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_arguments</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Parses command line arguments into an ArgumentParser object</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters </span>
+<span class="sd">    ----------</span>
+<span class="sd">    argv : {[str] or Dict[str, str]} (optional)</span>
+<span class="sd">        List or dictrionary of strings containing command line args and flags. If list, must be in the</span>
+<span class="sd">        format [dataFile_path, &#39;-flag1&#39;, argument1, &#39;-flag2&#39;, argument2, ...]. If dict,</span>
+<span class="sd">        must be in the format {&#39;dataFile&#39; : dataFile_path, &#39;flag1&#39; : argument1, ...}</span>
+<span class="sd">        If none, parses sys.argv[1:] instead.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    args : argparse.ArgumentParser</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    # Parses sys.argv[1:]</span>
+<span class="sd">    args1 = parse_arguments()</span>
+
+<span class="sd">    # Parses a list </span>
+<span class="sd">    args2 = parse_arguments([&#39;dataFile.txt&#39;, &#39;-timeCol&#39;, &#39;time&#39;, &#39;-iters&#39;, &#39;20&#39;])</span>
+
+<span class="sd">    # Parses a dictionary</span>
+<span class="sd">    args3 = parse_arguments([&#39;dataFile&#39; : &#39;dataFile.txt&#39;, &#39;timeCol&#39; : &#39;time&#39;, &#39;iters&#39; : &#39;20&#39;])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Parse command line arguments</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;dataFile&quot;</span><span class="p">,</span> 
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;path to data file containing time and function values for fit&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-DRTDirectory&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;DRT_Saves&#39;</span><span class="p">,</span> 
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;path to directory for DRT save files (default: DRT_Saves)&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-timeCol&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> 
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;heading of the time column in dataFile (default: &#39;t&#39;)&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-funcCol&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;Jext&#39;</span><span class="p">,</span> 
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;heading of the function column in dataFile (default: &#39;Jext&#39;)&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-iters&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;number of iterations in checkerboard fit (default: 50)&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-saveFormat&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;txt&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;txt&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">],</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;saved data file format (default: txt)&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-UUID&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Identifier tag added to save directory name i.e. DRTDirectory -&gt; DRTDirectory_UUID &quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Add mutually exclusive group for slicing passed data </span>
+    <span class="n">slice_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+    <span class="n">slice_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-startIndex&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Slices data from given index&quot;</span><span class="p">)</span>
+    <span class="n">slice_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-startTime&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Slices data from given time&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># IF argv is a dictionary, parse it into a list</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">commands_and_args</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">commands_and_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="s1">&#39;dataFile&#39;</span><span class="p">])</span>
+        <span class="n">argv</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;dataFile&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">argv</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">key</span>
+            <span class="n">commands_and_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">commands_and_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        
+        <span class="n">argv</span> <span class="o">=</span> <span class="n">commands_and_args</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">argv</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argv must be of type None, list[str], or Dict[str, str]&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">args</span></div>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.DRT.main">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Script entry point for running a checkerboard fit. </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    argv : [str] (optional)</span>
+<span class="sd">        List of strings containing command line args and flags. Default None</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    EXIT_CODE : int</span>
+<span class="sd">        0 on a success</span>
+<span class="sd">        1 on a failure </span>
+<span class="sd">        2 on a failure due to a usage error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Define exit codes </span>
+    <span class="n">EXIT_SUCCESS</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">EXIT_FAILURE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">EXIT_USAGE_ERROR</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="c1"># Parse command line arguments</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parse_arguments</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+
+    <span class="c1"># Read data</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dataFile</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">dataFile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: dataFile not found. Check file path.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">EXIT_USAGE_ERROR</span>
+  
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dataFile</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">timeCol</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: column &#39;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">timeCol</span><span class="si">}</span><span class="s2">&#39; not found in &#39;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">dataFile</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">EXIT_USAGE_ERROR</span>
+
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">y_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dataFile</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">funcCol</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: column &#39;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">funcCol</span><span class="si">}</span><span class="s2">&#39; not found in &#39;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">dataFile</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">EXIT_USAGE_ERROR</span>
+    
+    <span class="c1"># Set data slice if start index or start time is passed</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">startIndex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">startIndex</span><span class="p">:]</span>
+            <span class="n">y_data</span> <span class="o">=</span> <span class="n">y_data</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">startIndex</span><span class="p">:]</span>
+
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">startTime</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">time</span> <span class="o">&gt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">startTime</span><span class="p">)</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="nb">filter</span><span class="p">]</span>
+            <span class="n">y_data</span> <span class="o">=</span> <span class="n">y_data</span><span class="p">[</span><span class="nb">filter</span><span class="p">]</span>
+
+        <span class="c1"># Check to make sure the slice hasn&#39;t removed all values from the array </span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+        
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: no read data. Check dataFile is not empty, and make sure -startIndex/-startTime is in the data range if used&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">EXIT_USAGE_ERROR</span>
+
+    <span class="c1"># Update the passed directory name with the UUID if it exists</span>
+    <span class="n">DRT_directory</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">DRTDirectory</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">UUID</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">UUID</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">DRTDirectory</span>
+
+    <span class="c1"># Check whether DRTDirectory exists and, if not, create it</span>
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">DRT_directory</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">except</span> <span class="ne">PermissionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: DRT.py lacks the neccessary permissions to create </span><span class="si">{</span><span class="n">DRT_directory</span><span class="si">}</span><span class="s2">. Try manually creating </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">DRTDirectory</span><span class="si">}</span><span class="s2"> instead.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">EXIT_USAGE_ERROR</span>
+    
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected File Saving Error: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">EXIT_FAILURE</span>
+    
+    <span class="c1"># Run checkerboard fit </span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fits</span> <span class="o">=</span> <span class="n">checkerboard_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="s1">&#39;Auto&#39;</span><span class="p">,</span> <span class="n">y_inf</span><span class="o">=</span><span class="s1">&#39;Auto&#39;</span><span class="p">,</span> <span class="n">checkerboard_iters</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">iters</span><span class="p">)</span>
+        <span class="c1"># Save DRT data to file</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">saveFormat</span> <span class="o">==</span> <span class="s2">&quot;txt&quot;</span><span class="p">:</span>
+            <span class="n">save_to_txt</span><span class="p">(</span><span class="n">DRT_directory</span><span class="p">,</span> <span class="n">fits</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">saveFormat</span> <span class="o">==</span> <span class="s2">&quot;json&quot;</span><span class="p">:</span>
+            <span class="n">save_to_json</span><span class="p">(</span><span class="n">DRT_directory</span><span class="p">,</span> <span class="n">fits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">EXIT_SUCCESS</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected error: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">EXIT_FAILURE</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, 2025, 2024, Vincent M. Le Corre, Sander Heester, Fransien Elhorst, Joshua Luke Edmundson, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
