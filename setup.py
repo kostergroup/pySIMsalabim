@@ -33,6 +33,8 @@ setuptools.setup(
         'scipy>=1.0',
         'gitpython>=3.1',
         'openpyxl>=3.0',
+        'osqp',
+        'scikit-learn',
     ],
     extras_require = {
         'dev': [
