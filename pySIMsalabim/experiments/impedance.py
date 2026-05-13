@@ -153,6 +153,39 @@ def create_tVG_tolDens(V_0, del_V, ini_timeFactor, f_min, f_max, G, tVG_name, se
 
     return retval, msg
 
+def get_magnitude_phase(ReZ, ImZ, errReZ, errImZ):
+        """ Calculate the magnitude and phase of the impedance, including the error in these values, 
+        based on the real and imaginary part of the impedance and their associated errors
+
+        Parameters
+        ----------
+        ReZ : np.array
+            Array of the real component of impedance
+        ImZ : np.array
+            Array of the imaginary component of impedance
+        errReZ : np.array
+            Array of error in the real component of impedance
+        errImZ : np.array
+            Array of error in the imaginary component of impedance
+
+        Returns
+        -------
+        np.array
+            Array of magnitude of impedance
+        np.array
+            Array of phase of impedance
+        np.array
+            Array of error in magnitude of impedance
+        np.array
+            Array of error in phase of impedance
+        """
+        magZ = np.sqrt(ReZ**2 + ImZ**2)
+        phaseZ = np.degrees(np.arctan2(ImZ, ReZ))
+        errMagZ = abs(np.sqrt((ReZ*errReZ/(np.sqrt(ReZ**2 + ImZ**2)))**2 + (ImZ*errImZ/(np.sqrt(ReZ**2 + ImZ**2)))**2))
+        errPhaseZ = abs(np.degrees(np.sqrt((-ImZ*errReZ/(ReZ**2+ImZ**2))**2+(ReZ*errImZ/(ReZ**2+ImZ**2))**2)))
+        
+        return magZ, phaseZ, errMagZ, errPhaseZ
+
 def calc_impedance_limit_time(I, errI, time, VStep, imax):
     """Fourier Decomposition formula which computes the impedance at frequency freq (Hz) and its complex error
     Based on S.E. Laux, IEEE Trans. Electron Dev. 32 (10), 2028 (1985), eq. 5a, 5b
@@ -289,8 +322,9 @@ def calc_impedance(data, del_V, isToPlot,session_path,zimt_device_parameters,Rse
     
     return freq, ReZ, ImZ, errZ, C, G, errC, errG
 
-def store_impedance_data(session_path, freq, ReZ, ImZ, errZ, C, G, errC, errG, output_file):
-    """ Save the frequency, real & imaginary part of the impedance & impedance error in one file called freqZ.dat
+def store_impedance_data(session_path, freq, ReZ, ImZ, errZ, C, G, errC, errG, magZ, phaseZ, errMagZ, errPhaseZ, output_file):
+    """ Save the frequency, real & imaginary part of the impedance, Conductance and Capacitance, Magnitude and Phase of Impedance 
+    and associated error in an output file
     
     Parameters
     ----------
@@ -308,16 +342,26 @@ def store_impedance_data(session_path, freq, ReZ, ImZ, errZ, C, G, errC, errG, o
         Array of capacitance	
     G : np.array
         Array of conductance
+    magZ : np.array
+        Array of magnitude of impedance
+    phaseZ : np.array
+        Array of phase of impedance
+    errMagZ : np.array
+        Array of error in magnitude of impedance
+    errPhaseZ : np.array
+        Array of error in phase of impedance
     errC : np.array
         Array of error in capacitance	
     errG : np.array
         Array of error in conductance
+    output_file : string
+        name of the file where the impedance data is stored
     """
 
     with open(os.path.join(session_path,output_file), 'w') as file:
-        file.write('freq ReZ ImZ ReErrZ ImErrZ C G errC errG' + '\n')
+        file.write('freq ReZ ImZ ReErrZ ImErrZ C G errC errG magZ phaseZ errMagZ errPhaseZ' + '\n')
         for i in range(len(freq)):
-            file.write(f'{freq[i]:.6e} {ReZ[i]:.6e} {ImZ[i]:.6e} {abs(errZ[i].real):.6e} {abs(errZ[i].imag):.6e} {C[i]:.6e} {G[i]:.6e} {errC[i]:.6e} {errG[i]:.6e}\n')
+            file.write(f'{freq[i]:.6e} {ReZ[i]:.6e} {ImZ[i]:.6e} {abs(errZ[i].real):.6e} {abs(errZ[i].imag):.6e} {C[i]:.6e} {G[i]:.6e} {errC[i]:.6e} {errG[i]:.6e} {magZ[i]:.6e} {phaseZ[i]:.6e} {errMagZ[i]:.6e} {errPhaseZ[i]:.6e} \n')
 
     # print('The data of the Impedance Spectroscopy graphs is written to ' + output_file)
 
@@ -351,9 +395,12 @@ def get_impedance(data, f_min, f_max, f_steps, del_V, session_path, output_file,
     if isToPlot != -1:
         # Integral bounds have been determined, continue to calculate the impedance
         freq, ReZ, ImZ, errZ, C, G, errC, errG = calc_impedance(data, del_V, isToPlot,session_path,zimt_device_parameters,Rseries,Rshunt)
+        
+        # Calculate the magnitude and phase of the impedance
+        magZ, phaseZ, errMagZ, errPhaseZ = get_magnitude_phase(ReZ, ImZ, np.real(errZ), np.imag(errZ))
 
         # Write impedance results to a file
-        store_impedance_data(session_path, freq, ReZ, ImZ, errZ, C, G, errC, errG, output_file)
+        store_impedance_data(session_path, freq, ReZ, ImZ, errZ, C, G, errC, errG, magZ, phaseZ, errMagZ, errPhaseZ, output_file)
 
         msg = 'Success'
         return 0, msg
@@ -391,11 +438,11 @@ def Bode_plot(session_path, output_file, xscale='log', yscale_1='linear', yscale
     ylabel_2 = '-Im Z [Ohm m$^2$]'
     title = 'Bode plot'
 
-    fig, ax1 = plt.subplots()
+    fig, ax1 = plt.subplots(figsize=(9,6))
     ax2 = ax1.twinx()
     utils_plot.plot_result_twinx(data, pars, selected_1, selected_2, par_x, xlabel, ylabel_1, ylabel_2, xscale, yscale_1, yscale_2, title,ax1,ax2, 
                                         plot_type, y_error_1 = data['ReErrZ'], y_error_2 = data['ImErrZ'])
-    plt.show()
+    fig.tight_layout()
 
 def Nyquist_plot(session_path, output_file, xscale='linear', yscale='linear', plot_type = plt.errorbar):
     """ Plot the real and imaginary part of the impedance against each other
@@ -415,7 +462,7 @@ def Nyquist_plot(session_path, output_file, xscale='linear', yscale='linear', pl
     # Flip the ImZ data to the first quadrant
     data["ImZ"] = data["ImZ"]*-1
 
-    fig, ax = plt.subplots()
+    fig, ax =plt.subplots(figsize=(7,6))
     pars = {'ImZ' : '-Im Z [Ohm m$^2$]'}
     par_x = 'ReZ'
     xlabel = 'Re Z [Ohm m$^2$]'
@@ -428,9 +475,7 @@ def Nyquist_plot(session_path, output_file, xscale='linear', yscale='linear', pl
                                             data['ReErrZ'], data['ImErrZ'], legend=False)
     else:
         ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plot_type, legend=False)
-
-    plt.show()
-
+    fig.tight_layout()
 
 def Capacitance_plot(session_path, output_file, xscale='log', yscale='linear'):
     """ Plot the capacitance against frequency
@@ -458,11 +503,32 @@ def Capacitance_plot(session_path, output_file, xscale='log', yscale='linear'):
     title = 'Capacitance plot'
 
     ax = utils_plot.plot_result(data, pars, list(pars.keys()), par_x, xlabel, ylabel, xscale, yscale, title, ax, plt.errorbar, y_error=data['errC'], legend=False)
+    fig.tight_layout()
 
-    plt.show()
+def mag_phase_plot(session_path, output_file, xscale='log', yscale_1='linear', yscale_2='linear', plot_type = plt.errorbar):
+     # Read the data from freqZ-file
+    data = pd.read_csv(os.path.join(session_path,output_file), sep=r'\s+')
+
+    # Define the plot parameters, two y axis
+    pars = {'magZ' : 'Magnitude [Ohm m$^2$]', 'phaseZ' : 'Phase [deg.]' }
+    selected_1 = ['magZ']
+    selected_2 = ['phaseZ']
+    par_x = 'freq'
+    y_error_1 = data['errMagZ']
+    y_error_2 = data['errPhaseZ']
+    xlabel = 'frequency [Hz]'
+    ylabel_1 = 'Magnitude [Ohm m$^2$]'
+    ylabel_2 = 'Phase [deg.]'
+    title = 'Magnitude-phase plot'
+
+    fig, ax1 = plt.subplots(figsize=(9,6))
+    ax2 = ax1.twinx()
+    utils_plot.plot_result_twinx(data, pars, selected_1, selected_2, par_x, xlabel, ylabel_1, ylabel_2, xscale, yscale_1, yscale_2, title,ax1,ax2, 
+                                        plot_type, y_error_1 = y_error_1, y_error_2 = y_error_2)
+    fig.tight_layout()
 
 def plot_impedance(session_path, output_file='freqZ.dat'):
-    """Make a Bode and Nyquist plot of the impedance
+    """Make a Bode, Nyquist, Capacitance, and Magnitude=phase plot of the impedance
 
     Parameters
     ----------
@@ -477,6 +543,9 @@ def plot_impedance(session_path, output_file='freqZ.dat'):
 
     # Capacitance plot
     Capacitance_plot(session_path,output_file)
+
+    # Magnitude and phase plot
+    mag_phase_plot(session_path, output_file)
 
 
 def get_tolDens(zimt_device_parameters, session_path, f_min, f_max, V_0, G_frac, del_V, run_mode, tVG_name, tj_name, varFile, ini_timeFactor, dum_str, cmd_pars):
@@ -1000,6 +1069,7 @@ if __name__ == "__main__":
         if findDRT:
             DRT_result = drt.main(argv=DRT_commands_args)
             sys.exit(DRT_result)
+        plt.show()
     else:
         print(message)
         sys.exit(1)
