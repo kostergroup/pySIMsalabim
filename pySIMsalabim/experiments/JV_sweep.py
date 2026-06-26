@@ -192,11 +192,15 @@ def create_tVG_sweep(session_path, Vmin, Vmax, scan_speed, direction, steps, G_f
     else:
         t,V,G = build_tVG_arrays(Vmin,Vmax,scan_speed,direction,steps,G_frac,stabilized=stabilized)
 
-    # Set the correct header for the tVG file
+    # Track state array, fixed to 0 and formatted as integer
+    Track = np.zeros(len(t),dtype=int)
+
+    # Set the partial header for the tVG file
     tVG_header = ['t','Vext','G_frac']
 
-    # Combine t,V,G arrays into a DataFrame
+    # Combine t,V,G,Track arrays into a DataFrame
     tVG = pd.DataFrame(np.stack([t,np.asarray(V),np.asarray(G)]).T,columns=tVG_header)
+    tVG['Track'] = Track.astype(int) # Add the Track column to the DataFrame. This needs to be done separately as the Track column must be an integer and the other columns are floats. 
 
     # Create tVG file
     tVG.to_csv(os.path.join(session_path,tVG_name),sep=' ',index=False,float_format='%.5e')
@@ -466,7 +470,11 @@ def JV_sweep(zimt_device_parameters, session_path, UseExpData, scan_speed=None, 
             for i in range(1, len(V)):
                 t[i] = t[i-1] + abs((V[i]-V[i-1])/scan_speed)
             G = G_frac * np.ones(len(t))
+            Track = np.zeros(len(t),dtype=int)
+
             tVG = pd.DataFrame({'t': t, 'Vext': V, 'G_frac': G})
+            tVG['Track'] = Track.astype(int) # Add the Track column to the DataFrame. This needs to be done separately as the Track column must be an integer and the other columns are floats.
+            
             tVG.to_csv(tVG_name, sep=' ', index=False, float_format='%.5e')
             result, message = 0, 'Success'
         else:

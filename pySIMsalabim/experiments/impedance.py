@@ -57,14 +57,14 @@ def create_tVG_impedance(V_0, del_V, G_frac, tVG_name, session_path, f_min, f_ma
     time = 0
     del_t = ini_timeFactor/f_max
 
-    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header
-    tVG_lines = 't Vext G_frac\n' + f'{time:.3e} {V_0} {G_frac:.3e}\n'
+    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header (Inlcuding the Track column, which is fixed to 0)
+    tVG_lines = 't Vext G_frac Track\n' + f'{time:.3e} {V_0} {G_frac:.3e} 0\n'
 
 
     # Make the other lines in the tVG file
     while time < 1/f_min: #max time: 1/f_min is enough!
         time = time+del_t
-        tVG_lines += f'{time:.3e} {V_0+del_V} {G_frac:.3e}\n'
+        tVG_lines += f'{time:.3e} {V_0+del_V} {G_frac:.3e} 0\n'
         del_t = del_t * timeFactor # At first, we keep delt constant to its minimum values
 
     # Write the tVG lines to the tVG file
@@ -102,7 +102,7 @@ def create_tVG_SS(V_0, G_frac, tVG_name, session_path):
     """    
 
     # Starting line of the tVG file: header + datapoints at time=0. Set the correct header
-    tVG_lines = 't Vext G_frac\n' + f'{0} {V_0} {G_frac:.3e}\n'
+    tVG_lines = 't Vext G_frac Track\n' + f'{0} {V_0} {G_frac:.3e} 0\n'
    
     # Write the tVG lines to the tVG file
     with open(os.path.join(session_path,tVG_name), 'w') as file:
@@ -138,10 +138,10 @@ def create_tVG_tolDens(V_0, del_V, ini_timeFactor, f_min, f_max, G, tVG_name, se
 
     del_t = ini_timeFactor/f_max # t_1 = 0 s + del_t
 
-    tVG_lines = ('t\tVext\tG_frac\n'
-                 f'0\t{V_0+del_V}\t{G:.3e}\n'
-                 f'0\t{V_0}\t{G:.3e}\n'
-                 f'{del_t}\t{V_0+del_V}\t{G:.3e}\n')
+    tVG_lines = ('t\tVext\tG_frac\tTrack\n'
+                 f'0\t{V_0+del_V}\t{G:.3e}\t0\n'
+                 f'0\t{V_0}\t{G:.3e}\t0\n'
+                 f'{del_t}\t{V_0+del_V}\t{G:.3e}\t0\n')
 
     # Write the tVG lines to the tVG file
     with open(os.path.join(session_path,tVG_name), 'w') as file:

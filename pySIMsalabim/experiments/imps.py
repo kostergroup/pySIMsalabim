@@ -55,13 +55,13 @@ def create_tVG_IMPS(V, G_frac, del_G, tVG_name, session_path, f_min, f_max, ini_
     time = 0
     del_t = ini_timeFactor/f_max
 
-    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header
-    tVG_lines = 't Vext G_frac\n' + f'{time:.3e} {V} {G_frac:.3e}\n'
+    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header (Inlcuding the Track column, which is fixed to 0)
+    tVG_lines = 't Vext G_frac Track\n' + f'{time:.3e} {V} {G_frac:.3e} 0\n'
 
     # Make the other lines in the tVG file
     while time < 1/f_min: #max time: 1/f_min is enough!
         time = time+del_t
-        tVG_lines += f'{time:.3e} {V} {G_frac+del_G:.3e}\n'
+        tVG_lines += f'{time:.3e} {V} {G_frac+del_G:.3e} 0\n'
         del_t = del_t * timeFactor # At first, we keep delt constant to its minimum values
 
     # Export tVG file to ZimT folder

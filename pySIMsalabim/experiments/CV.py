@@ -54,20 +54,20 @@ def create_tVG_CV(V_0, V_max, del_V, V_step, G_frac, tVG_name, session_path, fre
         A message to indicate the result of the process
     """        
 
-    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header
-    tVG_lines = 't Vext G_frac\n'
+    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header (Inlcuding the Track column, which is fixed to 0)
+    tVG_lines = 't Vext G_frac Track\n'
 
     # Loop until V reaches V_max, in other words go from Vmin to Vmax with in V_step steps. Add some extra margin on the Vmax to prevent missing the last voltage point due to numerical accuracy.
     while V_0 <= V_max + V_max*1E-5:
         time = 0
         del_t = ini_timeFactor/freq
-        tVG_lines += f'{time:.3e} {V_0:.3e} {G_frac:.3e}\n'
+        tVG_lines += f'{time:.3e} {V_0:.3e} {G_frac:.3e} 0\n'
         
         # Make the other lines in the tVG file
         while time < 1/freq: #max time: 1/f_min is enough!
             time += del_t
             del_t = del_t * timeFactor
-            tVG_lines += f'{time:.3e} {V_0+del_V:.3e} {G_frac:.3e}\n'
+            tVG_lines += f'{time:.3e} {V_0+del_V:.3e} {G_frac:.3e} 0\n'
     
         V_0 += V_step
 
@@ -109,20 +109,20 @@ def create_tVG_CV_Rseries(Vint, del_V, G_frac, tVG_name, session_path, freq, ini
         A message to indicate the result of the process
     """        
 
-    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header
-    tVG_lines = 't Vext G_frac\n'
+    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header (Inlcuding the Track column, which is fixed to 0)
+    tVG_lines = 't Vext G_frac Track\n'
 
     # Loop until V reaches V_max, in other words go from Vmin to Vmax with in V_step steps. Add some extra margin on the Vmax to prevent missing the last voltage point due to numerical accuracy.
     for V_0 in Vint:
         time = 0
         del_t = ini_timeFactor/freq
-        tVG_lines += f'{time:.3e} {V_0:.3e} {G_frac:.3e}\n'
+        tVG_lines += f'{time:.3e} {V_0:.3e} {G_frac:.3e} 0\n'
         
         # Make the other lines in the tVG file
         while time < 1/freq:
             time += del_t
             del_t = del_t * timeFactor
-            tVG_lines += f'{time:.3e} {V_0+del_V:.3e} {G_frac:.3e}\n'
+            tVG_lines += f'{time:.3e} {V_0+del_V:.3e} {G_frac:.3e} 0\n'
 
     # while V_0 <= V_max + V_max*1E-5:
     #     time = 0
@@ -173,12 +173,12 @@ def create_tVG_SS_CV(V_min, V_max,Vstep, G_frac, tVG_name, session_path):
     
     """    
 
-    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header
-    tVG_lines = 't Vext G_frac\n' #+ f'{0} {V_0} {G_frac:.3e}\n'
+    # Starting line of the tVG file: header + datapoints at time=0. Set the correct header (Inlcuding the Track column, which is fixed to 0)
+    tVG_lines = 't Vext G_frac Track\n' #+ f'{0} {V_0} {G_frac:.3e}\n'
     V_0 =V_min
     while V_0 <= V_max + V_max*1E-5:
         time = 0
-        tVG_lines += f'{time:.3e} {V_0:.3e} {G_frac:.3e}\n'
+        tVG_lines += f'{time:.3e} {V_0:.3e} {G_frac:.3e} 0\n'
         V_0 += Vstep
 
     # Write the tVG lines to the tVG file

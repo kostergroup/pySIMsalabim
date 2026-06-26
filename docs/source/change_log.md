@@ -2,10 +2,11 @@ Change Log
 ==========
 All notable changes to this project will be documented in this file.
 
-v1.05 - 2026-05-13 - VMLC-PV, SH
+v1.05 - 2026-06-23 - VMLC-PV, SH
 ---------------------------------------
 - JV_funcs.py: Removed raise in the error handling of the SIMsalabim-like performance parameter calculation functions to avoid crashing. Instead, we now return calc = False and 0 as values and an error for the performance parameter that fails.
 - experiments/impedance.py: Added option to calculate and plot the magnitude and phase of the impedance
+- Included the Track column when a tVG file is generated, necessary for SIMsalabim v5.34
 
 v1.04 - 2026-02-17 - VMLC-PV, SH, JLE
 ---------------------------------------

@@ -204,11 +204,15 @@ def create_tVG_hysteresis(session_path, Vmin, Vmax, scan_speed, direction, steps
     else:
         t,V,G = build_tVG_arrays(Vmin,Vmax,scan_speed,direction,steps,G_frac)
         
-    # Set the correct header for the tVG file
+    # Track state array, fixed to 0 and formatted as integer
+    Track = np.zeros(len(t),dtype=int)
+
+    # Set the partial header for the tVG file
     tVG_header = ['t','Vext','G_frac']
 
     # Combine t,V,G arrays into a DataFrame
     tVG = pd.DataFrame(np.stack([t,np.asarray(V),np.asarray(G)]).T,columns=tVG_header)
+    tVG['Track'] = Track.astype(int) # Add the Track column to the DataFrame. This needs to be done separately as the Track column must be an integer and the other columns are floats. 
 
     # Create tVG file
     tVG.to_csv(os.path.join(session_path,tVG_name),sep=' ',index=False,float_format='%.5e')
@@ -304,13 +308,18 @@ def tVG_exp(session_path, expJV_Vmin_Vmax, expJV_Vmax_Vmin, scan_speed, directio
     # Voltage array
     V = np.concatenate([V_forward, V_backward])
 
-    # Set the correct header for the tVG file
-    tVG_header = ['t','Vext','G_frac']
-
+    # Fractional generation rate array
     G = G_frac * np.ones(len(t))
 
+    # Track state array, fixed to 0 and formatted as integer
+    Track = np.zeros(len(t),dtype=int)
+
+    # Set the partial header for the tVG file
+    tVG_header = ['t','Vext','G_frac']
+
     # Combine t,V,G arrays into a DataFrama
-    tVG = pd.DataFrame(np.stack([t,np.asarray(V),G]).T,columns=tVG_header)
+    tVG = pd.DataFrame(np.stack([t,np.asarray(V),G,Track]).T,columns=tVG_header)
+    tVG['Track'] = Track.astype(int) # Add the Track column to the DataFrame. This needs to be done separately as the Track column must be an integer and the other columns are floats. 
 
     # Create tVG file
     tVG.to_csv(os.path.join(session_path,tVG_name),sep=' ',index=False,float_format='%.3e')
