@@ -2,11 +2,14 @@ Change Log
 ==========
 All notable changes to this project will be documented in this file.
 
-v1.05 - 2026-06-23 - VMLC-PV, SH
+v1.05 - 2026-08-11 - VMLC-PV, SH
 ---------------------------------------
 - JV_funcs.py: Removed raise in the error handling of the SIMsalabim-like performance parameter calculation functions to avoid crashing. Instead, we now return calc = False and 0 as values and an error for the performance parameter that fails.
 - experiments/impedance.py: Added option to calculate and plot the magnitude and phase of the impedance
-- Included the Track column when a tVG file is generated, necessary for SIMsalabim v5.34
+- Included the Track column when a tVG file is generated, necessary for SIMsalabim v5.36
+- trPL.py: added a new experiment to perform a trPL simulation using ZimT (including test).
+- aux_funcs/light_pulse.py: added a new set of functions to run a ZimT simulation for a (Gaussian) light pulse . This is used for the trPL experiment, but generalised to be used for other future experiments as well (e.g. SPV, TPC, TPV, ...)
+- utils/device_parameters.py: Added functions to create a contactless device (See Application Note 6.1 in SIMsalabim Manual (version 5.36 and higher))
 
 v1.04 - 2026-02-17 - VMLC-PV, SH, JLE
 ---------------------------------------

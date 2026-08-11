@@ -1,7 +1,9 @@
 """Functions for processing the device parameters"""
 ######### Package Imports #########################################################################
 
-import os, shutil, random
+import os, sys, shutil, random, re
+import numpy as np
+import pandas as pd
 
 ######### Function Definitions ####################################################################
 
@@ -718,3 +720,532 @@ def ReadParameterFile(path2file):
 
 #     # Update the device parameters with the command line parameters
 #     for 
+
+
+#################### FUNCTIONS FOR CONTACTLESS DEVICE ##############################
+
+def update_simulation_setup(session_path, simulation_setup, dev_pars, block_layer_file = 'Block.txt'):
+    ''' Update the simulation setup file to add a layer on either side and change the layer indices.
+
+    Parameters
+    ----------
+    session_path : str
+        Path to the session folder
+    simulation_setup : str
+        Name of the simulation setup file
+    dev_pars : dict
+        Dictionary with the device parameters
+    block_layer_file : str, optional
+        Name of the blocking layer file, by default 'Block.txt'
+
+    Returns
+    -------
+    dict
+        Updated dictionary with the device parameters
+    
+    '''
+
+    ## Update the simulation setup file with layer indices, blocking layers, work functions, and force the TCO and BE parameters
+    for section in dev_pars[simulation_setup]:
+        # Update layer indices
+        if section[0] == 'Layers':
+            for idx in range(1,len(section)):
+                # First overwrite the original layer indices by shifting them with 1, i.e l1 becomes l2 etc.
+                # We will insert the new layers after this.
+
+                # Extract the original layer number from the parameter name, which is in the format lX where X is the layer number and increase it with 1
+                layer_num  = int(section[idx][1].split('l')[1]) + 1 
+
+                # Update the parameter name with the new layer number
+                section[idx][1] = 'l' + str(layer_num)
+
+            # Now insert the new layer at the first and last index
+            section.insert(1, ['par', 'l1', block_layer_file, 'Parameter file for blocking layer'])
+            section.append(['par', 'l' + str(len(section)), block_layer_file, 'Parameter file for blocking layer'])
+
+            num_layers = len(section)-1
+        
+    # Write the updated simulation setup file
+    simulation_setup_str = devpar_write_to_txt(dev_pars[simulation_setup])
+    with open(os.path.join(session_path, simulation_setup), 'w', encoding='utf-8') as fp:
+        fp.write(simulation_setup_str)
+        fp.close()
+
+    return dev_pars, num_layers
+    
+def create_block_layer(session_path, dev_pars, layers, block_layer_file = 'Block.txt', block_layer_mat='Air'):
+    ''' Create a new layer file for the blocking layer, which is a copy of the first layer to use as a template.
+    The parameters of the blocking layer are set to values that make it a blocking layer, 
+    like a very thin (1nm) layer with a large band offsets and low effective density of states. 
+    The nkLayer parameter is set to the block_layer_mat file.
+
+    Parameters
+    ----------
+    session_path : str
+        Path to the session folder
+    dev_pars : dict
+        Dictionary with the device parameters
+    layers : list
+        List with the layers in the device
+    block_layer_file : str, optional
+        Name of the blocking layer file, by default 'Block.txt'
+    block_layer_mat : str, optional
+        Name of the blocking layer material, by default 'Air'
+
+    Returns
+    -------
+    None
+    
+    '''
+
+    # Initialize a new layer file for the blocking layer, which is a copy of the first layer to use as a template
+    block_layer_par = dev_pars[layers[1][2]]
+
+    # Collect parameters that need to be set to 0 for the blocking layer
+    pars_to_zero = ['N_D', 'N_A', 'N_t_int', 'N_anion', 'N_cation','ionsMayEnter', 'layerGen', 'N_t_bulk']
+
+    # Go over every section of the layer parameter file and set the relevant parameters to the desired values for the blocking layer
+    for section in block_layer_par:
+        for line in section[1:]:
+            if line[1] == 'L':
+                line[2] = '1E-9' # Set the thickness to 1 nm
+            elif line[1] == 'eps_r':
+                line[2] = '1' # Set the relative permittivity to 1 (vacuum/~air)
+            elif line[1] == 'E_c':
+                line[2] = '1' # Set the conduction band to 1eV
+            elif line[1] == 'E_v':
+                line[2] = '9' # Set the valence band to 9eV
+            elif line[1] == 'N_c':
+                line[2] = '1' # Set the effective density of states in the conduction/valence band to 1
+            elif line[1] == 'mu_n' or line[1] == 'mu_p':
+                line[2] = '1E-5' # Set the mobility to 1E-5 m^2/Vs (an average value)
+            elif line[1] == 'nkLayer':
+                nkLayer_value = line[2]
+                # split the nkLayer_value by /nk_ and replace the last part with Air.txt
+                nkLayer_value_split = nkLayer_value.split('/nk_')
+                nkLayer_value_split[-1] = f'{block_layer_mat}.txt'
+                line[2] = nkLayer_value_split[0] + '/nk_' + nkLayer_value_split[-1] # Set the nkLayer to the block_layer_mat file
+            elif line[1] == 'k_direct':
+                line[2] = '1E-20' # Set the direct recomb rate to 1E-20 (very low)
+            elif line[1] in pars_to_zero:
+                line[2] = '0' # Set several parameters to 0
+
+            # If the parameter is not one of the above, leave it as is, as it is does not have to be changed
+    
+    # Add the blocking layer to the dev_pars dict with the key being the block_layer_file name
+    dev_pars[block_layer_file] = block_layer_par
+
+    # Write the new blocking layer parameter file
+    block_layer_str = devpar_write_to_txt(block_layer_par)
+    with open(os.path.join(session_path, block_layer_file), 'w', encoding='utf-8') as fp:
+        fp.write(block_layer_str)
+        fp.close() 
+
+    return dev_pars
+
+def update_cmd_pars_contactless(cmd_pars):
+    '''Update the command line parameters with new layer indices, which are now shifted by 1 for a contactless device.
+    
+    Parameters
+    ----------
+    cmd_pars : List
+        List of dict with the command line parameters
+    
+    Returns
+    -------
+    List
+        List of dict with the updated command line parameters
+    '''
+
+    for cmd_par in cmd_pars:
+        # Split the value of the 'par' keey by '.' and check if there are only 2 elements
+        par_split = cmd_par['par'].split('.')
+        if len(par_split) == 2 and par_split[0].startswith('l') and par_split[0][1:].isdigit():
+            # convert par_split[0][1:] to an integer
+            layer_num = int(par_split[0][1:])
+            layer_num +=1 
+
+            # update the value of the 'par' key with the new layer number
+            cmd_par['par'] = 'l' + str(layer_num) + '.' + par_split[1]
+
+    return cmd_pars      
+
+def calc_new_W_F(dev_pars, simulation_setup):
+    ''' Calculate the new work function for a contactless device based on the conduction and valence band energies 
+    of the available layers. We take the smallest difference between E_c and E_v (assumption: this is the PVK) and 
+    set the work function to half the gap above E_c.
+
+    Parameters
+    ----------
+    dev_pars : dict
+        Dictionary with the device parameters
+    simulation_setup : str
+        Name of the simulation setup file
+
+    Returns
+    -------
+    float
+        Work function for the contactless device (equal for both sides)
+
+    '''
+    # Initialize arrays to hold the E_c and E_v values for each layer to calculate the work function W_F
+    E_c_array = np.zeros((len(dev_pars)-1))
+    E_v_array = np.zeros((len(dev_pars)-1))
+
+    # Loop over all keys in the dev_pars dict but skip the key {simulation_setup} to get Ec and Ev
+    for idx,key in enumerate(dev_pars.keys()):
+        if key != simulation_setup:
+            section_general = dev_pars[key][1] # The second section is the General section, which contains the E_c and E_v values ( The first is the description section)
+            for param in section_general:
+                # Extract E_c and E_v values and convert to float
+                if param[1] == 'E_c':
+                    E_c_array[idx-1] = float(param[2])
+                if param[1] == 'E_v':
+                    E_v_array[idx-1] = float(param[2])
+
+    # Get the absolute difference between E_c and E_v for each layer
+    min_gap_array = abs(E_c_array - E_v_array)
+
+    # Find the smallest difference between E_c and E_v, including the associated index of the minimum gap
+    min_gap = np.min(min_gap_array)
+    min_gap_idx = np.argmin(min_gap_array)
+  
+    # Set the work function to half the gap
+    W_F =  E_c_array[min_gap_idx] + 0.5*min_gap
+
+    return W_F
+
+def create_contactless_device(session_path, simulation_setup, block_layer_file = 'Block.txt', block_layer_mat='Air', force_last_interface = True, cmd_pars = None):
+    ''' Create a contactless device by adding a blocking layer on either side of the device.
+    This will change the input files! Depending on the flag in the output function, these files are kept or returned to their
+    original state.
+
+    Parameters
+    ----------
+    session_path : str
+        Path to the session folder
+    simulation_setup : str
+        Name of the simulation setup file
+    block_layer_file : str, optional
+        Name of the blocking layer file, by default 'Block.txt'
+    block_layer_mat : str, optional
+        Name of the blocking layer material, by default 'Air'
+    force_last_interface : bool, optional
+        If True, the interface traps at the last interface are set to 0, by default True
+    cmd_pars : list, optional
+        List of dict with the command line parameters, by default None
+
+    Returns
+    -------
+
+    int
+        0 if the contactless device was created successfully, 1 if there was an error
+    dict
+        Updated dictionary with the command line parameters
+    str
+        Name of the blocking layer file
+
+    '''
+
+    # Load the device parameters and layers from the simulation setup file as an object
+    dev_pars,layers = load_device_parameters(session_path, simulation_setup)
+    
+    for section in dev_pars[simulation_setup]:
+        if section[0] == 'Layers':
+            # Check if the first and last layer are already the blocking layer, if so, we do not need to add them again
+            if (section[1][2] != block_layer_file) ^ (section[-1][2] != block_layer_file):
+                print(f'Error:simulation setup file {simulation_setup} is corrupt. The first and last layer must either both be or not be the blocking layer {block_layer_file}. Please check the simulation setup file.')
+                return 1, cmd_pars, block_layer_file
+            elif (section[1][2] != block_layer_file) and (section[-1][2] != block_layer_file):
+                # Update the simulation setup file to add a layer on either side, change the layer indices and update the work functions
+                dev_pars, num_layers = update_simulation_setup(session_path, simulation_setup, dev_pars, block_layer_file)
+
+                # Create a new layer file for the blocking layer
+                create_block_layer(session_path, dev_pars, layers, block_layer_file, block_layer_mat)
+            else:
+                # Blocking layers are already present, so we do not need to add them again. Just get the number of layers
+                num_layers = len(section)-1
+
+    # Calculate the new work function for the contactless device
+    W_F = calc_new_W_F(dev_pars, simulation_setup)
+
+    # Update the nk file of the back electrode to the block_layer_mat file, which is usually Air.txt to prevent reflections
+    for section in dev_pars[simulation_setup]:
+    # Update layer indices
+        if section[0] == 'Optics':
+            for line in section[1:]:
+                if line[1] == 'nkBE':
+                    nkBE_par = line[2]
+                    # split the nkBE_par by /nk_ and replace the last part with block_layer_mat file (Uses the default SIMsalabim nk file naming)
+                    nkBE_par_split = nkBE_par.split('/nk_')
+                    nkBE_par_split[-1] = f'{block_layer_mat}.txt'
+                    nkBE_par = nkBE_par_split[0] + '/nk_' + nkBE_par_split[-1]
+
+    # Set the contactless CMD arguments
+    contactless_args = [{'par':'W_L','val':f'{W_F:.3f}'},
+                        {'par':'W_R','val':f'{W_F:.3f}'},
+                        {'par':'L_TCO','val':'0'},
+                        {'par':'L_BE','val':'1E-9'},
+                        {'par':'nkBE','val':nkBE_par}]
+       
+    if force_last_interface:
+        # Set the interface/surface traps to zero for the last interface
+        contactless_args.append({'par':f'l{num_layers-1}.N_t_int','val':'0'})
+
+    # Update the indices of the cmd_pars and add the new command line parameters for the contactless device
+    if cmd_pars is not None:
+        # Update the command line parameters with the new layer indices, which are now shifted by 1      
+        cmd_pars = update_cmd_pars_contactless(cmd_pars)
+        cmd_pars.extend(contactless_args)
+    else:
+        cmd_pars = contactless_args
+
+    return 0, cmd_pars, block_layer_file
+
+def update_logFile(session_path, logFile = 'log.txt'):
+    ''' Update the log file to add a line after the line 'Reading in of parameters:' 
+    to indicate that a contactless device has been simulated and that the indices of the layers 
+    have been shifted by 1 for the set command line parameters.
+
+    Parameters
+    ----------
+    session_path : str
+        Path to the session folder
+    logFile : str, optional
+        Name of the log file, by default 'log.txt'
+    
+    Returns
+    -------
+    int
+        0 if the log file was updated successfully, 1 if the log file does not exist
+
+    '''
+
+    # Check if the log file exists
+    if os.path.exists(os.path.join(session_path, logFile)):
+        # Open the log file and find the line 'Reading in of parameters:'
+        with open(os.path.join(session_path, logFile), 'r', encoding='utf-8') as fp:
+            lines = fp.readlines()
+            fp.close()
+        
+        for i, line in enumerate(lines):
+            if line.strip() == 'Reading in of parameters:':
+                # Add a new line after this line with the current date and time
+                lines.insert(i, f'\nSimulated a contactless device. Note that the indices of the layers have been shifted by 1 for the set command line parameters. \n')
+                break
+        
+        # Write the updated log file
+        with open(os.path.join(session_path, logFile), 'w', encoding='utf-8') as fp:
+            fp.writelines(lines)
+            fp.close()
+        return 0
+    else:
+        return 1
+    
+def revert_simulation_setup(dev_pars, session_path, simulation_setup):
+    ''' Revert the simulation setup file to its original state by removing the blocking layers and updating 
+    the layer indices back to their original values.
+
+    Parameters
+    ----------
+    dev_pars : dict
+        Dictionary with the device parameters
+    session_path : str
+        Path to the session folder
+    simulation_setup : str
+        Name of the simulation setup file
+
+    Returns
+    -------
+    int
+        Number of layers in the device after reverting the simulation setup file
+    
+    '''
+    for section in dev_pars[simulation_setup]:
+        # Update layer indices
+        if section[0] == 'Layers':
+
+            # Get the number of layers in the device
+            num_layers = len(section) - 1 # Subtract 1 for the section name
+
+            # Remove the first and last layer, which are the blocking layers
+            section.pop(1) # Remove the first blocking layer (first index is only the section name)
+            section.pop(-1) # Remove the second blocking layer
+
+            # Update the layer indices of the remaining layers
+            for idx in range(1,len(section)):
+                # Extract the original layer number from the parameter name, which is in the format lX where X is the layer number and decrease it with 1
+                layer_num  = int(section[idx][1].split('l')[1]) - 1 
+
+                # Update the parameter name with the new layer number
+                section[idx][1] = 'l' + str(layer_num)
+
+    # Write the updated simulation setup file
+    simulation_setup_str = devpar_write_to_txt(dev_pars[simulation_setup])
+    with open(os.path.join(session_path, simulation_setup), 'w', encoding='utf-8') as fp:
+        fp.write(simulation_setup_str)
+        fp.close()
+
+    return num_layers
+
+def format_output_files(session_path, simulation_type, num_layers, JV_file='JV.dat', tJ_file='tJ.dat', Var_file='Var.dat' ):
+    ''' Format the output files (JV, tJ, Var) to remove the columns for the blocking layers and update the layer indices 
+    back to their original values. In the Var file, the rows for the blocking layers are removed and the x values 
+    are shifted to start at 0. Cleaned the leftover interface values for those layers as well
+
+    Parameters
+    ----------
+    session_path : str
+        Path to the session folder
+    simulation_type : str
+        Type of simulation: 'simss' or 'zimt'
+    num_layers : int
+        Number of layers in the device after reverting the simulation setup file
+    JV_file : str
+        Name of the JV file
+    tJ_file : str
+        Name of the tJ file
+    Var_file : str
+        Name of the Var file
+
+    Returns
+    -------
+    None
+
+    '''
+    # Init data_JV_tJ as empty dataframe
+    data_JV_tJ = pd.DataFrame()
+
+    block_layer_indices = [1, num_layers]
+
+    if simulation_type == 'simss':
+        # Check if the JV
+        if os.path.exists(os.path.join(session_path, JV_file)):
+            data_JV_tJ = pd.read_csv(os.path.join(session_path, JV_file),sep=r'\s+')
+    elif simulation_type == 'zimt':
+        if os.path.exists(os.path.join(session_path, tJ_file)):
+            data_JV_tJ = pd.read_csv(os.path.join(session_path, tJ_file),sep=r'\s+')
+
+    if not data_JV_tJ.empty:
+        # Loop over the column headers
+        for col in data_JV_tJ.columns:
+            if re.search(r'L\d+', col):
+
+                # Get the digits from the column header (Could be one or two depending on the columns)
+                digits = re.findall(r'\d+', col)
+
+                # If any of the digits is either the first or last layer, we should remove the column
+                if any(int(digit) in block_layer_indices for digit in digits):
+                    data_JV_tJ.drop(columns=col, inplace=True)
+                else:
+                    # If the digit is not equal to the first or last blocking layer index, move the digit down by 1 to restore the original layer indices
+                    new_col = col
+                    for digit in digits:
+                        new_digit = str(int(digit) - 1)
+                        new_col = new_col.replace(digit, new_digit)
+                    data_JV_tJ.rename(columns={col: new_col}, inplace=True)
+
+        # Save the modified JV or tJ file
+        if simulation_type == 'simss':
+            data_JV_tJ.to_csv(os.path.join(session_path, JV_file), sep=' ', index=False)
+        elif simulation_type == 'zimt':
+            data_JV_tJ.to_csv(os.path.join(session_path, tJ_file), sep=' ', index=False)
+    else:
+        print(f'JV or tJ file does not exist in {session_path}. Skipping formatting of JV or tJ file.')
+
+    # Check if the Var file exists and read it
+    if os.path.exists(os.path.join(session_path, Var_file)):
+        data_Var = pd.read_csv(os.path.join(session_path, Var_file),sep=r'\s+')
+
+        if simulation_type == 'simss':
+            unique_column_name = 'Vext'
+        elif simulation_type == 'zimt':
+            unique_column_name = 'time'
+
+        val_unique = data_Var[unique_column_name].unique()
+
+        # Drop all rows that have the first or last blocking layer index in the lid column
+        rows_to_drop = data_Var[(data_Var['lid'] == block_layer_indices[0]) | (data_Var['lid'] == block_layer_indices[1])].index
+        data_Var.drop(rows_to_drop, inplace=True)
+
+        # Shift all values of the column lid down by 1
+        data_Var['lid'] = data_Var['lid'] - 1
+
+        # Loop over the unique values and remove the rows that have the first or last blocking layer index in the lid column
+        for val in val_unique:
+
+            # Get the subset of the data for the current unique value
+            data_Var_val = data_Var[data_Var[unique_column_name] == val]
+
+            # Shift the values in the x column with the first x value to start at 0
+            x_min = data_Var_val['x'].min()
+            data_Var.loc[data_Var[unique_column_name] == val, 'x'] = data_Var_val['x'] - x_min
+
+            # Fix the last mobility value, which could be changed due to how the interface is handled and stored in the Var file
+            indices = data_Var[data_Var[unique_column_name] == val].index
+            data_Var.loc[indices[-1], 'mun'] = data_Var.loc[indices[-2], 'mun']
+            data_Var.loc[indices[-1], 'mup'] = data_Var.loc[indices[-2], 'mup']
+
+            data_Var.to_csv(os.path.join(session_path, Var_file), sep=' ', index=False, float_format='%.11e')
+    else:
+        if Var_file != 'none':
+            print(f'Var file {Var_file} does not exist in {session_path}. Skipping formatting of Var file.')
+
+    # Save the modified Var file. Write every column in scietific notation with 11 float percisison
+    # pd.options.display.float_format = '{:.11e}'.format
+    # data_Var.to_csv(os.path.join(session_path, Var_file), sep=' ', index=False, float_format='%.11e')
+
+
+def process_output_contactless(session_path, simulation_setup, simulation_type, format_output=True, clean_simulation_setup=True, JV_file = 'JV.dat', tJ_file='tJ.dat', Var_file='Var.dat', block_layer_file='Block.txt'):
+    ''' Process the output files for a contactless device simulation. The log file is always updated.
+     If format_output = True, the simulation setup is reverted to its original state, 
+     and the output files are formatted to remove any data related to the blocking layers.
+
+    Parameters
+    ----------
+    session_path : str
+        Path to the session folder
+    simulation_setup : str
+        Name of the simulation setup file
+    simulation_type : str
+        Type of simulation: 'simss' or 'zimt'
+    format_output : bool
+        If True, the simulation setup is reverted to its original state and the output files are formatted
+    JV_file : str
+        Name of the JV file
+    tJ_file : str
+        Name of the tJ file
+    Var_file : str
+        Name of the Var file
+    block_layer_file : str
+        Name of the blocking layer file
+
+    Returns
+    -------
+    None
+    
+    '''
+    returncode_logFile = update_logFile(session_path, 'log.txt')
+
+    if returncode_logFile == 1:
+        print(f'Warning: could not find log file in {session_path}. Skipping update of log file.')
+
+    if format_output:
+        dev_pars,layers = load_device_parameters(session_path, simulation_setup)
+        num_layers = len(layers)-1 # Subtract 1 for the simulation setup
+
+        if clean_simulation_setup:
+            # Only clean everything when specified by the user. Otherwise issues arise when calling this function multiple times
+            # dev_pars,layers = load_device_parameters(session_path, simulation_setup)
+
+            # Revert simulation setup to original state by removing the blocking layers and updating the layer indices
+            num_layers = revert_simulation_setup(dev_pars, session_path, simulation_setup)
+
+            # remove the blocking layer file
+            if os.path.exists(os.path.join(session_path, block_layer_file)):
+                os.remove(os.path.join(session_path, block_layer_file))
+            else:
+                print(f'Warning: could not find blocking layer file {block_layer_file} in {session_path}. Skipping removal of blocking layer file.')
+
+        # Format the output files to remove any data related to the blocking layers
+        format_output_files(session_path, simulation_type, num_layers, JV_file, tJ_file, Var_file)
