@@ -1186,7 +1186,7 @@ def format_output_files(session_path, simulation_type, num_layers, JV_file='JV.d
             data_Var.loc[indices[-1], 'mun'] = data_Var.loc[indices[-2], 'mun']
             data_Var.loc[indices[-1], 'mup'] = data_Var.loc[indices[-2], 'mup']
 
-            data_Var.to_csv(os.path.join(session_path, Var_file), sep=' ', index=False, float_format='%.11e')
+        data_Var.to_csv(os.path.join(session_path, Var_file), sep=' ', index=False, float_format='%.11e')
     else:
         if Var_file != 'none':
             print(f'Var file {Var_file} does not exist in {session_path}. Skipping formatting of Var file.')
