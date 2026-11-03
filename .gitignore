@@ -27,6 +27,7 @@
 /SIMsalabim/SimSS/Var*.txt
 # Exceptions
 !requirements.txt
+!pySIMsalabim/tests/sim_inputs/**/*.txt
 !pySIMsalabim/**.py
 # !SIMsalabim/Data/**.txt
 # !SIMsalabim/Docs/**.txt
@@ -56,5 +57,7 @@ build/
 dist/
 *.egg-info/
 
+# agent stuff
+CLAUDE.md
 
 

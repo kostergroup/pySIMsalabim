@@ -18,8 +18,6 @@ First, you need to clone the repository and install the requirements. The requir
 
     pip install -r requirements.txt
 
-Similarly to the conda installation, if you plan on using the BoTorch/Ax optimizer you need to use the requirements_torch_CPU.txt file or install pytorch with the correct version for your system with the requirements.txt file.
-
 
 With conda
 **********************

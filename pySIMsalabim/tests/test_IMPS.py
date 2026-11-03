@@ -22,7 +22,7 @@ def test_run_IMPS_simu():
         cwd = os.path.abspath('.')
     else:
         cwd = os.path.abspath('../..')
-    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
     # Set the IMPS parameters
     tVG_name = os.path.join(session_path,'tVG.txt')
@@ -48,7 +48,7 @@ def test_IMPS_parallel():
             cwd = os.path.abspath('.')
         else:
             cwd = os.path.abspath('../..')
-        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
         session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
 
         def run(G_frac,ID): # function to run the IMPS simulation in parallel
@@ -87,6 +87,11 @@ def test_IMPS_parallel():
 
 
 if __name__ == '__main__':
-    test_run_IMPS_simu()
-    test_IMPS_parallel()
-    print('All IMPS tests passed')
+    from sim_inputs_setup import prepare_test_inputs, cleanup_test_inputs
+    prepare_test_inputs()
+    try:
+        test_run_IMPS_simu()
+        test_IMPS_parallel()
+        print('All IMPS tests passed')
+    finally:
+        cleanup_test_inputs()

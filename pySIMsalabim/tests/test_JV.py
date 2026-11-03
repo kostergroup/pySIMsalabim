@@ -22,7 +22,7 @@ def test_run_SS_JV():
         cwd = os.path.abspath('.')
     else:
         cwd = os.path.abspath('../..')
-    simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup.txt')
+    simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup_test.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','SimSS')
     # Set the JV parameters
     Gfracs = [0.1,0.5,1.0]
@@ -42,7 +42,7 @@ def test_SS_JV_parallel():
             cwd = os.path.abspath('.')
         else:
             cwd = os.path.abspath('../..')
-        simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup.txt')
+        simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup_test.txt')
         session_path = os.path.join(cwd, 'SIMsalabim','SimSS')
 
         def run(G_frac,ID): # function to run the JV simulation in parallel
@@ -76,13 +76,18 @@ def test_SS_JV_parallel():
 
 
 if __name__ == '__main__':
-    test_run_SS_JV()
-    test_SS_JV_parallel()
+    from sim_inputs_setup import prepare_test_inputs, cleanup_test_inputs
+    prepare_test_inputs()
+    try:
+        test_run_SS_JV()
+        test_SS_JV_parallel()
 
-    cwd = os.path.abspath('../..')
-    session_path = os.path.join(cwd, 'SIMsalabim','SimSS')
-    sim.clean_all_output(session_path)
-    sim.clean_up_output('Gfracs',session_path)
-    sim.delete_folders('tmp',session_path)
+        cwd = os.path.abspath('../..')
+        session_path = os.path.join(cwd, 'SIMsalabim','SimSS')
+        sim.clean_all_output(session_path)
+        sim.clean_up_output('Gfracs',session_path)
+        sim.delete_folders('tmp',session_path)
 
-    print('All JV tests passed')
+        print('All JV tests passed')
+    finally:
+        cleanup_test_inputs()

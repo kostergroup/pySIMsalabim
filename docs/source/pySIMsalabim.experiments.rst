@@ -60,6 +60,14 @@ pySIMsalabim.experiments.imps module
    :show-inheritance:
    :undoc-members:
 
+pySIMsalabim.experiments.trPL module
+------------------------------------
+
+.. automodule:: pySIMsalabim.experiments.trPL
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 Module contents
 ---------------
 

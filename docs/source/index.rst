@@ -62,6 +62,7 @@ CAPE - Centre for Advanced Photovoltaics and Thin-film Energy Devices, Universit
    /examples/impedance.ipynb
    /examples/CV.ipynb
    /examples/IMPS.ipynb
+   /examples/trPL.ipynb
    Notebook_Gallery
 
 .. toctree::

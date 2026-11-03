@@ -22,7 +22,7 @@ def test_run_EQE():
         cwd = os.path.abspath('.')
     else:
         cwd = os.path.abspath('../..')
-    simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup.txt')
+    simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup_test.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','SimSS')
     spectrum = os.path.join(cwd, 'SIMsalabim','Data','AM15G.txt')
     lambda_min = 300
@@ -51,7 +51,7 @@ def test_EQE_parallel():
     session_path = os.path.join(cwd, 'SIMsalabim','SimSS')
 
     def run(cmd_pars,ID):
-        simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup.txt')
+        simss_device_parameters = os.path.join(cwd, 'SIMsalabim','SimSS','simulation_setup_test.txt')
         session_path = os.path.join(cwd, 'SIMsalabim','SimSS')
         spectrum = os.path.join(cwd, 'SIMsalabim','Data','AM15G.txt')
         lambda_min = 300
@@ -91,7 +91,11 @@ def test_EQE_parallel():
     #     assert False, 'EQE parallel simulation failed'
 
 if __name__ == '__main__':
-    test_run_EQE()
-    test_EQE_parallel()
-    print('All EQE tests passed')
-
+    from sim_inputs_setup import prepare_test_inputs, cleanup_test_inputs
+    prepare_test_inputs()
+    try:
+        test_run_EQE()
+        test_EQE_parallel()
+        print('All EQE tests passed')
+    finally:
+        cleanup_test_inputs()

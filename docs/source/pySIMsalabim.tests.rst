@@ -4,6 +4,22 @@ pySIMsalabim.tests package
 Submodules
 ----------
 
+pySIMsalabim.tests.conftest module
+----------------------------------
+
+.. automodule:: pySIMsalabim.tests.conftest
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pySIMsalabim.tests.sim\_inputs\_setup module
+--------------------------------------------
+
+.. automodule:: pySIMsalabim.tests.sim_inputs_setup
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 pySIMsalabim.tests.test\_CV module
 ----------------------------------
 
@@ -64,6 +80,14 @@ pySIMsalabim.tests.test\_impedance module
 -----------------------------------------
 
 .. automodule:: pySIMsalabim.tests.test_impedance
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pySIMsalabim.tests.test\_trPL module
+------------------------------------
+
+.. automodule:: pySIMsalabim.tests.test_trPL
    :members:
    :show-inheritance:
    :undoc-members:

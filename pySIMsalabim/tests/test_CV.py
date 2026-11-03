@@ -22,7 +22,7 @@ def test_run_CV_simu():
         cwd = os.path.abspath('.')
     else:
         cwd = os.path.abspath('../..')
-    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
     # Set the CV parameters
     tVG_name = os.path.join(session_path,'tVG.txt')
@@ -49,7 +49,7 @@ def test_CV_parallel():
             cwd = os.path.abspath('.')
         else:
             cwd = os.path.abspath('../..')
-        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
         session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
 
         def run(G_frac,ID): # function to run the CV simulation in parallel
@@ -85,7 +85,12 @@ def test_CV_parallel():
         assert False, 'CV parallel simulation failed'
 
 
-if __name__ == "__main__":
-    test_run_CV_simu()
-    test_CV_parallel()
-    print('All CV tests passed')
+if __name__ == '__main__':
+    from sim_inputs_setup import prepare_test_inputs, cleanup_test_inputs
+    prepare_test_inputs()
+    try:
+        test_run_CV_simu()
+        test_CV_parallel()
+        print('All CV tests passed')
+    finally:
+        cleanup_test_inputs()

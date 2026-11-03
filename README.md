@@ -34,7 +34,6 @@ To install pySIMsalabim with pip you have two options:
     pip install -r requirements.txt
     ```
 
-    Similarly to the conda installation, if you plan on using the BoTorch/Ax optimizer you need to use the `requirements_torch_CPU.txt` file or install PyTorch with the correct version for your system with the `requirements.txt` file.
 
 ### With conda
 To install pySIMsalabim, you need to clone the repository and install the requirements. The requirements can be installed with the following command:
@@ -137,6 +136,10 @@ Note that `pytest` needs to be installed to run the tests. You can install `pyte
 ```bash
 pip install pytest
 ```
+
+## Further applications
+
+For more advanced usage and automated fitting of simulations, please check the repository [optimPV](https://github.com/openPV-lab/optimPV)
 
 ## Disclaimer
 This repository is still under development. If you find any bugs or have any questions, please contact us.

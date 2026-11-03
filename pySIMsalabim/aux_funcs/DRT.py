@@ -401,7 +401,11 @@ def linear_fit(time, y_data, tau='Auto', y_inf='Auto', bounds=None, scaling=True
     # Step 4: Solve 
     osqp_model = osqp.OSQP()
     osqp_model.setup(P, q, A, l, u, verbose=False)
-    osqp_result = osqp_model.solve()
+    try:
+        # osqp >= 1.0 warns unless raise_error is given; False keeps the previous behaviour
+        osqp_result = osqp_model.solve(raise_error=False)
+    except TypeError:  # osqp < 1.0: solve() takes no arguments
+        osqp_result = osqp_model.solve()
     
     # Step 5: Rescale results
     U = scale_factor*osqp_result.x

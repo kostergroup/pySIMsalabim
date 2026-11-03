@@ -44,6 +44,14 @@ pySIMsalabim.aux\_funcs.addons module
    :show-inheritance:
    :undoc-members:
 
+pySIMsalabim.aux\_funcs.light\_pulse module
+-------------------------------------------
+
+.. automodule:: pySIMsalabim.aux_funcs.light_pulse
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 Module contents
 ---------------
 

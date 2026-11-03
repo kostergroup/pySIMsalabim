@@ -1127,6 +1127,8 @@ def format_output_files(session_path, simulation_type, num_layers, JV_file='JV.d
             data_JV_tJ = pd.read_csv(os.path.join(session_path, tJ_file),sep=r'\s+')
 
     if not data_JV_tJ.empty:
+        cols_to_drop = []
+        cols_to_rename = {}
         # Loop over the column headers
         for col in data_JV_tJ.columns:
             if re.search(r'L\d+', col):
@@ -1136,14 +1138,16 @@ def format_output_files(session_path, simulation_type, num_layers, JV_file='JV.d
 
                 # If any of the digits is either the first or last layer, we should remove the column
                 if any(int(digit) in block_layer_indices for digit in digits):
-                    data_JV_tJ.drop(columns=col, inplace=True)
+                    cols_to_drop.append(col)
                 else:
                     # If the digit is not equal to the first or last blocking layer index, move the digit down by 1 to restore the original layer indices
                     new_col = col
                     for digit in digits:
                         new_digit = str(int(digit) - 1)
                         new_col = new_col.replace(digit, new_digit)
-                    data_JV_tJ.rename(columns={col: new_col}, inplace=True)
+                    cols_to_rename[col] = new_col
+
+        data_JV_tJ = data_JV_tJ.drop(columns=cols_to_drop).rename(columns=cols_to_rename)
 
         # Save the modified JV or tJ file
         if simulation_type == 'simss':
@@ -1166,7 +1170,7 @@ def format_output_files(session_path, simulation_type, num_layers, JV_file='JV.d
 
         # Drop all rows that have the first or last blocking layer index in the lid column
         rows_to_drop = data_Var[(data_Var['lid'] == block_layer_indices[0]) | (data_Var['lid'] == block_layer_indices[1])].index
-        data_Var.drop(rows_to_drop, inplace=True)
+        data_Var = data_Var.drop(rows_to_drop)
 
         # Shift all values of the column lid down by 1
         data_Var['lid'] = data_Var['lid'] - 1

@@ -22,7 +22,7 @@ def test_run_JV_sweep_simu():
         cwd = os.path.abspath('.')
     else:
         cwd = os.path.abspath('../..')
-    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
     # Set the JV_sweep parameters
     scan_speed = 0.1
@@ -50,7 +50,7 @@ def test_run_JV_sweep_logstep_simu():
         cwd = os.path.abspath('.')
     else:
         cwd = os.path.abspath('../..')
-    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
     # Set the JV_sweep parameters
     scan_speed = 0.1
@@ -80,7 +80,7 @@ def test_JV_sweep_parallel():
             cwd = os.path.abspath('.')
         else:
             cwd = os.path.abspath('../..')
-        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
         session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
 
         def run(scan_speed,ID): # function to run the JV_sweep simulation in parallel
@@ -117,7 +117,12 @@ def test_JV_sweep_parallel():
 
 
 if __name__ == '__main__':
-    test_run_JV_sweep_simu()
-    test_JV_sweep_parallel()
-    test_run_JV_sweep_logstep_simu()
-    print('All JV_sweep tests passed')
+    from sim_inputs_setup import prepare_test_inputs, cleanup_test_inputs
+    prepare_test_inputs()
+    try:
+        test_run_JV_sweep_simu()
+        test_JV_sweep_parallel()
+        test_run_JV_sweep_logstep_simu()
+        print('All JV_sweep tests passed')
+    finally:
+        cleanup_test_inputs()

@@ -22,7 +22,7 @@ def test_run_trPL_simu():
     else:
         cwd = os.path.abspath('../..')
 
-    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_trPL_test.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
 
     # Set the trPL parameters
@@ -48,7 +48,7 @@ def test_trPL_parallel():
             cwd = os.path.abspath('.')
         else:
             cwd = os.path.abspath('../..')
-        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_trPL_test.txt')
         session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
 
         def run(T,ID): # function to run the trPL simulation in parallel
@@ -76,6 +76,11 @@ def test_trPL_parallel():
 
 
 if __name__ == '__main__':
-    test_run_trPL_simu()
-    test_trPL_parallel()
-    print('All trPL tests passed')
+    from sim_inputs_setup import prepare_test_inputs, cleanup_test_inputs
+    prepare_test_inputs()
+    try:
+        test_run_trPL_simu()
+        test_trPL_parallel()
+        print('All trPL tests passed')
+    finally:
+        cleanup_test_inputs()

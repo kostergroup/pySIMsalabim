@@ -21,7 +21,7 @@ def test_run_impedance_simu():
         cwd = os.path.abspath('.')
     else:
         cwd = os.path.abspath('../..')
-    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
     session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
     # Set the impedance parameters
     tVG_name = os.path.join(session_path,'tVG.txt')
@@ -47,7 +47,7 @@ def test_impedance_parallel():
             cwd = os.path.abspath('.')
         else:
             cwd = os.path.abspath('../..')
-        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup.txt')
+        zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_test.txt')
         session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
 
         def run(G_frac,ID): # function to run the impedance simulation in parallel
@@ -84,6 +84,11 @@ def test_impedance_parallel():
 
 
 if __name__ == '__main__':
-    test_run_impedance_simu()
-    test_impedance_parallel()
-    print('All impedance tests passed')
+    from sim_inputs_setup import prepare_test_inputs, cleanup_test_inputs
+    prepare_test_inputs()
+    try:
+        test_run_impedance_simu()
+        test_impedance_parallel()
+        print('All impedance tests passed')
+    finally:
+        cleanup_test_inputs()
