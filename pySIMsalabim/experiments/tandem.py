@@ -147,7 +147,11 @@ def get_genProf_tandem(sim_setup_tandem, session_path, genProf = 'calc', cleanup
 
     # Run SIMsalabim simulation
     result, message = utils_gen.run_simulation('simss', tandemArgs, session_path)
-    returncode = result.returncode # Get the return code from the result object
+    
+    if type(result) is int:
+        returncode = result # If the result is an int, it is the return code
+    else:
+        returncode = result.returncode # Get the return code from the result object
 
     if returncode == 0 or returncode == 95 or returncode == 97:
         # Simulation succeeded, as we don't care about convergence
@@ -249,7 +253,7 @@ def write_genProf_subcells(genProf1, genProf2, session_path,filename_sub1='genPr
 
     return filename_sub1, filename_sub2 
 
-def create_simulation_setup_subcell(session_path, sim_setup_tandem, genProf_sub1, genProf_sub2, simulationSetupSub1 = 'simulation_setup_sub1.txt', 
+def create_simulation_setup_subcell(session_path, sim_setup_tandem, genProf_sub1, genProf_sub2, lid_sub1_end, lid_sub2_start, simulationSetupSub1 = 'simulation_setup_sub1.txt', 
                                     simulationSetupSub2 = 'simulation_setup_sub2.txt', JVFile = 'JV.dat', VarFile = 'Var.dat', logFile = 'log.txt', overwrite_sim_setup_subcells = True):
     """ Create the simulation setup files for subcell 1 and subcell 2 based on the main tandem simulation setup to run them independently.
     
@@ -263,6 +267,10 @@ def create_simulation_setup_subcell(session_path, sim_setup_tandem, genProf_sub1
         The filename of the generation profile for subcell 1.
     genProf_sub2 : str
         The filename of the generation profile for subcell 2.
+    lid_sub1_end : int
+        The layer index where subcell 1 ends.
+    lid_sub2_start : int
+        The layer index where subcell 2 starts.
     simulationSetupSub1 : str, optional
         The filename for the simulation setup of subcell 1, by default 'simulation_setup_sub1.txt'.
     simulationSetupSub2 : str, optional
@@ -347,42 +355,38 @@ def create_simulation_setup_subcell(session_path, sim_setup_tandem, genProf_sub1
     logFile_sub2 = '%s_sub2%s' % os.path.splitext(logFile)
 
     # Check if the simulation setup file for the subcells already exists, if so, remove it to avoid conflicts
-    if os.path.exists(os.path.join(session_path, simulationSetupSub1)):
-        # Only create the new simulation setup for subcell 1 if the file either does not exist or if the user wants to overwrite it
-        if overwrite_sim_setup_subcells:
-            # Create simulation setup for subcell 1
-            dev_par_sub1, _ = utils_devpar.load_device_parameters(session_path, sim_setup_tandem)
+    if overwrite_sim_setup_subcells or not os.path.exists(os.path.join(session_path, simulationSetupSub1)):
+        # Create simulation setup for subcell 1
+        dev_par_sub1, _ = utils_devpar.load_device_parameters(session_path, sim_setup_tandem)
 
-            # Filter only the layers for subcell 1 based on lid_sub1_end
-            layers_sub1 = dev_par_sub1[sim_setup_tandem][2][:lid_sub1_end + 1]
+        # Filter only the layers for subcell 1 based on lid_sub1_end
+        layers_sub1 = dev_par_sub1[sim_setup_tandem][2][:lid_sub1_end + 1]
 
-            # Update the simulation setup with several fixed parameters
-            dev_par_sub1 = update_simulation_setup(dev_par_sub1, sim_setup_tandem, genProf_sub1, layers_sub1, 'W_R', VarFile_sub1, JVFile_sub1, logFile_sub1)
+        # Update the simulation setup with several fixed parameters
+        dev_par_sub1 = update_simulation_setup(dev_par_sub1, sim_setup_tandem, genProf_sub1, layers_sub1, 'W_R', VarFile_sub1, JVFile_sub1, logFile_sub1)
 
-            par_file = utils_gen.devpar_write_to_txt(dev_par_sub1[sim_setup_tandem])
-            with open(os.path.join(session_path, simulationSetupSub1), "w") as f:
-                f.write(par_file)
+        par_file = utils_gen.devpar_write_to_txt(dev_par_sub1[sim_setup_tandem])
+        with open(os.path.join(session_path, simulationSetupSub1), "w") as f:
+            f.write(par_file)
 
-    if os.path.exists(os.path.join(session_path, simulationSetupSub2)):
-        # Only create the new simulation setup for subcell 2 if the file either does not exist or if the user wants to overwrite it
-        if overwrite_sim_setup_subcells:
-            # Create simulation setup for subcell 2
-            dev_par_sub2, _ = utils_devpar.load_device_parameters(session_path, sim_setup_tandem)
+    if overwrite_sim_setup_subcells or not os.path.exists(os.path.join(session_path, simulationSetupSub2)):
+        # Create simulation setup for subcell 2
+        dev_par_sub2, _ = utils_devpar.load_device_parameters(session_path, sim_setup_tandem)
 
-            # Filter only the layers for subcell 2 based on lid_sub2_start, we need to include the header 'Layers' seperately as required by the object structure
-            layers_sub2 = dev_par_sub2[sim_setup_tandem][2][lid_sub2_start:]
-            layers_sub2 = ['Layers'] + layers_sub2
+        # Filter only the layers for subcell 2 based on lid_sub2_start, we need to include the header 'Layers' seperately as required by the object structure
+        layers_sub2 = dev_par_sub2[sim_setup_tandem][2][lid_sub2_start:]
+        layers_sub2 = ['Layers'] + layers_sub2
 
-            # Shift layer indices for subcell 2 to start from l1 again
-            for i, layer in enumerate(layers_sub2[1:], start=1):
-                layer[1] = f'l{i}'
-            dev_par_sub2[sim_setup_tandem][2] = layers_sub2
+        # Shift layer indices for subcell 2 to start from l1 again
+        for i, layer in enumerate(layers_sub2[1:], start=1):
+            layer[1] = f'l{i}'
+        dev_par_sub2[sim_setup_tandem][2] = layers_sub2
 
-            # Update the simulation setup with several fixed parameters
-            dev_par_sub2 = update_simulation_setup(dev_par_sub2, sim_setup_tandem, genProf_sub2,layers_sub2, 'W_L', VarFile_sub2, JVFile_sub2, logFile_sub2)
-            par_file_2 = utils_gen.devpar_write_to_txt(dev_par_sub2[sim_setup_tandem])
-            with open(os.path.join(session_path, simulationSetupSub2), "w") as f:
-                f.write(par_file_2)
+        # Update the simulation setup with several fixed parameters
+        dev_par_sub2 = update_simulation_setup(dev_par_sub2, sim_setup_tandem, genProf_sub2,layers_sub2, 'W_L', VarFile_sub2, JVFile_sub2, logFile_sub2)
+        par_file_2 = utils_gen.devpar_write_to_txt(dev_par_sub2[sim_setup_tandem])
+        with open(os.path.join(session_path, simulationSetupSub2), "w") as f:
+            f.write(par_file_2)
 
     return (simulationSetupSub1, JVFile_sub1, VarFile_sub1, logFile_sub1), (simulationSetupSub2, JVFile_sub2, VarFile_sub2, logFile_sub2)
 
@@ -466,9 +470,6 @@ def run_subcells(session_path, output_subcell1, output_subcell2, cmd_pars_sub1=N
         if VarFile_sub2 != 'none':
             VarFile_sub2 = f"{os.path.splitext(VarFile_sub2)[0]}_{UUID}{os.path.splitext(VarFile_sub2)[1]}"
 
-
-
-
     # Run SimSS for subcell 1
     cmd_pars = [{'par':'dev_par_file','val':simulation_setup_sub1},
                 {'par':'JVFile','val':JVFile_sub1},
@@ -480,7 +481,11 @@ def run_subcells(session_path, output_subcell1, output_subcell2, cmd_pars_sub1=N
         cmd_pars = update_cmd_pars(cmd_pars, cmd_pars_sub1)
 
     result_sub1, message_sub1 = utils_gen.run_simulation('simss', cmd_pars, session_path)
-    returncode_sub1 = result_sub1.returncode
+    
+    if type(result_sub1) is int:
+        returncode_sub1 = result_sub1
+    else:
+        returncode_sub1 = result_sub1.returncode
 
     # Run SimSS for subcell 2
     cmd_pars = [{'par':'dev_par_file','val':simulation_setup_sub2},
@@ -493,7 +498,10 @@ def run_subcells(session_path, output_subcell1, output_subcell2, cmd_pars_sub1=N
         cmd_pars = update_cmd_pars(cmd_pars, cmd_pars_sub2)
 
     result_sub2, message_sub2 = utils_gen.run_simulation('simss', cmd_pars, session_path)
-    returncode_sub2 = result_sub2.returncode
+    if type(result_sub2) is int:
+        returncode_sub2 = result_sub2
+    else:
+        returncode_sub2 = result_sub2.returncode
 
     return (returncode_sub1, JVFile_sub1, VarFile_sub1, logFile_sub1), (returncode_sub2, JVFile_sub2, VarFile_sub2, logFile_sub2)
 
@@ -997,12 +1005,14 @@ def run_tandem_simu( sim_setup_tandem, session_path, lid_sub1_end, lid_sub2_star
     genProf_sub1_filename, genProf_sub2_filename = write_genProf_subcells(genProf1, genProf2, session_path, UUID=UUID)
 
     # Create the simulation setup files for subcell 1 and subcell 2 based on the main tandem simulation setup to run them independently
-    output_subcell1, output_subcell2 = create_simulation_setup_subcell(session_path, sim_setup_tandem, genProf_sub1_filename, genProf_sub2_filename)
+    output_subcell1, output_subcell2 = create_simulation_setup_subcell(session_path, sim_setup_tandem, genProf_sub1_filename, genProf_sub2_filename, lid_sub1_end, lid_sub2_start)
 
     # If cmd_pars are provided, split them into two separate lists for subcell 1 and subcell 2 based on the layer indices.
     # As cmd_pars are provided for the entire tandem, to run the two subcells, the layer indices need to be adjusted for subcell 2 to start from l1 again.
     if cmd_pars is not None:
         cmd_pars_sub1, cmd_pars_sub2 = split_cmd_pars_subcells(cmd_pars, lid_sub2_start)
+    else:
+        cmd_pars_sub1, cmd_pars_sub2 = None, None
 
     # Simulate both subcells individually with perfect ohmic contact to get the maximum possible tandem voltage
     if calc_ideal_tandem:
@@ -1078,6 +1088,8 @@ def run_tandem_simu( sim_setup_tandem, session_path, lid_sub1_end, lid_sub2_star
             file_path = os.path.join(session_path, file)
             if os.path.exists(file_path):
                 os.remove(file_path)
+
+    return 0, ''
 
 if __name__ == "__main__":
     
@@ -1163,5 +1175,6 @@ if __name__ == "__main__":
     # Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list
     cmd_pars.extend({'par': key, 'val': value} for key, value in cmd_pars_dict.items())
 
-    run_tandem_simu(sim_setup_tandem, session_path, lid_sub1_end, lid_sub2_start, rec_contact_type, Rrec, Vp, Jp, True, False 
-                    , JVFile, varFile, logFile, cmd_pars = cmd_pars, UUID=UUID)
+    returncode, message =  run_tandem_simu(sim_setup_tandem, session_path, lid_sub1_end, lid_sub2_start, 
+                                           rec_contact_type, Rrec, Vp, Jp, True, False , JVFile, varFile, logFile, 
+                                           cmd_pars = cmd_pars, UUID=UUID)

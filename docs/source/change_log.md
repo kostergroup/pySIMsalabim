@@ -13,7 +13,7 @@ v1.05 - 2026-08-11 - VMLC-PV, SH
 - trPL.py: added `plot_trPL_pulse(session_path, output_file, freq, t_pulse, pulse=-1, ...)` to plot one or several pulses (e.g. `pulse=[1, 2, -1]`) of a pulse train simulation on a common time axis. `-1` is the last pulse in the output file, which can be fewer than `num_pulses` when ZimT stops early or on a timeout.
 - utils/device_parameters.py: Added functions to create a contactless device (See Application Note 6.1 in SIMsalabim Manual (version 5.36 and higher))
 - reshaped some of the test and added default input files to run the tests.
-- experiments: Added steady-state tandem JV experiment
+- experiments: Added steady-state tandem JV experiment (including Notebook and test)
 
 v1.04 - 2026-02-17 - VMLC-PV, SH, JLE
 ---------------------------------------
