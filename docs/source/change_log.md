@@ -11,6 +11,7 @@ v1.05 - 2026-08-11 - VMLC-PV, SH
 - aux_funcs/light_pulse.py: added a new set of functions to run a ZimT simulation for a (Gaussian) light pulse . This is used for the trPL experiment, but generalised to be used for other future experiments as well (e.g. SPV, TPC, TPV, ...)
 - utils/device_parameters.py: Added functions to create a contactless device (See Application Note 6.1 in SIMsalabim Manual (version 5.36 and higher))
 - reshaped some of the test and added default input files to run the tests.
+- experiments: Added steady-state tandem JV experiment
 
 v1.04 - 2026-02-17 - VMLC-PV, SH, JLE
 ---------------------------------------
