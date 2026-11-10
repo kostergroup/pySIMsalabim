@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.tests.sim_inputs_setup &mdash; pySIMsalabim 1.05 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=c83e6b79" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8214e1ae"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/trPL.html">trPL simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.tests.sim_inputs_setup</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.tests.sim_inputs_setup</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Prepare the SIMsalabim input files used by the pySIMsalabim tests.</span>
+
+<span class="sd">The tests use their own input files, stored in ``sim_inputs/default/{SimSS,ZimT}`` and named</span>
+<span class="sd">``*_test.txt`` so that they never overwrite the user's own files in the SIMsalabim folder.</span>
+
+<span class="sd">``prepare_test_inputs()``:</span>
+<span class="sd">  1. compares the version of every ``simulation_setup*.txt`` in sim_inputs (and of the layer files</span>
+<span class="sd">     it references) with the SIMsalabim version (``version = 'X.YY'`` in simss.pas / zimt.pas);</span>
+<span class="sd">  2. on a mismatch, compiles SIMsalabim's Updater (Tools/Updater/Updater.pas) if needed, places a</span>
+<span class="sd">     temporary copy next to the input files and runs it *interactively* (the user answers its questions),</span>
+<span class="sd">     converting them *in place* in sim_inputs</span>
+<span class="sd">     (the converted files show up in ``git status`` and can be committed as the new baseline);</span>
+<span class="sd">  3. copies the input files into SIMsalabim/SimSS and SIMsalabim/ZimT, where the tests run.</span>
+
+<span class="sd">``cleanup_test_inputs()`` deletes the copied files again, plus the Block.txt created by the</span>
+<span class="sd">contactless-device tests (trPL) if it did not exist before.</span>
+
+<span class="sd">Both are called by conftest.py (pytest session start/finish), by the ``__main__`` block of</span>
+<span class="sd">each test file when it is run directly, and by the example notebooks in Notebooks/.</span>
+<span class="sd">The notebooks call ``prepare_test_inputs(convert=False)``: a Jupyter kernel cannot give the</span>
+<span class="sd">interactive Updater a terminal, so on a version mismatch they stop and ask the user to convert the</span>
+<span class="sd">files from a terminal with</span>
+
+<span class="sd">    python pySIMsalabim/tests/sim_inputs_setup.py</span>
+
+<span class="sd">which only checks/converts the files in sim_inputs (nothing is copied).</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">TESTS_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">SIM_INPUTS_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TESTS_DIR</span><span class="p">,</span> <span class="s1">'sim_inputs'</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">)</span>
+<span class="n">SIMSALABIM_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TESTS_DIR</span><span class="p">,</span> <span class="s1">'..'</span><span class="p">,</span> <span class="s1">'..'</span><span class="p">,</span> <span class="s1">'SIMsalabim'</span><span class="p">))</span>
+<span class="n">UPDATER_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SIMSALABIM_DIR</span><span class="p">,</span> <span class="s1">'Tools'</span><span class="p">,</span> <span class="s1">'Updater'</span><span class="p">)</span>
+
+<span class="n">IS_WINDOWS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">'nt'</span>
+<span class="n">EXE_EXT</span> <span class="o">=</span> <span class="s1">'.exe'</span> <span class="k">if</span> <span class="n">IS_WINDOWS</span> <span class="k">else</span> <span class="s1">''</span>
+
+<span class="c1"># Program folder in SIMsalabim -&gt; name of its executable / source file</span>
+<span class="n">PROGRAMS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'SimSS'</span><span class="p">:</span> <span class="s1">'simss'</span><span class="p">,</span> <span class="s1">'ZimT'</span><span class="p">:</span> <span class="s1">'zimt'</span><span class="p">}</span>
+
+<span class="c1"># Files created in SIMsalabim by the tests themselves, removed at cleanup only if they did not exist before</span>
+<span class="n">GENERATED_FILES</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'ZimT'</span><span class="p">,</span> <span class="s1">'Block.txt'</span><span class="p">)]</span>
+
+<span class="n">_FILE_VERSION_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^\*\*\s*version:\s*(\d+\.\d+)'</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+<span class="n">_SOURCE_VERSION_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^\s*version\s*=\s*'(\d+\.\d+)'"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+<span class="n">_LAYER_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^l\d+\s*=\s*(\S+)'</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+
+<span class="c1"># State shared between prepare_test_inputs() and cleanup_test_inputs()</span>
+<span class="n">_copied_files</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">_generated_to_remove</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<div class="viewcode-block" id="TestInputsError">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.TestInputsError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestInputsError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Raised when the test input files cannot be prepared."""</span></div>
+
+
+
+<span class="c1">######### Version handling #########################################################################</span>
+
+<div class="viewcode-block" id="get_simsalabim_version">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.get_simsalabim_version">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_simsalabim_version</span><span class="p">(</span><span class="n">program_dir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return the version string (e.g. '5.37') declared in SIMsalabim's &lt;prog&gt;.pas source."""</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SIMSALABIM_DIR</span><span class="p">,</span> <span class="n">program_dir</span><span class="p">,</span> <span class="n">PROGRAMS</span><span class="p">[</span><span class="n">program_dir</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'.pas'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'SIMsalabim source not found: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s1">. Install SIMsalabim first '</span>
+                              <span class="s1">'(see pySIMsalabim.install.get_SIMsalabim.install_SIMsalabim).'</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'replace'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">_SOURCE_VERSION_RE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Could not find the version number in </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s1">.'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_input_versions">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.get_input_versions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_input_versions</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">setup_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return {file name: version} for a simulation setup file and every layer file it references."""</span>
+    <span class="n">setup</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">setup_name</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">setup</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">setup_name</span><span class="p">]</span> <span class="o">+</span> <span class="n">_LAYER_RE</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+    <span class="n">versions</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>  <span class="c1"># keep order, drop duplicates</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Test input file </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1"> (referenced by </span><span class="si">{</span><span class="n">setup</span><span class="si">}</span><span class="s1">) does not exist.'</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">_FILE_VERSION_RE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="n">versions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">match</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">versions</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_version_key</span><span class="p">(</span><span class="n">version</span><span class="p">):</span>
+    <span class="n">major</span><span class="p">,</span> <span class="n">minor</span> <span class="o">=</span> <span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">major</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">minor</span><span class="p">)</span>
+
+
+<span class="c1">######### Updater ##################################################################################</span>
+
+<div class="viewcode-block" id="compile_updater">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.compile_updater">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compile_updater</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Compile SIMsalabim's Updater if the binary is missing or older than Updater.pas.</span>
+<span class="sd">    Returns the path to the binary."""</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">UPDATER_DIR</span><span class="p">,</span> <span class="s1">'Updater.pas'</span><span class="p">)</span>
+    <span class="n">binary</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">UPDATER_DIR</span><span class="p">,</span> <span class="s1">'Updater'</span> <span class="o">+</span> <span class="n">EXE_EXT</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Cannot convert the test input files: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s1"> not found.'</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">binary</span>
+
+    <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s1">'fpc'</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="s1">'The test input files need converting, but the Free Pascal Compiler (fpc) '</span>
+                              <span class="s1">'needed to compile the Updater was not found.'</span><span class="p">)</span>
+
+    <span class="c1"># Must run from the Updater folder: Updater.pas locates SIMsalabim's units via ../../Units/</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">'fpc'</span><span class="p">,</span> <span class="s1">'Updater.pas'</span><span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">UPDATER_DIR</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">binary</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Compiling the Updater failed (exit code </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">returncode</span><span class="si">}</span><span class="s1">):</span><span class="se">\n</span><span class="s1">'</span>
+                              <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">binary</span></div>
+
+
+
+<div class="viewcode-block" id="run_updater">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.run_updater">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_updater</span><span class="p">(</span><span class="n">updater_binary</span><span class="p">,</span> <span class="n">input_dir</span><span class="p">,</span> <span class="n">setup_name</span><span class="p">,</span> <span class="n">terminal_access</span><span class="o">=</span><span class="n">contextlib</span><span class="o">.</span><span class="n">nullcontext</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Run a temporary copy of the Updater in input_dir to convert setup_name and its layer files in place.</span>
+
+<span class="sd">    The Updater runs interactively in the user's terminal: its output is shown and the user answers its</span>
+<span class="sd">    questions (overwrite confirmation, warnings) themselves. terminal_access is a context manager that</span>
+<span class="sd">    gives the subprocess the real terminal (conftest.py uses it to suspend pytest's capturing).</span>
+<span class="sd">    Returns the Updater's exit code."""</span>
+    <span class="n">tmp_updater</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">updater_binary</span><span class="p">))</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">updater_binary</span><span class="p">,</span> <span class="n">tmp_updater</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmp_updater</span> <span class="k">if</span> <span class="n">IS_WINDOWS</span> <span class="k">else</span> <span class="s1">'./'</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">tmp_updater</span><span class="p">),</span> <span class="n">setup_name</span><span class="p">]</span>
+        <span class="k">with</span> <span class="n">terminal_access</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="se">\n</span><span class="s1">--- Running the SIMsalabim Updater on </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span><span class="w"> </span><span class="n">setup_name</span><span class="p">)</span><span class="si">}</span><span class="s1"> ---'</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">returncode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">input_dir</span><span class="p">)</span><span class="o">.</span><span class="n">returncode</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'--- Updater finished ---</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmp_updater</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">returncode</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_sync_setup</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">setup_name</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="n">terminal_access</span><span class="o">=</span><span class="n">contextlib</span><span class="o">.</span><span class="n">nullcontext</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">versions</span> <span class="o">=</span> <span class="n">get_input_versions</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">setup_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">target</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">versions</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="k">return</span>
+
+    <span class="n">found</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">versions</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">versions</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'No version number found in some test input files in </span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">found</span><span class="si">}</span><span class="s1">).'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">_version_key</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">_version_key</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">versions</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Test input files in </span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s1"> are newer than SIMsalabim </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">found</span><span class="si">}</span><span class="s1">). '</span>
+                              <span class="s1">'The Updater can only upgrade files: update SIMsalabim.'</span><span class="p">)</span>
+
+    <span class="c1"># The Updater steps a setup file and its layer files up together, one version at a time, and only</span>
+    <span class="c1"># updates layer files that are at the same version as the setup file. A mixed set cannot be converted.</span>
+    <span class="n">setup_version</span> <span class="o">=</span> <span class="n">versions</span><span class="p">[</span><span class="n">setup_name</span><span class="p">]</span>
+    <span class="n">mismatched</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">versions</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="n">setup_version</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">mismatched</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">setup_name</span><span class="si">}</span><span class="s1"> is at version </span><span class="si">{</span><span class="n">setup_version</span><span class="si">}</span><span class="s1">, but some of its layer files are not (</span><span class="si">{</span><span class="n">found</span><span class="si">}</span><span class="s1">) in '</span>
+            <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s1">.</span><span class="se">\n</span><span class="s1">The Updater only converts layer files that are at the same version as their setup '</span>
+            <span class="sa">f</span><span class="s1">'file, so it cannot fix this. Bring </span><span class="si">{</span><span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mismatched</span><span class="p">)</span><span class="si">}</span><span class="s1"> to version </span><span class="si">{</span><span class="n">setup_version</span><span class="si">}</span><span class="s1"> '</span>
+            <span class="sa">f</span><span class="s1">'(or the whole set to the same version) first.'</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">convert</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">setup_name</span><span class="si">}</span><span class="s1"> and its layer files in </span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s1"> are at version </span><span class="si">{</span><span class="n">setup_version</span><span class="si">}</span><span class="s1">, but SIMsalabim is '</span>
+            <span class="sa">f</span><span class="s1">'at version </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">.</span><span class="se">\n</span><span class="s1">Convert them with the SIMsalabim Updater by running, from a terminal in the '</span>
+            <span class="sa">f</span><span class="s1">'pySIMsalabim folder:</span><span class="se">\n</span><span class="s1">    python </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"pySIMsalabim"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tests"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sim_inputs_setup.py"</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+
+    <span class="n">returncode</span> <span class="o">=</span> <span class="n">run_updater</span><span class="p">(</span><span class="n">compile_updater</span><span class="p">(),</span> <span class="n">input_dir</span><span class="p">,</span> <span class="n">setup_name</span><span class="p">,</span> <span class="n">terminal_access</span><span class="p">)</span>
+    <span class="n">new_versions</span> <span class="o">=</span> <span class="n">get_input_versions</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">setup_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="o">!=</span> <span class="n">target</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">new_versions</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="n">new_found</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">new_versions</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The test input files in </span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s1"> were not converted to SIMsalabim </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1"> '</span>
+                              <span class="sa">f</span><span class="s1">'(Updater exit code </span><span class="si">{</span><span class="n">returncode</span><span class="si">}</span><span class="s1">; versions now </span><span class="si">{</span><span class="n">new_found</span><span class="si">}</span><span class="s1">). '</span>
+                              <span class="s1">'Either the conversion was declined or the Updater stopped with an error (see its output above).'</span><span class="p">)</span>
+    <span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Converted </span><span class="si">{</span><span class="n">setup_name</span><span class="si">}</span><span class="s1"> (and its layer files) in </span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s1"> from (</span><span class="si">{</span><span class="n">found</span><span class="si">}</span><span class="s1">) to </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">.'</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="sync_input_versions">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.sync_input_versions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sync_input_versions</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">program_dir</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="n">terminal_access</span><span class="o">=</span><span class="n">contextlib</span><span class="o">.</span><span class="n">nullcontext</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Make sure every simulation_setup*.txt in input_dir (and the layer files it references)</span>
+<span class="sd">    matches the SIMsalabim version, converting them if needed (or raising TestInputsError if convert is False)."""</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">get_simsalabim_version</span><span class="p">(</span><span class="n">program_dir</span><span class="p">)</span>
+    <span class="n">setups</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="s1">'simulation_setup*.txt'</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">setups</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'No simulation_setup*.txt found in </span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s1">.'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">setup_name</span> <span class="ow">in</span> <span class="n">setups</span><span class="p">:</span>
+        <span class="n">_sync_setup</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">setup_name</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">terminal_access</span><span class="p">,</span> <span class="n">convert</span><span class="p">)</span></div>
+
+
+
+<span class="c1">######### Copy / cleanup ###########################################################################</span>
+
+<div class="viewcode-block" id="sync_all_inputs">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.sync_all_inputs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sync_all_inputs</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="n">terminal_access</span><span class="o">=</span><span class="n">contextlib</span><span class="o">.</span><span class="n">nullcontext</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Check (and convert if needed and allowed) the SimSS and ZimT test input files.</span>
+<span class="sd">    Returns the list of (program folder, input folder) that exist."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">SIMSALABIM_DIR</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">TestInputsError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'SIMsalabim folder not found at </span><span class="si">{</span><span class="n">SIMSALABIM_DIR</span><span class="si">}</span><span class="s1">.'</span><span class="p">)</span>
+    <span class="n">input_dirs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">program_dir</span> <span class="ow">in</span> <span class="n">PROGRAMS</span><span class="p">:</span>
+        <span class="n">input_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SIM_INPUTS_DIR</span><span class="p">,</span> <span class="n">program_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">input_dir</span><span class="p">):</span>
+            <span class="n">sync_input_versions</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">program_dir</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">terminal_access</span><span class="p">,</span> <span class="n">convert</span><span class="p">)</span>
+            <span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Test inputs for </span><span class="si">{</span><span class="n">program_dir</span><span class="si">}</span><span class="s1">: version matches SIMsalabim </span><span class="si">{</span><span class="n">get_simsalabim_version</span><span class="p">(</span><span class="n">program_dir</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+            <span class="n">input_dirs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">program_dir</span><span class="p">,</span> <span class="n">input_dir</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">input_dirs</span></div>
+
+
+
+<div class="viewcode-block" id="prepare_test_inputs">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.prepare_test_inputs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_test_inputs</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="n">terminal_access</span><span class="o">=</span><span class="n">contextlib</span><span class="o">.</span><span class="n">nullcontext</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bring the test input files to the SIMsalabim version and copy them into SIMsalabim/SimSS and ZimT.</span>
+<span class="sd">    log is called with each progress message (print by default; conftest.py passes pytest's terminal writer).</span>
+<span class="sd">    terminal_access is a context manager giving the interactive Updater access to the terminal.</span>
+<span class="sd">    With convert=False (used by the notebooks) a version mismatch raises TestInputsError instead of</span>
+<span class="sd">    running the Updater. All versions are checked before anything is copied."""</span>
+    <span class="n">input_dirs</span> <span class="o">=</span> <span class="n">sync_all_inputs</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">terminal_access</span><span class="p">,</span> <span class="n">convert</span><span class="p">)</span>
+
+    <span class="n">_generated_to_remove</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">GENERATED_FILES</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SIMSALABIM_DIR</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
+
+    <span class="k">for</span> <span class="n">program_dir</span><span class="p">,</span> <span class="n">input_dir</span> <span class="ow">in</span> <span class="n">input_dirs</span><span class="p">:</span>
+        <span class="n">dest_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SIMSALABIM_DIR</span><span class="p">,</span> <span class="n">program_dir</span><span class="p">)</span>
+        <span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Copying the </span><span class="si">{</span><span class="n">program_dir</span><span class="si">}</span><span class="s1"> test inputs to </span><span class="si">{</span><span class="n">dest_dir</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_dir</span><span class="p">)):</span>
+            <span class="n">src</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>
+                <span class="n">dest</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dest_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">dest</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_copied_files</span><span class="p">:</span>
+                    <span class="n">_copied_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="cleanup_test_inputs">
+<a class="viewcode-back" href="../../../pySIMsalabim.tests.html#pySIMsalabim.tests.sim_inputs_setup.cleanup_test_inputs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cleanup_test_inputs</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Delete the files copied by prepare_test_inputs() and the files generated by the tests."""</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">_copied_files</span> <span class="o">+</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SIMSALABIM_DIR</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">_generated_to_remove</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">_copied_files</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">_generated_to_remove</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="c1"># Check the test input files against the SIMsalabim version and convert them interactively if</span>
+    <span class="c1"># needed (nothing is copied to the SIMsalabim folder).</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sync_all_inputs</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">TestInputsError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, 2025, 2024, Vincent M. Le Corre, Sander Heester, Fransien Elhorst, Joshua Luke Edmundson, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.aux_funcs.light_pulse &mdash; pySIMsalabim 1.05 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=c83e6b79" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8214e1ae"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/trPL.html">trPL simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.aux_funcs.light_pulse</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.aux_funcs.light_pulse</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Functions to run a ZimT simulation using a (Gaussian) light pulse"""</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="c1"># import pySIMsalabim</span>
+<span class="c1">## Import pySIMsalabim, if not successful, add the parent directory to the system path</span>
+<span class="k">try</span> <span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Add the parent directory to the system path</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">'../..'</span><span class="p">)))</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">general</span> <span class="k">as</span> <span class="n">utils_gen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.device_parameters</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+<div class="viewcode-block" id="create_spectrum">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.light_pulse.create_spectrum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_spectrum</span><span class="p">(</span><span class="n">I_pulse</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">spectrum_name</span><span class="p">,</span> <span class="n">spectrum_path</span> <span class="o">=</span> <span class="s1">''</span><span class="p">,</span> <span class="n">lambda_min</span><span class="o">=</span><span class="mf">280E-9</span><span class="p">,</span> <span class="n">lambda_max</span><span class="o">=</span><span class="mf">4000E-9</span><span class="p">,</span> <span class="n">lambda_step</span><span class="o">=</span><span class="mf">1E-9</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">''' Create a spectrum file with monochrqamtic wavelength, which contains the wavelength (lambda) and the irradiance (I) for each wavelength. </span>
+<span class="sd">    The spectrum is defined as a Gaussian pulse with the specified parameters.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    I_pulse : float</span>
+<span class="sd">        The intensity of the pulse in photons/m^2/pulse</span>
+<span class="sd">    wavelength : float</span>
+<span class="sd">        The wavelength of the pulse in meters</span>
+<span class="sd">    FWHM : float</span>
+<span class="sd">        The full width at half maximum (FWHM) of the pulse</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        The path to the session folder, which is the working directory for the simulation</span>
+<span class="sd">    spectrum_name : string</span>
+<span class="sd">        The name of the spectrum file to create, which will be saved in the session path/spectrum_path</span>
+<span class="sd">    spectrum_path : string, optional</span>
+<span class="sd">        The path to the folder where the spectrum file will be saved, relative to the session path, by default ''</span>
+<span class="sd">    lambda_min : float, optional</span>
+<span class="sd">        The minimum wavelength to include in the spectrum, by default 280E-9</span>
+<span class="sd">    lambda_max : float, optional</span>
+<span class="sd">        The maximum wavelength to include in the spectrum, by default 4000E-9</span>
+<span class="sd">    lambda_step : float, optional</span>
+<span class="sd">        The wavelength step to use in the spectrum, by default 1E-9</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        The path to the created spectrum file, relative to the session path</span>
+<span class="sd">    '''</span>
+    
+    <span class="c1"># Cover the entire lambda range, even though most will be zero</span>
+    <span class="n">lambdas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lambda_min</span><span class="p">,</span> <span class="n">lambda_max</span><span class="p">,</span> <span class="n">lambda_step</span><span class="p">)</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lambdas</span><span class="p">))</span>
+
+    <span class="c1"># Calculate the Irradiance for the given wavelength</span>
+    <span class="n">Irr</span> <span class="o">=</span> <span class="p">(</span><span class="n">I_pulse</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">h</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c</span><span class="o">/</span><span class="n">wavelength</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span><span class="o">/</span><span class="n">FWHM</span><span class="p">)</span><span class="o">/</span><span class="mf">1E-9</span> 
+
+    <span class="c1"># Create a dataframe with the wavelengths and Irr</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'lambda'</span><span class="p">:</span> <span class="n">lambdas</span><span class="p">,</span> <span class="s1">'I'</span><span class="p">:</span> <span class="n">I</span><span class="p">})</span>
+
+    <span class="c1"># find the column where lambda is closest to the main pulse wavelength and add the irradiance for that wavelength</span>
+    <span class="n">closest_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">lambdas</span> <span class="o">-</span> <span class="n">wavelength</span><span class="p">))</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">closest_index</span><span class="p">,</span> <span class="s1">'I'</span><span class="p">]</span> <span class="o">=</span> <span class="n">Irr</span>
+
+    <span class="c1"># Save the dataframe to a csv file</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">spectrum_path</span><span class="p">,</span> <span class="n">spectrum_name</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">' '</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">'</span><span class="si">%.3e</span><span class="s1">'</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spectrum_path</span><span class="p">,</span> <span class="n">spectrum_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gaussian_pulse">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.light_pulse.gaussian_pulse">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">gaussian_pulse</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">''' Normalised Gaussian light pulse (peak = 1) evaluated on a time array. G is forced to 0 at the first time point (t=0).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time : array</span>
+<span class="sd">        The time array</span>
+<span class="sd">    t_pulse : float</span>
+<span class="sd">        The center of the pulse in time</span>
+<span class="sd">    FWHM : float</span>
+<span class="sd">        The full width at half maximum (FWHM) of the pulse</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    array</span>
+<span class="sd">        The generation profile (G_frac) for each time point</span>
+<span class="sd">    '''</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">FWHM</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">-</span> <span class="n">t_pulse</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Input Function (Gaussian Laser Pulse)</span>
+    <span class="n">G</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Force G=0 at t=0</span>
+    <span class="k">return</span> <span class="n">G</span></div>
+
+
+<div class="viewcode-block" id="create_tVG_light_pulse">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.light_pulse.create_tVG_light_pulse">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tVG_light_pulse</span><span class="p">(</span><span class="n">tmax</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">t_scale</span> <span class="o">=</span> <span class="s1">'lin'</span><span class="p">,</span> <span class="n">t_step</span> <span class="o">=</span> <span class="mf">1E-9</span><span class="p">,</span> <span class="n">t_pulse</span> <span class="o">=</span> <span class="mf">40E-9</span><span class="p">,</span> <span class="n">FWHM</span> <span class="o">=</span> <span class="mf">2E-9</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">num_pulses</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">G_frac</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">steps_FWHM</span> <span class="o">=</span> <span class="mi">200</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">''' Create a tVG file for a light pulse simulation, which contains the time (t), the external voltage (Vext), the generation profile (G_frac) and the Track state for each time step. </span>
+<span class="sd">    The generation profile is defined as a Gaussian pulse with the specified parameters.</span>
+
+<span class="sd">    Two modes are available:</span>
+
+<span class="sd">    - single pulse (num_pulses is None, default): one pulse, simulated from t=0 until tmax, using t_scale and t_step.</span>
+<span class="sd">    - pulse train (num_pulses is not None): num_pulses pulses with a repetition frequency freq. Each period (1/freq) is</span>
+<span class="sd">      resolved with a fine linear grid (FWHM/steps_FWHM) over the pulse followed by 'steps' logarithmically spaced points until the end of the period ('log' t_scale), </span>
+<span class="sd">      or with 'steps' linearly spaced points over the period ('lin' t_scale). The grid of one pulse is then repeated num_pulses times. tmax and t_step are ignored in this mode.</span>
+<span class="sd">      The Track column is 1 at the end of the first period and 3 at the end of the following periods.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmax : float</span>
+<span class="sd">        The maximum time for the experiment (single pulse only)</span>
+<span class="sd">    tVG_name : string</span>
+<span class="sd">        The name of the tVG file to create, which will be saved in the session path</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        The path to the session folder, which is the working directory for the simulation</span>
+<span class="sd">    t_scale : string, optional</span>
+<span class="sd">        The time scale to use for the time array, which can be 'lin' for linear or 'log' for logarithmic, by default 'lin'</span>
+<span class="sd">    t_step : float, optional</span>
+<span class="sd">        The time step when using a linear scale and the shortest timestep using a logarithmic scale (single pulse only), by default 1E-9. Note: Make sure the time step is small enough to accurately describe the laser pulse, as defined by the FWHM.</span>
+<span class="sd">    t_pulse : float, optional</span>
+<span class="sd">        The center of the pulse in time (within each period for a pulse train). Make sure it is far enough from t=0 otherwise first part of pulse will be cut, </span>
+<span class="sd">        resulting in lower number of photons, by default 40E-9</span>
+<span class="sd">    FWHM : float, optional</span>
+<span class="sd">        The full width at half maximum (FWHM) of the pulse, by default 2E-9</span>
+<span class="sd">    freq : float, optional</span>
+<span class="sd">        The repetition frequency of the pulses in Hz, required when num_pulses is not None, by default None</span>
+<span class="sd">    num_pulses : int, optional</span>
+<span class="sd">        The number of pulses. If None, a single pulse is simulated until tmax, by default None</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        The number of time steps per pulse, i.e. per period 1/freq (pulse train only), by default 1000. For t_scale = 'lin' this is the total number of points per pulse. For t_scale = 'log' this is the number of points after the pulse; the pulse itself (from t=0 to t_pulse + 2*FWHM) is resolved with an additional fixed step of FWHM/steps_FWHM.</span>
+<span class="sd">    G_frac : float, optional</span>
+<span class="sd">        Scaling factor applied to the generation profile, by default 1</span>
+<span class="sd">    steps_FWHM : int, optional</span>
+<span class="sd">        The number of time steps per FWHM used to resolve the pulse for t_scale = 'log' (pulse train only), i.e. the time step over the pulse is FWHM/steps_FWHM, by default 200</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        0 if the tVG file is created successfully, -1 if there is an error</span>
+<span class="sd">    string</span>
+<span class="sd">        A message indicating the success or failure of the tVG file creation</span>
+<span class="sd">    '''</span>
+
+    <span class="k">if</span> <span class="n">num_pulses</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1">########### Single pulse until tmax ###########</span>
+        <span class="n">numPointsDecade</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># Number of points per decade for the logarithmic time array</span>
+
+        <span class="k">if</span> <span class="n">t_scale</span> <span class="o">==</span> <span class="s1">'lin'</span><span class="p">:</span>
+            <span class="c1"># Create a linear time array from 0 to tmax with a step of tstep</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="o">+</span> <span class="n">t_step</span><span class="p">,</span> <span class="n">t_step</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Create a logarithmic time array from tstep to tmax</span>
+            <span class="n">steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tmax</span><span class="o">/</span><span class="n">t_step</span><span class="p">)</span> <span class="o">*</span> <span class="n">numPointsDecade</span><span class="p">))</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">t_step</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tmax</span><span class="p">),</span> <span class="n">num</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span> 
+            <span class="c1"># Insert t=0 at the beginning of the time array, as this is skipped in the logspace</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">G</span> <span class="o">=</span> <span class="n">gaussian_pulse</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">)</span>
+        <span class="n">Track</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># Track state array, fixed to 0</span>
+        <span class="n">float_format</span> <span class="o">=</span> <span class="s1">'</span><span class="si">%.4e</span><span class="s1">'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">########### Pulse train with frequency freq ###########</span>
+        <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">freq</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'A positive freq must be specified when num_pulses is not None'</span>
+        <span class="k">if</span> <span class="n">num_pulses</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'num_pulses must be at least 1'</span>
+
+        <span class="n">t_period</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">freq</span> <span class="c1"># Duration of one period</span>
+        <span class="n">pulse_stop</span> <span class="o">=</span> <span class="n">t_pulse</span> <span class="o">+</span> <span class="n">FWHM</span><span class="o">*</span><span class="mi">2</span> <span class="c1"># End of the finely resolved part of the pulse</span>
+        <span class="k">if</span> <span class="n">pulse_stop</span> <span class="o">&gt;=</span> <span class="n">t_period</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'The pulse (t_pulse + 2*FWHM = </span><span class="si">{</span><span class="n">pulse_stop</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> s) does not fit in one period (1/freq = </span><span class="si">{</span><span class="n">t_period</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> s)'</span>
+
+        <span class="k">if</span> <span class="n">t_scale</span> <span class="o">==</span> <span class="s1">'log'</span><span class="p">:</span>
+            <span class="n">t_step_pulse</span> <span class="o">=</span> <span class="n">FWHM</span> <span class="o">/</span> <span class="n">steps_FWHM</span> <span class="c1"># steps_FWHM time steps per FWHM to accurately capture the shape of the pulse</span>
+            <span class="n">time_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_step_pulse</span><span class="p">,</span> <span class="n">pulse_stop</span><span class="p">,</span> <span class="n">t_step_pulse</span><span class="p">)</span>
+            <span class="n">time_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">time_</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Start at t=0</span>
+            <span class="c1"># After the pulse, use a logarithmic time scale until the end of the period</span>
+            <span class="n">time_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">time_</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">time_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">t_period</span><span class="p">,</span> <span class="n">steps</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">time_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_period</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">t_pulse</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">time_</span><span class="p">:</span>
+                <span class="c1"># Make sure the pulse maximum is part of the time array</span>
+                <span class="n">time_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">time_</span><span class="p">,</span> <span class="p">[</span><span class="n">t_pulse</span><span class="p">])))</span>
+
+        <span class="n">G_</span> <span class="o">=</span> <span class="n">gaussian_pulse</span><span class="p">(</span><span class="n">time_</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">)</span> <span class="c1"># Generation profile of one period</span>
+
+        <span class="c1"># Track is 1 at the end of the first period and 3 at the end of the following periods</span>
+        <span class="n">Track_first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time_</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">Track_first</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">Track_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time_</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">Track_next</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+        <span class="c1"># Repeat the period num_pulses times, skipping t=0 of the repeated periods as it equals the end of the previous one</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">time_</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">time_</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="n">t_period</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_pulses</span><span class="p">)])</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">G_</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">G_</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">*</span> <span class="p">(</span><span class="n">num_pulses</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">Track</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">Track_first</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">Track_next</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">*</span> <span class="p">(</span><span class="n">num_pulses</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># Make sure the precision of the time column is sufficient to distinguish subsequent time values</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">time</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">FWHM</span><span class="o">/</span><span class="mi">10</span><span class="p">))</span> 
+        <span class="n">float_format</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'%.</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">e'</span>
+
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">))</span> <span class="c1"># Voltage array</span>
+
+    <span class="c1"># Write to the tVG file</span>
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'t'</span><span class="p">:</span> <span class="n">time</span><span class="p">,</span> <span class="s1">'Vext'</span><span class="p">:</span> <span class="n">V</span><span class="p">,</span> <span class="s1">'G_frac'</span><span class="p">:</span> <span class="n">G</span><span class="o">*</span><span class="n">G_frac</span><span class="p">})</span>
+    <span class="n">tVG</span><span class="p">[</span><span class="s1">'Track'</span><span class="p">]</span> <span class="o">=</span> <span class="n">Track</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># Add the Track column separately, as it must be an integer and the other columns are floats</span>
+
+    <span class="c1"># Drop duplicate time values, which can occur when the time step is smaller than the precision of the time values. SIMsalabim stops on duplicate times. Keep the first occurrence.</span>
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">tVG</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'t'</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s1">'first'</span><span class="p">)</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">tVG_name</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">' '</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="n">float_format</span><span class="p">)</span>
+
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">'Success'</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">retval</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="run_light_pulse_simu">
+<a class="viewcode-back" href="../../../pySIMsalabim.aux_funcs.html#pySIMsalabim.aux_funcs.light_pulse.run_light_pulse_simu">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_light_pulse_simu</span><span class="p">(</span><span class="n">zimt_simulation_setup</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">t_scale</span><span class="p">,</span> <span class="n">t_step</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> <span class="n">genProfile</span><span class="p">,</span> <span class="n">spectrum_type</span> <span class="o">=</span> <span class="s1">'laser'</span><span class="p">,</span> <span class="n">I</span> <span class="o">=</span> <span class="mf">6E15</span><span class="p">,</span> <span class="n">wavelength</span> <span class="o">=</span> <span class="mf">640E-9</span><span class="p">,</span> <span class="n">run_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tVG_name</span> <span class="o">=</span> <span class="s1">'tVG.txt'</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="s1">'tj.dat'</span><span class="p">,</span><span class="n">log_name</span> <span class="o">=</span> <span class="s1">'log.txt'</span><span class="p">,</span> <span class="n">varFile</span> <span class="o">=</span><span class="s1">'none'</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">threadsafe</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">num_pulses</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">G_frac</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">steps_FWHM</span> <span class="o">=</span> <span class="mi">200</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">''' Run a ZimT simulation for a (gaussian) light pulse, or a train of light pulses when num_pulses is not None. The function will create the necessary tVG file, as well as take into account the type of generation profile specified by the user, and create the necessary spectrum file if needed. </span>
+<span class="sd">    Blocking layers (contactless device) are not handled here, see create_contactless_device in utils/device_parameters.py.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zimt_simulation_setup : string</span>
+<span class="sd">        The name of the ZimT device parameters file, which should be located in the session path</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        The path to the session folder, which is the working directory for the simulation</span>
+<span class="sd">    t_max : float</span>
+<span class="sd">        The maximum time for the experiment (single pulse only)</span>
+<span class="sd">    t_scale : string</span>
+<span class="sd">        The time scale to use for the time array, which can be 'lin' for linear or 'log' for logarithmic</span>
+<span class="sd">    t_step : float</span>
+<span class="sd">        The time step for the tVG file (single pulse only)</span>
+<span class="sd">    t_pulse : float</span>
+<span class="sd">        The center of the pulse in time (within each period for a pulse train). Make sure it is far enough from t=0 otherwise first part of pulse will be cut, resulting in lower number of photons</span>
+<span class="sd">    FWHM : float</span>
+<span class="sd">        The full width at half maximum (FWHM) of the pulse</span>
+<span class="sd">    genProfile : string</span>
+<span class="sd">        The type of generation profile to use, which can be 'calc' for a calculated generation profile based on a spectrum, 'none' for no generation profile (in which case the generation rate should be specified in the simulation setup file or through cmd_pars), or a filename for a user supplied generation profile (in which case the file should be located in the session path)</span>
+<span class="sd">    spectrum_type : string, optional</span>
+<span class="sd">        The type of spectrum to use for the calculated generation profile, which can be 'laser' for a Gaussian spectrum based on the specified intensity, wavelength, and FWHM, or 'setup' to use the spectrum as specified in the simulation setup file, by default 'laser'</span>
+<span class="sd">    I : float, optional</span>
+<span class="sd">        The intensity of the pulse in photons/m^2/pulse, only used when genProfile is 'calc' and spectrum_type is 'laser', by default 6E15</span>
+<span class="sd">    wavelength : float, optional</span>
+<span class="sd">        The wavelength of the pulse in meters, only used when genProfile is 'calc' and spectrum_type is 'laser', by default 640E-9</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        If False, show verbose output in console, by default False</span>
+<span class="sd">    tVG_name : string, optional</span>
+<span class="sd">        The name of the tVG file, by default 'tVG.txt'</span>
+<span class="sd">    tj_name : string, optional</span>
+<span class="sd">        The name of the tJ file, by default 'tj.dat'</span>
+<span class="sd">    log_name : string, optional</span>
+<span class="sd">        The name of the log file, by default 'log.txt'</span>
+<span class="sd">    varFile : string, optional</span>
+<span class="sd">        The name of the var file to create, by default 'none'. If 'none', no var file will be created and the varFile parameter will not be passed to ZimT.</span>
+<span class="sd">    cmd_pars : list of dict, optional</span>
+<span class="sd">        A list of dictionaries with the parameters to update in the simulation setup file, where each dictionary should have the format {'par': 'parameter_name', 'val': 'parameter_value'}, by default None</span>
+<span class="sd">    turnoff_autoTidy : bool, optional</span>
+<span class="sd">        Whether to turn off the autoTidy option in ZimT, by default True</span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        Use verbose output, by default False</span>
+<span class="sd">    threadsafe : bool, optional</span>
+<span class="sd">        Whether to force run the simulation in a thread-safe way, by default False</span>
+<span class="sd">    freq : float, optional</span>
+<span class="sd">        The repetition frequency of the pulses in Hz, required when num_pulses is not None, by default None</span>
+<span class="sd">    num_pulses : int, optional</span>
+<span class="sd">        The number of pulses. If None, a single pulse is simulated until t_max, by default None</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        The number of time steps per pulse, i.e. per period 1/freq (pulse train only), by default 1000. For t_scale = 'lin' this is the total number of points per pulse. For t_scale = 'log' this is the number of points after the pulse; the pulse itself (from t=0 to t_pulse + 2*FWHM) is resolved with an additional fixed step of FWHM/steps_FWHM.</span>
+<span class="sd">    G_frac : float, optional</span>
+<span class="sd">        Scaling factor applied to the generation profile, by default 1</span>
+<span class="sd">    steps_FWHM : int, optional</span>
+<span class="sd">        The number of time steps per FWHM used to resolve the pulse for t_scale = 'log' (pulse train only), i.e. the time step over the pulse is FWHM/steps_FWHM, by default 200</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int        </span>
+<span class="sd">        0 if the simulation ran successfully, -1 if there was an error</span>
+<span class="sd">    string     </span>
+<span class="sd">        A message indicating the success or failure of the simulation</span>
+<span class="sd">    '''</span>
+    
+    <span class="c1"># Create tVG for light pulse</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">create_tVG_light_pulse</span><span class="p">(</span><span class="n">t_max</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">t_scale</span><span class="p">,</span> <span class="n">t_step</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span> <span class="n">num_pulses</span><span class="o">=</span><span class="n">num_pulses</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span> <span class="n">G_frac</span><span class="o">=</span><span class="n">G_frac</span><span class="p">,</span> <span class="n">steps_FWHM</span><span class="o">=</span><span class="n">steps_FWHM</span><span class="p">)</span>
+
+    <span class="c1"># Check if tVG file is created</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="c1"># Define mandatory options for ZimT:</span>
+        <span class="n">lp_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">'par'</span><span class="p">:</span><span class="s1">'dev_par_file'</span><span class="p">,</span><span class="s1">'val'</span><span class="p">:</span><span class="n">zimt_simulation_setup</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">'par'</span><span class="p">:</span><span class="s1">'tVGFile'</span><span class="p">,</span><span class="s1">'val'</span><span class="p">:</span><span class="n">tVG_name</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">'par'</span><span class="p">:</span><span class="s1">'tJFile'</span><span class="p">,</span><span class="s1">'val'</span><span class="p">:</span><span class="n">tj_name</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">'par'</span><span class="p">:</span><span class="s1">'varFile'</span><span class="p">,</span><span class="s1">'val'</span><span class="p">:</span><span class="n">varFile</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">'par'</span><span class="p">:</span><span class="s1">'logFile'</span><span class="p">,</span><span class="s1">'val'</span><span class="p">:</span><span class="n">log_name</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s1">'par'</span><span class="p">:</span><span class="s1">'genProfile'</span><span class="p">,</span><span class="s1">'val'</span><span class="p">:</span><span class="n">genProfile</span><span class="p">}]</span>
+
+        <span class="c1"># Set the appropriate parameters for the specified genProfile</span>
+        <span class="k">if</span> <span class="n">genProfile</span> <span class="o">==</span> <span class="s1">'calc'</span><span class="p">:</span>
+            <span class="c1"># Create spectrum if the option 'laser' has been specified, otherwise we use the spectrum as specified in the simulation setup</span>
+            <span class="k">if</span> <span class="n">spectrum_type</span> <span class="o">==</span> <span class="s1">'laser'</span><span class="p">:</span>
+                <span class="n">spectrum</span> <span class="o">=</span> <span class="n">create_spectrum</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="s1">'spectrum.txt'</span><span class="p">,</span> <span class="s1">'../Data'</span> <span class="p">)</span>
+                <span class="n">lp_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'par'</span><span class="p">:</span><span class="s1">'spectrum'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">:</span><span class="n">spectrum</span><span class="p">})</span>
+        <span class="k">elif</span> <span class="n">genProfile</span> <span class="o">!=</span> <span class="s1">'none'</span><span class="p">:</span> <span class="c1"># genProfile must be userFile, thus this is the filename</span>
+            <span class="c1"># Check if the file exists first</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">genProfile</span><span class="p">)):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'User supplied generation profile file not found: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="w"> </span><span class="n">genProfile</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">msg</span>
+        
+        <span class="k">if</span> <span class="n">turnoff_autoTidy</span><span class="p">:</span>
+            <span class="n">lp_args</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'par'</span><span class="p">:</span><span class="s1">'autoTidy'</span><span class="p">,</span><span class="s1">'val'</span><span class="p">:</span><span class="s1">'0'</span><span class="p">})</span>
+        
+        <span class="k">if</span> <span class="n">cmd_pars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lp_args</span> <span class="o">=</span> <span class="n">update_cmd_pars</span><span class="p">(</span><span class="n">lp_args</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation_filesafe</span><span class="p">(</span><span class="s1">'zimt'</span><span class="p">,</span> <span class="n">lp_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">utils_gen</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="s1">'zimt'</span><span class="p">,</span> <span class="n">lp_args</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, 2025, 2024, Vincent M. Le Corre, Sander Heester, Fransien Elhorst, Joshua Luke Edmundson, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

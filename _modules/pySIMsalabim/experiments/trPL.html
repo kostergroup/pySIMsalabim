@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pySIMsalabim.experiments.trPL &mdash; pySIMsalabim 1.05 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=c83e6b79" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8214e1ae"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
+      <script src="../../../_static/js/rtd_search_config.js"></script>
+      <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/trPL.html">trPL simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Notebook_Gallery.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pySIMsalabim.experiments.trPL</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pySIMsalabim.experiments.trPL</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Perform time resolved photoluminescence (trPL) simulations"""</span>
+<span class="c1">######### Package Imports #########################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1"># import pySIMsalabim</span>
+<span class="c1">## Import pySIMsalabim, if not successful, add the parent directory to the system path</span>
+<span class="k">try</span> <span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Add the parent directory to the system path</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">'../..'</span><span class="p">)))</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_functions</span> <span class="k">as</span> <span class="n">utils_plot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.utils.device_parameters</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim.aux_funcs.light_pulse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">lp</span>
+
+<span class="c1">######### Function Definitions ####################################################################</span>
+
+<div class="viewcode-block" id="get_trPL">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.trPL.get_trPL">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_trPL</span><span class="p">(</span><span class="n">data_trPL</span><span class="p">,</span> <span class="n">trPL_lyr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">''' Process the output of the tj file to extract the trPL data for the specified layer, taking into account the blocking layers and the layer indexing.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_trPL : DataFrame</span>
+<span class="sd">        The data from the tj file, which contains the time (t) and the current density (Jdir) for each layer </span>
+<span class="sd">    trPL_lyr : int</span>
+<span class="sd">        The index of the layer to calculate the trPL for, starting from 1 for the first layer of the simulation setup with blocking layers </span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    DataFrame</span>
+<span class="sd">        A DataFrame containing the time (t) and the trPL signal (trPL) for the specified layer, where trPL is equal to the current density (Jdir) for that layer. </span>
+<span class="sd">    '''</span>
+
+    <span class="c1"># Only a single layer currently</span>
+    <span class="n">trPL</span> <span class="o">=</span> <span class="n">data_trPL</span><span class="p">[</span><span class="sa">f</span><span class="s1">'JdirL</span><span class="si">{</span><span class="n">trPL_lyr</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="c1"># We use the direct recombination current density (Jdir) for the trPL signal.</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">data_trPL</span><span class="p">[</span><span class="s1">'t'</span><span class="p">]</span>
+
+    <span class="c1"># save the trPL data to a file</span>
+    <span class="n">df_trPL</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'t'</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span> <span class="s1">'trPL'</span><span class="p">:</span> <span class="n">trPL</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">df_trPL</span></div>
+
+
+<div class="viewcode-block" id="plot_trPL">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.trPL.plot_trPL">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_trPL</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">xlim</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">xscale</span> <span class="o">=</span> <span class="s1">'log'</span><span class="p">,</span> <span class="n">yscale</span> <span class="o">=</span> <span class="s1">'log'</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">''' Simple plot of the trPL data from the output file generated by the run_trPL_simu function. </span>
+<span class="sd">    The output file should contain two columns: time (t) and trPL signal (trPL). The function will create a plot of trPL vs time on a log-log scale.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        The path to the session folder, which is the working directory for the simulation</span>
+<span class="sd">    output_file : string</span>
+<span class="sd">        The name of the output file containing the trPL data, which should be located in the session path</span>
+<span class="sd">    xlim : list, optional</span>
+<span class="sd">        The limits for the x-axis, by default None, which means that the limits will be determined automatically based on the data</span>
+<span class="sd">    ylim : list, optional</span>
+<span class="sd">        The limits for the y-axis, by default None, which means that the limits will be determined automatically based on the data</span>
+<span class="sd">    xscale : string, optional</span>
+<span class="sd">        The scale for the x-axis, by default 'log'</span>
+<span class="sd">    yscale : string, optional</span>
+<span class="sd">        The scale for the y-axis, by default 'log'</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    '''</span>
+    <span class="c1"># simple trPL plot</span>
+    <span class="n">data_trPL</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">),</span><span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">data_trPL</span><span class="p">[</span><span class="s1">'t'</span><span class="p">]</span><span class="o">*</span><span class="mf">1E9</span> <span class="c1"># Convert time to ns for plotting</span>
+    <span class="n">trPL</span> <span class="o">=</span> <span class="n">data_trPL</span><span class="p">[</span><span class="s1">'trPL'</span><span class="p">]</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">trPL</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Time [ns]'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'trPL | Jdir [Am$^{-2}$]'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Time Resolved Photoluminescence (trPL) Simulation'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="n">xscale</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="n">yscale</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">xlim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xlim</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="mf">1E9</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xlim</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="plot_trPL_pulse">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.trPL.plot_trPL_pulse">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_trPL_pulse</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">pulse</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">xlim</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">xscale</span> <span class="o">=</span> <span class="s1">'log'</span><span class="p">,</span> <span class="n">yscale</span> <span class="o">=</span> <span class="s1">'log'</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">''' Plot the trPL signal of one or several pulses from a pulse train simulation (run_trPL_simu with num_pulses and freq).</span>
+<span class="sd">    Pulse n (starting from 1) covers the period from (n-1)/freq to n/freq and is centred at t_pulse + (n-1)/freq. </span>
+<span class="sd">    The time axis of each pulse is shifted to start at 0 at the start of its period, so several pulses can be compared directly on the same plot.</span>
+
+<span class="sd">    The number of pulses in the file is the number of pulse centres (t_pulse + (n-1)/freq) within the simulated time range. </span>
+<span class="sd">    This can be smaller than num_pulses, as ZimT stops the simulation early when the state at the end of a pulse no longer </span>
+<span class="sd">    changes from pulse to pulse. If the simulation was interrupted (e.g. timeout), the last pulse can be incomplete.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        The path to the session folder, which is the working directory for the simulation</span>
+<span class="sd">    output_file : string</span>
+<span class="sd">        The name of the output file containing the trPL data, which should be located in the session path</span>
+<span class="sd">    freq : float</span>
+<span class="sd">        The repetition frequency of the pulses in Hz, as used in the simulation</span>
+<span class="sd">    t_pulse : float</span>
+<span class="sd">        The center of the pulse within each period in s, as used in the simulation</span>
+<span class="sd">    pulse : int or list of int, optional</span>
+<span class="sd">        The pulse(s) to plot, starting from 1 for the first pulse. Negative values count from the end of the file,</span>
+<span class="sd">        i.e. -1 is the last simulated pulse. Use a list (e.g. [1, 2, -1]) to plot several pulses on top of each other, by default -1</span>
+<span class="sd">    xlim : list, optional</span>
+<span class="sd">        The limits for the x-axis in s (relative to the start of the pulse), by default None</span>
+<span class="sd">    ylim : list, optional</span>
+<span class="sd">        The limits for the y-axis, by default None</span>
+<span class="sd">    xscale : string, optional</span>
+<span class="sd">        The scale for the x-axis, by default 'log'</span>
+<span class="sd">    yscale : string, optional</span>
+<span class="sd">        The scale for the y-axis, by default 'log'</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    '''</span>
+    <span class="n">data_trPL</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">),</span><span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">data_trPL</span><span class="p">[</span><span class="s1">'t'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">t_period</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">freq</span>
+
+    <span class="c1"># Tolerance to compare time values, as the time values in the file have a limited precision: half of the smallest time step</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">dt</span><span class="p">[</span><span class="n">dt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">dt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="c1"># Number of pulses in the file: number of pulse centres t_pulse + n/freq (n = 0, 1, ...) within the simulated time range</span>
+    <span class="n">num_pulses</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">t_pulse</span> <span class="o">+</span> <span class="n">tol</span><span class="p">)</span><span class="o">*</span><span class="n">freq</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">num_pulses</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The output file ends at t = </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> s, before the center of the first pulse (t_pulse = </span><span class="si">{</span><span class="n">t_pulse</span><span class="si">:</span><span class="s1">.3e</span><span class="si">}</span><span class="s1"> s).'</span><span class="p">)</span>
+
+    <span class="n">pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">pulse</span><span class="p">]</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">pulse</span><span class="p">)</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">pulse</span><span class="p">)</span>
+
+    <span class="c1"># Convert the requested pulses (1 = first, -1 = last) to indices starting from 0</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pulses</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_pulses</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'pulse must be between 1 and </span><span class="si">{</span><span class="n">num_pulses</span><span class="si">}</span><span class="s1"> or between -</span><span class="si">{</span><span class="n">num_pulses</span><span class="si">}</span><span class="s1"> and -1, as the file contains </span><span class="si">{</span><span class="n">num_pulses</span><span class="si">}</span><span class="s1"> pulse(s). Got </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1">.'</span><span class="p">)</span>
+        <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">num_pulses</span> <span class="o">+</span> <span class="n">p</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+        <span class="c1"># Select the period of this pulse, including both its start and end point, so all pulses have the same time grid</span>
+        <span class="n">t_rel</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="n">idx</span><span class="o">*</span><span class="n">t_period</span> <span class="c1"># Time relative to the start of the period of this pulse</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_rel</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">tol</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t_rel</span> <span class="o">&lt;</span> <span class="n">t_period</span> <span class="o">+</span> <span class="n">tol</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rel</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">*</span><span class="mf">1E9</span><span class="p">,</span> <span class="n">data_trPL</span><span class="p">[</span><span class="s1">'trPL'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'Pulse </span><span class="si">{</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span> <span class="c1"># time in ns</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Time since start of pulse [ns]'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'trPL | Jdir [Am$^{-2}$]'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'trPL simulation, pulse </span><span class="si">{</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> of </span><span class="si">{</span><span class="n">num_pulses</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'trPL simulation, </span><span class="si">{</span><span class="n">num_pulses</span><span class="si">}</span><span class="s1"> pulse(s) in file'</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="n">xscale</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="n">yscale</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">xlim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xlim</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="mf">1E9</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xlim</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="run_trPL_simu">
+<a class="viewcode-back" href="../../../pySIMsalabim.experiments.html#pySIMsalabim.experiments.trPL.run_trPL_simu">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_trPL_simu</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">lyr_idx</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">t_scale</span><span class="p">,</span> <span class="n">t_step</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> <span class="n">genProfile</span><span class="o">=</span><span class="s1">'calc'</span><span class="p">,</span> <span class="n">spectrum_type</span> <span class="o">=</span> <span class="s1">'laser'</span><span class="p">,</span> <span class="n">I</span> <span class="o">=</span> <span class="mf">6E15</span><span class="p">,</span> <span class="n">wavelength</span> <span class="o">=</span> <span class="mf">640E-9</span><span class="p">,</span> <span class="n">G_ehp</span> <span class="o">=</span> <span class="mf">1E31</span><span class="p">,</span> <span class="n">contactless_device</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">format_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">run_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tVG_name</span> <span class="o">=</span> <span class="s1">'tVG.txt'</span><span class="p">,</span> <span class="n">output_file</span> <span class="o">=</span> <span class="s1">'trPL.dat'</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="s1">'tj.dat'</span><span class="p">,</span> <span class="n">log_name</span> <span class="o">=</span> <span class="s1">'log.txt'</span><span class="p">,</span><span class="n">varFile</span> <span class="o">=</span><span class="s1">'none'</span><span class="p">,</span> <span class="n">block_layer_file</span><span class="o">=</span><span class="s1">'Block.txt'</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">num_pulses</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">G_frac</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">steps_FWHM</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" Run a time resolved PhotoLuminescence (trPL) simulation, requiring the definition of a (Gaussian) light pulse.</span>
+<span class="sd">    There is an option to use a contactless device architecture, which adds blocking layers to the simulation setup. </span>
+<span class="sd">    The output PL is given in terms of the equivalent direct recombination current (Jdir) of the layer specified by lyr_idx.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zimt_device_parameters : string</span>
+<span class="sd">        The name of the ZimT device parameters file, which should be located in the session path</span>
+<span class="sd">    session_path : string</span>
+<span class="sd">        The path to the session folder, which is the working directory for the simulation</span>
+<span class="sd">    lyr_idx : int</span>
+<span class="sd">        The index of the active layer to calculate the trPL for, starting from 1 for the first layer of the original setup (i.e. without the blocking layers)</span>
+<span class="sd">    t_max : float</span>
+<span class="sd">        The maximum time for the experiment (single pulse only)</span>
+<span class="sd">    t_scale : string</span>
+<span class="sd">        The time scale to use for the time array, which can be 'lin' for linear or 'log' for logarithmic</span>
+<span class="sd">    t_step : float</span>
+<span class="sd">        The time step (single pulse only)</span>
+<span class="sd">    t_pulse : float</span>
+<span class="sd">        The center of the pulse in time (within each period for a pulse train). Make sure it is far enough from t=0 otherwise first part of pulse will be cut, resulting in lower number of photons</span>
+<span class="sd">    FWHM : float</span>
+<span class="sd">        The full width at half maximum (FWHM) of the pulse</span>
+<span class="sd">    genProfile : string</span>
+<span class="sd">        The type of generation profile to use, either 'calc', 'none', or 'userFile', by default 'calc'</span>
+<span class="sd">    spectrum_type : string</span>
+<span class="sd">        The type of spectrum to use, either 'spectrum' or 'laser', by default 'spectrum'</span>
+<span class="sd">    I : float</span>
+<span class="sd">        The intensity of the pulse in photons/m^2/pulse, only used if spectrum_type is 'laser', by default 1E15</span>
+<span class="sd">    wavelength : float</span>
+<span class="sd">        The wavelength of the pulse in meters, only used if spectrum_type is 'laser', by default 400E-9</span>
+<span class="sd">    G_ehp : float, optional</span>
+<span class="sd">        The generation rate in m^-3 s^-1, only used if genProfile is 'none', by default 1E31</span>
+<span class="sd">    contactless_device : bool, optional</span>
+<span class="sd">        Whether to use a contactless device architecture, which adds blocking layers to the simulation setup, by default True</span>
+<span class="sd">    format_output : bool, optional</span>
+<span class="sd">        Whether to format the output files to remove the blocking layers and update the layer indices back to their original values, by default True</span>
+<span class="sd">    run_mode : bool, optional</span>
+<span class="sd">        If False, show verbose output in console, by default False</span>
+<span class="sd">    tVG_name : string, optional</span>
+<span class="sd">        The name of the tVG file to create, by default 'tVG.txt'</span>
+<span class="sd">    output_file : string, optional</span>
+<span class="sd">        The name of the output file to create with the trPL data, by default 'trPL.dat'</span>
+<span class="sd">    tj_name : string, optional</span>
+<span class="sd">        The name of the tj file to create, by default 'tj.dat'</span>
+<span class="sd">    log_name : string, optional</span>
+<span class="sd">        The name of the log file to create, by default 'log.txt'</span>
+<span class="sd">    varFile : string, optional</span>
+<span class="sd">        The name of the var file to create, by default 'none'. If 'none', no var file will be created and the varFile parameter will not be passed to ZimT.</span>
+<span class="sd">    block_layer_file : string, optional</span>
+<span class="sd">        The name of the blocking layer file, by default 'Block.txt'</span>
+<span class="sd">    freq : float, optional</span>
+<span class="sd">        The repetition frequency of the pulses in Hz, required when num_pulses is not None, by default None</span>
+<span class="sd">    num_pulses : int, optional</span>
+<span class="sd">        The number of pulses. If None, a single pulse is simulated until t_max, otherwise num_pulses pulses with frequency freq are simulated (t_max and t_step are then ignored), by default None</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        The number of time steps per pulse, i.e. per period 1/freq (pulse train only), by default 1000. For t_scale = 'lin' this is the total number of points per pulse. For t_scale = 'log' this is the number of points after the pulse; the pulse itself (from t=0 to t_pulse + 2*FWHM) is resolved with an additional fixed step of FWHM/steps_FWHM.</span>
+<span class="sd">    G_frac : float, optional</span>
+<span class="sd">        Scaling factor applied to the generation profile, by default 1</span>
+<span class="sd">    steps_FWHM : int, optional</span>
+<span class="sd">        The number of time steps per FWHM used to resolve the pulse for t_scale = 'log' (pulse train only), i.e. the time step over the pulse is FWHM/steps_FWHM, by default 200</span>
+<span class="sd">       </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    CompletedProcess</span>
+<span class="sd">        Output object of with returncode and console output of the simulation</span>
+<span class="sd">    string</span>
+<span class="sd">        Return message to display on the UI, for both success and failed</span>
+<span class="sd">    """</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'verbose'</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to see the console output</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'UUID'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span> <span class="c1"># Check if the user wants to add a UUID to the tj file name</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'cmd_pars'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to add additional command line parameters</span>
+    <span class="c1"># Check if the user wants to force the use of thread safe mode, necessary for Windows with parallel simulations</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">'nt'</span><span class="p">:</span>
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'threadsafe'</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">threadsafe</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'threadsafe'</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Check if the user wants to force the use of threads instead of processes</span>
+    
+    <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'turnoff_autoTidy'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Check if the user wants to turn off the autoTidy function in SIMsalabim</span>
+    <span class="k">if</span> <span class="n">turnoff_autoTidy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">threadsafe</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">turnoff_autoTidy</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Update the file names with the UUID</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">''</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'_</span><span class="si">{</span><span class="n">UUID</span><span class="si">}</span><span class="s1">'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dum_str</span> <span class="o">=</span> <span class="s1">''</span>
+
+    <span class="c1"># Update the filenames with the UUID</span>
+    <span class="n">tj_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">)</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+    <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">)</span>
+    <span class="n">log_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">log_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">UUID</span> <span class="o">!=</span> <span class="s1">''</span><span class="p">:</span>
+        <span class="n">tj_file_name_base</span><span class="p">,</span> <span class="n">tj_file_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tj_name</span><span class="p">)</span>
+        <span class="n">tj_name</span> <span class="o">=</span> <span class="n">tj_file_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">tj_file_name_ext</span> 
+        <span class="n">tVG_name_base</span><span class="p">,</span> <span class="n">tVG_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">)</span>
+        <span class="n">tVG_name</span> <span class="o">=</span> <span class="n">tVG_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">tVG_name_ext</span>
+        <span class="n">log_name_base</span><span class="p">,</span> <span class="n">log_name_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">log_name</span><span class="p">)</span>
+        <span class="n">log_name</span> <span class="o">=</span> <span class="n">log_name_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">log_name_ext</span>
+        <span class="n">output_file_base</span><span class="p">,</span> <span class="n">output_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">output_file_ext</span>
+        <span class="k">if</span> <span class="n">varFile</span> <span class="o">!=</span> <span class="s1">'none'</span><span class="p">:</span>
+            <span class="n">var_file_base</span><span class="p">,</span> <span class="n">var_file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">varFile</span><span class="p">)</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">var_file_base</span> <span class="o">+</span> <span class="n">dum_str</span> <span class="o">+</span> <span class="n">var_file_ext</span>
+            <span class="n">varFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">varFile</span><span class="p">)</span>
+
+    <span class="c1"># Remove the output and tj files of a previous run, so that old results cannot be mistaken for the results of this run</span>
+    <span class="k">for</span> <span class="n">old_file</span> <span class="ow">in</span> <span class="p">[</span><span class="n">output_file</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">old_file</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">old_file</span><span class="p">)</span>
+
+    <span class="c1"># When not using a calculated or user-defined generation profile, the generation rate must be specified in the layer parameters file. </span>
+    <span class="c1"># Therefore, we add the generation rate to the command line parameters to update the layer parameters file accordingly.</span>
+    <span class="k">if</span> <span class="n">genProfile</span> <span class="o">==</span> <span class="s1">'none'</span><span class="p">:</span> <span class="c1"># Add the the generation rate to the arguments</span>
+        <span class="n">cmd_pars</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'par'</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'l</span><span class="si">{</span><span class="n">lyr_idx</span><span class="si">}</span><span class="s1">.G_ehp'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">G_ehp</span><span class="p">)})</span>
+
+    <span class="c1"># Add the blocking layers to the simulation setup if a contactless device architecture is used.</span>
+    <span class="k">if</span> <span class="n">contactless_device</span><span class="p">:</span>
+        <span class="n">returncode</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">block_layer_file</span> <span class="o">=</span> <span class="n">create_contactless_device</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">block_layer_file</span><span class="o">=</span><span class="n">block_layer_file</span><span class="p">,</span> <span class="n">cmd_pars</span> <span class="o">=</span> <span class="n">cmd_pars</span><span class="p">)</span>
+
+    <span class="c1"># Check if the layer index specified by the user makes sense given the original device architecture (taking into account blocking layers if defined)</span>
+    <span class="n">dev_pars</span><span class="p">,</span><span class="n">layers</span> <span class="o">=</span> <span class="n">load_device_parameters</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">contactless_device</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span> <span class="o">&lt;</span> <span class="n">lyr_idx</span><span class="p">:</span> <span class="c1"># Subtract 3 for the two blocking layers and the simulation setup</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Layer index </span><span class="si">{</span><span class="n">lyr_idx</span><span class="si">}</span><span class="s1"> is out of bounds for the used device architecture. The device has only </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="si">}</span><span class="s1"> layer(s).'</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">msg</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">lyr_idx</span><span class="p">:</span> <span class="c1"># Subtract 1 for the simulation setup</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Layer index </span><span class="si">{</span><span class="n">lyr_idx</span><span class="si">}</span><span class="s1"> is out of bounds for the used device architecture. The device has only </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1"> layer(s).'</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">msg</span>
+
+    <span class="c1"># Run the ZimT simulation for a (Gaussian) light pulse. The trPL signal is then calculated from the output.</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">run_light_pulse_simu</span><span class="p">(</span><span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="n">session_path</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">t_scale</span><span class="p">,</span> <span class="n">t_step</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> 
+                                              <span class="n">genProfile</span><span class="p">,</span> <span class="n">spectrum_type</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">run_mode</span><span class="p">,</span> <span class="n">tVG_name</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">,</span> <span class="n">log_name</span><span class="p">,</span> 
+                                              <span class="n">varFile</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="p">,</span> <span class="n">turnoff_autoTidy</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">threadsafe</span><span class="p">,</span>
+                                              <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span> <span class="n">num_pulses</span><span class="o">=</span><span class="n">num_pulses</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span> <span class="n">G_frac</span><span class="o">=</span><span class="n">G_frac</span><span class="p">,</span> <span class="n">steps_FWHM</span><span class="o">=</span><span class="n">steps_FWHM</span><span class="p">)</span>
+
+    <span class="c1"># 0: success, 95: finished with some non-converged points, 97: timeout.</span>
+    <span class="c1"># With a timeout, the tj file contains the results up to the moment the simulation was stopped (e.g. only part of the pulses),</span>
+    <span class="c1"># so we still write these (partial) results to the output file.</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">97</span><span class="p">]:</span>
+        <span class="c1"># Check if the file exists first</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">tj_name</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'tj file not found: </span><span class="si">{</span><span class="n">tj_name</span><span class="si">}</span><span class="s1">'</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">msg</span>
+
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">97</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">+</span> <span class="s1">' The output file only contains the results until the simulation was stopped, increase the timeout parameter (or use timeout = -1) to simulate the full experiment.'</span>
+
+        <span class="n">data_trPL</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">tj_name</span><span class="p">),</span><span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">)</span>
+
+        <span class="c1"># process the output to get the trPL data, this needs to take into account the blocking layers and also which layers should be taken into account for the signal</span>
+        <span class="k">if</span> <span class="n">contactless_device</span><span class="p">:</span>
+            <span class="n">trPL_lyr</span> <span class="o">=</span> <span class="n">lyr_idx</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">trPL_lyr</span> <span class="o">=</span> <span class="n">lyr_idx</span>
+
+        <span class="c1"># Calcuate the trPL signal for the specified layer</span>
+        <span class="n">df_trPL</span> <span class="o">=</span> <span class="n">get_trPL</span><span class="p">(</span><span class="n">data_trPL</span><span class="p">,</span> <span class="n">trPL_lyr</span><span class="p">)</span>
+        <span class="c1"># Make sure the precision of the output is sufficient to distinguish subsequent time values. With a pulse train, the time steps</span>
+        <span class="c1"># in the later pulses can be many orders of magnitude smaller than the time itself (e.g. 1E-11 s steps at t = 1E-3 s).</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">df_trPL</span><span class="p">[</span><span class="s1">'t'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">dt_min</span> <span class="o">=</span> <span class="n">dt</span><span class="p">[</span><span class="n">dt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">dt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">t_end</span> <span class="o">=</span> <span class="n">df_trPL</span><span class="p">[</span><span class="s1">'t'</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">dt_min</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">t_end</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">num_digits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">t_end</span><span class="o">/</span><span class="n">dt_min</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">num_digits</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">df_trPL</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span><span class="n">output_file</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">' '</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="sa">f</span><span class="s1">'%.</span><span class="si">{</span><span class="n">num_digits</span><span class="si">}</span><span class="s1">e'</span><span class="p">)</span> <span class="c1"># Write to the output file</span>
+
+    <span class="c1"># Format the output files to remove the blocking layers and update the layer indices back to their original values</span>
+    <span class="k">if</span> <span class="n">contactless_device</span> <span class="ow">and</span> <span class="n">format_output</span><span class="p">:</span>
+        <span class="n">process_output_contactless</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">zimt_device_parameters</span><span class="p">,</span> <span class="s1">'zimt'</span><span class="p">,</span> <span class="n">format_output</span> <span class="o">=</span> <span class="n">format_output</span><span class="p">,</span> <span class="n">clean_simulation_setup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tJ_file</span> <span class="o">=</span> <span class="n">tj_name</span><span class="p">,</span> <span class="n">Var_file</span> <span class="o">=</span> <span class="n">varFile</span><span class="p">,</span> <span class="n">block_layer_file</span> <span class="o">=</span> <span class="n">block_layer_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">message</span></div>
+
+
+<span class="c1">## Running the function as a standalone script</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="c1">########### Folder &amp; File names ###########</span>
+    <span class="n">session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'../../'</span><span class="p">,</span><span class="s1">'SIMsalabim'</span><span class="p">,</span><span class="s1">'ZimT'</span><span class="p">)</span> <span class="c1"># Working directory</span>
+    <span class="n">simulation_setup_zimt</span> <span class="o">=</span> <span class="s1">'simulation_setup.txt'</span> <span class="c1">#'simulation_setup_PVK.txt' # lyr_idx = 1</span>
+
+    <span class="c1"># File names</span>
+    <span class="n">tVG_name</span> <span class="o">=</span> <span class="s1">'tVG.txt'</span>
+    <span class="n">tj_name</span> <span class="o">=</span> <span class="s1">'tj.dat'</span>
+    <span class="n">output_name</span> <span class="o">=</span> <span class="s1">'trPL.dat'</span>
+
+    <span class="c1">########### Define the device ###########</span>
+    <span class="n">lyr_idx</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Index of the layer to calculate the trPL for !CHANGE THIS WHEN DEVICE ARCHITECTURE CHANGES!</span>
+    <span class="n">contactless_device</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Use a contactless device architecture, which adds blocking layers to the simulation setup. </span>
+    <span class="n">format_output</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Whether to format the output files to remove the blocking layers and update the layer indices back to their original values</span>
+
+    <span class="c1">########### Define pulse + time input + spectrum ###########</span>
+    <span class="n">t_max</span> <span class="o">=</span> <span class="mf">1E-7</span>
+    <span class="n">t_step</span> <span class="o">=</span> <span class="mf">1E-9</span> <span class="c1"># 1E-10</span>
+    <span class="c1"># !IMPORTANT! If you make the tstep smaller than 0.1E-9, but tmax &gt; 100E-9, then you must change the float format of the time column in the tVG file, </span>
+    <span class="c1"># otherwise the decimal precision is not sufficient to display the values, resulting in similar subsequent time values, causing SIMsalabim to stop</span>
+    
+    <span class="n">t_pulse</span> <span class="o">=</span> <span class="mf">10E-9</span> <span class="c1"># Center of the pulse in time. Make sure it is far enough from t=0 otherwise first part of pulse will be cut, resulting in lower number of photons. Depends on FWHM</span>
+    <span class="n">t_scale</span> <span class="o">=</span> <span class="s1">'log'</span> <span class="c1"># Time scale for the tVG file, either 'lin' for linear or 'log' for logarithmic. Note that if t_scale is 'log', the time step specified by t_step will be the shortest time step. If t_scale is 'lin', the time steps will be constant and equal to t_step</span>
+    <span class="n">FWHM</span> <span class="o">=</span> <span class="mf">3E-9</span><span class="c1">#1E-9</span>
+
+    <span class="c1">########### Generation profile ###########</span>
+    <span class="c1"># Specify which type of generation profile to use for the trPL ('calc', 'none', 'userFile') (As supported by SIMsalabim, for more information see the Manual)</span>
+    <span class="c1"># 'calc' : let SIMsalabim calculate the generation profile using the transfer matrix method</span>
+    <span class="c1"># 'none' : Uniform generation profile. Note this requires the generation rate G_ehp to be specified in the respective layer parameters file (also layerGen = 1 must be set)</span>
+    <span class="c1"># 'userFile' : User defined profile (replace 'userFile' with the filename ( + path) with respect to the session path). See SIMsalabim documentation for specifics on the file format and content</span>
+    <span class="n">genProfile</span> <span class="o">=</span> <span class="s1">'calc'</span>
+
+    <span class="c1"># If genProfile is 'calc', specify the spectrum</span>
+    <span class="n">spectrum_type</span> <span class="o">=</span> <span class="s1">'laser'</span> <span class="c1"># 'spectrum' or 'laser' ( 'spectrum' will use the spectrum as specified in the simulation setup, 'laser' uses a monochromatic pulse (with no background illumination) where the wavelength and intensity must be specified)</span>
+    <span class="n">wavelength</span> <span class="o">=</span> <span class="mf">640E-9</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="mf">6E15</span> <span class="c1"># Intensity in photons/m^2/pulse</span>
+
+    <span class="c1"># If genProfile is 'none', specify the generation rate G_ehp (this will be applied to the layer specified by lyr_idx)</span>
+    <span class="n">G_ehp</span> <span class="o">=</span> <span class="mf">1E31</span> <span class="c1"># in m^-3 s^-1</span>
+
+    <span class="c1">########### Misc. pars ###########</span>
+
+    <span class="c1"># UUID = str(uuid.uuid4()) # Add a UUID to the simulation</span>
+    <span class="n">UUID</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="n">run_mode</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># If False, show verbose output in console</span>
+
+    <span class="c1">############## Command line arguments  ##############</span>
+    <span class="c1">## Notes</span>
+    <span class="c1">## - The command line arguments are optional and can be provided in any order</span>
+    <span class="c1">## - Each command line argument must be provided in the format -par_name value</span>
+    <span class="c1">## - Possible arguments include all SIMsalabim parameters and trPL specific parameters as listed before</span>
+    <span class="c1">## - Special arguments</span>
+    <span class="c1">##   - sp : string</span>
+    <span class="c1">##     - The session path, i.e. the working directory for the simulation</span>
+    <span class="c1">##   - simsetup : string</span>
+    <span class="c1">##     - The name of the zimt simulation setup parameters file</span>
+    <span class="c1">##   - UUID : string</span>
+    <span class="c1">##     - An UUID to add to the simulation (output)</span>
+
+    <span class="n">cmd_pars_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">cmd_pars</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># When specifying command line arguments for a contactless device, use the layer indices as defined in the original device architecture. The function will automatically adjust the layer indices needed.</span>
+
+    <span class="c1"># Check if any arguments are provided.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Each arguments should be in the format -par val, i.e. in pairs of two. Skip the first argument as this is the script name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'Error in command line parameters. Please provide arguments in the format -par_name value -par_name value ...'</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="c1"># Loop over the input list and put pairs into a dictionary with the first argument as key and the second argument as value</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">),</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1"># Check if the key already exists, if not, add it to the cmd_pars_dict</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Duplicate parameter found in the command line parameters: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Check and process specific keys/arguments that are not native SIMsalabim arguments</span>
+    <span class="c1"># Handle the session_path/sp argument separately, as the other parameters depend on this</span>
+    <span class="k">if</span> <span class="s1">'sp'</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="p">:</span>
+        <span class="n">session_path</span> <span class="o">=</span> <span class="n">cmd_pars_dict</span><span class="p">[</span><span class="s1">'sp'</span><span class="p">]</span>
+        <span class="c1"># remove from cmd_pars</span>
+        <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'sp'</span><span class="p">)</span>
+
+    <span class="c1"># Define mappings for keys and variables</span>
+    <span class="n">key_action_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'simsetup'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'zimt_device_parameters'</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">'t_max'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'t_max'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">'t_step'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'t_step'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">'t_pulse'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'t_pulse'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">'FWHM'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'FWHM'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">'spectrum_type'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'spectrum_type'</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">'I'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'I'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">'wavelength'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'wavelength'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">'lyr_idx'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'lyr_idx'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)},</span>
+        <span class="s1">'tVG_name'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'tVG_name'</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">'tj_name'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'tj_name'</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">'out_name'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'output_name'</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+        <span class="s1">'UUID'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="p">{</span><span class="s1">'UUID'</span><span class="p">:</span> <span class="n">val</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>  <span class="c1"># Use list to avoid modifying the dictionary while iterating</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_action_map</span><span class="p">:</span>
+            <span class="c1"># Apply the corresponding action</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">key_action_map</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">cmd_pars_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Dynamically update global variables</span>
+            <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># Handle remaining keys in `cmd_pars_dict` and add them to the cmd_pars list</span>
+    <span class="n">cmd_pars</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span><span class="s1">'par'</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">cmd_pars_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">run_trPL_simu</span><span class="p">(</span><span class="n">simulation_setup_zimt</span><span class="p">,</span><span class="n">session_path</span><span class="p">,</span> <span class="n">lyr_idx</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">t_scale</span><span class="p">,</span> <span class="n">t_step</span><span class="p">,</span> <span class="n">t_pulse</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> 
+                                    <span class="n">genProfile</span><span class="p">,</span> <span class="n">spectrum_type</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">G_ehp</span><span class="p">,</span> <span class="n">contactless_device</span><span class="o">=</span><span class="n">contactless_device</span><span class="p">,</span> <span class="n">format_output</span><span class="o">=</span><span class="n">format_output</span><span class="p">,</span> <span class="n">run_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                                    <span class="n">tVG_name</span><span class="o">=</span><span class="n">tVG_name</span><span class="p">,</span> <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_name</span><span class="p">,</span> <span class="n">tj_name</span> <span class="o">=</span> <span class="n">tj_name</span><span class="p">,</span> <span class="n">cmd_pars</span><span class="o">=</span><span class="n">cmd_pars</span><span class="p">,</span> <span class="n">UUID</span><span class="o">=</span><span class="n">UUID</span><span class="p">)</span>
+    <span class="c1"># Make the trPL figure</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">95</span><span class="p">:</span>
+
+        <span class="c1"># Custom function to get the x and y bounds</span>
+        <span class="n">xlim</span> <span class="o">=</span> <span class="p">[</span><span class="n">t_pulse</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">t_pulse</span><span class="p">,</span> <span class="n">t_max</span><span class="p">]</span> <span class="c1"># Force x-axis limits for better visibility of the actual trPL signal on a log scale</span>
+
+        <span class="n">data_trPL</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">output_name</span><span class="p">),</span><span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">)</span>
+        <span class="n">y_min</span> <span class="o">=</span> <span class="n">data_trPL</span><span class="p">[</span><span class="n">data_trPL</span><span class="p">[</span><span class="s1">'t'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">t_pulse</span><span class="p">][</span><span class="s1">'trPL'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">y_max</span> <span class="o">=</span> <span class="n">data_trPL</span><span class="p">[</span><span class="s1">'trPL'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span>
+
+        <span class="n">plot_trPL</span><span class="p">(</span><span class="n">session_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_name</span><span class="p">),</span> <span class="n">xlim</span><span class="p">,</span> <span class="p">[</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, 2025, 2024, Vincent M. Le Corre, Sander Heester, Fransien Elhorst, Joshua Luke Edmundson, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

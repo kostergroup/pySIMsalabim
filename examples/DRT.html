@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview (26/01/2026) &mdash; pySIMsalabim 1.05 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=c83e6b79" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=0c049bae" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8214e1ae"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+      <script src="../_static/js/rtd_search_config.js"></script>
+      <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pySIMsalabim" href="../modules.html" />
+    <link rel="prev" title="Notebooks gallery" href="../Notebook_Gallery.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/pySIMsalabim_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#additional-necessary-installs-for-the-drift-diffusion-software">Additional necessary installs for the drift-diffusion software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impedance.html">Impedance simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trPL.html">trPL simulation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Notebook_Gallery.html">Notebooks gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="light_dep_JVs.html">Steady-state light-intensity dependent JV simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hysteresis.html">Hysteresis JV simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JV_sweep.html">JV sweep simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EQE.html">External quantum efficiency (EQE) simulation of a solar cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="impedance.html">Impedance simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CV.html">Capacitance versus voltage simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IMPS.html">Intensity-Modulated photocurrent Spectroscopy simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trPL.html">trPL simulation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview (26/01/2026)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Capacitive-and-Inductive-Curve-Test">Capacitive and Inductive Curve Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Linear-Fit">Linear Fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Checkerboard-Fit">Checkerboard Fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Analytic-and-Capacitive">Analytic and Capacitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Capacitive-Curve-Test">Capacitive Curve Test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Using-plotting-methods">Using plotting methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Try-File-Saving-and-Loading">Try File Saving and Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Add-CLI-Test">Add CLI Test</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">pySIMsalabim</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pySIMsalabim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Notebook_Gallery.html">Notebooks gallery</a></li>
+      <li class="breadcrumb-item active">Overview (26/01/2026)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kostergroup/pySIMsalabim/blob/main/docs/source/examples/DRT.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Overview-(26/01/2026)">
+<h1>Overview (26/01/2026)<a class="headerlink" href="#Overview-(26/01/2026)" title="Link to this heading"></a></h1>
+<p>This notebook is for the purpose of testing/demonstrating the code in aux_funcs/DRT.py.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="c1"># add parent directory to sys.path if pySIMsalabim is not installed</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'..'</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pySIMsalabim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pySIMsalabim.aux_funcs</span><span class="w"> </span><span class="kn">import</span> <span class="n">DRT</span> <span class="k">as</span> <span class="n">drt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">TESTED_LATEST_VERSION</span> <span class="o">=</span> <span class="mf">0.10</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a function to give a gaussian distribution of lifetimes about a central lifetime tau on a logarithmic scale</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_gaussian</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sig</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">sig</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tau</span><span class="o">/</span><span class="n">mu</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sig</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<section id="Capacitive-and-Inductive-Curve-Test">
+<h2>Capacitive and Inductive Curve Test<a class="headerlink" href="#Capacitive-and-Inductive-Curve-Test" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate an array of time values of length N</span>
+<span class="n">t_min</span> <span class="o">=</span> <span class="mf">1e-10</span>
+<span class="n">t_max</span> <span class="o">=</span> <span class="mf">1e2</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
+<span class="n">time_ppd</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">t_max</span><span class="o">/</span><span class="n">t_min</span><span class="p">))</span>
+
+<span class="c1"># Generate array of tau values of length M such that tau_ppd ~ time_ppd (ppd - points per decade)</span>
+<span class="n">d_t</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">d_t_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">d_t</span><span class="p">)</span>
+<span class="n">d_T</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">tau_min</span> <span class="o">=</span> <span class="n">d_t_min</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>   <span class="c1"># Selected based on Nyquist spacing</span>
+<span class="n">tau_max</span> <span class="o">=</span> <span class="n">d_T</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>   <span class="c1"># Selected based on Nyquist spacing</span>
+<span class="n">tau_dec</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_T</span><span class="o">/</span><span class="n">tau_min</span><span class="p">))</span>
+<span class="n">tau_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tau_min</span><span class="p">,</span> <span class="n">tau_max</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+
+<span class="c1"># Generate the analytic curve</span>
+<span class="n">gaussian_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">gaussian_peaks</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">]</span> <span class="c1"># These now correspond to when decay events begin</span>
+<span class="n">analytic_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">gaussian_coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">log_gaussian</span><span class="p">(</span><span class="n">tau_values</span><span class="p">,</span> <span class="n">gaussian_peaks</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mf">0.2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gaussian_coeffs</span><span class="p">))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">analytic_y</span> <span class="o">=</span> <span class="n">drt</span><span class="o">.</span><span class="n">predict_y_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_U</span><span class="p">,</span> <span class="n">tau_values</span><span class="p">)</span> <span class="o">+</span> <span class="mi">20</span>
+<span class="n">analytic_y_scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">analytic_y</span> <span class="o">-</span> <span class="n">analytic_y</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">/</span><span class="p">(</span><span class="n">analytic_y</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">analytic_y</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">'log'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'$t$ [$</span><span class="se">\\</span><span class="s1">text</span><span class="si">{s}</span><span class="s1">$]'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'$y$ (scaled)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Analytic Capacitive Curve"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_4_0.png" src="../_images/examples_DRT_4_0.png" />
+</div>
+</div>
+</section>
+<section id="Linear-Fit">
+<h2>Linear Fit<a class="headerlink" href="#Linear-Fit" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try linear fit</span>
+<span class="n">linear_fit</span> <span class="o">=</span> <span class="n">drt</span><span class="o">.</span><span class="n">linear_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_y</span><span class="p">)</span>
+
+<span class="c1"># Plot fit results</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_y</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">linear_fit</span><span class="o">.</span><span class="n">y_model</span><span class="p">,</span> <span class="n">y_data</span><span class="o">=</span><span class="n">analytic_y</span><span class="p">)</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_U</span><span class="p">(</span><span class="n">linear_fit</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">linear_fit</span><span class="o">.</span><span class="n">U_norm</span><span class="p">,</span> <span class="n">tau_values</span><span class="p">,</span> <span class="n">analytic_U</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">analytic_U</span><span class="p">),</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">'Normalised DRT'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_6_0.png" src="../_images/examples_DRT_6_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_6_1.png" src="../_images/examples_DRT_6_1.png" />
+</div>
+</div>
+</section>
+<section id="Checkerboard-Fit">
+<h2>Checkerboard Fit<a class="headerlink" href="#Checkerboard-Fit" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span> <span class="o">=</span> <span class="n">drt</span><span class="o">.</span><span class="n">checkerboard_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_y</span><span class="p">)</span>
+<span class="n">cb_fit</span> <span class="o">=</span> <span class="n">fits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drt</span><span class="o">.</span><span class="n">plot_y</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">cb_fit</span><span class="o">.</span><span class="n">y_model</span><span class="p">,</span> <span class="n">analytic_y</span><span class="p">)</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_U</span><span class="p">(</span><span class="n">cb_fit</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">cb_fit</span><span class="o">.</span><span class="n">U</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="n">tau_values</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">analytic_U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_9_0.png" src="../_images/examples_DRT_9_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_9_1.png" src="../_images/examples_DRT_9_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drt</span><span class="o">.</span><span class="n">plot_cumulative_U</span><span class="p">(</span><span class="n">cb_fit</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">cb_fit</span><span class="o">.</span><span class="n">U</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="n">tau_values</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">analytic_U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_10_0.png" src="../_images/examples_DRT_10_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test how y error and DRT error change with number of max iterations for OSQP</span>
+<span class="n">cb_fits</span> <span class="o">=</span> <span class="n">drt</span><span class="o">.</span><span class="n">checkerboard_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_y</span><span class="p">,</span> <span class="n">checkerboard_iters</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">fit_scaling</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">drt</span><span class="o">.</span><span class="n">plot_R_2</span><span class="p">(</span><span class="n">cb_fits</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_12_0.png" src="../_images/examples_DRT_12_0.png" />
+</div>
+</div>
+</section>
+<section id="Analytic-and-Capacitive">
+<h2>Analytic and Capacitive<a class="headerlink" href="#Analytic-and-Capacitive" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a function to give a gaussian distribution of lifetimes about a central lifetime tau on a logarithmic scale</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_gaussian</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sig</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">sig</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tau</span><span class="o">/</span><span class="n">mu</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sig</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate an array of time values of length N</span>
+<span class="n">t_min</span> <span class="o">=</span> <span class="mf">1e-10</span>
+<span class="n">t_max</span> <span class="o">=</span> <span class="mf">1e2</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">time_ppd</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">t_max</span><span class="o">/</span><span class="n">t_min</span><span class="p">))</span>
+
+<span class="c1"># Generate array of tau values of length M such that tau_ppd ~ time_ppd (ppd - points per decade)</span>
+<span class="n">tau_min</span> <span class="o">=</span> <span class="n">t_min</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>   <span class="c1"># Selected based on Nyquist spacing</span>
+<span class="n">tau_max</span> <span class="o">=</span> <span class="n">t_max</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>   <span class="c1"># Selected based on Nyquist spacing</span>
+<span class="n">tau_dec</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tau_max</span><span class="o">/</span><span class="n">tau_min</span><span class="p">))</span>
+<span class="n">tau_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">t_min</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">t_max</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="n">tau_dec</span><span class="o">*</span><span class="n">time_ppd</span><span class="p">)</span>
+
+<span class="c1"># Generate the analytic curve</span>
+<span class="n">gaussian_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">gaussian_peaks</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">]</span> <span class="c1"># These now correspond to when decay events begin</span>
+<span class="n">analytic_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">gaussian_coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">log_gaussian</span><span class="p">(</span><span class="n">tau_values</span><span class="p">,</span> <span class="n">gaussian_peaks</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mf">0.2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gaussian_coeffs</span><span class="p">))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">analytic_y</span> <span class="o">=</span> <span class="n">drt</span><span class="o">.</span><span class="n">predict_y_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_U</span><span class="p">,</span> <span class="n">tau_values</span><span class="p">)</span>
+<span class="n">analytic_y_scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">analytic_y</span> <span class="o">-</span> <span class="n">analytic_y</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">/</span><span class="p">(</span><span class="n">analytic_y</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">analytic_y</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">'log'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'$t$ [$</span><span class="se">\\</span><span class="s1">text</span><span class="si">{s}</span><span class="s1">$]'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'$y$ (scaled)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Analytic Capacitive Curve"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_15_0.png" src="../_images/examples_DRT_15_0.png" />
+</div>
+</div>
+</section>
+<section id="Capacitive-Curve-Test">
+<h2>Capacitive Curve Test<a class="headerlink" href="#Capacitive-Curve-Test" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cb_fits</span> <span class="o">=</span> <span class="n">drt</span><span class="o">.</span><span class="n">checkerboard_fit</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_y</span><span class="p">)</span>
+<span class="n">cb_fit</span> <span class="o">=</span> <span class="n">cb_fits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the error</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_MSE</span><span class="p">(</span><span class="n">cb_fits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_18_0.png" src="../_images/examples_DRT_18_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot fitted curves</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_U</span><span class="p">(</span><span class="n">cb_fit</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">cb_fit</span><span class="o">.</span><span class="n">U</span><span class="p">,</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="n">tau_values</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">analytic_U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_19_0.png" src="../_images/examples_DRT_19_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drt</span><span class="o">.</span><span class="n">plot_cumulative_U</span><span class="p">(</span><span class="n">cb_fit</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">cb_fit</span><span class="o">.</span><span class="n">U</span><span class="p">,</span> <span class="n">tau_values</span><span class="p">,</span> <span class="n">analytic_U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_20_0.png" src="../_images/examples_DRT_20_0.png" />
+</div>
+</div>
+<section id="Using-plotting-methods">
+<h3>Using plotting methods<a class="headerlink" href="#Using-plotting-methods" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cb_fits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot_U</span><span class="p">(</span><span class="n">tau_analytic</span> <span class="o">=</span> <span class="n">tau_values</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">analytic_U</span><span class="p">,</span> <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s2">"tau"</span><span class="p">,</span> <span class="n">yaxis_label</span><span class="o">=</span><span class="s2">"U"</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s2">"Dist"</span><span class="p">)</span>
+<span class="n">cb_fits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot_U</span><span class="p">(</span><span class="n">normalised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tau_analytic</span> <span class="o">=</span> <span class="n">tau_values</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">analytic_U</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">analytic_U</span><span class="p">))</span>
+<span class="n">cb_fits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot_cumulative_U</span><span class="p">(</span><span class="n">tau_analytic</span> <span class="o">=</span> <span class="n">tau_values</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">analytic_U</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">cb_fits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot_y_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">analytic_y</span><span class="p">,</span> <span class="n">return_ax</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mf">1e-7</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_22_0.png" src="../_images/examples_DRT_22_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_22_1.png" src="../_images/examples_DRT_22_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_22_2.png" src="../_images/examples_DRT_22_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(1e-07, 1e-05)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_22_4.png" src="../_images/examples_DRT_22_4.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Try-File-Saving-and-Loading">
+<h2>Try File Saving and Loading<a class="headerlink" href="#Try-File-Saving-and-Loading" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">"DRT_Saves"</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">save_to_txt</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">cb_fits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try reading in the saved txt files</span>
+<span class="n">models</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'DRT_Saves/DRTModels.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'DRT_Saves/modelOutputs.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">)</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'DRT_Saves/outputErrors.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">)</span>
+
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_U</span><span class="p">(</span><span class="n">models</span><span class="p">[</span><span class="s1">'tau'</span><span class="p">],</span> <span class="n">models</span><span class="p">[</span><span class="s1">'U_iter_50'</span><span class="p">],</span> <span class="n">tau_analytic</span><span class="o">=</span><span class="n">tau_values</span><span class="p">,</span> <span class="n">U_analytic</span><span class="o">=</span><span class="n">analytic_U</span><span class="p">)</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_y</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'t'</span><span class="p">],</span> <span class="n">outputs</span><span class="p">[</span><span class="s1">'y_model_iter_50'</span><span class="p">],</span> <span class="n">y_data</span><span class="o">=</span><span class="n">analytic_y</span><span class="p">)</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_MSE</span><span class="p">(</span><span class="n">errors</span><span class="p">[</span><span class="s1">'MSE'</span><span class="p">])</span>
+<span class="n">drt</span><span class="o">.</span><span class="n">plot_R_2</span><span class="p">(</span><span class="n">errors</span><span class="p">[</span><span class="s1">'R_2'</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_25_0.png" src="../_images/examples_DRT_25_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_25_1.png" src="../_images/examples_DRT_25_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_25_2.png" src="../_images/examples_DRT_25_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DRT_25_3.png" src="../_images/examples_DRT_25_3.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Add-CLI-Test">
+<h1>Add CLI Test<a class="headerlink" href="#Add-CLI-Test" title="Link to this heading"></a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'../'</span><span class="p">,</span><span class="s1">'SIMsalabim'</span><span class="p">,</span><span class="s1">'ZimT'</span><span class="p">)</span>
+<span class="n">session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">session_path</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DRT_commands_and_args</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'-dataFile'</span><span class="p">,</span> <span class="n">session_path</span> <span class="o">+</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="s1">'tj.dat'</span><span class="p">,</span>
+        <span class="s1">'-DRTDirectory'</span><span class="p">,</span> <span class="n">session_path</span> <span class="o">+</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="s1">'DRT_Saves'</span><span class="p">,</span>
+        <span class="s1">'-timeCol'</span><span class="p">,</span> <span class="s1">'t'</span><span class="p">,</span>
+        <span class="s1">'-funcCol'</span><span class="p">,</span> <span class="s1">'Jext'</span><span class="p">,</span>
+        <span class="s1">'-iters'</span><span class="p">,</span> <span class="s1">'50'</span><span class="p">,</span>
+        <span class="s1">'-saveFormat'</span><span class="p">,</span> <span class="s1">'txt'</span><span class="p">,</span>
+        <span class="s1">'-UUID'</span><span class="p">,</span> <span class="s1">'tag'</span>
+    <span class="p">]</span>
+
+<span class="n">DRT_commands_and_args_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'dataFile'</span><span class="p">:</span> <span class="n">session_path</span> <span class="o">+</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="s1">'tj.dat'</span><span class="p">,</span>
+    <span class="s1">'DRTDirectory'</span><span class="p">:</span> <span class="n">session_path</span> <span class="o">+</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="s1">'DRT_Saves'</span><span class="p">,</span>
+    <span class="s1">'timeCol'</span><span class="p">:</span> <span class="s1">'t'</span><span class="p">,</span>
+    <span class="s1">'funcCol'</span><span class="p">:</span> <span class="s1">'Jext'</span><span class="p">,</span>
+    <span class="s1">'iters'</span><span class="p">:</span> <span class="s1">'50'</span><span class="p">,</span>
+    <span class="s1">'saveFormat'</span><span class="p">:</span> <span class="s1">'txt'</span><span class="p">,</span>
+    <span class="s1">'UUID'</span><span class="p">:</span> <span class="s1">'tag'</span><span class="p">,</span>
+    <span class="s1">'startIndex'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="s1">'startTime'</span><span class="p">:</span> <span class="s1">''</span>
+<span class="p">}</span>
+
+<span class="n">drt</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">DRT_commands_and_args</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Error: dataFile not found. Check file path.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DRT_commands_and_args_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'dataFile'</span><span class="p">:</span> <span class="n">session_path</span> <span class="o">+</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="s1">'tj.dat'</span><span class="p">,</span>
+    <span class="s1">'DRTDirectory'</span><span class="p">:</span> <span class="n">session_path</span> <span class="o">+</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="s1">'DRT_Saves'</span><span class="p">,</span>
+    <span class="s1">'timeCol'</span><span class="p">:</span> <span class="s1">'t'</span><span class="p">,</span>
+    <span class="s1">'funcCol'</span><span class="p">:</span> <span class="s1">'Jext'</span><span class="p">,</span>
+    <span class="s1">'iters'</span><span class="p">:</span> <span class="s1">'50'</span><span class="p">,</span>
+    <span class="s1">'saveFormat'</span><span class="p">:</span> <span class="s1">'json'</span><span class="p">,</span>
+    <span class="s1">'UUID'</span><span class="p">:</span> <span class="s1">'tag'</span>
+<span class="p">}</span>
+
+<span class="n">drt</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">DRT_commands_and_args_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Error: dataFile not found. Check file path.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2
+</pre></div></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Notebook_Gallery.html" class="btn btn-neutral float-left" title="Notebooks gallery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../modules.html" class="btn btn-neutral float-right" title="pySIMsalabim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, 2025, 2024, Vincent M. Le Corre, Sander Heester, Fransien Elhorst, Joshua Luke Edmundson, L. Jan Anton Koster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
