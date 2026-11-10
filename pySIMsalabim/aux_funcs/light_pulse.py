@@ -68,14 +68,44 @@ def create_spectrum(I_pulse, wavelength, FWHM, session_path, spectrum_name, spec
 
     return os.path.join(spectrum_path, spectrum_name)
 
-def create_tVG_light_pulse(tmax, tVG_name, session_path, t_scale = 'lin', t_step = 1E-9, t_pulse = 40E-9, FWHM = 2E-9):
-    ''' Create a tVG file for a light pulse simulation, which contains the time (t), the external voltage (Vext), and the generation profile (G_frac) for each time step. 
+def gaussian_pulse(time, t_pulse, FWHM):
+    ''' Normalised Gaussian light pulse (peak = 1) evaluated on a time array. G is forced to 0 at the first time point (t=0).
+
+    Parameters
+    ----------
+    time : array
+        The time array
+    t_pulse : float
+        The center of the pulse in time
+    FWHM : float
+        The full width at half maximum (FWHM) of the pulse
+
+    Returns
+    -------
+    array
+        The generation profile (G_frac) for each time point
+    '''
+    sigma = FWHM/(2*np.sqrt(2*np.log(2)))
+    G = np.exp(-((np.asarray(time) - t_pulse)/(sigma*np.sqrt(2)))**2) # Input Function (Gaussian Laser Pulse)
+    G[0] = 0 # Force G=0 at t=0
+    return G
+
+def create_tVG_light_pulse(tmax, tVG_name, session_path, t_scale = 'lin', t_step = 1E-9, t_pulse = 40E-9, FWHM = 2E-9, freq = None, num_pulses = None, steps = 1000, G_frac = 1, steps_FWHM = 200):
+    ''' Create a tVG file for a light pulse simulation, which contains the time (t), the external voltage (Vext), the generation profile (G_frac) and the Track state for each time step. 
     The generation profile is defined as a Gaussian pulse with the specified parameters.
+
+    Two modes are available:
+
+    - single pulse (num_pulses is None, default): one pulse, simulated from t=0 until tmax, using t_scale and t_step.
+    - pulse train (num_pulses is not None): num_pulses pulses with a repetition frequency freq. Each period (1/freq) is
+      resolved with a fine linear grid (FWHM/steps_FWHM) over the pulse followed by 'steps' logarithmically spaced points until the end of the period ('log' t_scale), 
+      or with 'steps' linearly spaced points over the period ('lin' t_scale). The grid of one pulse is then repeated num_pulses times. tmax and t_step are ignored in this mode.
+      The Track column is 1 at the end of the first period and 3 at the end of the following periods.
 
     Parameters
     ----------
     tmax : float
-        The maximum time for the experiment
+        The maximum time for the experiment (single pulse only)
     tVG_name : string
         The name of the tVG file to create, which will be saved in the session path
     session_path : string
@@ -83,12 +113,22 @@ def create_tVG_light_pulse(tmax, tVG_name, session_path, t_scale = 'lin', t_step
     t_scale : string, optional
         The time scale to use for the time array, which can be 'lin' for linear or 'log' for logarithmic, by default 'lin'
     t_step : float, optional
-        The time step when using a linear scale and the shortest timestep using a logarithmic scale, by default 1E-9. Note: Make sure the time step is small enough to accurately describe the laser pulse, as defined by the FWHM.
+        The time step when using a linear scale and the shortest timestep using a logarithmic scale (single pulse only), by default 1E-9. Note: Make sure the time step is small enough to accurately describe the laser pulse, as defined by the FWHM.
     t_pulse : float, optional
-        The center of the pulse in time. Make sure it is far enough from t=0 otherwise first part of pulse will be cut, 
-        resulting in lower number of photons, by default 40
+        The center of the pulse in time (within each period for a pulse train). Make sure it is far enough from t=0 otherwise first part of pulse will be cut, 
+        resulting in lower number of photons, by default 40E-9
     FWHM : float, optional
         The full width at half maximum (FWHM) of the pulse, by default 2E-9
+    freq : float, optional
+        The repetition frequency of the pulses in Hz, required when num_pulses is not None, by default None
+    num_pulses : int, optional
+        The number of pulses. If None, a single pulse is simulated until tmax, by default None
+    steps : int, optional
+        The number of time steps per pulse, i.e. per period 1/freq (pulse train only), by default 1000. For t_scale = 'lin' this is the total number of points per pulse. For t_scale = 'log' this is the number of points after the pulse; the pulse itself (from t=0 to t_pulse + 2*FWHM) is resolved with an additional fixed step of FWHM/steps_FWHM.
+    G_frac : float, optional
+        Scaling factor applied to the generation profile, by default 1
+    steps_FWHM : int, optional
+        The number of time steps per FWHM used to resolve the pulse for t_scale = 'log' (pulse train only), i.e. the time step over the pulse is FWHM/steps_FWHM, by default 200
 
     Returns
     -------
@@ -98,44 +138,83 @@ def create_tVG_light_pulse(tmax, tVG_name, session_path, t_scale = 'lin', t_step
         A message indicating the success or failure of the tVG file creation
     '''
 
-    numPointsDecade = 1000 # Number of points per decade for the logarithmic time array
+    if num_pulses is None:
+        ########### Single pulse until tmax ###########
+        numPointsDecade = 1000 # Number of points per decade for the logarithmic time array
 
-    if t_scale == 'lin':
-        # Create a linear time array from 0 to tmax with a step of tstep
-        time = np.arange(0, tmax+ t_step, t_step)
+        if t_scale == 'lin':
+            # Create a linear time array from 0 to tmax with a step of tstep
+            time = np.arange(0, tmax+ t_step, t_step)
+        else:
+            # Create a logarithmic time array from tstep to tmax
+            steps = int(np.ceil(np.log10(tmax/t_step) * numPointsDecade))
+            time = np.logspace(np.log10(t_step), np.log10(tmax), num=steps) 
+            # Insert t=0 at the beginning of the time array, as this is skipped in the logspace
+            time = np.insert(time, 0, 0)
+
+        G = gaussian_pulse(time, t_pulse, FWHM)
+        Track = np.zeros(len(time),dtype=int) # Track state array, fixed to 0
+        float_format = '%.4e'
     else:
-        # Create a logarithmic time array from tstep to tmax
-        steps = int(np.ceil(np.log10(tmax/t_step) * numPointsDecade))
-        time = np.logspace(np.log10(t_step), np.log10(tmax), num=steps) 
-        # Insert t=0 at the beginning of the time array, as this is skipped in the logspace
-        time = np.insert(time, 0, 0)
+        ########### Pulse train with frequency freq ###########
+        if freq is None or freq <= 0:
+            return -1, 'A positive freq must be specified when num_pulses is not None'
+        if num_pulses < 1:
+            return -1, 'num_pulses must be at least 1'
 
-    V = np.zeros(len(time)) # Initialize the voltage array
+        t_period = 1 / freq # Duration of one period
+        pulse_stop = t_pulse + FWHM*2 # End of the finely resolved part of the pulse
+        if pulse_stop >= t_period:
+            return -1, f'The pulse (t_pulse + 2*FWHM = {pulse_stop:.3e} s) does not fit in one period (1/freq = {t_period:.3e} s)'
 
-    G = np.zeros(len(time)) # Main Pulse Generation Profile
+        if t_scale == 'log':
+            t_step_pulse = FWHM / steps_FWHM # steps_FWHM time steps per FWHM to accurately capture the shape of the pulse
+            time_ = np.arange(t_step_pulse, pulse_stop, t_step_pulse)
+            time_ = np.insert(time_, 0, 0) # Start at t=0
+            # After the pulse, use a logarithmic time scale until the end of the period
+            time_ = np.concatenate((time_[:-1], np.geomspace(time_[-1], t_period, steps)))
+        else:
+            time_ = np.linspace(0, t_period, steps)
+            if t_pulse not in time_:
+                # Make sure the pulse maximum is part of the time array
+                time_ = np.sort(np.concatenate((time_, [t_pulse])))
 
-    Track = np.zeros(len(time),dtype=int) # Track state array, fixed to 0 and formatted as integer
+        G_ = gaussian_pulse(time_, t_pulse, FWHM) # Generation profile of one period
 
-    for t in range(len(time)):
-        # Skip t=0, as we force it G=0 there
-        if t > 0:
-            G[t] = np.exp(-((time[t]-t_pulse)/((FWHM/(2*np.sqrt(2*np.log(2))))*np.sqrt(2)))**2) #Input Function (Gaussian Laser Pulse)
+        # Track is 1 at the end of the first period and 3 at the end of the following periods
+        Track_first = np.zeros(len(time_), dtype=int)
+        Track_first[-1] = 1
+        Track_next = np.zeros(len(time_), dtype=int)
+        Track_next[-1] = 3
+
+        # Repeat the period num_pulses times, skipping t=0 of the repeated periods as it equals the end of the previous one
+        time = np.concatenate([time_] + [time_[1:] + n*t_period for n in range(1, num_pulses)])
+        G = np.concatenate([G_] + [G_[1:]] * (num_pulses - 1))
+        Track = np.concatenate([Track_first] + [Track_next[1:]] * (num_pulses - 1))
+
+        # Make sure the precision of the time column is sufficient to distinguish subsequent time values
+        res = abs(np.log10(np.max(time)) - np.log10(FWHM/10)) 
+        float_format = f'%.{int(np.ceil(res)+2)}e'
+
+    V = np.zeros(len(time)) # Voltage array
 
     # Write to the tVG file
-    tVG = pd.DataFrame({'t': time, 'Vext': V, 'G_frac': G})
+    tVG = pd.DataFrame({'t': time, 'Vext': V, 'G_frac': G*G_frac})
+    tVG['Track'] = Track.astype(int) # Add the Track column separately, as it must be an integer and the other columns are floats
 
-    tVG['Track'] = Track.astype(int) # Add the Track column to the DataFrame. This needs to be done separately as the Track column must be an integer and the other columns are floats. 
+    # Drop duplicate time values, which can occur when the time step is smaller than the precision of the time values. SIMsalabim stops on duplicate times. Keep the first occurrence.
+    tVG = tVG.drop_duplicates(subset=['t'], keep='first')
 
-    tVG.to_csv(os.path.join(session_path,tVG_name), index=False, sep = ' ', float_format='%.4e')
+    tVG.to_csv(os.path.join(session_path,tVG_name), index=False, sep = ' ', float_format=float_format)
 
     msg = 'Success'
     retval = 0
 
     return retval, msg
 
-def run_light_pulse_simu(zimt_simulation_setup, session_path, t_max, t_scale, t_step, t_pulse, FWHM, genProfile, spectrum_type = 'laser', I = 6E15, wavelength = 640E-9, run_mode=False, tVG_name = 'tVG.txt', tj_name = 'tj.dat',log_name = 'log.txt', varFile ='none', cmd_pars=None, turnoff_autoTidy = True, verbose = False, threadsafe = False):
-    ''' Run a ZimT simulation for a (gaussian) light pulse. The function will create the necessary tVG file, as well as take into account the type of generation profile specified by the user, and create the necessary spectrum file if needed. 
-    The function will also handle the use of blocking layers, by updating the simulation setup file and creating the necessary blocking layer parameter files.
+def run_light_pulse_simu(zimt_simulation_setup, session_path, t_max, t_scale, t_step, t_pulse, FWHM, genProfile, spectrum_type = 'laser', I = 6E15, wavelength = 640E-9, run_mode=False, tVG_name = 'tVG.txt', tj_name = 'tj.dat',log_name = 'log.txt', varFile ='none', cmd_pars=None, turnoff_autoTidy = True, verbose = False, threadsafe = False, freq = None, num_pulses = None, steps = 1000, G_frac = 1, steps_FWHM = 200):
+    ''' Run a ZimT simulation for a (gaussian) light pulse, or a train of light pulses when num_pulses is not None. The function will create the necessary tVG file, as well as take into account the type of generation profile specified by the user, and create the necessary spectrum file if needed. 
+    Blocking layers (contactless device) are not handled here, see create_contactless_device in utils/device_parameters.py.
     
     Parameters
     ----------
@@ -144,13 +223,13 @@ def run_light_pulse_simu(zimt_simulation_setup, session_path, t_max, t_scale, t_
     session_path : string
         The path to the session folder, which is the working directory for the simulation
     t_max : float
-        The maximum time for the experiment
+        The maximum time for the experiment (single pulse only)
     t_scale : string
         The time scale to use for the time array, which can be 'lin' for linear or 'log' for logarithmic
     t_step : float
-        The time step for the tVG file
+        The time step for the tVG file (single pulse only)
     t_pulse : float
-        The center of the pulse in time. Make sure it is far enough from t=0 otherwise first part of pulse will be cut, resulting in lower number of photons
+        The center of the pulse in time (within each period for a pulse train). Make sure it is far enough from t=0 otherwise first part of pulse will be cut, resulting in lower number of photons
     FWHM : float
         The full width at half maximum (FWHM) of the pulse
     genProfile : string
@@ -179,6 +258,16 @@ def run_light_pulse_simu(zimt_simulation_setup, session_path, t_max, t_scale, t_
         Use verbose output, by default False
     threadsafe : bool, optional
         Whether to force run the simulation in a thread-safe way, by default False
+    freq : float, optional
+        The repetition frequency of the pulses in Hz, required when num_pulses is not None, by default None
+    num_pulses : int, optional
+        The number of pulses. If None, a single pulse is simulated until t_max, by default None
+    steps : int, optional
+        The number of time steps per pulse, i.e. per period 1/freq (pulse train only), by default 1000. For t_scale = 'lin' this is the total number of points per pulse. For t_scale = 'log' this is the number of points after the pulse; the pulse itself (from t=0 to t_pulse + 2*FWHM) is resolved with an additional fixed step of FWHM/steps_FWHM.
+    G_frac : float, optional
+        Scaling factor applied to the generation profile, by default 1
+    steps_FWHM : int, optional
+        The number of time steps per FWHM used to resolve the pulse for t_scale = 'log' (pulse train only), i.e. the time step over the pulse is FWHM/steps_FWHM, by default 200
 
     Returns
     -------
@@ -189,7 +278,7 @@ def run_light_pulse_simu(zimt_simulation_setup, session_path, t_max, t_scale, t_
     '''
     
     # Create tVG for light pulse
-    result, message = create_tVG_light_pulse(t_max, tVG_name, session_path, t_scale, t_step, t_pulse, FWHM)
+    result, message = create_tVG_light_pulse(t_max, tVG_name, session_path, t_scale, t_step, t_pulse, FWHM, freq=freq, num_pulses=num_pulses, steps=steps, G_frac=G_frac, steps_FWHM=steps_FWHM)
 
     # Check if tVG file is created
     if result == 0:

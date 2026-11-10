@@ -41,6 +41,32 @@ def test_run_trPL_simu():
     # Check the output
     assert ret == 0, 'trPL simulation failed'
 
+def test_run_trPL_simu_pulse_train():
+    """ Test the run_trPL_simu function with a train of pulses (num_pulses and freq) """
+    if os.path.exists('SIMsalabim'):
+        cwd = os.path.abspath('.')
+    else:
+        cwd = os.path.abspath('../..')
+
+    zimt_device_parameters = os.path.join(cwd, 'SIMsalabim','ZimT','simulation_setup_trPL_test.txt')
+    session_path = os.path.join(cwd, 'SIMsalabim','ZimT')
+
+    # Set the trPL parameters, t_max and t_step are ignored when num_pulses is not None
+    lyr_idx = 1
+    t_pulse = 10E-9
+    t_scale = 'log'
+    FWHM = 3E-9
+    freq = 1E6
+    num_pulses = 2
+    ret, mess = run_trPL_simu(zimt_device_parameters, session_path, lyr_idx, None, t_scale, None, t_pulse, FWHM, output_file = 'trPL.dat', tj_name = 'tj.dat', freq = freq, num_pulses = num_pulses, steps = 200)
+
+    # Clean up the output
+    sim.clean_all_output(session_path)
+    sim.clean_up_output('trPL',session_path)
+    sim.delete_folders('tmp',session_path)
+    # Check the output
+    assert ret == 0 or ret == 95, f'trPL pulse train simulation failed: {mess}'
+
 def test_trPL_parallel():
     """ Test the trPL function """
     try:
@@ -80,6 +106,7 @@ if __name__ == '__main__':
     prepare_test_inputs()
     try:
         test_run_trPL_simu()
+        test_run_trPL_simu_pulse_train()
         test_trPL_parallel()
         print('All trPL tests passed')
     finally:

@@ -9,6 +9,8 @@ v1.05 - 2026-08-11 - VMLC-PV, SH
 - Included the Track column when a tVG file is generated, necessary for SIMsalabim v5.36
 - trPL.py: added a new experiment to perform a trPL simulation using ZimT (including test).
 - aux_funcs/light_pulse.py: added a new set of functions to run a ZimT simulation for a (Gaussian) light pulse . This is used for the trPL experiment, but generalised to be used for other future experiments as well (e.g. SPV, TPC, TPV, ...)
+- aux_funcs/light_pulse.py & trPL.py: added a pulse train mode (`freq`, `num_pulses`, `steps`, `G_frac`, `steps_FWHM`). If `num_pulses` is None (default) a single pulse is simulated until `t_max`, otherwise `num_pulses` pulses with repetition frequency `freq` are simulated.
+- trPL.py: added `plot_trPL_pulse(session_path, output_file, freq, t_pulse, pulse=-1, ...)` to plot one or several pulses (e.g. `pulse=[1, 2, -1]`) of a pulse train simulation on a common time axis. `-1` is the last pulse in the output file, which can be fewer than `num_pulses` when ZimT stops early or on a timeout.
 - utils/device_parameters.py: Added functions to create a contactless device (See Application Note 6.1 in SIMsalabim Manual (version 5.36 and higher))
 - reshaped some of the test and added default input files to run the tests.
 - experiments: Added steady-state tandem JV experiment

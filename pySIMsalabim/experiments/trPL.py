@@ -2,6 +2,7 @@
 ######### Package Imports #########################################################################
 
 import os, sys
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 # import pySIMsalabim
@@ -91,7 +92,92 @@ def plot_trPL(session_path, output_file, xlim = None, ylim = None, xscale = 'log
     plt.show()
     return
 
-def run_trPL_simu(zimt_device_parameters, session_path, lyr_idx, t_max, t_scale, t_step, t_pulse, FWHM, genProfile='calc', spectrum_type = 'laser', I = 6E15, wavelength = 640E-9, G_ehp = 1E31, contactless_device = True, format_output=True, run_mode=False, tVG_name = 'tVG.txt', output_file = 'trPL.dat', tj_name = 'tj.dat', log_name = 'log.txt',varFile ='none', block_layer_file='Block.txt',**kwargs):
+def plot_trPL_pulse(session_path, output_file, freq, t_pulse, pulse = -1, xlim = None, ylim = None, xscale = 'log', yscale = 'log'):
+    ''' Plot the trPL signal of one or several pulses from a pulse train simulation (run_trPL_simu with num_pulses and freq).
+    Pulse n (starting from 1) covers the period from (n-1)/freq to n/freq and is centred at t_pulse + (n-1)/freq. 
+    The time axis of each pulse is shifted to start at 0 at the start of its period, so several pulses can be compared directly on the same plot.
+
+    The number of pulses in the file is the number of pulse centres (t_pulse + (n-1)/freq) within the simulated time range. 
+    This can be smaller than num_pulses, as ZimT stops the simulation early when the state at the end of a pulse no longer 
+    changes from pulse to pulse. If the simulation was interrupted (e.g. timeout), the last pulse can be incomplete.
+
+    Parameters
+    ----------
+    session_path : string
+        The path to the session folder, which is the working directory for the simulation
+    output_file : string
+        The name of the output file containing the trPL data, which should be located in the session path
+    freq : float
+        The repetition frequency of the pulses in Hz, as used in the simulation
+    t_pulse : float
+        The center of the pulse within each period in s, as used in the simulation
+    pulse : int or list of int, optional
+        The pulse(s) to plot, starting from 1 for the first pulse. Negative values count from the end of the file,
+        i.e. -1 is the last simulated pulse. Use a list (e.g. [1, 2, -1]) to plot several pulses on top of each other, by default -1
+    xlim : list, optional
+        The limits for the x-axis in s (relative to the start of the pulse), by default None
+    ylim : list, optional
+        The limits for the y-axis, by default None
+    xscale : string, optional
+        The scale for the x-axis, by default 'log'
+    yscale : string, optional
+        The scale for the y-axis, by default 'log'
+
+    Returns
+    -------
+    None
+
+    '''
+    data_trPL = pd.read_csv(os.path.join(session_path, output_file),sep=r'\s+')
+    t = data_trPL['t'].values
+    t_period = 1/freq
+
+    # Tolerance to compare time values, as the time values in the file have a limited precision: half of the smallest time step
+    dt = np.diff(t)
+    tol = 0.5*dt[dt > 0].min() if np.any(dt > 0) else 0
+
+    # Number of pulses in the file: number of pulse centres t_pulse + n/freq (n = 0, 1, ...) within the simulated time range
+    num_pulses = int(np.floor((t.max() - t_pulse + tol)*freq)) + 1
+    if num_pulses < 1:
+        raise ValueError(f'The output file ends at t = {t.max():.3e} s, before the center of the first pulse (t_pulse = {t_pulse:.3e} s).')
+
+    pulses = [pulse] if np.isscalar(pulse) else list(pulse)
+
+    # Convert the requested pulses (1 = first, -1 = last) to indices starting from 0
+    indices = []
+    for p in pulses:
+        if p == 0 or abs(p) > num_pulses:
+            raise ValueError(f'pulse must be between 1 and {num_pulses} or between -{num_pulses} and -1, as the file contains {num_pulses} pulse(s). Got {p}.')
+        indices.append(p - 1 if p > 0 else num_pulses + p)
+
+    fig, ax = plt.subplots()
+    for idx in indices:
+        # Select the period of this pulse, including both its start and end point, so all pulses have the same time grid
+        t_rel = t - idx*t_period # Time relative to the start of the period of this pulse
+        mask = (t_rel > -tol) & (t_rel < t_period + tol)
+        ax.plot(t_rel[mask]*1E9, data_trPL['trPL'].values[mask], label=f'Pulse {idx+1}') # time in ns
+
+    ax.set_xlabel('Time since start of pulse [ns]')
+    ax.set_ylabel(r'trPL | Jdir [Am$^{-2}$]')
+    if len(indices) == 1:
+        ax.set_title(f'trPL simulation, pulse {indices[0]+1} of {num_pulses}')
+    else:
+        ax.set_title(f'trPL simulation, {num_pulses} pulse(s) in file')
+        ax.legend()
+    ax.set_xscale(xscale)
+    ax.set_yscale(yscale)
+
+    if xlim is not None:
+        xlim = [x*1E9 for x in xlim]
+        ax.set_xlim(xlim)
+    if ylim is not None:
+        ax.set_ylim(ylim)
+
+    plt.tight_layout()
+    plt.show()
+    return
+
+def run_trPL_simu(zimt_device_parameters, session_path, lyr_idx, t_max, t_scale, t_step, t_pulse, FWHM, genProfile='calc', spectrum_type = 'laser', I = 6E15, wavelength = 640E-9, G_ehp = 1E31, contactless_device = True, format_output=True, run_mode=False, tVG_name = 'tVG.txt', output_file = 'trPL.dat', tj_name = 'tj.dat', log_name = 'log.txt',varFile ='none', block_layer_file='Block.txt', freq = None, num_pulses = None, steps = 1000, G_frac = 1, steps_FWHM = 200, **kwargs):
     """ Run a time resolved PhotoLuminescence (trPL) simulation, requiring the definition of a (Gaussian) light pulse.
     There is an option to use a contactless device architecture, which adds blocking layers to the simulation setup. 
     The output PL is given in terms of the equivalent direct recombination current (Jdir) of the layer specified by lyr_idx.
@@ -103,15 +189,15 @@ def run_trPL_simu(zimt_device_parameters, session_path, lyr_idx, t_max, t_scale,
     session_path : string
         The path to the session folder, which is the working directory for the simulation
     lyr_idx : int
-        The index of the active layer to calculate the trPL for, starting from 0 for the first layer of the original setup (i.e. without the blocking layers)
+        The index of the active layer to calculate the trPL for, starting from 1 for the first layer of the original setup (i.e. without the blocking layers)
     t_max : float
-        The maximum time for the experiment
+        The maximum time for the experiment (single pulse only)
     t_scale : string
         The time scale to use for the time array, which can be 'lin' for linear or 'log' for logarithmic
     t_step : float
-        The time step
+        The time step (single pulse only)
     t_pulse : float
-        The center of the pulse in time. Make sure it is far enough from t=0 otherwise first part of pulse will be cut, resulting in lower number of photons
+        The center of the pulse in time (within each period for a pulse train). Make sure it is far enough from t=0 otherwise first part of pulse will be cut, resulting in lower number of photons
     FWHM : float
         The full width at half maximum (FWHM) of the pulse
     genProfile : string
@@ -140,6 +226,18 @@ def run_trPL_simu(zimt_device_parameters, session_path, lyr_idx, t_max, t_scale,
         The name of the log file to create, by default 'log.txt'
     varFile : string, optional
         The name of the var file to create, by default 'none'. If 'none', no var file will be created and the varFile parameter will not be passed to ZimT.
+    block_layer_file : string, optional
+        The name of the blocking layer file, by default 'Block.txt'
+    freq : float, optional
+        The repetition frequency of the pulses in Hz, required when num_pulses is not None, by default None
+    num_pulses : int, optional
+        The number of pulses. If None, a single pulse is simulated until t_max, otherwise num_pulses pulses with frequency freq are simulated (t_max and t_step are then ignored), by default None
+    steps : int, optional
+        The number of time steps per pulse, i.e. per period 1/freq (pulse train only), by default 1000. For t_scale = 'lin' this is the total number of points per pulse. For t_scale = 'log' this is the number of points after the pulse; the pulse itself (from t=0 to t_pulse + 2*FWHM) is resolved with an additional fixed step of FWHM/steps_FWHM.
+    G_frac : float, optional
+        Scaling factor applied to the generation profile, by default 1
+    steps_FWHM : int, optional
+        The number of time steps per FWHM used to resolve the pulse for t_scale = 'log' (pulse train only), i.e. the time step over the pulse is FWHM/steps_FWHM, by default 200
        
     Returns
     -------
@@ -189,6 +287,11 @@ def run_trPL_simu(zimt_device_parameters, session_path, lyr_idx, t_max, t_scale,
             varFile = var_file_base + dum_str + var_file_ext
             varFile = os.path.join(session_path,varFile)
 
+    # Remove the output and tj files of a previous run, so that old results cannot be mistaken for the results of this run
+    for old_file in [output_file, tj_name]:
+        if os.path.isfile(old_file):
+            os.remove(old_file)
+
     # When not using a calculated or user-defined generation profile, the generation rate must be specified in the layer parameters file. 
     # Therefore, we add the generation rate to the command line parameters to update the layer parameters file accordingly.
     if genProfile == 'none': # Add the the generation rate to the arguments
@@ -210,14 +313,21 @@ def run_trPL_simu(zimt_device_parameters, session_path, lyr_idx, t_max, t_scale,
     # Run the ZimT simulation for a (Gaussian) light pulse. The trPL signal is then calculated from the output.
     result, message = lp.run_light_pulse_simu(zimt_device_parameters, session_path, t_max, t_scale, t_step, t_pulse, FWHM, 
                                               genProfile, spectrum_type, I, wavelength, run_mode, tVG_name, tj_name, log_name, 
-                                              varFile, cmd_pars, turnoff_autoTidy, verbose, threadsafe)
+                                              varFile, cmd_pars, turnoff_autoTidy, verbose, threadsafe,
+                                              freq=freq, num_pulses=num_pulses, steps=steps, G_frac=G_frac, steps_FWHM=steps_FWHM)
 
-    if result == 0 or result == 95:
+    # 0: success, 95: finished with some non-converged points, 97: timeout.
+    # With a timeout, the tj file contains the results up to the moment the simulation was stopped (e.g. only part of the pulses),
+    # so we still write these (partial) results to the output file.
+    if result in [0, 2, 95, 97]:
         # Check if the file exists first
         if not os.path.isfile(tj_name):
             msg = f'tj file not found: {tj_name}'
             return -1, msg
-        
+
+        if result == 97:
+            message = str(message) + ' The output file only contains the results until the simulation was stopped, increase the timeout parameter (or use timeout = -1) to simulate the full experiment.'
+
         data_trPL = pd.read_csv(os.path.join(session_path, tj_name),sep=r'\s+')
 
         # process the output to get the trPL data, this needs to take into account the blocking layers and also which layers should be taken into account for the signal
@@ -228,7 +338,16 @@ def run_trPL_simu(zimt_device_parameters, session_path, lyr_idx, t_max, t_scale,
 
         # Calcuate the trPL signal for the specified layer
         df_trPL = get_trPL(data_trPL, trPL_lyr)
-        df_trPL.to_csv(os.path.join(session_path,output_file), index=False, sep = ' ', float_format='%.3e') # Write to the output file
+        # Make sure the precision of the output is sufficient to distinguish subsequent time values. With a pulse train, the time steps
+        # in the later pulses can be many orders of magnitude smaller than the time itself (e.g. 1E-11 s steps at t = 1E-3 s).
+        dt = np.diff(df_trPL['t'].values)
+        dt_min = dt[dt > 0].min() if np.any(dt > 0) else 0
+        t_end = df_trPL['t'].abs().max()
+        if dt_min > 0 and t_end > 0:
+            num_digits = max(3, int(np.ceil(np.log10(t_end/dt_min))) + 2)
+        else:
+            num_digits = 3
+        df_trPL.to_csv(os.path.join(session_path,output_file), index=False, sep = ' ', float_format=f'%.{num_digits}e') # Write to the output file
 
     # Format the output files to remove the blocking layers and update the layer indices back to their original values
     if contactless_device and format_output:
