@@ -60,7 +60,7 @@ def plot_device_widths(ax, y_min, L, L_original):
     ax.text(1.04*sum(L), y_min-2.0, '[nm]', color='k')
 
 
-def create_energy_label(x_left, x_right, L, y, band_type, position, ax, vert_pos='top'):
+def create_energy_label(x_left, x_right, L, y, band_type, position, ax, vert_pos='top', band_level_two_decimals=False):
     """Create and place the label for an energy level (in eV) of a layer
 
     Parameters
@@ -89,14 +89,23 @@ def create_energy_label(x_left, x_right, L, y, band_type, position, ax, vert_pos
 
     # If the layer covers over 20% of the figure size, move the label to the x middle of the figure. Else align it to the left side of the layer.
     if (x_right - x_left) > 0.2*position:
-        ax.text((x_left+x_right)/2 + 0.01*L, y+offset, y)
+        if band_level_two_decimals:
+            ax.text((x_left+x_right)/2 + 0.01*L, y+offset, f'{y:.2f}')
+        else:
+            ax.text((x_left+x_right)/2 + 0.01*L, y+offset, y)
     elif 'WR' in band_type:
         # In case of the right WF, we must align the text to the right of the label
-        ax.text(x_right, y+offset, y, horizontalalignment='right')
+        if band_level_two_decimals:
+            ax.text(x_right+ 0.01*L, y+offset, f'{y:.2f}', horizontalalignment='right')
+        else:
+            ax.text(x_right+ 0.01*L, y+offset, y, horizontalalignment='right')
     else:
-        ax.text(x_left+ 0.01*L, y+offset, y)
+        if band_level_two_decimals:
+            ax.text(x_left+ 0.01*L, y+offset, f'{y:.2f}')
+        else:
+            ax.text(x_left+ 0.01*L, y+offset, y)
 
-def get_param_band_diagram(dev_par, layers, dev_par_name):
+def get_param_band_diagram(dev_par, layers, dev_par_name, cmd_pars=[], band_level_two_decimals=False):
     """Create and display the band diagram on the UI based on the relevant parameters from the dict object
 
     Parameters
@@ -115,14 +124,17 @@ def get_param_band_diagram(dev_par, layers, dev_par_name):
     E_c = []
     E_v = []
 
+    ### Get the values in the simulation_setup
     # Get the work functions of the electrodes
     for section in dev_par[dev_par_name]:
         if section[0] == 'Contacts':
             for param in section:
                 if 'W_L' in param[1]:
                     W_L = -float(param[2])
+                    # {'par':'W_L', 'val':W_L}
                 elif 'W_R' in param[1]:
                     W_R = -float(param[2])
+                    # {'par':'W_R', 'val':W_R}
 
 
     # Get the thicknesses and energy levels from the respective layer files
@@ -137,6 +149,31 @@ def get_param_band_diagram(dev_par, layers, dev_par_name):
                     elif param[1] in 'E_v':
                         E_v.append(-float(param[2]))
 
+    
+
+    ### Overwrite values from the simulation_setup, if parameters are defined on the command line
+    overrides = {}
+    for item in cmd_pars:
+        if item['par'] in overrides:
+            raise ValueError(f"Duplicate parameter found: {item['par']}")
+        overrides[item['par']] = float(item['val'])
+        
+    # Overwrite electrode work functions (keeping the negative sign)
+    if 'W_L' in overrides:
+        W_L = -overrides['W_L']
+    if 'W_R' in overrides:
+        W_R = -overrides['W_R']
+    
+    # Overwrite layer parameters (l1 -> index 0, l2 -> index 1, etc.)
+    for i in range(len(L)):
+        prefix = f"l{i + 1}."
+        
+        if f"{prefix}L" in overrides:
+            L[i] = overrides[f"{prefix}L"]
+        if f"{prefix}E_c" in overrides:
+            E_c[i] = -overrides[f"{prefix}E_c"]
+        if f"{prefix}E_v" in overrides:
+            E_v[i] = -overrides[f"{prefix}E_v"]
     
     # Create a figure where the band diagram will be plotted
     # Each element from the array is a layer in the device
@@ -157,8 +194,8 @@ def get_param_band_diagram(dev_par, layers, dev_par_name):
             L[i] = 0.09*L_total
 
         ax.fill_between([sum(L[:i]), sum(L[:i+1])], [E_c[i], E_c[i]], y2=[E_v[i], E_v[i]], color=colors[i])
-        create_energy_label(sum(L[:i]), sum(L[:i+1]),sum(L), E_c[i], 'CB', L_total, ax, 'top')
-        create_energy_label(sum(L[:i]), sum(L[:i+1]),sum(L), E_v[i], 'VB', L_total, ax, 'bot')
+        create_energy_label(sum(L[:i]), sum(L[:i+1]),sum(L), E_c[i], 'CB', L_total, ax, 'top', band_level_two_decimals)
+        create_energy_label(sum(L[:i]), sum(L[:i+1]),sum(L), E_v[i], 'VB', L_total, ax, 'bot', band_level_two_decimals)
     
     L_total = sum(L) # update with the corrected values
 
@@ -172,11 +209,11 @@ def get_param_band_diagram(dev_par, layers, dev_par_name):
 
     # Left Electrode
     ax.plot([-0.06*L_total, 0], [W_L, W_L], color='k')
-    create_energy_label(-0.08*L_total, 0, sum(L), W_L, 'WL', L_total, ax, W_L_pos)
+    create_energy_label(-0.08*L_total, 0, sum(L), W_L, 'WL', L_total, ax, W_L_pos, band_level_two_decimals)
 
     # Right Electrode
     ax.plot([L_total, L_total+0.06*L_total], [W_R, W_R], color='k')
-    create_energy_label(L_total, L_total+0.08*L_total, sum(L), W_R, 'WR', L_total, ax, W_R_pos)
+    create_energy_label(L_total, L_total+0.08*L_total, sum(L), W_R, 'WR', L_total, ax, W_R_pos, band_level_two_decimals)
 
     # Hide the figure axis
     ax.axis('off')
@@ -190,7 +227,7 @@ def get_param_band_diagram(dev_par, layers, dev_par_name):
     else:
         return fig
 
-def plot_band_diagram(dev_par_file_name, session_path ):
+def plot_band_diagram(dev_par_file_name, session_path, cmd_pars=[], band_level_two_decimals=False ):
     """Plot the band diagram of the device based on the device parameter file and the session path
 
     Parameters
@@ -201,9 +238,9 @@ def plot_band_diagram(dev_par_file_name, session_path ):
         Path to the session folder
     """
     # Load the device parameter file
-    dev_par,layers = pySIMsalabim.utils_dev.load_device_parameters(session_path, dev_par_file_name)
+    dev_par, layers = pySIMsalabim.utils_dev.load_device_parameters(session_path, dev_par_file_name)
 
     # Create and display the band diagram
-    fig = get_param_band_diagram(dev_par, layers, dev_par_file_name)
+    fig = get_param_band_diagram(dev_par, layers, dev_par_file_name, cmd_pars, band_level_two_decimals)
     plt.show()
     return fig
